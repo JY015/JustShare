@@ -33,6 +33,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	 @Override
 	    public void afterConnectionEstablished(WebSocketSession session) throws Exception {  //연결된 후 
 		 if (session.isOpen()) {}
+		 
+		 String mid = session.getId();
+		// System.out.println("접속아이디"+mid);
+		 //System.out.println("접속아이디"+clients.values());
 	
 	    }
 
@@ -45,15 +49,15 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    			payload = message.getPayload();
 	    	 	jsonObject = new JSONObject(payload);
 
-	    	 if (jsonObject.has("id")  && !jsonObject.has("toId") && !jsonObject.has("text")) {
+	    	 if (jsonObject.has("mid")  && !jsonObject.has("toId") && !jsonObject.has("text")) {
 	    		 
 	    		 
 	             handleInitialConnection(jsonObject, session);  // 처음 연결시 네임값만 확인하는 메서드
 	             //System.out.println("네임만"+jsonObject.toString());
 	             
-	         } else if (jsonObject.has("toId") && jsonObject.has("id") && jsonObject.has("text")) {
+	         } else if (jsonObject.has("toId") && jsonObject.has("mid") && jsonObject.has("text")) {
 	        	 
-	        	  if(jsonObject.get("id").equals(jsonObject.get("toId"))) {
+	        	  if(jsonObject.get("mid").equals(jsonObject.get("toId"))) {
 	        		  System.out.println("같은 사람에게는 보낼수 없습니다.");
 	        	  } else {
 	        		 
@@ -64,7 +68,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	         	}
 	    	} else {  // 세션이 오프라인인 경우
 	    		
-	    		 if(jsonObject.get("id").equals(jsonObject.get("toId"))) {
+	    		 if(jsonObject.get("mid").equals(jsonObject.get("toId"))) {
 	        		  System.out.println("같은 사람에게는 보낼수 없습니다.");
 	        	  } else {
 	    		int result=socketService.msginsert(jsonObject);
@@ -77,8 +81,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	 
 	    //처음 웹소켓 연결된 사용자 이름, 세션 저장 메서드
 	    private void handleInitialConnection(JSONObject jsonObject, WebSocketSession session) {
-	        String id = jsonObject.optString("id", "");
-	        clients.put(id, session);
+	        String mid = jsonObject.optString("mid", "");
+	 
+	        clients.put(mid, session);
 	        sessions.add(session);
 	       // System.out.println("초기연결아이디 :" +name);
 	        // 초기 연결에 관한 로직 (예: 사용자 이름 저장)
@@ -86,12 +91,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    //쪽지보낼떄 쪽지보낼때 보낼사람,메세지,보내는사람 저장 메서드 
 	    private void handleMessage(JSONObject jsonObject, WebSocketSession session) {
 	        String toId = jsonObject.optString("toId", "");
-	        String id = jsonObject.optString("id", "");
+	        String mid = jsonObject.optString("mid", "");
 	       
 	        String text = jsonObject.optString("text","");
 	        String time = jsonObject.optString("time","");
 	   	 JSONObject messageData = new JSONObject();
-	   	 messageData.put("id", id); // 내 아이디
+	   	 messageData.put("mid", mid); // 내 아이디
 	  
 	   	 messageData.put("toId", toId);
 	   	 messageData.put("text", text);
@@ -114,7 +119,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    		JSONObject jsonObject = new JSONObject(message1.getPayload());
 	    		// "message" 필드에서 메시지 값을 추출
 	    		String message = jsonObject.getString("text");
-	    		String sender = jsonObject.getString("id");
+	    		String sender = jsonObject.getString("mid");
 	    		String time = jsonObject.getString("time");
 	    	
 	    		JSONObject messageObject = new JSONObject();
@@ -149,11 +154,29 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		@Override
 	    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 	        // WebSocket 연결이 닫혔을 때 실행되는 로직을 여기에 추가
-	        //System.out.println("클라이언트 연결 종료: " + session.getId());
-	       // sessions.remove(session);
-	        
-	        String userId = session.getId();
-	        clients.remove(userId);
+	       
+	
+			    String sessionToRemove = null;
+			    
+			    for (Map.Entry<String, WebSocketSession> entry : clients.entrySet()) {
+			        if (entry.getValue().equals(session)) {
+			            sessionToRemove = entry.getKey();
+			            break;
+			        }
+			    }
+
+			    if (sessionToRemove != null) {
+			        // 클라이언트 정보를 제거
+			        clients.remove(sessionToRemove);
+			        System.out.println("WebSocket session closed for user: " + sessionToRemove);
+			    }
+			
+			
+	//System.out.println(" 이거 :"+session.getId());
+	        //String userId = clients.
+	        //System.out.println(userId);
+	        //sessions.remove(session);
+	        //clients.remove(userId);
 	    }
 	    
 	    //public void sendMessageToClient(String clientId, String message) { //특정 아이디를 가진 클라이언트에게 메세지보내기
@@ -161,6 +184,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    //}
 	    
 	    public void sendMessageToAllClients(String message,WebSocketSession session) {  //모든 클라이언트에게 메시지보내기 
+	    	
 	    	if (session.isOpen()) {
 	        TextMessage textMessage = new TextMessage(message);
 	        System.out.println("textmessage"+textMessage);
