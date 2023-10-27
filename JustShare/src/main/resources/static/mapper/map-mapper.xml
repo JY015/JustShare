@@ -5,4 +5,10 @@
         INSERT INTO map (latitude, longitude)
         VALUES (#{latitude}, #{longitude})
     </insert>
+    
+    <select id="gpsList" resultType="map" parameterType="com.js.web.map.MapDTO">
+    	select latitude,longitude, btitle, badd
+    	from map
+    	where mno=#{mno}
+    </select>
 </mapper>
