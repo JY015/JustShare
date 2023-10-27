@@ -54,7 +54,7 @@ function report(){
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4638e2c21e218f8f8162ad1b3069e8c"></script>
 <script>
 var x = ${detail.latitude};
-var y = ${detail.longtitude};
+var y = ${detail.longitude};
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
     center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표

@@ -32,7 +32,7 @@
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longtitude,latitude,addr,mno,addNum,addDetail)
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail)
 	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD})
 </insert>
 
