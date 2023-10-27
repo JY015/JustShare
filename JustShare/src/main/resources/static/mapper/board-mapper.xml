@@ -9,18 +9,19 @@
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.badd,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
+	WHERE b.bdel=1
 	GROUP BY b.bno
 	ORDER BY b.bno desc
 	LIMIT #{cri.pageStart}, #{cri.perPageNum}
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.badd,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
@@ -31,8 +32,8 @@
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,bcx,bcy,badd,mno)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno})
+	INSERT INTO board (btitle,cate,bprice,bcontent,bcx,bcy,addr,mno,addNum,addDetail)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD})
 </insert>
 
 <select id="bno">
@@ -66,5 +67,52 @@
 	FROM board
 	WHERE bno=#{bno}
 </select>
+
+<select id="imageD">
+	SELECT realFile
+	FROM image
+	WHERE bno=#{bno}
+	ORDER BY ino
+</select>
+
+<select id="equipD">
+	SELECT e.ename
+	FROM boardEquipment be
+	JOIN board b ON b.bno=be.bno
+	JOIN equipment e ON e.eid=be.eid
+	WHERE be.bno=#{bno}
+	ORDER BY be.eid
+	
+</select>
+
+<update id="del">
+	 UPDATE board
+	 SET bdel =0 
+	 WHERE bno = #{bno}
+</update>
+
+<select id="equipDE">
+	SELECT eid
+	FROM boardEquipment
+	WHERE bno=#{bno}
+
+</select>
+
+<update id="read" parameterType="Map">
+	UPDATE board
+	SET bread=bread+1
+	WHERE bno = #{bno}
+</update>
+
+<insert id="report" parameterType="Map">
+	INSERT INTO report (rmno,mno,bno,rcontent)
+	VALUES (#{rmno},#{mno},#{bno},#{rcontent} )
+</insert>
+
+<update id="breport">
+	UPDATE board
+	SET brno=brno+1
+	WHERE bno=#{bno}
+</update>
 
 </mapper>

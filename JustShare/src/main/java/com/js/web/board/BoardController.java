@@ -55,7 +55,6 @@ public class BoardController {
 	public String boardp(@RequestParam Map<String,Object> map ) {
 		// 전체 글 숫자 
 		int listNum = boardService.listNum();
-		System.out.println(map);
 		// map 에서 꺼내서 형 변환 
 		int limit = Integer.parseInt(map.get("limit").toString());
 		int nextPageLimit = Integer.parseInt(map.get("nextPageLimit").toString());
@@ -72,7 +71,6 @@ public class BoardController {
 		            JSONObject jsonObject = new JSONObject(item);
 		            jsonArray.put(jsonObject);
 		        }
-		        System.out.println(jsonArray.toString());
 		        // JSON 응답 반환
 		        return jsonArray.toString();
 		    } else {
@@ -175,12 +173,61 @@ public class BoardController {
 	@GetMapping("/bdetail")
 	public String bdetail(@RequestParam Map<String,Object> map,HttpSession session,Model model ) {
 		// 해당 게시글 번호 받아와서 게시글 띄우기 
-		List<Map<String, Object>> detail = boardService.detail(map);
-		// 게시글에 연관된 장비 / 사진 모두 가져오기 
+		Map<String, Object> detail = boardService.detail(map);
+		// 게시글에 연관된 시설명 / 사진 모두 가져오기 
+		
+		List<String> imageD = boardService.imageD(map);
+		List<String> equipD = boardService.equipD(map);
+		
+		model.addAttribute("imageD", imageD);
+		model.addAttribute("equipD", equipD);
 		model.addAttribute("detail", detail);
 		return "bdetail";
 	}
 	
+	@GetMapping("/bdelete")
+	public String bdetail(@RequestParam Map<String,Object> map,HttpSession session) {
+		// 아이디 일치 확인
+		// 게시글 받아와서 삭제
+		int a = boardService.del(map);
+		return "redirect:board";
+	}
+	@GetMapping("/bedit")
+	public String bedit(@RequestParam Map<String,Object> map,HttpSession session,Model model) {
+		// 아이디 일치확인
+		//게시글 내용 그대로 받아오기 
+		Map<String, Object> detail = boardService.detail(map);
+		List<String> imageD = boardService.imageD(map);
+		// 번호를 가져와야함 
+		List<Integer> equipDE = boardService.equipDE(map);
+		// 카테고리/ 시설 명 가져오기 
+		List<Map<String, Object>> cl = boardService.cl();
+		List<Map<String, Object>> el = boardService.el();
+		// 올렸던 파일 가져오기 
+		
+		
+		model.addAttribute("catelist",cl);
+		model.addAttribute("equiplist",el);
+		model.addAttribute("imageD", imageD);
+		model.addAttribute("equipDE", equipDE);
+		model.addAttribute("detail", detail);
+		return "bedit";
+	}
+	// 수정 아직 다안함 >> 파일을 다시 돌아오게하는 법을 몰라서 그거 띄우고  post 만들거임
 	
-	
+	@GetMapping("/report")
+	public String report(@RequestParam Map<String,Object> map,HttpSession session,Model model ) {
+		// 신고하는 사람 추가 >> 나중에 세션으로 받는거로 수정
+		map.put("rmno", 2);
+		model.addAttribute("map", map);
+		return "report";
+	}
+	@PostMapping("/report")
+	public String reportp(@RequestParam Map<String,Object> map,HttpSession session,Model model ) {
+		// 중복 신고에 대해서 어떻게 막아야할까?
+		
+		// 신고 받은 내용 DB에 저장하기 
+		int a = boardService.report(map);
+		return "redirect:/bdetail?bno="+map.get("bno");
+	}
 }

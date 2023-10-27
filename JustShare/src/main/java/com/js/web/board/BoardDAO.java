@@ -26,8 +26,21 @@ public interface BoardDAO {
 
 	List<Map<String, Object>> listp(Map<String, Integer> intLimit);
 
-	List<Map<String, Object>> detail(Map<String, Object> map);
+	Map<String, Object> detail(Map<String, Object> map);
 
-	
+	List<String> imageD(Map<String, Object> map);
+
+	List<String> equipD(Map<String, Object> map);
+
+	int del(Map<String, Object> map);
+
+	List<Integer> equipDE(Map<String, Object> map);
+
+	void read(Map<String, Object> map);
+
+	int report(Map<String, Object> map);
+
+	void breport(Map<String, Object> map);
+
 	
 }

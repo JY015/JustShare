@@ -22,8 +22,9 @@
                		<th class="col-2 ">제목</th>
                		<th class="col-2 bb">날짜</th>
                		<th class="col-1 bb" >글쓴이</th>
-               		<th class="col-2 bb">가격</th>
+               		<th class="col-1 bb">가격</th>
                		<th class="col-1 bb">태그</th>
+               		<th class="col-1 bb">조회수</th>
                	</tr>
                </thead>
                <tbody><c:forEach items="${list}" var="row">
@@ -33,8 +34,10 @@
                		<td class="col-2">${row.btitle } &nbsp;</td>
                		<td class="col-2 bb">${row.bdate }</td>
                		<td class="col-1 bb">${row.mno }</td>
-               		<td class="col-2 bb">${row.bprice }</td>
+               		<td class="col-1 bb">${row.bprice }</td>
                		<td class="col-1 bb">${row.cname }</td>
+               		<td class="col-1 bb">${row.bread }</td>
+               		
                 </tr>
                </c:forEach>
                </tbody>
@@ -68,7 +71,7 @@ function getData(limit){
             // 성공적으로 응답을 받았을 때 처리
             if (data && data.length > 0) {
                 // 테이블 내용 생성
-               var desiredOrder = ['realFile','btitle','bno',  'bprice', 'bcontent', 'bdate', 'cate', 'bread', 'badd', 'mno', 'cname'];
+               var desiredOrder = ['realFile','btitle','bno',  'bprice', 'bcontent', 'bdate', 'cate', 'bread', 'addr', 'mno', 'cname'];
                 data.forEach(function (item) {
                     var newRow = "<tr onclick=\"location.href='./bdetail?bno=" + item.bno + "'\">";
                     desiredOrder.forEach(function(prop) {

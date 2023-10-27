@@ -68,12 +68,39 @@ public class BoardService {
 		return boardDAO.listp(intLimit);
 	}
 
-	public List<Map<String, Object>> detail(Map<String, Object> map) {
-		
+	public Map<String, Object> detail(Map<String, Object> map) {
+		// 클릭할때마다 조회수 +1 추가하기
+		boardDAO.read(map);
 		return boardDAO.detail(map);
 	}
 
-	
+	public List<String> imageD(Map<String, Object> map) {
+		
+		return boardDAO.imageD(map);
+	}
+
+	public List<String> equipD(Map<String, Object> map) {
+		
+		return boardDAO.equipD(map);
+	}
+
+	public int del(Map<String, Object> map) {
+		
+		return boardDAO.del(map);
+	}
+
+	public List<Integer> equipDE(Map<String, Object> map) {
+		
+		return boardDAO.equipDE(map);
+	}
+
+	public int report(Map<String, Object> map) {
+		// 신고 접수하면서 board에 게시글 신고 횟수 올리기
+		boardDAO.breport(map);
+		
+		return boardDAO.report(map);
+	}
+
 
 
 }

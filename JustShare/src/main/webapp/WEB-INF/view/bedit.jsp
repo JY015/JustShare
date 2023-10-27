@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,45 +21,46 @@
 </head>
 <body>
 	<h1>공간 공유하기 </h1>
-	<form action="./bwrite" method="post" enctype="multipart/form-data">
+	<form action="./bwrite" method="post" enctype="multipart/form-data" >
 	
 	 <label for="images">이미지 업로드</label>
+	
 	<div >
     <input type="file" name="upFile" id="upFile" multiple="multiple" >
     </div>
      <div id="imagePreviews"></div>
 	제목
 	<div>
-	<input type="text" name="title" >
+	<input type="text" name="title" value="${detail.btitle }" > 
 	</div>
 	공간 유형
 	<div>
 	<select name="bcate">
 	<c:forEach items="${catelist }" var="n">
-	<option value ="${n.cate}" >${n.cname }</option>
+	<option value ="${n.cate}" <c:if test="${n.cate eq detail.cate}">selected</c:if>>${n.cname }</option>
 	</c:forEach>
 	</select>
 	</div>
 	가격
 	<div>
-	<input type="number" name="price">
+	<input type="number" name="price" value="${detail.bprice }">
 	</div>
 	시설
 	<div>
 	<c:forEach items="${equiplist }" var="n">
-	<input type="checkbox" name="equipment" value="${n.eid }"> ${n.ename }
+	<input type="checkbox" name="equipment" value="${n.eid }" <c:if test="${equipDE.contains(n.eid)}">checked</c:if> > ${n.ename }
 	</c:forEach>
 	</div>
 	상세 설명
 	<div>
-	<textarea name="content"></textarea>
+	<textarea name="content">${detail.bcontent }</textarea>
 	</div>
 	주소
 	<div>
-	<input type="text" id="sample2_postcode" name="addNum" placeholder="우편번호" >
+	<input type="text" id="sample2_postcode" placeholder="우편번호" value="${detail.addNum }">
 	<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample2_address" name="addr" placeholder="주소"><br>
-	<input type="text" id="sample2_detailAddress"  name ="addD" placeholder="상세주소">
+	<input type="text" id="sample2_address" name="add" placeholder="주소" value="${detail.addr }"><br>
+	<input type="text" id="sample2_detailAddress" placeholder="상세주소" value="${detail.addDetail }">
 	<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 	</div>
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
