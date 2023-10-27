@@ -36,19 +36,20 @@
 	
 
 
-	 const socket = new WebSocket("ws://localhost:80/chat"); // 서버 주소로 변경
+	 const socket = new WebSocket("ws://localhost:8080/chat"); // 서버 주소로 변경
+	 
 	 
 	 
 	 // ##소켓 연결##
      socket.onopen = function(event) {
        	console.log("커넥션이 만들어졌습니다.");
-
+    	msgroomload();
        	// ## 1.세션이 연결될때  세션에있는 사용자 이름을 담아서 보내준다.##  --첫연결--로그인세션아이디보냄-- ##
     	var mid = sessionStorage.getItem("mid"); 
     	
        	socket.send(JSON.stringify({ "mid": mid}));
     	//chat.scrollTop = chat.scrollHeight;
-    	msgroomload();
+
     	
     	
     	// ## 2. 게시글에서 대화하기로 접속시 쿼리로 상대방 ID값 받고 그 값으로 queryserchid 함수 실행 ##
@@ -56,7 +57,7 @@
     	var urlParams = new URLSearchParams(queryString);
     	 var toId = urlParams.get("toId");
 
-    	if (toId ==null || toId  ===null) {
+    	if (toId  ===null) {
     		
     	
     	} else {
@@ -80,7 +81,7 @@
  		 // 클릭한 li 요소에 "active" 클래스를 추가
     	
  		
- 		if(toId == null || toId  === "null") {
+ 		if(toId === null) {
  			// 현재 페이지의 URL에서 쿼리 문자열을 가져옵니다.
      		var queryString = window.location.search;
 
@@ -143,37 +144,125 @@
  	}
  	
 
-
-
+ 	
  //## 6.서버로부터 메세지 수신##
 socket.onmessage = function(event) {
-	
+	 
+
 var data = JSON.parse(event.data);
-    
-    // toId와 메시지를 추출
-    //var toId = data.toId;
-    var message =data.message;
-    var sender = data.sender;
-    var time = data.time;
-   
+
   
+var currentScreen = getCurrentScreen();
 
-    // 현재 화면 상태 확인
-    var currentScreen = getCurrentScreen();
+for (var key in data) {
+    var value = data[key];
+    
+ 
+        
+    } 
 
-    if (currentScreen === 'contacts_card') {
-    	
-    	updateMessage(sender, time, message);
+       
+    
 
-    } else if (currentScreen === 'msgload') {
+      
+    if ("message" in data && "sender" in data && "time" in data) {  //일반메시지전송
     	
-    	msgappend(message,sender);
+        var message =data.message;
+        var sender = data.sender;
+        var time = data.time;
+  
+        if (currentScreen === 'contacts_card') {
+        	
+        	updateMessage(sender, time, message);
+
+        } else if (currentScreen === 'msgload') {
+        	
+        	msgappend(message,sender);
+        	
+        } else {
+        	
+        	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
+        	
+        }
     	
-    } else {
+    } else if ("sender" in data && "message" in data && !("time" in data) ) { //접속알림
     	
-    	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
     	
+    	 var sender = data.sender;
+         var message = data.message;
+       
+         if(message ==="연결") { 
+         
+    	  if (currentScreen === 'contacts_card') {
+          	
+    		onlineupdate(sender);
+
+          } else if (currentScreen === 'msgload') {
+          	
+        	  msgonlineupdate(sender);
+          	
+          } else {
+          	
+          	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
+          	
+          }
+    	  
+         }else if(message ==="연결해제") {
+        	 
+        	 if (currentScreen === 'contacts_card') {
+               	
+        		 
+         		offupdate(sender);
+
+               } else if (currentScreen === 'msgload') {
+               	
+            	   msgoffupdate(sender);
+               	
+               } else {
+               	
+               	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
+               	
+               }
+        	 
+        	 
+        	 
+         }
+    
+    } 
+    
+    
+	 //alert(currentScreen);
+    if(value ==="연결불러오기") {
+    	 //alert(currentScreen);
+    	 
+    	 
+    	
+ 	
+ 	      if (currentScreen === 'contacts_card') {
+ 	    	  
+ 	    	 for (var userName in data) {
+ 	  	       var sender = userName;
+ 	  	   	 onlineupdate(sender);
+ 	     	   }
+ 	   
+ 	    		
+
+ 	          } else if (currentScreen === 'msgload') {
+ 	    
+ 	        	 for (var userName in data) {
+ 	  	  	       var sender = userName;
+ 	  	  	 		 msgonlineupdate(sender);
+ 	  	     	   }
+ 	       
+ 	          } else {
+ 	     
+ 	          	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
+ 	          	
+ 	          }
     }
+      
+
+};
 
 
 	//## 6-1 ##
@@ -181,9 +270,105 @@ var data = JSON.parse(event.data);
 	
 	//chat.scrollTop = chat.scrollHeight;
   
-};
 
 
+
+// ## 클라이언트 온라인 연결
+function onlineupdate(sender) {
+    // 모든 user_info1 엘리먼트를 찾기
+      var userList = document.querySelectorAll('.user_info1');
+   		 var imgList = document.querySelectorAll('.img_cont');
+       var imgElement;
+       var toIdElement;
+
+    for (var i = 0; i < userList.length; i++) {
+        toIdElement = userList[i].querySelector('.toId');
+        imgElement =imgList[i];
+       
+        //나를 제외한 모든사람사람채팅창에 내가 접속여부를보여주는거!
+        if (toIdElement.textContent === sender) {
+        
+        
+        	imgElement.querySelector('.status').classList.replace('offline', 'online_icon');
+        	
+        } 
+    }
+}
+		//## 오프라인 업데이트 
+	function offupdate(sender) {
+		
+	
+		    // 모든 user_info1 엘리먼트를 찾기
+		      var userList = document.querySelectorAll('.user_info1');
+		   		 var imgList = document.querySelectorAll('.img_cont');
+		       var imgElement;
+		       var toIdElement;
+
+		    for (var i = 0; i < userList.length; i++) {
+		        toIdElement = userList[i].querySelector('.toId');
+		        imgElement =imgList[i];
+		       
+		        //나를 제외한 모든사람사람채팅창에 내가 접속여부를보여주는거!
+		        if (toIdElement.textContent === sender) {
+		        
+		        
+		        	imgElement.querySelector('.status').classList.replace('online_icon', 'offline');
+		        }
+		       
+		    }
+		}
+		
+		//## 메세지방 접속상태 off 업데이트
+	function msgoffupdate(sender) { 
+		
+		   // 모든 user_info1 엘리먼트를 찾기
+	      var userList = document.querySelectorAll('.user_info');
+	   		 var imgList = document.querySelectorAll('.img_cont');
+	       var imgElement;
+	       var toIdElement;
+
+	       for (var i = 0; i < userList.length; i++) {
+	        toIdElement = userList[i].querySelector('.toId');
+	        imgElement =imgList[i];
+	    
+	       }
+	        //나를 제외한 모든사람사람채팅창에 내가 접속여부를보여주는거!
+	        if (toIdElement.textContent === sender) {
+	        
+	        
+	        	imgElement.querySelector('.status').classList.replace('online_icon', 'offline');
+	        }
+	       
+	    }
+		
+	//## 메세지방 접속상태 online 업데이트
+	function msgonlineupdate(sender) { 
+		
+		  var userList = document.querySelectorAll('.user_info');
+	   		 var imgList = document.querySelectorAll('.img_cont');
+	       var imgElement;
+	       var toIdElement;
+
+	       for (var i = 0; i < userList.length; i++) {
+	        toIdElement = userList[i].querySelector('.toId');
+	        imgElement =imgList[i];
+       //나를 제외한 모든사람사람채팅창에 내가 접속여부를보여주는거!
+       if (toIdElement.textContent === sender) {
+       
+       
+    	   imgElement.querySelector('.status').classList.replace('offline', 'online_icon');
+       }
+		 
+	     }	 
+	 }
+	 
+	
+	
+  
+
+
+
+ //## 대화목록리스트 메세지업데이트
 function updateMessage(sender, time, message) {
     // 모든 user_info1 엘리먼트를 찾기
     var userList = document.querySelectorAll('.user_info1');
@@ -210,7 +395,7 @@ function updateMessage(sender, time, message) {
     }
       if(!status){
     	  
-       	
+       		//온라인 ,오프라인 메서드 만들어서 변수화시키기 
     	  var chatcreate ='<li><div class="d-flex bd-highlight" type="button"'; 
     	      chatcreate+='onclick="serchid(this)"><div class="img_cont">';
     	  	  chatcreate+='<img src="" class="rounded-circle user_img">';
@@ -244,7 +429,7 @@ function getCurrentScreen() {
         return 'msgload';
     }
     // 다른 상태에 따른 처리 추가 가능
-    return 'unknown';
+    return '1';
 }
 
 
@@ -402,7 +587,7 @@ function sendMessage() {
     	    		if(initid===sender) { 
     	    		   
     	    		
-    	    			 console.log(img);
+    	    			 //console.log(img);
     	      		    
     	      	  var conversationHTML='<div class="d-flex justify-content-start mb-4" >';
     	              conversationHTML+='<div class="img_cont_msg"><img src="'+img+'" class="rounded-circle user_img_msg toimg">';
@@ -516,6 +701,7 @@ function sendMessage() {
         		$.ajax({
                     type: "GET",
                     url: "./roomload", // 폼의 action URL
+                    async: false,
                     data: {
                     	
                     	"mid" : mid
@@ -585,7 +771,7 @@ function sendMessage() {
   
       		roombody ='<li><div class="d-flex bd-highlight" type="button" onclick="serchid(this)">';
       		roombody +='<div class="img_cont"><img src="'+toimg+'"class="rounded-circle user_img">';
-      		roombody +='<span class="online_icon"></span></div><div class="user_info1">';
+      		roombody +='<span class="status offline"></span></div><div class="user_info1">';
       		roombody +='<span class="toId">'+toId+'</span><span class="time">'+ formattedTime+'</span><p class="roommessage">'+lastmessage+'</p></div></div></li>';
 			
 		 roomContent += roombody;
@@ -726,7 +912,7 @@ function sendMessage() {
         		    contenthead +='<div class="msgback" id="goBack"><span><i class="xi-arrow-left"></i></span></div>';
         		    contenthead +='<div class="img_cont">';
         		    contenthead +='<img src="'+toimg+'" class="rounded-circle user_img">';
-        		    contenthead +='<span class="online_icon"></span></div>';
+        		    contenthead +='<span class="status offline"></span></div>';
         		    contenthead +='<div class="user_info">';
         		    contenthead +='<span class="toId">'+toId+'</span></div>';
         		    contenthead +='</div><span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>';
