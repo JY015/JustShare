@@ -42,5 +42,7 @@ public interface BoardDAO {
 
 	void breport(Map<String, Object> map);
 
+	int dp(Map<String, Integer> imap);
+
 	
 }

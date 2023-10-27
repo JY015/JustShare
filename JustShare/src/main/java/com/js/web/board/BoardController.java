@@ -224,10 +224,18 @@ public class BoardController {
 	}
 	@PostMapping("/report")
 	public String reportp(@RequestParam Map<String,Object> map,HttpSession session,Model model ) {
-		// 중복 신고에 대해서 어떻게 막아야할까?
-		
+		// 중복 신고 막기  해당 게시글을 이미 신고한 사용자라면 신고가 더이상 추가되지않음  추가되지않는거 어캐 처리할지는 나중에
+		int dp = boardService.dp(map);
+		if(dp ==0 ) {
 		// 신고 받은 내용 DB에 저장하기 
 		int a = boardService.report(map);
+		// 신고 완료한 글에 대하여 표시하기 >>> rmno 와 sessionid 가 같고 dp가 0이 아니면 불드러오게 
+		model.addAttribute("dp", dp);
 		return "redirect:/bdetail?bno="+map.get("bno");
+		}else {
+			
+		return "redirect:/bdetail?bno="+map.get("bno");	
+		}
+		
 	}
 }

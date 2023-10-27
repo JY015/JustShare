@@ -32,7 +32,7 @@
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,bcx,bcy,addr,mno,addNum,addDetail)
+	INSERT INTO board (btitle,cate,bprice,bcontent,longtitude,latitude,addr,mno,addNum,addDetail)
 	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD})
 </insert>
 
@@ -115,4 +115,9 @@
 	WHERE bno=#{bno}
 </update>
 
+<select id="dp" parameterType="Map" resultType="Integer">
+	SELECT Count(*)
+	FROM report
+	WHERE rmno=#{rmno} and bno=#{bno}
+</select>
 </mapper>

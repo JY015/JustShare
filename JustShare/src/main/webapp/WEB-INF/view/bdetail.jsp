@@ -22,7 +22,6 @@
 <br>
 
 
-
 ${detail.bcontent }
 
 <div id="map" style="width:350px;height:350px;"></div>
@@ -54,18 +53,18 @@ function report(){
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4638e2c21e218f8f8162ad1b3069e8c"></script>
 <script>
-var x = ${detail.bcx};
-var y = ${detail.bcy};
+var x = ${detail.latitude};
+var y = ${detail.longtitude};
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
-    center: new kakao.maps.LatLng(y, x), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(x, y), // 지도의 중심좌표
     level: 3 // 지도의 확대 레벨
 };
 
 //지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 //마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(y, x); 
+var markerPosition  = new kakao.maps.LatLng(x, y); 
 //마커를 생성합니다
 var marker = new kakao.maps.Marker({
  position: markerPosition
@@ -75,7 +74,7 @@ marker.setMap(map);
 
 
 var iwContent = '<div style="padding:5px;">'+"${detail.btitle}"+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-iwPosition = new kakao.maps.LatLng(y, x); //인포윈도우 표시 위치입니다
+iwPosition = new kakao.maps.LatLng(x, y); //인포윈도우 표시 위치입니다
 
 //인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({
