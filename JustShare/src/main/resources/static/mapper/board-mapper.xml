@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.web.board.BoardDAO">
+
+<select id="listNum">
+	SELECT count(bno)
+	FROM board
+
+</select>
+
+<select id="list" parameterType="Map" resultType="map">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.badd,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="listp">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.badd,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT #{nextPageLimit}, #{limit}
+</select>
+
+<insert id="adr" parameterType="Map" >
+	INSERT INTO board (btitle,cate,bprice,bcontent,bcx,bcy,badd,mno)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno})
+</insert>
+
+<select id="bno">
+	SELECT last_insert_id();
+</select>
+
+<insert id="equip">
+	INSERT INTO boardEquipment (bno,eid)
+	VALUES (#{bno},#{i})
+</insert>
+
+<insert id="image">
+	INSERT INTO image (originalFile,realFile,bno ,main)
+	VALUES (#{originalFilename},#{realFileName},#{bno},#{main})
+</insert>
+
+<select id="cl">
+	SELECT cate,cname
+	FROM cate
+
+</select>
+
+<select id="el">
+	SELECT eid,ename
+	FROM equipment
+
+</select>
+
+<select id="detail" parameterType="Map" resultType="Map">
+	SELECT *
+	FROM board
+	WHERE bno=#{bno}
+</select>
+
+</mapper>
