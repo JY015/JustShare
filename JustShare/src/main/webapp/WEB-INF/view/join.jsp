@@ -67,7 +67,7 @@
 	         let pw2 = $("#pw2").val();
 	         let mname = $("#mname").val();
 	         let mphone = $("#mphone").val();
-	         let mbrith = $("#mbrith").val();
+	         let mbirth = $("#mbirth").val();
 	         
 	          if (!isIdChecked) {
 	             Swal.fire("아이디 중복 검사를 실행하세요.");
@@ -85,7 +85,7 @@
 	            Swal.fire("핸드폰 번호 11자리를 정확히 입력해주세요.");
 	            return false;
 	         }
-	       if (mbrith.length < 10 ) {
+	       if (mbirth.length < 10 ) {
 	            Swal.fire("생년월일을 정확히 입력해주세요.");
 	            return false; 
 	         
@@ -133,11 +133,104 @@
 				Swal.fire("올바른 메일주소를 입력해주세요");
 				return false; 
 	     }	
-	     	 document.getElementById("myForm").submit();
+	     	 document.getElementById("myForm").submit();	
 	     	
 	  	});
 	       
 	 });
+	  
+	  
+	  
+	  $(function(){
+			window.addEventListener('ssc_wheel', function(event) {
+				event.preventDefault();
+			}, {passive:false}); 
+			   //휴대폰 번호 인증
+			   var isphoneChecked = false; // ID 중복 확인 여부를 저장하는 변수
+			   $(document).on("click", "#phoneChk", function() {
+			   	var phone = $("#phone").val().trim();
+			   	if (!strToInt(phone)) {
+		            return; // 숫자로 변환되지 않으면 함수 종료
+		        }
+			   	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주세요.");
+			   	$.ajax({
+			           type:"post",
+			           url:"phoneCheck",// "phoneCheck?phone=" + phone하려면 밑에 data를 빼야함
+			           data:{phone:phone},
+			           success:function(data){
+			        	    alert(data);
+			           	    update();
+			           		var clickCnt = 0;
+			           	 $(document).on("click", "#phoneChk2", function() {
+			           		if(data == $("#phone2").val().trim()){
+			           			alert("본인 인증이 확인되었습니다.");
+			           			$("#phoneChk2").attr("disabled",true);
+			           			$("#phoneChk2").css("background-color",'green');
+			           			isphoneChecked = true;
+			           			/*$.ajax({
+			           			   type:"post",
+			     		           url:"phoneSave",
+			     		           data:{phone:phone},
+			     		           success:function(data){
+			     		        	   location.href="./info";
+			     		           }, error:function(error){
+			     		        	   alert('에러');
+			     		           }
+			           			});*/
+			           		} else if (clickCnt < 5){
+			           			alert("인증 번호가 틀렸습니다. 다시 시도하세요.");
+			           		} else if(clickCnt >= 5){
+			           			alert("인증 번호를 다시 받으세요.");
+			           			location.href = "./info";
+			           		}
+			           		clickCnt++;
+			           	 });
+		           		},
+		           		error:function(error){
+		           			alert("에러");
+		           		}
+			       });
+			  });
+		});
+		
+		function strToInt(str) {
+			if(str.length > 11 || str.length < 10){
+				alert("다시 입력하세요...");
+				return false;
+			}
+			
+		    for (let i = 0; i < str.length; i++) {
+		        if (isNaN(parseInt(str[i]))) {
+		            // 숫자가 아닌 문자가 중간에 포함된 경우
+		            alert("숫자만 입력하세요...");
+		            return false;
+		        }
+		    }
+		    // 숫자로만 이루어진 문자열을 정수로 변환하여 반환
+		    return parseInt(str);
+		}
+		
+		function update(){
+			$("#phone2").attr("disabled",false);
+	   		$("#phone2").attr("placeholder","인증번호를 입력하세요...");
+	   		$("#phoneChk").attr("disabled",true);
+	   		$("#phoneChk2").attr("disabled",false);
+	   		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+	   		$(".successPhoneChk").css("color","green");
+	   		$("#phone").attr("readonly",true);
+		}
+		$(function(){
+			window.addEventListener('ssc_wheel', function(event) {
+				event.preventDefault();
+			}, {passive:false});
+		});
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	
 	</script>
 	
@@ -210,10 +303,25 @@
                   </div>
                </div>
                <div>
-                  <div class="brithBox">
+                  <div class="birthBox">
                      <input class="input"  type="date" name="mbirth" id="mbirth"/><br><br>
                   </div>
                </div>
+               
+                 <div class="form-group"> 전화번호 (숫자만 입력하세요.)
+                      <div class="detail">
+                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="${info.mphone }">
+						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
+						<br><br>
+						<input class="menu-title" id="phone2" type="text" disabled required/>
+						<input class="btn" type="button" id="phoneChk2" value = "본인인증" disabled="disabled">
+						<div><span style="color: red;" class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span></div>
+						<input type="hidden" id="phoneDoubleChk"/>
+					</div>
+                  </div>
+ 
+               
+               
                <div>
                   <div class="phoneBox">
                      <input class="input" type="text" name="mphone" id="mphone" placeholder="전화번호를 입력해 주세요"/><br><br>
