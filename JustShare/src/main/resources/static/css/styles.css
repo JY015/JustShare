@@ -10824,4 +10824,16 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+  .footer1 {
+  margin-top: 20px;
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  background-color: #ff6a24;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 150px;
+  color: white;
+}
 }

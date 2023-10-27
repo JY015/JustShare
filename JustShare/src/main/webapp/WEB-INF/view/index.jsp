@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
+        <title>Shop Homepage - Start e</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -264,6 +264,14 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">안녕</p></div>
         </footer>
+<footer class="footer1">
+<br>
+<p>서울 강남구 테헤란로 7길 7(역삼동 에스코빌딩 7층) / 대표자: 김민성 / TEL:02-000-1111</p>
+<p>Copyright ⓒ 2023. 내가 사랑한 여름. All Rights Reserved</p>
+</footer>        
+        
+        
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
