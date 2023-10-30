@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -33,50 +35,84 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping("/board")    // 게시판 리스트 
-	public String board(Model model,PageCriteria cri) {
-		// 조건 1. 검색을 실시하지 않았을때
-		// 전체 글 개수
-        int listNum = boardService.listNum();
-		// 페이징 객체
-        Map<String, Object> map = new HashMap<String, Object>();
+	public String board(@RequestParam Map<String,Object>map ,Model model,PageCriteria cri) {
+		// 전체 글 개수   + 검색시 글 개수 변화 
+        int listNum = boardService.listNum(map);
+       
+       
+        // 지역구 / 시설 / 카테고리 전부 꺼내기   << 모달로 띄울 필터창에 보여줄 목록을 가져오기 위해서 
+        List<Map<String, Object>> areaList = boardService.areaList();
+        List<Map<String, Object>> cl = boardService.cl();
+		List<Map<String, Object>> el = boardService.el();
+		
+		
+		// 페이징 객체  >> 1page 말고 덧붙이기 할껀데 페이징이 필요한가 ?
         Paging paging = new Paging();
         paging.setCri(cri);
         paging.setTotalCount(listNum);    
         map.put("cri", cri);
+        
+        // 리스트 뽑기  +  검색시  
 		List<Map<String, Object>> boardList = boardService.list(map);
+		
 		model.addAttribute("list",boardList);
 		model.addAttribute("paging", paging);
+		model.addAttribute("areaList", areaList);
+		model.addAttribute("catelist", cl);
+		model.addAttribute("equiplist", el);
 		return "board";
 	}
 	
-	// 인피니트 페이지
+	// 인피니트 페이지  두번째 페이지 부터 계속 ajax로 생성해서 붙이기 
 	@ResponseBody
 	@PostMapping("/board")
 	public String boardp(@RequestParam Map<String,Object> map ) {
-		// 전체 글 숫자 
-		int listNum = boardService.listNum();
-		// map 에서 꺼내서 형 변환 
-		int limit = Integer.parseInt(map.get("limit").toString());
-		int nextPageLimit = Integer.parseInt(map.get("nextPageLimit").toString());
-		Map<String,Integer> intLimit = new HashMap<String, Integer>();
-		intLimit.put("limit", limit);
-		intLimit.put("nextPageLimit", nextPageLimit);
 		
+		System.out.println(map);
+		// 전체 글 숫자   +  검색
+		int listNum = boardService.listNum(map);
+		
+		// map 에서 꺼내서 형 변환 
+		int limitI = Integer.parseInt(map.get("limit").toString());
+		int nextPageLimitI = Integer.parseInt(map.get("nextPageLimit").toString());
+		
+		map.put("limitI", limitI);
+		map.put("nextPageLimitI", nextPageLimitI);
+	
 		// 최대보다 많으면 더이상 뽑지 않으면
-		 if( nextPageLimit < listNum) {
-		        List<Map<String, Object>> listp = boardService.listp(intLimit);
+		 if( nextPageLimitI < (listNum+10)) {
+		        List<Map<String, Object>> listp = boardService.listp(map);
 		     // JSON 배열을 생성하고 데이터 추가
 		        JSONArray jsonArray = new JSONArray();
 		        for (Map<String, Object> item : listp) {
 		            JSONObject jsonObject = new JSONObject(item);
 		            jsonArray.put(jsonObject);
 		        }
+		        
 		        // JSON 응답 반환
 		        return jsonArray.toString();
 		    } else {
 		        // 더 이상의 데이터가 없음을 나타내는 JSON 응답 반환
 		        return "{\"message\":\"No more data available.\"}";
 		    }
+	}
+	
+	// 필터 적용하기   배열로 받아오기 힘듦  // 지금 보내고 받는게 이상함 배열로 보내고 배열로 받아와야함 
+	
+	@ResponseBody
+	@PostMapping("/boardFilter")
+	public String boardf(@RequestParam Map<String, Object> filterData) {
+		System.out.println(filterData);
+		 String areas = (String)filterData.get("areas[0]");
+		 System.out.println(areas);
+		/*
+		 * for(i= 0; i < map.get("areas").length; i++) {
+		 * 
+		 * }
+		 */
+		
+		JSONArray jsonArray = new JSONArray();
+		return jsonArray.toString();
 	}
 	
 	@GetMapping("/bwrite")   // 글 작성
@@ -94,7 +130,7 @@ public class BoardController {
 	, required= false)Integer[] equipment,@RequestParam("upFile")MultipartFile[] upfile,HttpSession session) {
 		 
 		// session.getAttribute("mno"); map.put("mno",mno) 로그인 생기면 밑에 수정
-		//게시글 작성 + 주소 변형후 DB에 넣기 
+		//게시글 작성 + 주소 변형후 DB에 넣기   >>  area 카테고리랑 연동하기 
 		// 임시 회원번호 부여
 		// 이거 조건을 걸때 사진은 반드시있어야하니깐 제일 위에 if해서 걸어주기 안함아직
 		map.put("mno", 1);
@@ -224,7 +260,7 @@ public class BoardController {
 	}
 	@PostMapping("/report")
 	public String reportp(@RequestParam Map<String,Object> map,HttpSession session,Model model ) {
-		// 중복 신고 막기  해당 게시글을 이미 신고한 사용자라면 신고가 더이상 추가되지않음  추가되지않는거 어캐 처리할지는 나중에
+		// 중복 신고 막기  해당 게시글을 이미 신고한 사용자라면 신고가 더이상 추가되지않음  >> 서버에서는 막아노음 
 		int dp = boardService.dp(map);
 		if(dp ==0 ) {
 		// 신고 받은 내용 DB에 저장하기 

@@ -57,7 +57,7 @@
 	<div>
 	<input type="text" id="sample2_postcode" name="addNum" placeholder="우편번호" >
 	<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample2_address" name="addr" placeholder="주소"><br>
+	<input type="text" id="sample2_address" name="add" placeholder="주소"><br>
 	<input type="text" id="sample2_detailAddress"  name ="addD" placeholder="상세주소">
 	<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 	</div>

@@ -22,9 +22,9 @@ public interface BoardDAO {
 
 	List<Map<String, Object>> el();
 
-	int listNum();
+	int listNum(Map<String, Object> map);
 
-	List<Map<String, Object>> listp(Map<String, Integer> intLimit);
+	List<Map<String, Object>> listp(Map<String, Object> map);
 
 	Map<String, Object> detail(Map<String, Object> map);
 
@@ -43,6 +43,10 @@ public interface BoardDAO {
 	void breport(Map<String, Object> map);
 
 	int dp(Map<String, Integer> imap);
+
+	List<Map<String, Object>> areaList();
+
+	Map<String, Object> areaN(Map<String, Object> areaD);
 
 	
 }

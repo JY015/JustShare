@@ -5,19 +5,35 @@
 <select id="listNum">
 	SELECT count(bno)
 	FROM board
-
+	<where>
+		<if test="searchV != null and searchV != ''">
+		btitle Like CONCAT('%',#{searchV},'%') or bcontent Like CONCAT('%',#{searchV},'%') or addr Like CONCAT('%',#{searchV},'%')
+		</if>
+	</where>
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
 	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
+		
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
-	WHERE b.bdel=1
+	<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		</where>
+	AND b.bdel=1
 	GROUP BY b.bno
 	ORDER BY b.bno desc
 	LIMIT #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="areaList" parameterType="Map" resultType="Map">
+	SELECT ano,aname
+	FROM area
+	
 </select>
 
 <select id="listp">
@@ -26,14 +42,20 @@
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
+		<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		</where>
+	AND b.bdel=1
 	GROUP BY b.bno
 	ORDER BY b.bno desc
-	LIMIT #{nextPageLimit}, #{limit}
+	LIMIT #{nextPageLimitI}, #{limitI}
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD})
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail,rno,ano)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD},#{rno},#{ano})
 </insert>
 
 <select id="bno">
@@ -119,5 +141,12 @@
 	SELECT Count(*)
 	FROM report
 	WHERE rmno=#{rmno} and bno=#{bno}
+</select>
+
+<select id="areaN" parameterType="Map" resultType="Map">
+	SELECT a.ano,r.rno
+	FROM area a 
+	JOIN region r ON a.rno = r.rno
+	WHERE a.aname = #{area} and r.rname=#{region}
 </select>
 </mapper>

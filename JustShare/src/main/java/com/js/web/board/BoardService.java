@@ -14,6 +14,10 @@ public class BoardService {
 	
 	@Autowired
 	private AddressService addressService;
+	
+	@Autowired
+	
+	private AreaDivide areaDivide;
 
 	// 전체 리스트 뽑기
 	public List<Map<String, Object>> list(Map<String, Object> map) {
@@ -24,12 +28,22 @@ public class BoardService {
 	// 받은 주소 값을 위도로 변경하여 DB에 넣어주기 >> 문제 발생 
 	// 넣는거 까진 잘 들어가는데 해당 bno를 어떻게 찾아줄건가 
 	public Integer adr(Map<String, Object> map) {
+		// 위도 경도 찾아서 넣어주기
 		String a = (String) map.get("add");
 		Coordinates b = addressService.getCoordinate(a);
 		double x = Double.parseDouble(b.getX());
 		double y = Double.parseDouble(b.getY());
 		map.put("x", x);
 		map.put("y", y);
+		// 지역 스트링으로 나누기 > 숫자로 변형 후 map 에 넣어주기 
+		Map<String,Object> areaD = areaDivide.areaD(a);
+		System.out.println(areaD);
+		Map<String,Object> areaN = boardDAO.areaN(areaD);
+		System.out.println(areaN);
+		Integer ano = (Integer) areaN.get("ano");
+		Integer rno = (Integer) areaN.get("rno");
+		map.put("ano",ano);
+		map.put("rno",rno);
 		boardDAO.adr(map);
 		return 1 ;
 	}
@@ -59,14 +73,14 @@ public class BoardService {
 		return boardDAO.el();
 	}
 
-	public int listNum() {
+	public int listNum(Map<String, Object> map) {
 		
-		return boardDAO.listNum();
+		return boardDAO.listNum(map);
 	}
 
-	public List<Map<String, Object>> listp(Map<String, Integer> intLimit) {
+	public List<Map<String, Object>> listp(Map<String, Object> map) {
 		
-		return boardDAO.listp(intLimit);
+		return boardDAO.listp(map);
 	}
 
 	public Map<String, Object> detail(Map<String, Object> map) {
@@ -115,6 +129,11 @@ public class BoardService {
 		imap.put("bno", bno);
 		
 		return boardDAO.dp(imap);
+	}
+
+	public List<Map<String, Object>> areaList() {
+		
+		return boardDAO.areaList();
 	}
 
 
