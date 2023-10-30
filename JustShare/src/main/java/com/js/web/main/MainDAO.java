@@ -12,5 +12,7 @@ public interface MainDAO {
 
 	Map<String, Object> findPW(Map<String, Object> map);
 
+	Map<String, Object> findPwCheck(Map<String, Object> map);
+
 
 }

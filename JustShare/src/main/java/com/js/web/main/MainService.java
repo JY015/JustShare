@@ -21,6 +21,11 @@ public class MainService {
 		return mainDAO.findId(map);
 	}
 
+	public Map<String, Object> findPwCheck(Map<String, Object> map) {
+		
+		return mainDAO.findPwCheck(map);
+	}
+
 
 	
 	

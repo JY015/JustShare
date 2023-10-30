@@ -16,11 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.js.web.util.Util;
+
 @Controller
 public class MainController {
 
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private Util util;
 
 	@GetMapping("/")
 	public String main() {
@@ -41,7 +46,7 @@ public class MainController {
 			session.setAttribute("mname", res.get("mname"));		
 			return "redirect:/";
 		} else {
-			/* model.addAttribute("loginCheckCount", 1); */
+			model.addAttribute("loginCheckCount", 1);
 			return "login";		
 		}
 	}
@@ -56,11 +61,6 @@ public class MainController {
 		}
 		session.invalidate();
 		return "redirect:/";
-	}
-
-	@GetMapping("/userSearch")
-	public String userSearch() {
-		return "userSearch";
 	}
 
 	@GetMapping("/findId")
@@ -93,10 +93,46 @@ public class MainController {
 		return "findPw";
 	}
 	
-	@GetMapping("/mail")
-	public String mail() {
-		
-		return "mail";
-	}
 
+	@PostMapping("/findPw") 
+	public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
+	  
+		//util.htmlMailSender(map);
+		model.addAttribute("findPwEmail", 1);
+	  	return "findPw";
+	 
+	  }
+	 
+
+	@PostMapping("findPwCheck")
+	public String findPwCheck(@RequestParam String mid, @RequestParam String mphone , Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("mid", mid);
+		map.put("mphone", mphone);
+		Map<String, Object> findPwCheck = mainService.findPwCheck(map);	
+		System.out.println("findPwCheck : "+ findPwCheck);
+		if (String.valueOf(findPwCheck.get("count")).equals("1")) {
+			model.addAttribute("findPwCheck", 1);
+			String memail = (String) findPwCheck.get("memail");
+			model.addAttribute("memail", memail);
+			return "findPw";
+		}
+		model.addAttribute("findPwCheck", 0);
+		return "findPw";
+	}
+	
+	
+	@PostMapping("findPwFinal")
+	public String findPwFinal() {
+			
+		return "findPwFinal";
+	}
+	
+
+	@GetMapping("/cafe")
+	public String cafe() {
+		
+		return "cafe";	
+	}
+	
 }

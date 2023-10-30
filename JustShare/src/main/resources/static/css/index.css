@@ -7785,6 +7785,7 @@ textarea.form-control-lg {
 /* 	 position: fixed; */
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
+  background-color: #ff6a24;
 }
 
 .pt-0 {
@@ -10824,16 +10825,18 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
-  .footer1 {
+ .footer1 {
   margin-top: 20px;
   position: absolute;
   bottom: -50%;
   left: 0;
   width: 100%;
-  background-color: #ff6a24;
   padding: 10px;
   box-sizing: border-box;
   height: 150px;
   color: white;
+  background-color: black !important;
 }
+
+
 }
