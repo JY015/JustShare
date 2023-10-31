@@ -141,6 +141,37 @@
 	  
 	  
 	  
+	  $('#send').click(function() {
+			
+			const to = $('#to').val();
+			
+			$.ajax ({
+				url: '/check/sendSMS',
+				type: 'GET',
+				data: {
+					"to" : to
+				},
+				success: function(data) {
+					const checkNum = data;
+					alert('checkNum:'+ checkNum);
+					
+					$('#enterBtn').click(function() {	
+						const userNum = $('#userNum').val();
+						
+						if(checkNum === userNum) {
+							alert('인증 성공하였습니다.');
+						}
+						else {
+							alert('인증 실패하였습니다. 다시 입력해주세요.');
+						}
+					});
+					
+				}
+			});
+			
+		});
+	  
+	  
 	  $(function(){
 			window.addEventListener('ssc_wheel', function(event) {
 				event.preventDefault();
@@ -226,11 +257,6 @@
 		});
 	  
 	  
-	  
-	  
-	  
-	  
-	  
 	
 	</script>
 	
@@ -307,10 +333,13 @@
                      <input class="input"  type="date" name="mbirth" id="mbirth"/><br><br>
                   </div>
                </div>
-               
-                 <div class="form-group"> 전화번호 (숫자만 입력하세요.)
+           
+           
+         
+              
+      <div class="form-group"> 전화번호 (숫자만 입력하세요.)
                       <div class="detail">
-                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="${info.mphone }">
+                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="전화번호">
 						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
 						<br><br>
 						<input class="menu-title" id="phone2" type="text" disabled required/>
@@ -319,8 +348,8 @@
 						<input type="hidden" id="phoneDoubleChk"/>
 					</div>
                   </div>
- 
-               
+                  
+                  
                
                <div>
                   <div class="phoneBox">
