@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.web.map.MapDAO">
+	 <insert id="gpsInsert" parameterType="com.js.web.map.MapDTO">
+        INSERT INTO map (latitude, longitude)
+        VALUES (#{latitude}, #{longitude})
+    </insert>
+    
+    <select id="gpsListAll" resultType="map" parameterType="com.js.web.map.BoardDTO">
+    	select bno, latitude, longitude, btitle, addr
+    	from board
+    </select>
+    
+    <select id="gpsListOne" resultType="map" parameterType="com.js.web.map.BoardDTO">
+    	SELECT board.btitle, board.latitude, board.longitude, board.addr, board.bno
+		FROM map
+		JOIN board ON map.bno = board.bno
+		WHERE map.bno = 30
+    </select>
+</mapper>
