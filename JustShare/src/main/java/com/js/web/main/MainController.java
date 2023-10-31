@@ -1,46 +1,37 @@
 package com.js.web.main;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-=======
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.EmailException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.js.web.util.Util;
->>>>>>> main
+
 
 @Controller
 public class MainController {
 
-<<<<<<< HEAD
-=======
+
 	@Autowired
 	private MainService mainService;
 	
 	@Autowired
 	private Util util;
 
->>>>>>> main
+
 	@GetMapping("/")
 	public String main() {
 		return "index";
 	}
-<<<<<<< HEAD
-=======
+
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -145,5 +136,5 @@ public class MainController {
 		return "cafe";	
 	}
 	
->>>>>>> main
+
 }
