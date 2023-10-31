@@ -48,5 +48,6 @@ public interface BoardDAO {
 
 	Map<String, Object> areaN(Map<String, Object> areaD);
 
+
 	
 }

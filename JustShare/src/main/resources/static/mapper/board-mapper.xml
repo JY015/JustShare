@@ -3,13 +3,24 @@
 <mapper namespace="com.js.web.board.BoardDAO">
 
 <select id="listNum">
-	SELECT count(bno)
-	FROM board
+	SELECT count(distinct b.bno)
+	FROM board b 
+	JOIN boardEquipment be
 	<where>
 		<if test="searchV != null and searchV != ''">
 		btitle Like CONCAT('%',#{searchV},'%') or bcontent Like CONCAT('%',#{searchV},'%') or addr Like CONCAT('%',#{searchV},'%')
 		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
 	</where>
+	
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
@@ -22,6 +33,15 @@
 	<where>
 		<if test="searchV != null and searchV != ''">
 		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
 		</if>
 		</where>
 	AND b.bdel=1
@@ -46,12 +66,45 @@
 		<if test="searchV != null and searchV != ''">
 		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
 		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
 		</where>
 	AND b.bdel=1
 	GROUP BY b.bno
 	ORDER BY b.bno desc
 	LIMIT #{nextPageLimitI}, #{limitI}
 </select>
+<!-- 
+<select id="listf" parameterType="Map" resultType="Map">
+	
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+		
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areaArray != null and areaArray != ''"> 
+		 b.cate IN (#{areaArray})
+		</if>
+		</where>
+	AND b.bdel=1
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT 0, 10
+	
+
+</select> -->
 
 <insert id="adr" parameterType="Map" >
 	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail,rno,ano)
