@@ -108,7 +108,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 currentInfoWindow.close();
             }
 
-            var content = '<div style="padding:10px;">' +
+            var content = '<div style="padding:11px;">' +
                 '<h3>' + item.content + '</h3>' +
                 '</div>';
 
