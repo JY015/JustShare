@@ -24,6 +24,10 @@ public class MapService {
 		return mapDao.gpsListAll(boardDto2);
 	}
 
+	public List<String> imageD(ImgDTO imageDto) {
+		return mapDao.imageD(imageDto);
+	}
+
 
 
 

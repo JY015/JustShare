@@ -12,11 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.js.web.board.BoardService;
+
 @Controller
 public class MapController {
 
 	@Autowired
 	private MapService mapService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping("/mapGps")
 	public String mapGps() {
@@ -93,9 +98,14 @@ public class MapController {
 		
 		BoardDTO boardDto2= new BoardDTO();
 		List<Map<String, Object>> ListOne = mapService.gpsListAll(boardDto2);
+		
+		ImgDTO imageDto = new ImgDTO();
+		List<String> imageD = mapService.imageD(imageDto);
+		 model.addAttribute("imageD",imageD);
 
 		System.out.println("ListAll:"+ListAll);
 		System.out.println("ListOne:"+ListOne);
+		System.out.println("imageD:"+imageD);
 		
 		if (!ListAll.isEmpty()) {
 		    Map<String, Object> map = ListAll.get(0);

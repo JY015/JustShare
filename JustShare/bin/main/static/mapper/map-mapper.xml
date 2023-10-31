@@ -17,4 +17,10 @@
 		JOIN board ON map.bno = board.bno
 		WHERE map.bno = 30
     </select>
+    
+    <select id="imageD">
+	SELECT realFile
+	FROM image
+	WHERE bno=30
+</select>
 </mapper>
