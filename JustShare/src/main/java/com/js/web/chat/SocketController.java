@@ -19,11 +19,6 @@ public class SocketController {
 		@Autowired
 		SocketService socketService;
 	
-	@GetMapping(value = { "/", "/index" })
-	public String index() {
-		
-		return "index";
-	}
 	
 	@GetMapping("/chat1")
 	public String chat1() {
