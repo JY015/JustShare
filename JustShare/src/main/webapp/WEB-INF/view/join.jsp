@@ -315,7 +315,7 @@
          </div>
                <div>
                   <div class="nameBox">
-                     <input class="input" type="text" name="mname" id="mname" placeholder="이름을 입력해 주세요"/><br><br>
+                     <input class="input" type="text" name="mname" id="mname" placeholder="이름을 입력해 주세요."/><br><br>
                   </div>
                </div>
                <div>
