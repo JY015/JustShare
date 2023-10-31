@@ -14,5 +14,7 @@ public interface MainDAO {
 
 	Map<String, Object> findPwCheck(Map<String, Object> map);
 
+	void temporaryPw(Map<String, Object> map);
+
 
 }

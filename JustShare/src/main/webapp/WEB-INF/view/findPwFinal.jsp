@@ -7,8 +7,9 @@
 <title>비밀번호 변경</title>
 </head>
 <body>
-비밀번호 변경 <br>
-여기 : ${memail}
+비밀번호 변경 ::
+${memail}
+<br>
 		<div class="article">			
 				<h1>메일보내기</h1>
 				<form action="./findPwFinal" method="post">

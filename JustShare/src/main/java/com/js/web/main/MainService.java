@@ -26,6 +26,11 @@ public class MainService {
 		return mainDAO.findPwCheck(map);
 	}
 
+	public void temporaryPw(Map<String, Object> map) {
+			mainDAO.temporaryPw(map);
+		
+	}
+
 
 	
 	

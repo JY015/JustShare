@@ -335,7 +335,7 @@
         <!-- Footer-->
 <footer class="footer1">
 <br>
-<p>Copyright ⓒ 2023. 내가 사랑한 여름. All Rights Reserved</p>
+<p></p>
 </footer>        
         `
         
@@ -345,5 +345,4 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
->>>>>>> main
 </html>

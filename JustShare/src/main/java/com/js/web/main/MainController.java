@@ -3,6 +3,7 @@ package com.js.web.main;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,8 +43,9 @@ public class MainController {
 		Map<String, Object> res = mainService.login(map);
 		System.out.println(res);
 		if (String.valueOf(res.get("count")).equals("1")) {
-			session.setAttribute("mid", map.get("id"));
-			session.setAttribute("mname", res.get("mname"));		
+			session.setAttribute("mid", map.get("mid"));
+			session.setAttribute("mname", res.get("mname"));
+			System.out.println(session);
 			return "redirect:/";
 		} else {
 			model.addAttribute("loginCheckCount", 1);
@@ -93,42 +95,46 @@ public class MainController {
 		return "findPw";
 	}
 	
-
-	@PostMapping("/findPw") 
-	public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
-	  
-		util.htmlMailSender(map);
-		model.addAttribute("findPwEmail", 1);
-	  	return "findPw";
-	 
-	  }
-	 
-
+	
 	@PostMapping("findPwCheck")
 	public String findPwCheck(@RequestParam String mid, @RequestParam String mphone , Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mid", mid);
 		map.put("mphone", mphone);
-		Map<String, Object> findPwCheck = mainService.findPwCheck(map);	
+		Map<String, Object> findPwCheck = mainService.findPwCheck(map);
 		System.out.println("findPwCheck : "+ findPwCheck);
 		if (String.valueOf(findPwCheck.get("count")).equals("1")) {
 			model.addAttribute("findPwCheck", 1);
 			String memail = (String) findPwCheck.get("memail");
 			model.addAttribute("memail", memail);
+			String uuid = String.valueOf(UUID.randomUUID()).substring(0, 7);
+			model.addAttribute("uuid",uuid);
+			System.out.println(uuid);
 			return "findPw";
 		}
 		model.addAttribute("findPwCheck", 0);
 		return "findPw";
 	}
 	
-	
+	@PostMapping("/findPw") 
+	public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
+	 
+		//util.htmlMailSender(map);
+		System.out.println("findPw 여기" + map);
+		String uuidPw = (String) map.get("uuid");
+		System.out.println("uuidPw" + uuidPw);
+		model.addAttribute("findPwEmail", 1);
+		model.addAttribute("uuidPw", uuidPw);
+		 mainService.temporaryPw(map);
+	  	return "findPw";
+	 
+	  }
+
 	@PostMapping("findPwFinal")
 	public String findPwFinal(Model model) {
-			
 		return "findPwFinal";
 	}
 	
-
 	@GetMapping("/cafe")
 	public String cafe() {
 		

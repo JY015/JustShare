@@ -20,20 +20,21 @@
 </c:if>
 
 <c:if test="${findPwCheck eq 1}">
-<p style="color: red;">가입하신 이메일로 인증번호를 보내드리겠습니다.</p>
-
+<p style="color: red;">가입하신 이메일로 임시비밀번호를 발급해드리겠습니다.</p>
 <form action="./findPw" method="post">
 				<input type="hidden" name="to" value="${memail}">
+				<input type="hidden" name="uuid" value="${uuid}">
 				<button type="submit">확인</button>
 </form>	
 </c:if>
 
 <c:if test="${findPwEmail eq 1}">
 <form id="findPwFinal" action="./findPwFinal" method="post">
-				인증번호를 입력하세요. 여기 : ${memail}<br>
+				임시비밀번호를 입력하세요<br>
 			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="인증번호 8자리" required="required" maxlength="8"><br>
-			<input type="hidden" name="to" value="${memail}">
-			 <button type="button" onclick="findPwFinal()">확인</button>
+			<input type="hidden" name="memail" value="${memail}">
+			<input type="hidden" name="uuid" value="${uuid}">
+			<button type="button" onclick="findPwFinal()">확인</button>
 </form>	
 </c:if>
 
@@ -42,22 +43,22 @@
 <a href="./findPw">돌아가기</a>
 </c:if>
 
-
 findpwCheck : ${findPwCheck}<br>
 findpwEmail : ${findPwEmail}<br>
-memail :  ${memail}
+memail :  ${memail}<br>
+uuid : ${uuid}<br>
+uuidPw : ${uuidPw} 
 
 <script type="text/javascript">
 function findPwFinal() {
-    var input = document.getElementById('findPwFinalCode'); // 입력 필드의 ID를 사용하여 요소를 가져옵니다.
-    var findPwFinalCode = '01234567'; // 기대값을 설정합니다.
-
+    var input = document.getElementById('findPwFinalCode'); 
+    var findPwFinalCode = '${uuidPw}'; 
     if (input.value === findPwFinalCode) {
-        alert('인증번호가 일치합니다.');
+        alert('임시비밀번호가 일치합니다.');
         document.getElementById('findPwFinal').submit();
-    } else {
-        // 입력값이 기대값과 일치하지 않는 경우 사용자에게 메시지를 표시하거나 다른 작업을 수행할 수 있습니다.
-        alert('인증번호가 일치하지 않습니다.');
+        alert("로그인해주세요.")
+    } else {   
+        alert('임시비밀번호가 일치하지 않습니다.');
     }
 }
 </script>
