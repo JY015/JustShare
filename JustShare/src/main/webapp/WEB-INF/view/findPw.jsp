@@ -30,8 +30,9 @@
 
 <c:if test="${findPwEmail eq 1}">
 <form id="findPwFinal" action="./findPwFinal" method="post">
-				인증번호를 입력하세요.<br>
+				인증번호를 입력하세요. 여기 : ${memail}<br>
 			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="인증번호 8자리" required="required" maxlength="8"><br>
+			<input type="hidden" name="to" value="${memail}">
 			 <button type="button" onclick="findPwFinal()">확인</button>
 </form>	
 </c:if>
@@ -40,7 +41,6 @@
 <p style="color: red;">일치하는 회원정보가 없습니다. 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
 <a href="./findPw">돌아가기</a>
 </c:if>
-
 
 
 findpwCheck : ${findPwCheck}<br>
