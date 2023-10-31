@@ -1,9 +1,6 @@
 package com.js.web.main;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-=======
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,13 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.js.web.util.Util;
 
->>>>>>> main
-
 @Controller
 public class MainController {
-
-<<<<<<< HEAD
-=======
 
 	@Autowired
 	private MainService mainService;
@@ -34,13 +26,10 @@ public class MainController {
 	private Util util;
 
 
->>>>>>> main
 	@GetMapping("/")
 	public String main() {
 		return "index";
 	}
-<<<<<<< HEAD
-=======
 
 
 	@GetMapping("/login")
@@ -145,7 +134,5 @@ public class MainController {
 		
 		return "cafe";	
 	}
-	
 
->>>>>>> main
 }
