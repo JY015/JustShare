@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.js.web.SocketDAO">
+
+
+
+	<select id="serchid"  parameterType="Map" resultType="Map">
+	
+SELECT
+    u.from_user_id,
+    u.to_user_id,
+    u.content,
+    (SELECT mimg FROM members WHERE mid= #{toId}) AS toimg,
+    (SELECT mimg FROM members WHERE mid = #{mid}) AS myimg,
+    u.timestamp,
+    (select mid from members where mid=#{toId}) AS toId
+
+FROM UserMessages u
+
+WHERE u.from_user_id = #{mid} AND u.to_user_id = #{toId}
+  OR u.from_user_id = #{toId} AND u.to_user_id = #{mid}
+  
+   ORDER BY u.timestamp ASC
+
+	</select>
+	
+	<insert id="msginsert" parameterType="Map">
+	
+	
+	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status)
+	VALUE (#{toId},#{text},#{mid},NOW(),#{readmsg})
+	
+	
+	</insert>
+	
+	<select id="isFirstConversation" parameterType="Map" resultType="Integer">
+	
+	select
+	  	
+    		count(*) as count
+    FROM UserMessages u	
+ 	WHERE u.from_user_id = #{mid} AND u.to_user_id = #{toId}
+  		OR u.from_user_id = #{toId} AND u.to_user_id = #{mid}
+    		
+	</select>
+	
+	<insert id="Firstmsg" parameterType="Map">
+	
+	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp)
+	VALUE (#{toId},#{message},#{mid},NOW())
+	
+	</insert>
+
+<select id="imgserch"  parameterType="Map" resultType="String">
+	
+SELECT
+ 
+    mimg 
+  
+FROM members 
+
+WHERE mid = #{mid}
+
+	</select>
+	
+	<select id="roomload" parameterType="Map" resultType="Map">
+	
+	SELECT
+    m1.message_id AS latest_message_id,
+    m1.timestamp AS latest_timestamp,
+    m1.to_user_id,
+    m1.from_user_id,
+    m1.content,
+    (SELECT COUNT(*) FROM UserMessages
+        WHERE (from_user_id = m1.from_user_id AND to_user_id = m1.to_user_id) OR
+              (from_user_id = m1.to_user_id AND to_user_id = m1.from_user_id) AND
+              read_status = 1
+    ) AS read_count
+FROM UserMessages m1
+WHERE m1.message_id IN (
+    SELECT MAX(m2.message_id)
+    FROM UserMessages m2
+    WHERE m2.from_user_id = #{mid} OR m2.to_user_id = #{mid}
+    GROUP BY 
+        CASE 
+            WHEN m2.from_user_id = #{mid} THEN m2.to_user_id
+            WHEN m2.to_user_id = #{mid} THEN m2.from_user_id
+        END
+)  
+ORDER BY latest_timestamp DESC;
+	
+	</select>
+	
+
+	</mapper>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.web.board.BoardDAO">
+
+<select id="listNum">
+	SELECT count(distinct b.bno)
+	FROM board b 
+	JOIN boardEquipment be
+	<where>
+		<if test="searchV != null and searchV != ''">
+		btitle Like CONCAT('%',#{searchV},'%') or bcontent Like CONCAT('%',#{searchV},'%') or addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+	</where>
+	
+</select>
+
+<select id="list" parameterType="Map" resultType="map">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+		
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+		</where>
+	AND b.bdel=1
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="areaList" parameterType="Map" resultType="Map">
+	SELECT ano,aname
+	FROM area
+	
+</select>
+
+<select id="listp">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+		<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areas != null and areas != '' ">
+		AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+		</where>
+	AND b.bdel=1
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT #{nextPageLimitI}, #{limitI}
+</select>
+<!-- 
+<select id="listf" parameterType="Map" resultType="Map">
+	
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	c.cname
+	FROM board b
+		
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	<where>
+		<if test="searchV != null and searchV != ''">
+		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		</if>
+		<if test="areaArray != null and areaArray != ''"> 
+		 b.cate IN (#{areaArray})
+		</if>
+		</where>
+	AND b.bdel=1
+	GROUP BY b.bno
+	ORDER BY b.bno desc
+	LIMIT 0, 10
+	
+
+</select> -->
+
+<insert id="adr" parameterType="Map" >
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail,rno,ano)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD},#{rno},#{ano})
+</insert>
+
+<select id="bno">
+	SELECT last_insert_id();
+</select>
+
+<insert id="equip">
+	INSERT INTO boardEquipment (bno,eid)
+	VALUES (#{bno},#{i})
+</insert>
+
+<insert id="image">
+	INSERT INTO image (originalFile,realFile,bno ,main)
+	VALUES (#{originalFilename},#{realFileName},#{bno},#{main})
+</insert>
+
+<select id="cl">
+	SELECT cate,cname
+	FROM cate
+
+</select>
+
+<select id="el">
+	SELECT eid,ename
+	FROM equipment
+
+</select>
+
+<select id="detail" parameterType="Map" resultType="Map">
+	SELECT *
+	FROM board
+	WHERE bno=#{bno}
+</select>
+
+<select id="imageD">
+	SELECT realFile
+	FROM image
+	WHERE bno=#{bno}
+	ORDER BY ino
+</select>
+
+<select id="equipD">
+	SELECT e.ename
+	FROM boardEquipment be
+	JOIN board b ON b.bno=be.bno
+	JOIN equipment e ON e.eid=be.eid
+	WHERE be.bno=#{bno}
+	ORDER BY be.eid
+	
+</select>
+
+<update id="del">
+	 UPDATE board
+	 SET bdel =0 
+	 WHERE bno = #{bno}
+</update>
+
+<select id="equipDE">
+	SELECT eid
+	FROM boardEquipment
+	WHERE bno=#{bno}
+
+</select>
+
+<update id="read" parameterType="Map">
+	UPDATE board
+	SET bread=bread+1
+	WHERE bno = #{bno}
+</update>
+
+<insert id="report" parameterType="Map">
+	INSERT INTO report (rmno,mno,bno,rcontent)
+	VALUES (#{rmno},#{mno},#{bno},#{rcontent} )
+</insert>
+
+<update id="breport">
+	UPDATE board
+	SET brno=brno+1
+	WHERE bno=#{bno}
+</update>
+
+<select id="dp" parameterType="Map" resultType="Integer">
+	SELECT Count(*)
+	FROM report
+	WHERE rmno=#{rmno} and bno=#{bno}
+</select>
+
+<select id="areaN" parameterType="Map" resultType="Map">
+	SELECT a.ano,r.rno
+	FROM area a 
+	JOIN region r ON a.rno = r.rno
+	WHERE a.aname = #{area} and r.rname=#{region}
+</select>
+</mapper>
