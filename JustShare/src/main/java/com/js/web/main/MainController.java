@@ -97,7 +97,7 @@ public class MainController {
 	@PostMapping("/findPw") 
 	public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
 	  
-		//util.htmlMailSender(map);
+		util.htmlMailSender(map);
 		model.addAttribute("findPwEmail", 1);
 	  	return "findPw";
 	 
