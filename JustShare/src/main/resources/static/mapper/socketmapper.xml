@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.js.web.chat.SocketDAO">
+<mapper namespace="com.js.web.SocketDAO">
 
 
 
@@ -28,8 +28,8 @@ WHERE u.from_user_id = #{mid} AND u.to_user_id = #{toId}
 	<insert id="msginsert" parameterType="Map">
 	
 	
-	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp)
-	VALUE (#{toId},#{text},#{mid},NOW())
+	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status)
+	VALUE (#{toId},#{text},#{mid},NOW(),#{readmsg})
 	
 	
 	</insert>
@@ -71,7 +71,12 @@ WHERE mid = #{mid}
     m1.timestamp AS latest_timestamp,
     m1.to_user_id,
     m1.from_user_id,
-    m1.content
+    m1.content,
+    (SELECT COUNT(*) FROM UserMessages
+        WHERE (from_user_id = m1.from_user_id AND to_user_id = m1.to_user_id) OR
+              (from_user_id = m1.to_user_id AND to_user_id = m1.from_user_id) AND
+              read_status = 1
+    ) AS read_count
 FROM UserMessages m1
 WHERE m1.message_id IN (
     SELECT MAX(m2.message_id)
@@ -82,8 +87,8 @@ WHERE m1.message_id IN (
             WHEN m2.from_user_id = #{mid} THEN m2.to_user_id
             WHEN m2.to_user_id = #{mid} THEN m2.from_user_id
         END
-      )  
-      ORDER BY latest_timestamp DESC;
+)  
+ORDER BY latest_timestamp DESC;
 	
 	</select>
 	

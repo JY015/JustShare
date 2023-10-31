@@ -88,8 +88,10 @@ public class SocketController {
 		List<Map<String, Object>> result = socketService.roomload(map);
 		JSONObject json = new JSONObject();
 	
+	
 		 json.put("result", result);
 		
+		 
 		 //System.out.println(result.toString());
 		return json.toString();
 	}
