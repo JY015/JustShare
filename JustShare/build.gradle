@@ -32,14 +32,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+<<<<<<< HEAD
+=======
 
 	implementation 'javax.servlet:jstl' //스프링부트 3.0 미만
 
+>>>>>>> main
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+<<<<<<< HEAD
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+	implementation 'org.json:json:20230227'
+	implementation 'javax.servlet:jstl'
+	// Gson
+	implementation'com.google.code.gson:gson:2.8.7'
+=======
 	
 	 //웹소켓
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
@@ -54,6 +64,7 @@ dependencies {
 	 implementation 'org.apache.commons:commons-email:1.5'
 	 implementation 'org.json:json:20230227'
 
+>>>>>>> main
 }
 
 tasks.named('test') {
