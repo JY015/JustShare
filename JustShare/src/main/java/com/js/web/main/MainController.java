@@ -123,7 +123,7 @@ public class MainController {
 	
 	
 	@PostMapping("findPwFinal")
-	public String findPwFinal() {
+	public String findPwFinal(Model model) {
 			
 		return "findPwFinal";
 	}

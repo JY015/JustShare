@@ -35,8 +35,8 @@ public class Util {
 	   
 	   public boolean htmlMailSender(Map<String, Object> map) throws EmailException {
 		   
-			String emailAddr = "";// 보내는사람
-		    String passwd = "";// 메일의 암호를 넣어주세요.
+			String emailAddr = "eorb1527@outlook.com";// 보내는사람
+		    String passwd = "dkdntfnr9495";// 메일의 암호를 넣어주세요.
 			String name = "Just Share 비밀번호 찾기"; // 보내는 사람 이름
 			String hostname = "smtp.office365.com";// smtp주소
 			int port = 587;
@@ -50,14 +50,16 @@ public class Util {
 		      mail.setSmtpPort(port);
 		      mail.setStartTLSEnabled(true);
 		      mail.setFrom(emailAddr, name);
-		   //
+		   // mail.addTo("eorb1527@naver.com");
 		      mail.addTo(String.valueOf(map.get("to")));
 		     // !!!!mail.setSubject(String.valueOf(map.get("title")));
 		      mail.setSubject("안녕하세요. JustShare입니다. 임시비밀번호 보내겠습니다.");
 		      
 		     // mail.setMsg(String.valueOf(map.get("content")));//본문내용
 		     // String path = uploadPath();
-		    
+		      //String img = "https://whale.naver.com/img//banner_beta_download_phone_1440.png";
+		      //String file2 = path + "/20230822150048553333ae-8795-4b70-9fb4-1bd204262f3e2023정보처리기사.pdf";
+		      
 		      String html = "<html>";
 		     // html += "<h1>그림을 첨부합니다</h1>";
 		     // html += "<img alt=\"이미지\" src='"+img+"'>";
