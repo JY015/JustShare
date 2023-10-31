@@ -57,7 +57,6 @@ public class BoardController {
 
 		// 리스트 뽑기 + 검색시 + 필터
 		List<Map<String, Object>> boardList = boardService.list(map);
-		System.out.println(boardList);
 		model.addAttribute("list", boardList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("areaList", areaList);
@@ -121,26 +120,25 @@ public class BoardController {
 
 	@GetMapping("/bwrite") // 글 작성
 	public String bwrite(HttpSession session, Model model) {
-		// 세션없으면 빠꾸시키기 추가하기 >> 로그인 생기면
+		if(session.getAttribute("mid") != null) {
 		// 시설/카데고리 자료 가져오기
 		List<Map<String, Object>> cl = boardService.cl();
 		List<Map<String, Object>> el = boardService.el();
 		model.addAttribute("catelist", cl);
 		model.addAttribute("equiplist", el);
 		return "bwrite";
-	}
+		}else {
+		return "board";
+		}
+		}
 
 	@PostMapping("/bwrite")
 	public String bwrite(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "equipment", required = false) Integer[] equipment,
 			@RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
-
-		// session.getAttribute("mno"); map.put("mno",mno) 로그인 생기면 밑에 수정
-		// 게시글 작성 + 주소 변형후 DB에 넣기 >> area 카테고리랑 연동하기
-		// 임시 회원번호 부여
-		// 이거 조건을 걸때 사진은 반드시있어야하니깐 제일 위에 if해서 걸어주기 안함아직
-		map.put("mid", "five");
-
+		if(session.getAttribute("mid") != null) {
+		// 로그인 후 글 작성 내용 insert 
+		map.put("mid", session.getAttribute("mid"));
 		Integer adr = boardService.adr(map);
 
 		// 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기
@@ -209,8 +207,10 @@ public class BoardController {
 		}
 
 		return "redirect:board";
+	}else {
+		return "board";
 	}
-
+	}
 	@GetMapping("/bdetail")
 	public String bdetail(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
 		// 해당 게시글 번호 받아와서 게시글 띄우기
@@ -228,17 +228,32 @@ public class BoardController {
 
 	@GetMapping("/bdelete")
 	public String bdetail(@RequestParam Map<String, Object> map, HttpSession session) {
-		// 아이디 일치 확인
-		// 게시글 받아와서 삭제
+		// 로그인 확인
+		if(session.getAttribute("mid") != null) {
+		// 아이디 일치 확인 	
+		Map<String, Object> detail = boardService.detail(map);
+		String rid = String.valueOf(detail.get("mid"));
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		if(rid.equals(sid)) {
 		int a = boardService.del(map);
 		return "redirect:board";
+		}else {
+		return "redirect:board";	
+		}
+		}else {
+		return "redirect:board";
+	}
 	}
 
 	@GetMapping("/bedit")
 	public String bedit(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
-		// 아이디 일치확인
-		// 게시글 내용 그대로 받아오기
+		//로그인 확인
+		if(session.getAttribute("mid") != null) {
+		// 게시글 내용 그대로 받아오기 +  아이디 일치확인
 		Map<String, Object> detail = boardService.detail(map);
+		String rid = String.valueOf(detail.get("mid"));
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		if(rid.equals(sid)) {
 		List<String> imageD = boardService.imageD(map);
 		// 번호를 가져와야함
 		List<Integer> equipDE = boardService.equipDE(map);
@@ -253,13 +268,21 @@ public class BoardController {
 		model.addAttribute("equipDE", equipDE);
 		model.addAttribute("detail", detail);
 		return "bedit";
-	}
+		}else{ return "redirect:/bdetail?bno="+map.get("bno");
+		}
+		}else{ return "redirect:/bdetail?bno="+map.get("bno");
+		}
+		}
 	// 수정 아직 다안함 >> 파일을 다시 돌아오게하는 법을 몰라서 그거 띄우고 post 만들거임
 	@PostMapping("/bedit")
 	public String beditU(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "equipment", required = false) Integer[] equipment,
 			@RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
+		
 		// map 으로 새로받은 데이터는 업데이트 
+		
+		// 로그인 확인 + id 일치 확인 해야함 아직안함 
+		System.out.println(map);
 		int result = boardService.bedit(map);
 		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰는 이유- 갯수가 달라질수 있어서 // 겹치는거 체크 ?
 		boardService.deleteEquip(map);
@@ -279,15 +302,20 @@ public class BoardController {
 	
 	@GetMapping("/report")
 	public String report(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
-		// 신고하는 사람 추가 >> 나중에 세션으로 받는거로 수정
-		map.put("rmid", "pororo");
+		// 세션확인
+		if(session.getAttribute("mid") != null) {
+		// 신고하는 사람 넣기   
+		map.put("rmid", session.getAttribute("mid"));
 		model.addAttribute("map", map);
 		return "report";
+	}else {	return "redirect:/bdetail?bno="+map.get("bno");
+	}
 	}
 
 	@PostMapping("/report")
 	public String reportp(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
 		// 중복 신고 막기 해당 게시글을 이미 신고한 사용자라면 신고가 더이상 추가되지않음 >> 서버에서는 막아노음
+		// 로그인 검사 + 신고자 / 신고 당하는 사람  같으면 막는거 이거 넣어야함 아직 안넣음
 		int dp = boardService.dp(map);
 		if (dp == 0) {
 			// 신고 받은 내용 DB에 저장하기

@@ -42,7 +42,7 @@ public interface BoardDAO {
 
 	void breport(Map<String, Object> map);
 
-	int dp(Map<String, Integer> imap);
+	int dp(Map<String, Object> imap);
 
 	List<Map<String, Object>> areaList();
 

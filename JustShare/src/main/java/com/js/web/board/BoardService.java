@@ -120,13 +120,12 @@ public class BoardService {
 		// 받아온 값은 object 타입 integer 타입으로 변환해준다 
 		// null 이 들어왔을때 예외처리 안해줬음 
 		// Object 타입을 변환 시키는 클래스를 만들면 편할듯 ? 
-		String rmnoStr = (String) map.get("rmno");
-		String bnoStr = (String) map.get("bno");
-		int rmno = Integer.parseInt(rmnoStr);
-		int bno = Integer.parseInt(bnoStr);
-		Map<String,Integer> imap = new HashMap<String, Integer>();
-		imap.put("rmno", rmno);
-		imap.put("bno", bno);
+		String rmid = (String) map.get("rmid");
+		
+		
+		Map<String,Object> imap = new HashMap<String, Object>();
+		imap.put("rmid", rmid);
+		imap.put("bno", map.get("bno"));
 		
 		return boardDAO.dp(imap);
 	}

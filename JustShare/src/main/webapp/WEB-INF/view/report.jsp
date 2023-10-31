@@ -10,8 +10,8 @@
 	<h1>신고하기</h1>
 	<form action="./report" method="post" >
 	<input type="hidden" name="bno" value="${map.bno }">
-	<input type="hidden" name="rmno" value="${map.rmno }">
-	<input type="hidden" name="mno" value=${map.mno }>
+	<input type="hidden" name="rmid" value="${map.rmid }">
+	<input type="hidden" name="mid" value=${map.mid }>
 	신고 사유
 	<div>
 	<input type="radio" name="rcate">
