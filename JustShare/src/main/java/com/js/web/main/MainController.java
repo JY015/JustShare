@@ -2,6 +2,7 @@ package com.js.web.main;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -26,12 +27,6 @@ public class MainController {
 	private Util util;
 
 
-	@GetMapping("/")
-	public String main() {
-		return "index";
-	}
-
-
 	@GetMapping("/login")
 	public String login(Model model) {
 		return "login";
@@ -42,7 +37,7 @@ public class MainController {
 		Map<String, Object> res = mainService.login(map);
 		System.out.println(res);
 		if (String.valueOf(res.get("count")).equals("1")) {
-			session.setAttribute("mid", map.get("id"));
+			session.setAttribute("mid", map.get("mid"));
 			session.setAttribute("mname", res.get("mname"));		
 			return "redirect:/";
 		} else {
@@ -134,5 +129,19 @@ public class MainController {
 		
 		return "cafe";	
 	}
+	
+	@GetMapping("/")
+	public String main(Model model,HttpSession session,@RequestParam Map<String, Object> map) {
+	
+		//배너
+				List<MainDTO> bannerlist = mainService.bannerlist();
+				model.addAttribute("bannerlist", bannerlist);
+
+	
+	return "index";
+	
+	}
+	
+	
 
 }

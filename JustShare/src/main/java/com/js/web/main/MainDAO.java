@@ -1,5 +1,6 @@
 package com.js.web.main;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,6 +14,8 @@ public interface MainDAO {
 	Map<String, Object> findPW(Map<String, Object> map);
 
 	Map<String, Object> findPwCheck(Map<String, Object> map);
+
+	List<MainDTO> bannerlist();
 
 
 }

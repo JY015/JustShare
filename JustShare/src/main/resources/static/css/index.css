@@ -10825,18 +10825,107 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
- .footer1 {
-  margin-top: 20px;
-  position: absolute;
-  bottom: -50%;
-  left: 0;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  height: 150px;
-  color: white;
-  background-color: black !important;
+
+
+JavaScript (script.js):
+js
+Copy code
+// 페이지 내용이 스크롤될 때 발생하는 이벤트
+document.addEventListener("scroll", function() {
+  // 여기에 추가적인 스크롤 이벤트 처리 로직을 추가할 수 있습니다.
+});
+
+// 추가적으로 필요한 JavaScript 코드를 작성할 수 있습니다.
+이 예시에서는 푸터를 페이지 하단에 고정하도록 CSS의 position: fixed; 속성을 사용하였습니다. 이로써 스크롤을 내려도 푸터는 항상 화면 하단에 유지됩니다. 필요에 따라 JavaScript를 사용하여 스크롤 이벤트를 처리하고 추가적인 기능을 구현할 수 있습니다.
+
+
+
+
+User
+스프링부트를 이용해서
+ChatGPT
+스프링 부트를 사용하여 스크롤해도 유지되는 푸터를 구현하려면 Thymeleaf 또는 기타 템플릿 엔진을 사용하여 서버 측에서 페이지를 생성하는 방법을 사용할 수 있습니다. 아래는 스프링 부트와 Thymeleaf를 사용한 예시 코드입니다.
+
+의존성 추가:
+pom.xml 파일에 Thymeleaf와 Spring Boot Starter Web 의존성을 추가합니다.
+xml
+Copy code
+<!-- pom.xml -->
+<dependencies>
+    <!-- Spring Boot Starter Web 의존성 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Thymeleaf 의존성 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+</dependencies>
+컨트롤러 클래스:
+스프링 부트 애플리케이션의 컨트롤러 클래스를 생성합니다.
+java
+Copy code
+// FooterController.java
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class FooterController {
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 }
+Thymeleaf 템플릿:
+Thymeleaf 템플릿 엔진을 사용하여 HTML 템플릿을 작성합니다.
+html
+Copy code
+<!-- src/main/resources/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll 유지 푸터</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="content">
+        <!-- 여기에 페이지 내용이 들어갑니다. -->
+    </div>
+
+    <div class="footer">
+        <!-- 푸터 내용이 들어갑니다. -->
+    </div>
+</body>
+</html>
+CSS 파일:
+필요한 스타일을 정의하는 CSS 파일을 생성합니다.
+css
+Copy code
+/* src/main/resources/static/styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.content {
+    /* 페이지 내용의 스타일 및 여백 설정 */
+    padding: 20px;
+}
+
+
+
+
+
+
 
 
 }

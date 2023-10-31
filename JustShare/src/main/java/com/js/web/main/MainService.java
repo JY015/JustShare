@@ -1,5 +1,6 @@
 package com.js.web.main;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class MainService {
 	public Map<String, Object> findPwCheck(Map<String, Object> map) {
 		
 		return mainDAO.findPwCheck(map);
+	}
+
+	public List<MainDTO> bannerlist() {
+		
+		return mainDAO.bannerlist();
 	}
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,12 +11,18 @@
         <title>메인 페이지</title>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      <!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+       
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/index.css" rel="stylesheet" />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+       
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">  
+
     </head>
     <body>
         <!-- Navigation-->   
@@ -55,18 +62,32 @@
         </nav>
         <!-- Header-->
         <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">광고</h1>
-                </div>
-            </div>
+        
+           <div class="welcome_banner_inner">
+				<div class="swiper-container">
+					<ul class="swiper-wrapper">
+						<c:forEach items="${bannerlist }" var="row">
+						<div class="swiper-slide" style="margin-left: 13%; width: 90">
+						
+							  
+						
+									<div class="col-sm-12">
+										<img src="../img/banner/${row.baimg }" style="" alt="배너이미지"/>
+									</div>
+								
+							
+						</div>
+							</c:forEach>
+					</ul>
+				</div>
+			</div>
         </header><br>
                  
   <style>
     .category-container {
       display: grid;
       grid-template-columns: repeat(4, 17%);
-      gap: 20px;
+      gap: 20xp;
       justify-content: center;
     }
     .grid-item {
@@ -76,6 +97,33 @@
     .all-category-container{
     text-align: center;
     }
+ 
+
+.banner_title{
+	color: black;
+	font: 600 35px/1.3 "NanumBarunGothic"
+}
+
+
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* 또는 원하는 너비 설정 */
+  height: 100%; /* 또는 원하는 높이 설정 */
+}
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+}
+    
   </style>
 </head>
 <body>
@@ -107,6 +155,25 @@
     <div class="category culture"><a href="cafe">공연장</a></div>
   </div>
   <script>
+  var swiper = new Swiper('.swiper-container', {
+	  direction: 'horizontal',
+	  centeredSlides: true,
+	  loop: true,
+	  pagination: {
+	    el: '.swiper-pagination',
+	    clickable: true,
+	  },
+	  autoplay: {
+	    delay: 2500,
+	    disableOnInteraction: false,
+	  },
+	  // 추가 옵션들...
+	  spaceBetween: 10, // 슬라이드 사이의 간격 설정
+	});
+  
+  
+  
+  
   showCategory("all");
   
     $("button").click(function() {
@@ -332,18 +399,15 @@
                 </div>
             </div>
         </section>
-        <!-- Footer-->
-<footer class="footer1">
-<br>
-<p>Copyright ⓒ 2023. 내가 사랑한 여름. All Rights Reserved</p>
-</footer>        
-        `
-        
-        
-        <!-- Bootstrap core JS-->
+           <!-- Footer-->
+<%@ include file="footer.jsp" %> 
+       
+        <!-- Bootstrap core JS-->    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <!-- Core theme JS-->     
         <script src="js/scripts.js"></script>
+           
+ 
     </body>
->>>>>>> main
+
 </html>
