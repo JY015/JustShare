@@ -21,8 +21,8 @@
 </head>
 <body>
 	<h1>공간 공유하기 </h1>
-	<form action="./bwrite" method="post" enctype="multipart/form-data" >
-	
+	<form action="./bedit" method="post" enctype="multipart/form-data" >
+	<input type="hidden" name="bno" value="${detail.bno }">
 	 <label for="images">이미지 업로드</label>
 	
 	<div >
@@ -57,10 +57,10 @@
 	</div>
 	주소
 	<div>
-	<input type="text" id="sample2_postcode" placeholder="우편번호" value="${detail.addNum }">
+	<input type="text" id="sample2_postcode" placeholder="우편번호" name="addNum" value="${detail.addNum }">
 	<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
 	<input type="text" id="sample2_address" name="add" placeholder="주소" value="${detail.addr }"><br>
-	<input type="text" id="sample2_detailAddress" placeholder="상세주소" value="${detail.addDetail }">
+	<input type="text" id="sample2_detailAddress" name="addD"placeholder="상세주소" value="${detail.addDetail }">
 	<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 	</div>
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">

@@ -48,6 +48,10 @@ public interface BoardDAO {
 
 	Map<String, Object> areaN(Map<String, Object> areaD);
 
+	int bedit(Map<String, Object> map);
+
+	void deleteEquip(Map<String, Object> map);
+
 
 	
 }

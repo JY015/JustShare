@@ -45,7 +45,7 @@ function report(){
 	let chk3 = confirm("신고하시겠습니까?");
 		
 	if(chk3){
-			location.href="/report?bno=${detail.bno }&mno=${detail.mno}";
+			location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
 	}
 	
 }

@@ -1,15 +1,15 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '2.7.17'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id 'war'
+   id 'java'
+   id 'org.springframework.boot' version '2.7.17'
+   id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+   id 'war'
 }
 
 group = 'com.js'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '11'
+   sourceCompatibility = '11'
 }
 
 bootWar {
@@ -18,55 +18,44 @@ bootWar {
 
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+   compileOnly {
+      extendsFrom annotationProcessor
+   }
 }
 
 repositories {
-	mavenCentral()
+   mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-<<<<<<< HEAD
-=======
+   implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+   implementation 'org.springframework.boot:spring-boot-starter-web'
+   implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+   implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
-	implementation 'javax.servlet:jstl' //스프링부트 3.0 미만
+   implementation 'javax.servlet:jstl' //스프링부트 3.0 미만
 
->>>>>>> main
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-<<<<<<< HEAD
-	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
-	implementation 'org.json:json:20230227'
-	implementation 'javax.servlet:jstl'
-	// Gson
-	implementation'com.google.code.gson:gson:2.8.7'
-=======
-	
-	 //웹소켓
+   compileOnly 'org.projectlombok:lombok'
+   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+   runtimeOnly 'com.mysql:mysql-connector-j'
+   annotationProcessor 'org.projectlombok:lombok'
+   testImplementation 'org.springframework.boot:spring-boot-starter-test'
+   
+    //웹소켓
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     
     implementation 'org.webjars:sockjs-client:1.1.2'
     implementation 'org.webjars:stomp-websocket:2.3.3'
 
 
-	implementation	'javax.servlet:jstl:1.2'
-	implementation 'net.nurigo:sdk:4.3.0'
-	
-	 implementation 'org.apache.commons:commons-email:1.5'
-	 implementation 'org.json:json:20230227'
+   implementation   'javax.servlet:jstl:1.2'
+   implementation 'net.nurigo:sdk:4.3.0'
+   
+    implementation 'org.apache.commons:commons-email:1.5'
+    implementation 'org.json:json:20230227'
 
->>>>>>> main
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+   useJUnitPlatform()
 }

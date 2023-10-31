@@ -7,41 +7,47 @@
 	FROM board b 
 	JOIN boardEquipment be
 	<where>
-		<if test="searchV != null and searchV != ''">
-		btitle Like CONCAT('%',#{searchV},'%') or bcontent Like CONCAT('%',#{searchV},'%') or addr Like CONCAT('%',#{searchV},'%')
-		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
 		</if>
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
+		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice between #{minPrice}  AND #{maxPrice} 
+		</if>
+		<if test="searchV != null and searchV != ''">
+		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 	</where>
 	
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
 		
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 	<where>
-		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
-		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
 		</if>
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
+		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		<if test="searchV != null and searchV != ''">
+		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 		</where>
 	AND b.bdel=1
@@ -57,17 +63,14 @@
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 		<where>
-		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
-		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -75,6 +78,13 @@
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
 		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice}  AND #{maxPrice} 
+		</if>
+		<if test="searchV != null and searchV != ''">
+		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
+		
 		</where>
 	AND b.bdel=1
 	GROUP BY b.bno
@@ -107,8 +117,8 @@
 </select> -->
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail,rno,ano)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD},#{rno},#{ano})
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano})
 </insert>
 
 <select id="bno">
@@ -180,8 +190,8 @@
 </update>
 
 <insert id="report" parameterType="Map">
-	INSERT INTO report (rmno,mno,bno,rcontent)
-	VALUES (#{rmno},#{mno},#{bno},#{rcontent} )
+	INSERT INTO report (rmid,mid,bno,rcontent)
+	VALUES (#{rmid},#{mid},#{bno},#{rcontent} )
 </insert>
 
 <update id="breport">
@@ -193,7 +203,7 @@
 <select id="dp" parameterType="Map" resultType="Integer">
 	SELECT Count(*)
 	FROM report
-	WHERE rmno=#{rmno} and bno=#{bno}
+	WHERE rmid=#{rmid} and bno=#{bno}
 </select>
 
 <select id="areaN" parameterType="Map" resultType="Map">
@@ -202,4 +212,14 @@
 	JOIN region r ON a.rno = r.rno
 	WHERE a.aname = #{area} and r.rname=#{region}
 </select>
+
+<update id="bedit">
+	UPDATE board
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid="five",addNum=#{addNum}
+	WHERE bno=#{bno}
+	
+</update>
+<delete id="deleteEquip">
+	delete from boardEquipment where bno=#{bno}
+</delete>
 </mapper>
