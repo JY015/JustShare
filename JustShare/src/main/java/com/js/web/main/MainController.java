@@ -1,5 +1,6 @@
 package com.js.web.main;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.js.web.util.Util;
 
-
 @Controller
 public class MainController {
-
 
 	@Autowired
 	private MainService mainService;
@@ -135,6 +134,5 @@ public class MainController {
 		
 		return "cafe";	
 	}
-	
 
 }
