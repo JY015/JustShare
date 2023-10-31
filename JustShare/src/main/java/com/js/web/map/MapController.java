@@ -37,37 +37,99 @@ public class MapController {
 		return json.toString();
 	}
 	
-	@GetMapping("/mapMark")
+	@GetMapping("/mapMark2")
 	public String mapMark(Model model) {
-		MapDTO mapDto= new MapDTO();
-		mapDto.setMno(18);
 		
-		List<Map<String, Object>> result = mapService.gpsList(mapDto);
-
-		System.out.println(result);
-		System.out.println(mapDto.getMno());
-		//System.out.println(String.valueOf(result.get(2).get("longitude")));
-
-		//System.out.println(String.valueOf(result.get(2).get("longitude")));
+		BoardDTO boardDto= new BoardDTO();
+		List<Map<String, Object>> ListAll = mapService.gpsListOne(boardDto);
 		
-		if (!result.isEmpty()) {
-		    Map<String, Object> map = result.get(0);
+		BoardDTO boardDto2= new BoardDTO();
+		List<Map<String, Object>> ListOne = mapService.gpsListAll(boardDto2);
+
+		System.out.println("ListAll:"+ListAll);
+		System.out.println("ListOne:"+ListOne);
+		
+		if (!ListAll.isEmpty()) {
+		    Map<String, Object> map = ListAll.get(0);
+		    Object bno = map.get("bno");
 		    Object latitude = map.get("latitude");
 		    Object longitude = map.get("longitude");
 		    Object btitle = map.get("btitle");
-		    Object badd = map.get("badd");
+		    Object addr = map.get("addr");
+		    System.out.println(bno);
 		    System.out.println(latitude);
 		    System.out.println(longitude);
 		    System.out.println(btitle);
-		    System.out.println(badd);
-		    
-		    model.addAttribute("latitude",latitude);
-		    model.addAttribute("longitude",longitude);
-		    model.addAttribute("btitle",btitle);
-		    model.addAttribute("badd",badd);
+		    System.out.println(addr);
+		 
+		    model.addAttribute("ListAll",ListAll);
+		}
+		
+		if (!ListOne.isEmpty()) {
+		    Map<String, Object> map = ListOne.get(0);
+		    Object bno = map.get("bno");
+		    Object latitude = map.get("latitude");
+		    Object longitude = map.get("longitude");
+		    Object btitle = map.get("btitle");
+		    Object addr = map.get("addr");
+		    System.out.println(bno);
+		    System.out.println(latitude);
+		    System.out.println(longitude);
+		    System.out.println(btitle);
+		    System.out.println(addr);
+		 
+		    model.addAttribute("ListOne",ListOne);
 		}
 
 
-		return "mapMark";
+		return "mapMark2";
+	}
+	
+	@GetMapping("/mapMark3")
+	public String mapMark3(Model model) {
+		
+		BoardDTO boardDto= new BoardDTO();
+		List<Map<String, Object>> ListAll = mapService.gpsListOne(boardDto);
+		
+		BoardDTO boardDto2= new BoardDTO();
+		List<Map<String, Object>> ListOne = mapService.gpsListAll(boardDto2);
+
+		System.out.println("ListAll:"+ListAll);
+		System.out.println("ListOne:"+ListOne);
+		
+		if (!ListAll.isEmpty()) {
+		    Map<String, Object> map = ListAll.get(0);
+		    Object bno = map.get("bno");
+		    Object latitude = map.get("latitude");
+		    Object longitude = map.get("longitude");
+		    Object btitle = map.get("btitle");
+		    Object addr = map.get("addr");
+		    System.out.println(bno);
+		    System.out.println(latitude);
+		    System.out.println(longitude);
+		    System.out.println(btitle);
+		    System.out.println(addr);
+		 
+		    model.addAttribute("ListAll",ListAll);
+		}
+		
+		if (!ListOne.isEmpty()) {
+		    Map<String, Object> map = ListOne.get(0);
+		    Object bno = map.get("bno");
+		    Object latitude = map.get("latitude");
+		    Object longitude = map.get("longitude");
+		    Object btitle = map.get("btitle");
+		    Object addr = map.get("addr");
+		    System.out.println(bno);
+		    System.out.println(latitude);
+		    System.out.println(longitude);
+		    System.out.println(btitle);
+		    System.out.println(addr);
+		 
+		    model.addAttribute("ListOne",ListOne);
+		}
+
+
+		return "mapMark3";
 	}
 }

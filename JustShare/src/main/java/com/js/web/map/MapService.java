@@ -16,9 +16,12 @@ public class MapService {
 		return mapDao.gpsInsert(mapDto);
 	}
 
-	public List<Map<String, Object>> gpsList(MapDTO mapDto) {
-		// TODO Auto-generated method stub
-		return mapDao.gpsList(mapDto);
+	public List<Map<String, Object>> gpsListAll(BoardDTO boardDto) {
+		return mapDao.gpsListOne(boardDto);
+	}
+
+	public List<Map<String, Object>> gpsListOne(BoardDTO boardDto2) {
+		return mapDao.gpsListAll(boardDto2);
 	}
 
 

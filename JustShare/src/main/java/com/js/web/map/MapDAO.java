@@ -10,6 +10,8 @@ public interface MapDAO {
 
 	int gpsInsert(MapDTO mapDto);
 
-	List<Map<String, Object>> gpsList(MapDTO mapDto);
+	List<Map<String, Object>> gpsListAll(BoardDTO boardDto);
+
+	List<Map<String, Object>> gpsListOne(BoardDTO boardDto2);
 
 }

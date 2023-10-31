@@ -6,9 +6,15 @@
         VALUES (#{latitude}, #{longitude})
     </insert>
     
-    <select id="gpsList" resultType="map" parameterType="com.js.web.map.MapDTO">
-    	select latitude,longitude, btitle, badd
-    	from map
-    	where mno=#{mno}
+    <select id="gpsListAll" resultType="map" parameterType="com.js.web.map.BoardDTO">
+    	select bno, latitude, longitude, btitle, addr
+    	from board
+    </select>
+    
+    <select id="gpsListOne" resultType="map" parameterType="com.js.web.map.BoardDTO">
+    	SELECT board.btitle, board.latitude, board.longitude, board.addr, board.bno
+		FROM map
+		JOIN board ON map.bno = board.bno
+		WHERE map.bno = 30
     </select>
 </mapper>
