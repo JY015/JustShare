@@ -22,7 +22,7 @@
 </head>
 <body>
 	
-  <button data-category="all">전체</button>
+  <button data-category="all">all</button>
   <button data-category="commercial">상업</button>
   <button data-category="studio">스튜디오</button>
   <button data-category="culture">문화</button>
