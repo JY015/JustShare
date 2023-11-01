@@ -226,4 +226,23 @@
 	SELECT *
 	FROM reportCate
 </select>
+<select id="isLike" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE mid=#{sid} AND bno=#{bno}
+</select>
+<select id="likesCount" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE bno=#{bno}
+</select>
+
+<delete id="deleteLike">
+	delete from likeList where mid=#{id} AND bno=#{bno}
+</delete>
+
+<insert id="insertLike">
+	INSERT INTO likeList (bno,mid)
+	VALUES (#{bno},#{id})
+</insert>
 </mapper>

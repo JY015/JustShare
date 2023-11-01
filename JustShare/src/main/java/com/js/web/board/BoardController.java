@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -216,10 +217,17 @@ public class BoardController {
 		// 해당 게시글 번호 받아와서 게시글 띄우기
 		Map<String, Object> detail = boardService.detail(map);
 		// 게시글에 연관된 시설명 / 사진 모두 가져오기
-
 		List<String> imageD = boardService.imageD(map);
 		List<String> equipD = boardService.equipD(map);
-
+		// 해당글의 좋아요 수 가져오기 
+		Integer likesCount = boardService.likesCount(map); 
+		// 로그인 한 사람의 좋아요 가져오기
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		map.put("sid",sid);
+		Integer isLike = boardService.isLike(map);
+		
+		model.addAttribute("likesCount", likesCount);
+		model.addAttribute("isLike", isLike);
 		model.addAttribute("imageD", imageD);
 		model.addAttribute("equipD", equipD);
 		model.addAttribute("detail", detail);
@@ -344,7 +352,21 @@ public class BoardController {
 		return "redirect:/bdetail?bno=" + map.get("bno");
 		}
 	}
-
-
+	
+	
+	  @ResponseBody
+	  @PostMapping("/like") 
+	  public  ResponseEntity<String> like(@RequestParam Map<String, Object> map) {
+		  String likes = String.valueOf(map.get("likes"));
+		  if(likes.equalsIgnoreCase("off")) {
+			  boardService.deleteLike(map);
+		  }else {
+			  boardService.insertLike(map);
+		  }
+		  
+		  return ResponseEntity.ok().build(); 
+		  
+	  }
+	 
 
 }

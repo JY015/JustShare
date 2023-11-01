@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <style>
       html,
       body {
@@ -63,7 +66,22 @@
 <button type="submit" onclick="del()">삭제</button>
 <button type="submit" onclick="report()">신고</button>
 
+		
 
+ 		<div class="inf2" data-bno=${param.bno }>  
+       	<c:choose>
+		<c:when test="${isLike eq 1  }">     
+		<span><i class="fas fa-heart" style='color:red'></i> 찜 </span>
+		</c:when>
+		<c:otherwise>
+		<span><i class="far fa-heart" ></i> 찜 </span>
+		</c:otherwise>
+		</c:choose>  	
+		<span class="likes_count" data-count=${likesCount } >${likesCount }</span>
+        </div>
+
+
+	
     <!--스와이퍼 -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -177,5 +195,47 @@ infowindow.open(map, marker);
 
     </script>
  <!-- 스와이퍼 사용  -->   
+
+<!-- 좋아요 스크립트 -->
+ <script type="text/javascript">
+ $(".inf2 i").click(function(){
+		let likes ="";
+		const id = "${sessionScope.mid}";
+		const bno = $(".inf2").data("bno");
+		if($(this).hasClass("far")) {
+			likes = "on";
+		} else {
+			likes = "off";
+		}
+		const data = {
+			id : id,
+			likes : likes,
+			bno : bno
+		}
+		$.ajax({
+			url: "/like",
+			type: "POST",
+			data: data
+		})
+		.done(function(result){
+				console.log(result.body);
+				let likesCount = $(".likes_count").data("count");
+				
+				if(likes == "on") {
+					$(".inf2 i").removeClass("far").addClass("fas");
+					$(".likes_count").text(likesCount+1);
+					$(".likes_count").data("count", likesCount+1 );
+				} else {
+					$(".inf2 i").removeClass("fas").addClass("far");
+					$(".likes_count").text(likesCount-1);
+					$(".likes_count").data("count", likesCount-1 );
+				}
+			})
+		.fail(function(error){
+			alert(error.responseText);
+		})
+	})
+ </script>
+ 
 </body>
 </html>
