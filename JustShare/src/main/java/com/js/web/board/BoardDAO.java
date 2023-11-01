@@ -42,11 +42,17 @@ public interface BoardDAO {
 
 	void breport(Map<String, Object> map);
 
-	int dp(Map<String, Integer> imap);
+	int dp(Map<String, Object> imap);
 
 	List<Map<String, Object>> areaList();
 
 	Map<String, Object> areaN(Map<String, Object> areaD);
+
+	int bedit(Map<String, Object> map);
+
+	void deleteEquip(Map<String, Object> map);
+
+	List<Map<String, Object>> reportCateList();
 
 
 	

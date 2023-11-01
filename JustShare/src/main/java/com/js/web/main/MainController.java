@@ -42,7 +42,7 @@ public class MainController {
 		Map<String, Object> res = mainService.login(map);
 		System.out.println(res);
 		if (String.valueOf(res.get("count")).equals("1")) {
-			session.setAttribute("mid", map.get("id"));
+			session.setAttribute("mid", map.get("mid"));
 			session.setAttribute("mname", res.get("mname"));		
 			return "redirect:/";
 		} else {
