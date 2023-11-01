@@ -14,6 +14,6 @@ public interface MapDAO {
 
 	List<Map<String, Object>> gpsListOne(BoardDTO boardDto2);
 
-	List<String> imageD(ImgDTO imageDto);
+	List<Map<String, Object>> imageD(ImgDTO imageDto);
 
 }

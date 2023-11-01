@@ -100,13 +100,16 @@ public class MapController {
 		List<Map<String, Object>> ListOne = mapService.gpsListAll(boardDto2);
 		
 		ImgDTO imageDto = new ImgDTO();
-		List<String> imageD = mapService.imageD(imageDto);
-		 model.addAttribute("imageD",imageD);
+		List<Map<String, Object>> imageAll = mapService.imageD(imageDto);
 
-		System.out.println("ListAll:"+ListAll);
-		System.out.println("ListOne:"+ListOne);
-		System.out.println("imageD:"+imageD);
-		
+		model.addAttribute("imageAll",imageAll);
+
+		/*
+		 * System.out.println("ListAll:"+ListAll);
+		 * System.out.println("ListOne:"+ListOne);
+		 * System.out.println("imageAll:"+imageAll);
+		 */
+
 		if (!ListAll.isEmpty()) {
 		    Map<String, Object> map = ListAll.get(0);
 		    Object bno = map.get("bno");
@@ -114,11 +117,11 @@ public class MapController {
 		    Object longitude = map.get("longitude");
 		    Object btitle = map.get("btitle");
 		    Object addr = map.get("addr");
-		    System.out.println(bno);
-		    System.out.println(latitude);
-		    System.out.println(longitude);
-		    System.out.println(btitle);
-		    System.out.println(addr);
+		    //System.out.println(bno);
+		    //System.out.println(latitude);
+		    //System.out.println(longitude);
+		    //System.out.println(btitle);
+		    //System.out.println(addr);
 		 
 		    model.addAttribute("ListAll",ListAll);
 		}
@@ -130,11 +133,11 @@ public class MapController {
 		    Object longitude = map.get("longitude");
 		    Object btitle = map.get("btitle");
 		    Object addr = map.get("addr");
-		    System.out.println(bno);
-		    System.out.println(latitude);
-		    System.out.println(longitude);
-		    System.out.println(btitle);
-		    System.out.println(addr);
+			/*
+			 * System.out.println(bno); System.out.println(latitude);
+			 * System.out.println(longitude); System.out.println(btitle);
+			 * System.out.println(addr);
+			 */
 		 
 		    model.addAttribute("ListOne",ListOne);
 		}

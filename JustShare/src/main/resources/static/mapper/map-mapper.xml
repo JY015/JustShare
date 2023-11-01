@@ -15,12 +15,12 @@
     	SELECT board.btitle, board.latitude, board.longitude, board.addr, board.bno
 		FROM map
 		JOIN board ON map.bno = board.bno
-		WHERE map.bno = 30
     </select>
     
-    <select id="imageD">
-	SELECT realFile
+    <select id="imageD" resultType="map" >
+	SELECT image.realFile, image.bno, image.main, board.bno, board.latitude, board.longitude, board.btitle, board.addr
 	FROM image
-	WHERE bno=30
+	JOIN board ON image.bno = board.bno
+
 </select>
 </mapper>
