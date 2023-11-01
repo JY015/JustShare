@@ -28,9 +28,6 @@
 </c:if>
 </div>
 
-
-
-
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
     sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );

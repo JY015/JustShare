@@ -5,14 +5,42 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 30%;
+            margin: 0 auto;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 30%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-가입하신 아이디를 입력하세요, 가입하신 핸드폰번호를 입력하세요, 인증번호를 입력해서 같은지를 확인도 해야함
-
+<img alt="login" src="./img/JustShare.png">
 <c:if test="${findPwCheck eq null && findPwEmail ne 1}">
 <form action="./findPwCheck" method="post">
     	아이디<br>
-        <input type="text" name="mid" placeholder="ex) five" required="required" maxlength="8"><br>
+        <input type="text" name="mid" placeholder="ex) five" required="required" maxlength="15"><br>
         핸드폰 번호<br>
         <input type="text" name="mphone" placeholder="ex) 01012345678" required="required" maxlength="11"><br>
         <button type="submit">이메일 인증</button>
@@ -31,7 +59,7 @@
 <c:if test="${findPwEmail eq 1}">
 <form id="findPwFinal" action="./findPwFinal" method="post">
 				임시비밀번호를 입력하세요<br>
-			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="인증번호 8자리" required="required" maxlength="8"><br>
+			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="임시비밀번호 6자리" required="required" maxlength="6"><br>
 			<input type="hidden" name="memail" value="${memail}">
 			<input type="hidden" name="uuid" value="${uuid}">
 			<button type="button" onclick="findPwFinal()">확인</button>
@@ -50,7 +78,7 @@ uuid : ${uuid}<br>
 uuidPw : ${uuidPw} 
 
 <script type="text/javascript">
-function findPwFinal() {
+function findPwFinal() { 
     var input = document.getElementById('findPwFinalCode'); 
     var findPwFinalCode = '${uuidPw}'; 
     if (input.value === findPwFinalCode) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,12 +11,16 @@
         <title>메인 페이지</title>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+      <!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>       
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/index.css" rel="stylesheet" />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+       
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">  
     </head>
     <body>
         <!-- Navigation-->   
@@ -31,101 +36,161 @@
                          <c:choose>
                          <c:when test="${sessionScope.mname eq null}"><li class="nav-item"><a class="nav-link" href="./login">로그인</a></li></c:when>
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li></c:otherwise>
-                        </c:choose>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
+                        </c:choose>                 
                     </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
                 </div>
             </div>
             </div>
         </nav>
         <!-- Header-->
         <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">광고</h1>
-                </div>
-            </div>
+        
+           <div class="welcome_banner_inner">
+				<div class="swiper-container">
+					<ul class="swiper-wrapper">
+						<c:forEach items="${bannerlist }" var="row">
+						<div class="swiper-slide" style="margin-left: 13%; width: 90">
+									<div class="col-sm-12">
+										<img src="../img/banner/${row.baimg }" style="" alt="배너이미지"/>
+									</div>	
+						</div>
+							</c:forEach>
+					</ul>
+				</div>
+			</div>
         </header><br>
                  
   <style>
-    .category-container {
-      display: grid;
-      grid-template-columns: repeat(4, 17%);
-      gap: 20px;
-      justify-content: center;
-    }
-    .grid-item {
-      display: none;
-      text-align: center;
-    }
-    .all-category-container{
+   .all-category-container {
     text-align: center;
-    }
+  }
+
+  .all-category-container button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .category {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .category a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+  }
+  
+
+.banner_title{
+	color: black;
+	font: 600 35px/1.3 "NanumBarunGothic"
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 100%; 
+}
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+} 
   </style>
 </head>
 <body>
-  <div class="all-category-container">	
+ <div class="all-category-container">	
   <button data-category="all">전체</button>
-  <button data-category="commercial">상업</button>
-  <button data-category="studio">스튜디오</button>
-  <button data-category="culture">문화</button>
-  <button data-category="business">업무</button>
-  </div>
+  <img class="commercial" alt="commercial" src="./img/category/commercial.png" width="5%;" height="5%;">
+  <img class="studio" alt="studio" src="./img/category/studio.png" width="5%;" height="5%;">
+  <img class="culture" alt="culture" src="./img/category/culture.png" width="5%;" height="5%;">
+  <img class="business" alt="business" src="./img/category/business.png" width="5%;" height="5%;">
+  <!-- <button data-category="business">업무</button> -->
+  </div> 
   <br><br>
-  <div class="category-container">		
-    <div class="category commercial"><a href="cafe">카페</a></div>
-    <div class="category commercial"><a href="cafe">식당</a></div>
-    <div class="category commercial"><a href="cafe">술집</a></div>
-    <div class="category commercial"><a href="cafe">공방</a></div>
-    
-    <div class="category studio"><a href="cafe">연습실</a></div>
-    <div class="category studio"><a href=cafe>녹음실</a></div>
-    <div class="category studio"><a href="cafe">파티룸</a></div>
-    <div class="category studio"><a href="cafe">세트장</a></div>  
+  <div class="category-container">
+
+	<div class="category commercial"><a href="cafe"> ${cateList[0].cname }</a></div>
+ 	<div class="category commercial"><a href="cafe"> ${cateList[1].cname }</a></div>
+    <div class="category commercial"><a href="cafe"> ${cateList[2].cname }</a></div>
+    <div class="category commercial"><a href="cafe">${cateList[7].cname }</a></div>
+    <div class="category studio"><a href="cafe">${cateList[3].cname }</a></div>
+    <div class="category studio"><a href=cafe>${cateList[4].cname }</a></div>
+    <div class="category studio"><a href="cafe">${cateList[5].cname }</a></div>
+    <div class="category studio"><a href="cafe">${cateList[6].cname }</a></div>  
       
-    <div class="category business"><a href="cafe">사무실</a></div>
-    <div class="category business"><a href="cafe">오피스텔</a></div>
-    <div class="category business"><a href="cafe">강당</a></div>
-    <div class="category business"><a href="cafe">기타</a></div>
+    <div class="category business"><a href="cafe">${cateList[11].cname }</a></div>
+    <div class="category business"><a href="cafe">${cateList[12].cname }</a></div>
+    <div class="category business"><a href="cafe">${cateList[8].cname }</a></div>
     
-    <div class="category culture"><a href="cafe">갤러리</a></div>
-    <div class="category culture"><a href="cafe">공연장</a></div>
-  </div>
-  <script>
-  showCategory("all");
+    <div class="category culture"><a href="cafe">${cateList[9].cname }</a></div>
+    <div class="category culture"><a href="cafe">${cateList[10].cname }</a></div>
+  </div> 
+ 
+ <script>
+  var swiper = new Swiper('.swiper-container', {
+	  direction: 'horizontal',
+	  centeredSlides: true,
+	  loop: true,
+	  pagination: {
+	    el: '.swiper-pagination',
+	    clickable: true,
+	  },
+	  autoplay: {
+	    delay: 2500,
+	    disableOnInteraction: false,
+	  },
+	  // 추가 옵션들...
+	  spaceBetween: 10, // 슬라이드 사이의 간격 설정
+	});
   
-    $("button").click(function() {
-      var category = $(this).data("category");
-      showCategory(category);
-    });
 
-    function showCategory(category) {
-      $(".category").hide();
-      if (category === 'all') {
-        showAllItems();
-      } else {
-        $(".category." + category).show();
-      }
-    }
+  $(".commercial, .business, .studio, .culture").click(function () {
+	    var category = $(this).attr("class");
+	    showCategory(category);
+	  });
 
-    function showAllItems() {
-      $(".category").show();
-    }
+	  $("button").click(function() {
+	    var category = $(this).data("category");
+	    showCategory(category);
+	  });
+
+	  function showCategory(category) {
+	    $(".category").hide();
+	    if (category === 'all') {
+	      showAllItems();
+	    } else {
+	      $(".category." + category).show();
+	    }
+	  }
+
+	  function showAllItems() {
+	    $(".category").show();
+	  }
+   
+
   </script>
 <br>
         <!-- Section-->
@@ -332,17 +397,15 @@
                 </div>
             </div>
         </section>
-        <!-- Footer-->
-<footer class="footer1">
-<br>
-<p></p>
-</footer>        
-        `
-        
-        
-        <!-- Bootstrap core JS-->
+           <!-- Footer-->
+<%@ include file="footer.jsp" %> 
+       
+        <!-- Bootstrap core JS-->    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <!-- Core theme JS-->     
         <script src="js/scripts.js"></script>
+           
+ 
     </body>
+
 </html>
