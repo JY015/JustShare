@@ -128,7 +128,7 @@ public class BoardController {
 		model.addAttribute("equiplist", el);
 		return "bwrite";
 		}else {
-		return "board";
+		return "redirec:/board";
 		}
 		}
 
@@ -175,9 +175,9 @@ public class BoardController {
 				// 파일 이름 가공 >> 올린 이미지의 이름이 같을 수 있어서
 				LocalDateTime ldt = LocalDateTime.now();
 				String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
-				String realFileName = format + originalFilename;
+				String realFileName = format+originalFilename;
 				// 이미지 업로드
-				File newFileName = new File(path, realFileName);
+				File newFileName = new File(path,realFileName);
 				try {
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -310,8 +310,11 @@ public class BoardController {
 		if(mid.equals("rmid")) {
 			return "redirect:/bdetail?bno="+map.get("bno");
 		}else {
-			// 신고하는 사람 넣기
+			// 카테고리 꺼내오기 
+			List<Map<String, Object>> reportCateList = boardService.reportCateList();
+			// 신고하는 사람 넣기 
 			map.put("rmid", session.getAttribute("mid"));
+			model.addAttribute("reportCateList",reportCateList);
 			model.addAttribute("map", map);
 			return "report";
 			}
@@ -327,6 +330,7 @@ public class BoardController {
 		int dp = boardService.dp(map);
 		if (dp == 0) {
 			// 신고 받은 내용 DB에 저장하기
+			
 			int a = boardService.report(map);
 			// 신고 완료한 글에 대하여 표시하기 >>> rmno 와 sessionid 가 같고 dp가 0이 아니면 불드러오게
 			model.addAttribute("dp", dp);

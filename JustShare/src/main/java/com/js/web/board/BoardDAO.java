@@ -52,6 +52,8 @@ public interface BoardDAO {
 
 	void deleteEquip(Map<String, Object> map);
 
+	List<Map<String, Object>> reportCateList();
+
 
 	
 }

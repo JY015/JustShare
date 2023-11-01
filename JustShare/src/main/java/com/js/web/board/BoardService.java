@@ -37,9 +37,7 @@ public class BoardService {
 		map.put("y", y);
 		// 지역 스트링으로 나누기 > 숫자로 변형 후 map 에 넣어주기 
 		Map<String,Object> areaD = areaDivide.areaD(a);
-		System.out.println(areaD);
 		Map<String,Object> areaN = boardDAO.areaN(areaD);
-		System.out.println(areaN);
 		Integer ano = (Integer) areaN.get("ano");
 		Integer rno = (Integer) areaN.get("rno");
 		map.put("ano",ano);
@@ -144,9 +142,7 @@ public class BoardService {
 		map.put("y", y);
 		// 지역 스트링으로 나누기 > 숫자로 변형 후 map 에 넣어주기 
 		Map<String,Object> areaD = areaDivide.areaD(a);
-		System.out.println(areaD);
 		Map<String,Object> areaN = boardDAO.areaN(areaD);
-		System.out.println(areaN);
 		Integer ano = (Integer) areaN.get("ano");
 		Integer rno = (Integer) areaN.get("rno");
 		map.put("ano",ano);
@@ -159,6 +155,11 @@ public class BoardService {
 	public void deleteEquip(Map<String, Object> map) {
 		boardDAO.deleteEquip(map);
 		
+	}
+
+	public List<Map<String, Object>> reportCateList() {
+		
+		return boardDAO.reportCateList();
 	}
 
 	

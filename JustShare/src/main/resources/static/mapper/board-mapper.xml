@@ -190,8 +190,8 @@
 </update>
 
 <insert id="report" parameterType="Map">
-	INSERT INTO report (rmid,mid,bno,rcontent)
-	VALUES (#{rmid},#{mid},#{bno},#{rcontent} )
+	INSERT INTO report (rmid,mid,bno,rcontent,rcate)
+	VALUES (#{rmid},#{mid},#{bno},#{rcontent},#{rcate} )
 </insert>
 
 <update id="breport">
@@ -222,4 +222,8 @@
 <delete id="deleteEquip">
 	delete from boardEquipment where bno=#{bno}
 </delete>
+<select id="reportCateList">
+	SELECT *
+	FROM reportCate
+</select>
 </mapper>
