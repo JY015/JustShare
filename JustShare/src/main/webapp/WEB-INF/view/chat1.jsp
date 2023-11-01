@@ -183,15 +183,19 @@ for (var key in data) {
 	//var msgcount = 0;
 
 	//if("sender" in data== )
-	var noteNumElement = document.querySelector('.note-num');
+	//var noteNumElement = document.querySelector('.note-num');
 	
-	  noteNumElement.addEventListener('click', function() {
+	  //noteNumElement.addEventListener('click', function() {
 	        // 클릭 이벤트 핸들러
-	        noteNumElement.style.display = 'none'; // 클릭 시 숨김
-	        noteNumElement.textContent = 0; // 텍스트 내용을 0으로 설정
+	        //noteNumElement.style.display = 'none'; // 클릭 시 숨김
+	        //noteNumElement.textContent = 0;
+	        
+	       // socket.send(JSON.stringify({);
+	        
+	        // 텍스트 내용을 0으로 설정
 	        //msgcount = 0; // 메시지 카운트 초기화
 	        	
-	    });
+	    //});
 	  
 	 // function handleNewMessage(noteNumElement) {
 			
@@ -205,11 +209,12 @@ for (var key in data) {
         var message =data.message;
         var sender = data.sender;
         var time = data.time;
+        var sort = 1;
        
         
         if (currentScreen === 'contacts_card') {
         	
-        	updateMessage(sender, time, message);
+        	updateMessage(sender, time, message,sort);
         	
         	//handleNewMessage(noteNumElement);
     		//noteNumElement.style.display = 'block';
@@ -405,7 +410,7 @@ function onlineupdate(sender) {
 
 
  //## 대화목록리스트 메세지업데이트 (sender받을떄 ,toId로받을떄 2가지버전)
-function updateMessage(sender, time, message,readmsg) {
+function updateMessage(sender, time, message,sort) {
 
     var userList = document.querySelectorAll('.user_info');
     var roomlist = document.getElementById("roomlist");
@@ -418,6 +423,7 @@ function updateMessage(sender, time, message,readmsg) {
        var img='';
        var msgcount=0;
        var noteNumElement;
+       
        imgserch1(sender, function(result) {
 			img= result;
        });
@@ -425,25 +431,51 @@ function updateMessage(sender, time, message,readmsg) {
     for (var i = 0; i < userList.length; i++) {
         toIdElement = userList[i].querySelector('.toId');
         
-        if (toIdElement.textContent === sender) {
+        
+        // sort로 2가지 전송을 확인하기 메세지전송후 내목록업데이트시 sort1  
+        //
+        if (toIdElement.textContent === sender && sort ===1) {
             // sender가 일치하는 경우에만 time 및 message 업데이트
             timeElement = userList[i].querySelector('.time');
             messageElement = userList[i].querySelector('.roommessage');
         	noteNumElement = userList[i].querySelector('.note-num');
         	
         	 var currentMsgCount = parseInt(noteNumElement.textContent);
+        	 
+        	 if(currentMsgCount<99) {
              currentMsgCount += 1; // 1씩 증가
+        	 }
              noteNumElement.textContent = currentMsgCount; // 읽지 않은 메시지 수 업데이트
         	
         	
             timeElement.textContent = time;
             messageElement.textContent = message;
             msgcount=noteNumElement.textContent;
+            noteNumElement.style.display = 'block';
+       
             
+           
             status=true;
-        } 
+        } else if (toIdElement.textContent === sender && sort ===0 ) {
         	
-    }
+        	 timeElement = userList[i].querySelector('.time');
+             messageElement = userList[i].querySelector('.roommessage');
+         	noteNumElement = userList[i].querySelector('.note-num');
+         	
+         
+         	
+             timeElement.textContent = time;
+             messageElement.textContent = message;
+           
+             
+             status=true;
+        	
+        }
+        	//만들기
+        }
+        
+        	
+    
       if(!status){
     	  
     	  //신규 대화 시작
@@ -473,8 +505,7 @@ function updateMessage(sender, time, message,readmsg) {
     	  
       
         }
-    
-
+ 
 
 
 // html 삽입공격 방지
@@ -485,6 +516,7 @@ function escapeHtml(input) {
 function sendMessage() {
 	var img="";
 	  var readmsg=1;
+	  var sort =0;
 	var messageInput = document.getElementById("message");
 	 var chat = document.getElementById("chat");
 	  var mid = sessionStorage.getItem("mid"); 
@@ -517,8 +549,8 @@ function sendMessage() {
   	        		  	"mid" : mid,
   	        		  	"toId" : toId,
   	        		  	"text" : message,
-  	        		  	"time":formattedTime,
-  	        		  	"readmsg":readmsg
+  	        		  	"time":formattedTime
+  	        		
   	        		  	
   	        		 
   	        		  
@@ -530,7 +562,7 @@ function sendMessage() {
   	              //## 5-1 메시지전송 후 > 내 대화방에 내글추가 > 서버에서 메시지 전달  ##
   	              msgappendsend(content);  
   	              //내 대화방목록리스트 업데이트
-  	              updateMessage(toId, formattedTime, message,readmsg)
+  	              updateMessage(toId, formattedTime, message,sort);
 
   	           // 스크롤을 아래로 이동시킵니다.
   	           chat.scrollTop = chat.scrollHeight;
@@ -679,7 +711,7 @@ function sendMessage() {
         	}
         	
          
-        	//## 8.대화방을 클릭해서 접속시 실행## /chat1 채팅방 리스트   /chat?fromname='' 개별 채팅방
+        	//## 8.대화방을 클릭해서 접속시 실행## /chat1 채팅방 리스트   /chat?
 		function serchid(clickedElement) {
         		
         		
@@ -688,6 +720,24 @@ function sendMessage() {
         		  
         		var mid = sessionStorage.getItem("mid"); 
         		
+        		var noteNumElement = clickedElement.querySelector('.note-num')
+        	
+        		noteNumElement.style.display = 'none';
+        		
+        		
+        		       var jsondata = {
+        		    		   
+        		       "toId":toId,
+        		       "mid":mid,
+        		       "readmsg":0
+        		       
+        		       }
+        		        
+        		        noteNumElement.textContent = 0;
+        		        
+        		      
+        		        socket.send(JSON.stringify(jsondata));
+        		        
         		 // 클릭한 li 요소에 "active" 클래스를 추가
            		var liElements = document.querySelectorAll("li");
        			for (var i = 0; i < liElements.length; i++) {
@@ -756,6 +806,9 @@ function sendMessage() {
                     data: {
                     	
                     	"mid" : mid
+                  
+                    
+                    
                     	},
                    	
                     success: function(data) {
@@ -798,12 +851,13 @@ function sendMessage() {
                 
                 formattedTime = formatTimestamp(lastmsgtime);
                 
+                
+            
                 //대화방 목록에서 받는사람이 자기 자신이라면 상대방에 아이디를 저장한다.
                 if(result.to_user_id === mid) {
                 	
                 	toId =result.from_user_id;
-                	
-                	
+       
                           
              
                 } else {
@@ -814,8 +868,9 @@ function sendMessage() {
                           
                 }
                 
-                
-
+                //if(to_user_id==mid)
+           
+              
             
                 imgserch1(toId, function (img) {
                     toimg=img;
@@ -823,6 +878,7 @@ function sendMessage() {
                     });
                 
        
+                
                 //여기에 프사불러와서 들어갈 함수가 들어가야됨 
   
       		roombody ='<li><div class="d-flex bd-highlight" type="button" onclick="serchid(this)">';

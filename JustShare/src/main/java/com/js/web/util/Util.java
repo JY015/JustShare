@@ -1,3 +1,4 @@
+
 package com.js.web.util;
 
 import java.util.Map;
@@ -36,7 +37,7 @@ public class Util {
 	   public boolean htmlMailSender(Map<String, Object> map) throws EmailException {
 		   
 			String emailAddr = "eorb1527@outlook.com";// 보내는사람
-		    String passwd = "dkdntfnr9495";// 메일의 암호를 넣어주세요.
+		    String passwd = "";// 메일의 암호를 넣어주세요.
 			String name = "Just Share 비밀번호 찾기"; // 보내는 사람 이름
 			String hostname = "smtp.office365.com";// smtp주소
 			int port = 587;

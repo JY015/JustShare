@@ -53,7 +53,9 @@ noteNumElement.addEventListener('click', function() {
     // 클릭 이벤트 핸들러
     noteNumElement.style.display = 'none'; // 클릭 시 숨김
     noteNumElement.textContent = 0; // 텍스트 내용을 0으로 설정
-    msgCount = 0; // 메시지 카운트 초기화
+    msgcount = 0; // 메시지 카운트 초기화
+    
+    //sql문 초기화 업데이트 
 });
 	
 

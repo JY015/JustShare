@@ -36,4 +36,16 @@ public interface SocketDAO {
 
 	List<Map<String, Object>> roomload(Map<String, Object> map);
 
+
+
+	void readupdate(Map<String, Object> map);
+
+
+
+	void chatcount(String toId);
+
+
+
+	;
+
 }
