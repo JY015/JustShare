@@ -20,6 +20,7 @@
 	${n }
 </c:forEach>		
 <br>
+<button type="submit" onclick="chat()">거래하기</button>
 
 
 ${detail.bcontent }
@@ -47,6 +48,11 @@ function report(){
 	if(chk3){
 			location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
 	}
+	
+}
+
+function chat(){
+	location.href="/chat1?toId=${detail.mid}&bno=${detail.bno}";
 	
 }
 </script>

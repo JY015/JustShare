@@ -273,7 +273,7 @@ public class BoardController {
 		}else{ return "redirect:/bdetail?bno="+map.get("bno");
 		}
 		}
-	// 수정 아직 다안함 >> 파일을 다시 돌아오게하는 법을 몰라서 그거 띄우고 post 만들거임
+	
 	@PostMapping("/bedit")
 	public String beditU(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "equipment", required = false) Integer[] equipment,
@@ -304,18 +304,26 @@ public class BoardController {
 	public String report(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
 		// 세션확인
 		if(session.getAttribute("mid") != null) {
-		// 신고하는 사람 넣기   
-		map.put("rmid", session.getAttribute("mid"));
-		model.addAttribute("map", map);
-		return "report";
-	}else {	return "redirect:/bdetail?bno="+map.get("bno");
-	}
-	}
+		// 신고하는 사람이 본인과 아이디가 같다면 신고 막기 
+		String mid = String.valueOf(map.get("mid"));
+		String rmid = String.valueOf(session.getAttribute("mid"));
+		if(mid.equals("rmid")) {
+			return "redirect:/bdetail?bno="+map.get("bno");
+		}else {
+			// 신고하는 사람 넣기
+			map.put("rmid", session.getAttribute("mid"));
+			model.addAttribute("map", map);
+			return "report";
+			}
+		}
+		else {	return "redirect:/bdetail?bno="+map.get("bno");
+		}
+		}
 
 	@PostMapping("/report")
 	public String reportp(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
-		// 중복 신고 막기 해당 게시글을 이미 신고한 사용자라면 신고가 더이상 추가되지않음 >> 서버에서는 막아노음
-		// 로그인 검사 + 신고자 / 신고 당하는 사람  같으면 막는거 이거 넣어야함 아직 안넣음
+		// 로그인 검사 + 신고자 
+		if(session.getAttribute("mid") != null) {
 		int dp = boardService.dp(map);
 		if (dp == 0) {
 			// 신고 받은 내용 DB에 저장하기
@@ -328,5 +336,11 @@ public class BoardController {
 			return "redirect:/bdetail?bno=" + map.get("bno");
 		}
 
+		}else {
+		return "redirect:/bdetail?bno=" + map.get("bno");
+		}
 	}
+
+
+
 }
