@@ -14,6 +14,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
       <!-- Swiper -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>       
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -23,9 +24,9 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">  
     </head>
     <body>
-        <!-- Navigation-->   
+        <!-- Navigation-->    
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <img alt="login" src="./img/JustShare.png" width="15%;">
+        <img alt="logo" src="./img/JustShare.png" width="15%;">
         <div style="text-align:right;">
             <div class="container px-4 px-lg-5">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -34,8 +35,8 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="./">Home</a></li>
          
                          <c:choose>
-                         <c:when test="${sessionScope.mname eq null}"><li class="nav-item"><a class="nav-link" href="./login">로그인</a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li></c:otherwise>
+                         <c:when test="${sessionScope.mname eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
                         </c:choose>                 
                     </ul>
                 </div>
@@ -62,43 +63,43 @@
                  
   <style>
    .all-category-container {
-    text-align: center;
+     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font: 600 15px/1.3 "NanumBarunGothic";
+    text-align: center; 
   }
-
-  .all-category-container button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin: 5px;
-  }
-
   .category-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+   .category-item {
+        flex-direction: column;
+        text-align: center;
+        margin: 0 10px; 
+    }
 
-  .category {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-  }
+  .category img {
+        cursor: pointer; 
+    }
 
-  .category a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
-  }
-  
+	.category {
+        display: inline-block;
+        margin-right: 10px; 
+        text-align: center;
+    }
+    
+	.entire-cate{
+	text-align: center;
+	font: 600 15px/1.3 "NanumBarunGothic"
+	}    
 
-.banner_title{
+
+	.banner_title{
 	color: black;
 	font: 600 35px/1.3 "NanumBarunGothic"
-}
+	}
 
 .swiper-container {
   display: flex;
@@ -121,34 +122,31 @@
   </style>
 </head>
 <body>
- <div class="all-category-container">	
-  <button data-category="all">전체</button>
-  <img class="commercial" alt="commercial" src="./img/category/commercial.png" width="5%;" height="5%;">
-  <img class="studio" alt="studio" src="./img/category/studio.png" width="5%;" height="5%;">
-  <img class="culture" alt="culture" src="./img/category/culture.png" width="5%;" height="5%;">
-  <img class="business" alt="business" src="./img/category/business.png" width="5%;" height="5%;">
-  <!-- <button data-category="business">업무</button> -->
-  </div> 
-  <br><br>
-  <div class="category-container">
+<div class="all-category-container">
+    <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
+    <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
+	<div class="category-item"><img class="studio" alt="studio" src="./img/category/studio.png"><p>스튜디오</p></div>
+    <div class="category-item"><img class="culture" alt="culture" src="./img/category/culture.png"><p>문화</p></div>    
+    <div class="category-item"><img class="business" alt="business" src="./img/category/business.png"><p>업무</p></div>
+    </div>
+    <hr>
 
-	<div class="category commercial"><a href="cafe"> ${cateList[0].cname }</a></div>
- 	<div class="category commercial"><a href="cafe"> ${cateList[1].cname }</a></div>
-    <div class="category commercial"><a href="cafe"> ${cateList[2].cname }</a></div>
-    <div class="category commercial"><a href="cafe">${cateList[7].cname }</a></div>
-    <div class="category studio"><a href="cafe">${cateList[3].cname }</a></div>
-    <div class="category studio"><a href=cafe>${cateList[4].cname }</a></div>
-    <div class="category studio"><a href="cafe">${cateList[5].cname }</a></div>
-    <div class="category studio"><a href="cafe">${cateList[6].cname }</a></div>  
-      
-    <div class="category business"><a href="cafe">${cateList[11].cname }</a></div>
-    <div class="category business"><a href="cafe">${cateList[12].cname }</a></div>
-    <div class="category business"><a href="cafe">${cateList[8].cname }</a></div>
-    
-    <div class="category culture"><a href="cafe">${cateList[9].cname }</a></div>
-    <div class="category culture"><a href="cafe">${cateList[10].cname }</a></div>
-  </div> 
- 
+<div class="entire-cate">
+<div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
+<div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
+<div class="category commercial"><img alt="drink" src="./img/category/drink.png"><p>${cateList[2].cname }</p></div>
+<div class="category commercial"><img alt="else" src="./img/category/else.png"><p>${cateList[7].cname }</p></div>
+<div class="category studio"><img alt="practice" src="./img/category/practice.png"><p>${cateList[3].cname }</p></div>
+<div class="category studio"><img alt="rec" src="./img/category/rec.png"><p>${cateList[4].cname }</p></div>
+<div class="category studio"><img alt="party" src="./img/category/party.png"><p>${cateList[5].cname }</p></div>
+<div class="category studio"><img alt="set" src="./img/category/set.png"><p>${cateList[6].cname }</p></div>
+<div class="category studio"><img alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
+<div class="category business"><img alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
+<div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
+<div class="category culture"><img alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+</div>
+ <hr>
  <script>
   var swiper = new Swiper('.swiper-container', {
 	  direction: 'horizontal',
@@ -162,8 +160,7 @@
 	    delay: 2500,
 	    disableOnInteraction: false,
 	  },
-	  // 추가 옵션들...
-	  spaceBetween: 10, // 슬라이드 사이의 간격 설정
+	  spaceBetween: 10,
 	});
   
 
@@ -172,9 +169,8 @@
 	    showCategory(category);
 	  });
 
-	  $("button").click(function() {
-	    var category = $(this).data("category");
-	    showCategory(category);
+	  $(".all").click(function() {
+	    showCategory('all');
 	  });
 
 	  function showCategory(category) {
@@ -189,10 +185,7 @@
 	  function showAllItems() {
 	    $(".category").show();
 	  }
-   
-
   </script>
-<br>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -398,8 +391,7 @@
             </div>
         </section>
            <!-- Footer-->
-<%@ include file="footer.jsp" %> 
-       
+<%@ include file="footer.jsp" %>      
         <!-- Bootstrap core JS-->    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->     

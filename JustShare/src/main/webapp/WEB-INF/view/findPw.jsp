@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+<link href="css/index.css" rel="stylesheet" /> 
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             text-align: center;
         }
@@ -32,7 +33,7 @@
             padding: 10px 20px;
             border: none;
             cursor: pointer;
-        }
+        } 
     </style>
 </head>
 <body>
@@ -67,7 +68,7 @@
 </c:if>
 
 <c:if test="${findPwCheck eq 0}">
-<p style="color: red;">일치하는 회원정보가 없습니다. 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
+<p style="color: red; font-weight: bold;">일치하는 회원정보가 없습니다. 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
 <a href="./findPw">돌아가기</a>
 </c:if>
 

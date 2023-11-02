@@ -57,8 +57,8 @@ public class Util {
 		      
 		     // mail.setMsg(String.valueOf(map.get("content")));//본문내용
 		     // String path = uploadPath();
-		      //String img = "https://whale.naver.com/img//banner_beta_download_phone_1440.png";
-		      //String file2 = path + "/20230822150048553333ae-8795-4b70-9fb4-1bd204262f3e2023정보처리기사.pdf";
+		      //String img = "";
+		      //String file2 = path + "";
 		      
 		      String html = "<html>";
 		     // html += "<h1>그림을 첨부합니다</h1>";

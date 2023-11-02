@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 창</title>
+<link href="css/index.css" rel="stylesheet" />
 <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
+<%@ include file="menu.jsp" %>  
 <div style="text-align:center;">
 <img alt="login" src="./img/JustShare.png">
 <div class="login-form">
