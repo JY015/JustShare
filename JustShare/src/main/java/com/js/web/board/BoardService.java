@@ -184,4 +184,9 @@ public class BoardService {
 		
 	}
 
+	public List<Integer> isLikeList(Map<String, Object> map) {
+		
+		return boardDAO.isLikeList(map);
+	}
+
 }

@@ -62,6 +62,8 @@ public interface BoardDAO {
 
 	void insertLike(Map<String, Object> map);
 
+	List<Integer> isLikeList(Map<String, Object> map);
+
 
 	
 }

@@ -238,11 +238,17 @@
 </select>
 
 <delete id="deleteLike">
-	delete from likeList where mid=#{id} AND bno=#{bno}
+	delete from likeList where mid=#{mid} AND bno=#{bno}
 </delete>
 
 <insert id="insertLike">
 	INSERT INTO likeList (bno,mid)
-	VALUES (#{bno},#{id})
+	VALUES (#{bno},#{mid})
 </insert>
+
+<select id="isLikeList">
+	SELECT bno
+	FROM likeList
+	WHERE mid=#{sid}
+</select>
 </mapper>

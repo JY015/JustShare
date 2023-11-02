@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.row detail{
+	width: 100%;
+	}
+
 img {
 	height: 150px;
 	width: 150px;
@@ -15,8 +19,8 @@ img {
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
@@ -44,7 +48,6 @@ img {
 	</form>
 	<!--   검색창  -->
 
-
 	<!-- 리스트 -->
 	<table class="tableContainer" id="tableContainer">
 		<thead>
@@ -60,11 +63,10 @@ img {
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="row">
-				<tr class="row detail"
-					onclick="location.href='./bdetail?bno=${row.bno}'">
+				<tr class="row detail"  data-bno="${row.bno}">
 					<td class="col-4"><img src="/img/places/${row.realFile}">
-						&nbsp;</td>
-					<td class="col-2">${row.btitle }&nbsp;</td>
+					&nbsp;</td>
+					<td class="col-2" onclick="location.href='./bdetail?bno=${row.bno}'">${row.btitle }&nbsp;</td>
 					<td class="col-2 bb">${row.bdate }</td>
 					<td class="col-1 bb">${row.mid }</td>
 					<td class="col-1 bb">${row.bprice }</td>
@@ -146,6 +148,7 @@ img {
 						</div>
 					</div>
 				</div>
+					<div id="footer"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" id="resetButton">초기화</button>
 					<button type="button" class="btn btn-primary" id="applyButton">적용</button>
@@ -169,6 +172,7 @@ img {
 		function getData(limit, searchV, areas, categories, equipments, minPrice,maxPrice) {
 
 			//다음페이지
+			const likeList = ${isLikeList};
 			nextPageLimit = (page + 1) * limit;
 			page = page + 1;
 
@@ -193,19 +197,23 @@ img {
 								// 테이블 내용 생성
 								var desiredOrder = [ 'realFile', 'btitle',
 										'bno', 'bprice', 'bcontent', 'bdate',
-										'cate', 'bread', 'addr', 'mid', 'cname' ];
+										'cate', 'bread', 'addr', 'mid', 'cname','isLiked' ];
 								data
 										.forEach(function(item) {
-											var newRow = "<tr onclick=\"location.href='./bdetail?bno="
-													+ item.bno + "'\">";
+											var newRow = "<tr class='row detail' data-bno="+item.bno +" data-liked="+item.isLiked+">";
 											desiredOrder
 													.forEach(function(prop) {
 														if (prop === 'realFile') {
 															// 'realFile' 속성일 경우 이미지로 표시
-															newRow += "<td><img src='/img/places/" + item[prop] + "' alt='Image' style='width: 150px; height: 150px;'></td>";
-														} else {
+															newRow += "<td class='col-4'><div class='imgBox'><img src='/img/places/" + item[prop] + "' alt='Image' style='width: 150px; height: 150px;'><div class='inf2'><i class=\"" + (item.isLiked == 1 ? 'fas' : 'far') + " fa-heart heart-icon\" style='color:red'></i></div></div></td>";
+														} else if(prop =='btitle'){newRow += "<td >"
+															+ item[prop]
+														+ "</td>";
+															
+														}else {
 															// 다른 속성은 텍스트로 표시
-															newRow += "<td>"
+															newRow += "<td onclick=\"location.href='./bdetail?bno="
+																+ item.bno + "'\">"
 																	+ item[prop]
 																	+ "</td>";
 														}
@@ -217,7 +225,8 @@ img {
 													newRow);
 										});
 
-							} else {
+								
+								} else {
 								// 더 이상의 데이터가 없음을 나타내는 메시지 출력
 								console.log("No more data available.");
 							}
@@ -415,7 +424,93 @@ img {
 		     var maxPrice = parseInt($(this).val());
 		     $("#price-slider").slider("values", [minPrice, maxPrice]);
 		 });
-	</script>
+	
+	/* 	슬라이드의 최소 최대 값을 넘는 입력 막기  */
+		 
+		 $("#min-price").on("input", function() {
+			    var minPrice = parseInt($(this).val());
+			    var maxPrice = parseInt($("#max-price").val());
+			    var sliderMaxValue = $("#price-slider").slider("option", "max");
+
+			    if (minPrice < 0) {
+			        minPrice = 0;
+			    } else if (minPrice > sliderMaxValue) {
+			        minPrice = sliderMaxValue;
+			    }
+
+			    if (minPrice > maxPrice) {
+			        maxPrice = minPrice;
+			        $("#max-price").val(maxPrice);
+			    }
+
+			    $("#min-price").val(minPrice);
+			    $("#price-slider").slider("values", [minPrice, maxPrice]);
+			});
+
+			$("#max-price").on("input", function() {
+			    var minPrice = parseInt($("#min-price").val());
+			    var maxPrice = parseInt($(this).val());
+			    var sliderMaxValue = $("#price-slider").slider("option", "max");
+
+			    if (maxPrice < 0) {
+			        maxPrice = 0;
+			    } else if (maxPrice > sliderMaxValue) {
+			        maxPrice = sliderMaxValue;
+			    }
+
+			    if (maxPrice < minPrice) {
+			        minPrice = maxPrice;
+			        $("#min-price").val(minPrice);
+			    }
+
+			    $("#max-price").val(maxPrice);
+			    $("#price-slider").slider("values", [minPrice, maxPrice]);
+			});
+			
+			/* 모달에서 선택한 옵션 보여주기  */
+			
+		$(document).ready(function() {
+    // 선택된 옵션을 저장할 배열
+    var selectedOptions = [];
+
+    // 각 탭에서 옵션을 선택할 때 발생하는 이벤트 처리
+    $("input[name='area'], input[name='category'], input[name='equipment']").change(function() {
+        selectedOptions = []; // 배열 초기화
+        // 각 탭에서 선택된 값들을 가져와서 selectedOptions 배열에 저장
+        $("input[name='area']:checked").each(function() {
+            selectedOptions.push("지역: " + $(this).next().text().trim());
+        });
+
+        $("input[name='category']:checked").each(function() {
+            selectedOptions.push("공간 유형: " + $(this).next().text().trim());
+        });
+
+        var minPrice = $("#min-price").val();
+        var maxPrice = $("#max-price").val();
+        selectedOptions.push("가격: " + minPrice + "만원부터 " + maxPrice + "만원까지");
+
+        $("input[name='equipment']:checked").each(function() {
+            selectedOptions.push("시설물: " + $(this).next().text().trim());
+        });
+
+        // 선택된 옵션들을 푸터에 표시
+        $("#footer").html(selectedOptions.join("<br>"));
+    });
+
+    // 초기화 버튼 클릭 시
+    $("#resetButton").click(function() {
+        // 선택된 옵션 초기화
+        $("input[type='checkbox']").prop("checked", false);
+        $("#min-price").val(0);
+        $("#max-price").val(100);
+
+        // 선택된 옵션 푸터에서 제거
+        $("#footer").empty();
+    });
+});
+	 
+</script>
+
 
 
 </body>

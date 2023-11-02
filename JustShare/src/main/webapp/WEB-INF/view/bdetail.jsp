@@ -15,6 +15,7 @@
       body {
         position: relative;
         height: 100%;
+        text-align: center;
       }
 
       body {
@@ -57,11 +58,20 @@
         height: 50%;
         object-fit: cover;
       }
+      
+     #map {
+    width: 350px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 atuo ;
+}
 
     </style>
 </head>
 <body>
-	<h1>디테일</h1>
+	<h1>Share</h1>
 <button type="submit" onclick="edit()">수정</button>
 <button type="submit" onclick="del()">삭제</button>
 <button type="submit" onclick="report()">신고</button>
@@ -95,20 +105,13 @@
     </div>
       <!--스와이퍼 -->
 
-
-<c:forEach items="${imageD }" var="n">
-	<img src="/img/places/${n }">
-</c:forEach>
 <br>
 <c:forEach items="${equipD }" var="n">
 	${n }
 </c:forEach>		
 <br>
 <button type="submit" onclick="chat()">거래하기</button>
-
-
 ${detail.bcontent }
-
 <div id="map" style="width:350px;height:350px;"></div>
 
 <script type="text/javascript">
@@ -180,7 +183,7 @@ infowindow.open(map, marker);
         spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         },
         pagination: {
@@ -199,8 +202,15 @@ infowindow.open(map, marker);
 <!-- 좋아요 스크립트 -->
  <script type="text/javascript">
  $(".inf2 i").click(function(){
+		const mid = "${sessionScope.mid}";
+		  // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+	    if (!mid) {
+	        alert("로그인이 필요합니다.");
+	        return;
+	    }
+		// 로그인 확인 후 좋아요 스크립트 진행  
+		  
 		let likes ="";
-		const id = "${sessionScope.mid}";
 		const bno = $(".inf2").data("bno");
 		if($(this).hasClass("far")) {
 			likes = "on";
@@ -208,7 +218,7 @@ infowindow.open(map, marker);
 			likes = "off";
 		}
 		const data = {
-			id : id,
+			mid : mid,
 			likes : likes,
 			bno : bno
 		}
