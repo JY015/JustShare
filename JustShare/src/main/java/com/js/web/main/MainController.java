@@ -138,6 +138,17 @@ public class MainController {
 				model.addAttribute("bannerlist", bannerlist);
 
 	
+		//메인게시물 최신순	 
+				List<Map<String,Object>> imageD = mainService.imageD();
+				model.addAttribute("imageD", imageD);
+		//메인게시물 조회순
+				List<Map<String,Object>> imageC = mainService.imageC();
+				model.addAttribute("imageC", imageC);
+				
+				
+				
+				
+				
 	return "index";
 	
 	}

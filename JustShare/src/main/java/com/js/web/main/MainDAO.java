@@ -17,5 +17,9 @@ public interface MainDAO {
 
 	List<MainDTO> bannerlist();
 
+	List<Map<String,Object>> imageD();
+
+	List<Map<String, Object>> imageC();
+
 
 }

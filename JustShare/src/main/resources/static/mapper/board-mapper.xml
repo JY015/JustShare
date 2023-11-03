@@ -24,7 +24,7 @@
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
 	c.cname
 	FROM board b
 		

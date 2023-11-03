@@ -49,14 +49,14 @@ memail :  ${memail}
 
 <script type="text/javascript">
 function findPwFinal() {
-    var input = document.getElementById('findPwFinalCode'); // 입력 필드의 ID를 사용하여 요소를 가져옵니다.
-    var findPwFinalCode = '01234567'; // 기대값을 설정합니다.
+    var input = document.getElementById('findPwFinalCode');
+    var findPwFinalCode = '01234567'; 
 
     if (input.value === findPwFinalCode) {
         alert('인증번호가 일치합니다.');
         document.getElementById('findPwFinal').submit();
     } else {
-        // 입력값이 기대값과 일치하지 않는 경우 사용자에게 메시지를 표시하거나 다른 작업을 수행할 수 있습니다.
+      
         alert('인증번호가 일치하지 않습니다.');
     }
 }
