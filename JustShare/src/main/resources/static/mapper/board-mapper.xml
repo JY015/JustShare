@@ -7,8 +7,11 @@
 	FROM board b 
 	JOIN boardEquipment be
 	<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
 		<if test="areas != null and areas != '' ">
-		 b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -17,12 +20,9 @@
 		AND be.eid IN (#{equipments})
 		</if>
 		<if test = "minPrice !=null and minPrice !=''">
-		AND b.bprice between #{minPrice}  AND #{maxPrice} 
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
-		<if test="searchV != null and searchV != ''">
-		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
-		</if>
-	</where>
+		</where>
 	
 </select>
 
@@ -34,8 +34,11 @@
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 	<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
 		<if test="areas != null and areas != '' ">
-		 b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -45,9 +48,6 @@
 		</if>
 		<if test = "minPrice !=null and minPrice !=''">
 		AND b.bprice  between #{minPrice} AND #{maxPrice} 
-		</if>
-		<if test="searchV != null and searchV != ''">
-		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 		</where>
 	AND b.bdel=1
@@ -69,8 +69,11 @@
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 		<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
 		<if test="areas != null and areas != '' ">
-		 b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -79,12 +82,8 @@
 		AND be.eid IN (#{equipments})
 		</if>
 		<if test = "minPrice !=null and minPrice !=''">
-		AND b.bprice  between #{minPrice}  AND #{maxPrice} 
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
-		<if test="searchV != null and searchV != ''">
-		AND ( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
-		</if>
-		
 		</where>
 	AND b.bdel=1
 	GROUP BY b.bno
@@ -215,7 +214,7 @@
 
 <update id="bedit">
 	UPDATE board
-	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid="five",addNum=#{addNum}
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum}
 	WHERE bno=#{bno}
 	
 </update>

@@ -58,17 +58,11 @@ public class BoardController {
 		
 		// 로그인 한 사람의 좋아요 확인하기   >  그 리스트에 글을 어캐 확인해야하지? 이것도 리스트로 같이 찍어주기 ? bno를 뭘 보내줘야함?
 		// 이거 리스트를 뽑아서 같이 뿌리기 ?
-		String sid = String.valueOf(session.getAttribute("mid")) ;
-		map.put("sid",sid);
-		List<Integer> isLikeList = boardService.isLikeList(map);
-		System.out.println(isLikeList);
 	
-		
 		
 		// 리스트 뽑기 + 검색시 + 필터
 		List<Map<String, Object>> boardList = boardService.list(map);
 		
-		model.addAttribute("isLikeList",isLikeList);
 		model.addAttribute("list", boardList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("areaList", areaList);
@@ -142,7 +136,7 @@ public class BoardController {
 		model.addAttribute("equiplist", el);
 		return "bwrite";
 		}else {
-		return "redirec:/board";
+		return "redirect:/board";
 		}
 		}
 
@@ -303,7 +297,9 @@ public class BoardController {
 		// map 으로 새로받은 데이터는 업데이트 
 		
 		// 로그인 확인 + id 일치 확인 해야함 아직안함 
-		System.out.println(map);
+		// 수정하는 사람의 mid 넣어주기 
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		map.put("mid", sid);
 		int result = boardService.bedit(map);
 		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰는 이유- 갯수가 달라질수 있어서 // 겹치는거 체크 ?
 		boardService.deleteEquip(map);

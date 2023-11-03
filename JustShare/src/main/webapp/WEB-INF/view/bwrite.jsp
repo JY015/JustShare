@@ -184,6 +184,7 @@
 </script>
 <script type="text/javascript">
 
+
 $(function(){
     $(".writeB").click(function(){
         const fileInput = document.getElementById('upFile');
@@ -246,27 +247,6 @@ $(function(){
     });    
 
  </script>       
-
-
-
-<!-- /*         // 제목, 내용, 우편번호, 주소, 상세주소가 모두 입력되었는지 확인
-        if (title === '' || content === '' || postcode === '' || address === '') {
-            alert("제목, 내용, 주소 등 필수 정보를 모두 입력하세요.");
-        } else if (title.length > 100) { // 제목 길이 제한 (예: 100자)
-            alert("제목은 100자 이내로 입력하세요.");
-        } else if (content.length > 1000) { // 내용 길이 제한 (예: 1000자)
-            alert("내용은 1000자 이내로 입력하세요.");
-        } else if (fileInput.files.length === 0) { // 파일이 선택되지 않았을 때 경고 메시지 표시
-            alert("파일을 선택하세요.");
-        } else {
-            // 다른 유효성 검사 로직을 추가할 수 있습니다.
-            document.querySelector('form').submit(); // 폼 전송
-        }
-    });
-}); */ -->
-
-
-
-    
+  
 </body>
 </html>

@@ -115,30 +115,62 @@ ${detail.bcontent }
 <div id="map" style="width:350px;height:350px;"></div>
 
 <script type="text/javascript">
+	let sid = "${sessionScope.mid}";
+	let mid = "${detail.mid}";
+
 function del() {
 	let chk = confirm("삭제하시겠습니까?"); //참  거짓으로 나옵니다.
-
+	
 	if(chk) {
+		if(sid == mid ){
 		location.href ="/bdelete?bno=${detail.bno }";
+		}else{
+			alert("해당 게시물 작성자만 삭제 가능합니다.")
+		}
 	}
 }
 function edit(){
 	let chk2 = confirm("수정하시겠습니까?");
-	
+
 	if(chk2){
-		location.href="/bedit?bno=${detail.bno }";
+		if(sid == mid ){
+			location.href="/bedit?bno=${detail.bno }";
+			
+		}else{
+			alert("해당 게시물 작성자만 수정 가능합니다.")
+		}
 	}
 }
 function report(){
 	let chk3 = confirm("신고하시겠습니까?");
-		
+	
 	if(chk3){
-			location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
+		if(sid == null || sid == ""){
+			alert("신고하려면 로그인이 필요합니다")
+			return false;
+		}
+		if(sid == mid){
+			alert("작성자가 본인의 게시물을 신고할 수 없습니다")
+			return false;
+		}	
+		
+		location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
+			
+		
 	}
 	
 }
 
 function chat(){
+	
+	if(sid == null || sid == ""){
+		alert("거래를하려면 로그인이 필요합니다")
+		return false;
+	}
+	if(sid == mid){
+		alert("작성자가 본인의 게시물을 거래할 수 없습니다")
+		return false;
+	}	
 	location.href="/chat1?toId=${detail.mid}&bno=${detail.bno}";
 }
 </script>
