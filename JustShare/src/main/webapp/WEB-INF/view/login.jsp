@@ -11,7 +11,7 @@
 <body>
 <%@ include file="menu.jsp" %>  
 <div style="text-align:center;">
-<img alt="login" src="./img/JustShare.png">
+<img alt="JustShare" src="./img/JustShare.png">
 <div class="login-form">
 		<form action="./login" method="post">
 			<input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br>
@@ -19,9 +19,9 @@
 			<button type="submit">로그인</button><br><br>
 			</form>
 	</div>
-	<a href="./findId">아이디 찾기 ㅣ</a>
-	<a href="./findPw">비밀번호 찾기 ㅣ</a>
-	<a href="./join">회원가입 </a>
+	<a href="./findId">아이디 찾기</a>
+	<a href="./findPw">비밀번호 찾기</a>
+	<a href="./join">회원가입</a>
 </div>
 
 <div style="text-align:center;">

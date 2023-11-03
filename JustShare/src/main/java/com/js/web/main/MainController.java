@@ -23,8 +23,15 @@ public class MainController {
 	@GetMapping("/")
 	public String main(Model model, HttpSession session, @RequestParam Map<String, Object> map) {
 	
+		//배너
 		List<MainDTO> bannerlist = mainService.bannerlist();
 		model.addAttribute("bannerlist", bannerlist);
+		//메인게시물 최신순	 
+		List<Map<String,Object>> imageD = mainService.imageD();
+		model.addAttribute("imageD", imageD);
+		//메인게시물 조회순
+		List<Map<String,Object>> imageC = mainService.imageC();
+		model.addAttribute("imageC", imageC);
 		
 		List<Map<String, Object>> cateList = mainService.cateList();
 		model.addAttribute("cateList", cateList);
@@ -33,6 +40,13 @@ public class MainController {
 		
 		return "index";
 	
+	}
+	
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		
+		return "mypage";
 	}
 	
 

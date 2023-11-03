@@ -10825,17 +10825,36 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
- .footer1 {
-  margin-top: 20px;
-  position: absolute;
-  bottom: -50%;
-  left: 0;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  height: 150px;
-  color: white;
-  background-color: black !important;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.content {
+    padding: 20px;
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 100%; 
+}
+.swiper-slide img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  max-width:100%
 }
 
 

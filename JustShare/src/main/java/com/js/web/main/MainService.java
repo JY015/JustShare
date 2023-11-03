@@ -27,6 +27,20 @@ public class MainService {
 	}
 
 
+
+	public List<Map<String, Object>> imageD() {
+		
+		return mainDAO.imageD();
+	}
+
+
+
+	public List<Map<String, Object>> imageC() {
+
+		return mainDAO.imageC();
+	}
+
+
 	
 	
 	

@@ -7,6 +7,14 @@
 SELECT * FROM banner ORDER BY bano ASC 
 </select>
 
+<select id="imageD" resultType="Map"> 
+SELECT * FROM image WHERE main= 1 ORDER BY bno DESC 
+</select>
+
+<select id="imageC" resultType="Map"> 
+SELECT i.realFile, i.bno FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 ORDER BY b.bread DESC; 
+</select>
+
 <select id="cateList" resultType="Map">
 SELECT * FROM cate
 </select>
