@@ -5,14 +5,43 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+<link href="css/index.css" rel="stylesheet" /> 
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 30%;
+            margin: 0 auto;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 30%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        } 
+    </style>
 </head>
 <body>
-가입하신 아이디를 입력하세요, 가입하신 핸드폰번호를 입력하세요, 인증번호를 입력해서 같은지를 확인도 해야함
-
+<img alt="login" src="./img/JustShare.png">
 <c:if test="${findPwCheck eq null && findPwEmail ne 1}">
 <form action="./findPwCheck" method="post">
     	아이디<br>
-        <input type="text" name="mid" placeholder="ex) five" required="required" maxlength="8"><br>
+        <input type="text" name="mid" placeholder="ex) five" required="required" maxlength="15"><br>
         핸드폰 번호<br>
         <input type="text" name="mphone" placeholder="ex) 01012345678" required="required" maxlength="11"><br>
         <button type="submit">이메일 인증</button>
@@ -20,44 +49,46 @@
 </c:if>
 
 <c:if test="${findPwCheck eq 1}">
-<p style="color: red;">가입하신 이메일로 인증번호를 보내드리겠습니다.</p>
-
+<p style="color: red;">가입하신 이메일로 임시비밀번호를 발급해드리겠습니다.</p>
 <form action="./findPw" method="post">
 				<input type="hidden" name="to" value="${memail}">
+				<input type="hidden" name="uuid" value="${uuid}">
 				<button type="submit">확인</button>
 </form>	
 </c:if>
 
 <c:if test="${findPwEmail eq 1}">
 <form id="findPwFinal" action="./findPwFinal" method="post">
-				인증번호를 입력하세요. 여기 : ${memail}<br>
-			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="인증번호 8자리" required="required" maxlength="8"><br>
-			<input type="hidden" name="to" value="${memail}">
-			 <button type="button" onclick="findPwFinal()">확인</button>
+				임시비밀번호를 입력하세요<br>
+			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="임시비밀번호 6자리" required="required" maxlength="6"><br>
+			<input type="hidden" name="memail" value="${memail}">
+			<input type="hidden" name="uuid" value="${uuid}">
+			<button type="button" onclick="findPwFinal()">확인</button>
 </form>	
 </c:if>
 
 <c:if test="${findPwCheck eq 0}">
-<p style="color: red;">일치하는 회원정보가 없습니다. 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
+<p style="color: red; font-weight: bold;">일치하는 회원정보가 없습니다. 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
 <a href="./findPw">돌아가기</a>
 </c:if>
 
-
 findpwCheck : ${findPwCheck}<br>
 findpwEmail : ${findPwEmail}<br>
-memail :  ${memail}
+memail :  ${memail}<br>
+uuid : ${uuid}<br>
+uuidPw : ${uuidPw} 
 
 <script type="text/javascript">
-function findPwFinal() {
-    var input = document.getElementById('findPwFinalCode');
-    var findPwFinalCode = '01234567'; 
 
+function findPwFinal() { 
+    var input = document.getElementById('findPwFinalCode'); 
+    var findPwFinalCode = '${uuidPw}'; 
     if (input.value === findPwFinalCode) {
-        alert('인증번호가 일치합니다.');
+        alert('임시비밀번호가 일치합니다.');
         document.getElementById('findPwFinal').submit();
-    } else {
-      
-        alert('인증번호가 일치하지 않습니다.');
+        alert("로그인해주세요.")
+    } else {   
+        alert('임시비밀번호가 일치하지 않습니다.');
     }
 }
 </script>

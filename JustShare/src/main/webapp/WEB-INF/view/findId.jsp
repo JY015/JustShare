@@ -27,7 +27,7 @@
     <button type="button" onclick="location.href='./login'">로그인 하러 가기</button>
 </c:if>
 <c:if test="${count eq 0}">
-    <p style="color: red;">가입된 아이디가 없습니다.</p>
+    <p style="color: red; font-weight: bold;">가입된 아이디가 없습니다.</p>
 </c:if>
 
 <script type="text/javascript">

@@ -3,50 +3,20 @@
 
 <mapper namespace="com.js.web.main.MainDAO">
 
-<select id="login" parameterType="Map" resultType="Map">
-		SELECT count(*) as count, mname 
-		FROM members
-		WHERE mid = #{mid } AND mpw = #{mpw}
+<select id="bannerlist" resultType="com.js.web.main.MainDTO"> 
+SELECT * FROM banner ORDER BY bano ASC 
 </select>
 
-<select id="findId" parameterType="Map" resultType="String">
-		SELECT MID 
-		FROM members 
-		WHERE mname = #{mname} AND mphone = #{mphone}
+<select id="imageD" resultType="Map"> 
+SELECT * FROM image WHERE main= 1 ORDER BY bno DESC 
 </select>
 
-<select id="findPwCheck" parameterType="Map" resultType="Map">
-		SELECT COUNT(*) AS count, memail FROM members 
-		WHERE mid = #{mid} AND mphone = #{mphone}
+<select id="imageC" resultType="Map"> 
+SELECT i.realFile, i.bno FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 ORDER BY b.bread DESC; 
 </select>
 
-
-<select id="bannerlist" resultType="com.js.web.main.MainDTO">
-	SELECT *
-	FROM banner
-	ORDER BY bano 
-	ASC
-
+<select id="cateList" resultType="Map">
+SELECT * FROM cate
 </select>
-
-
-<select id="imageD" resultType="Map">
-	SELECT *
-	FROM image
-	WHERE main= 1
-	ORDER BY bno
-	DESC
-</select>
-
-
-<select id="imageC" resultType="Map">
-SELECT i.realFile, i.bno
-FROM image i
-JOIN board b ON i.bno = b.bno
-WHERE i.main = 1
-ORDER BY b.bread DESC;
-</select>
-
-
 
 </mapper>

@@ -48,9 +48,9 @@
  <footer class="footer1">
 <a href="./index"><img  src="/img/home.png" ></a>
 <a href="./board"><img  src="/img/share.png" ></a>
-<a href="./mapGps"><img src="/img/map.png" ></a>
+<a href="./mapMark4"><img src="/img/map.png" ></a>
 <a href="./chat1"><img  src="/img/chat.png" ></a>
-<a href="./board"><img src="/img/mypage.png" ></a>
+<a href="./mypage"><img src="/img/mypage.png" ></a>
 </footer>    
 
 
