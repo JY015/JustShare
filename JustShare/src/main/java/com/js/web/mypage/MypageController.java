@@ -26,8 +26,7 @@ public class MypageController {
 		if (mid != null) {
 			System.out.println(mid);
 			List<MypageDTO> list = mypageService.list(mid);
-			System.out.println(list);
-			model.addAttribute("mypage", list);
+			model.addAttribute("mypageList", list);
 
 			return "mypage";
 			

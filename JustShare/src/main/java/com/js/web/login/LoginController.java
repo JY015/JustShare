@@ -38,7 +38,10 @@ public class LoginController {
 		if (String.valueOf(res.get("count")).equals("1")) {
 			session.setAttribute("mid", map.get("mid"));
 			session.setAttribute("mname", res.get("mname"));
-			System.out.println(session);
+			session.setAttribute("mgrade", res.get("mgrade"));
+			if ((int)res.get("mgrade") == 4) {
+				return "admin/admin";
+			}
 			return "redirect:/";
 		} else {
 			model.addAttribute("loginCheckCount", 1);

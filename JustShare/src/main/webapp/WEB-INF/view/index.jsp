@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">  
     </head>
     <body>
-        <!-- Navigation-->    
+        <!-- Navigation-->      
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img alt="logo" src="./img/JustShare.png" width="15%;">
         <div style="text-align:right;">
