@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- <script src="./js/wnInterface.js"></script>  -->
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Map</title>
 <style>
 .custom-overlay-info {
 	border-radius: 6px;
@@ -25,12 +27,7 @@
 	border: 1px solid blue;
 }
 
-/*이미지파일
-    .custom-overlay-info a strong {
-        background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_icon.png) no-repeat;
-        padding-left: 27px;
-    }
-    */
+
 .custom-overlay-info .desc {
 	padding: 1px;
 	position: relative;
@@ -68,6 +65,7 @@ html, body {
 	bottom: 20px;
 	right: 20px;
 }
+
 </style>
 </head>
 <body>
@@ -81,11 +79,21 @@ ${i.bno}
 ${i.realFile}
 </c:forEach>
 --%>
+<%-- <c:forEach var="i" items="${ListAll }" >
+(${i.latitude},${i.longitude})
+</c:forEach>
+<br><br> --%>
+<c:forEach var="i" items="${imageAll }" >
+(${i.latitude},${i.longitude})
+</c:forEach>
 </body>
 <div id="map">
 		<div class="quick" style="z-index:5;" >
 			<a href="javascript:;" onclick="panTo()" >
-            <img src="../img/mylocation64-3.png" >
+            <img src="../img/mylocationwhie.png" style="width:10%;float: right;" >
+            <img src="../img/mylocationblue2.png" style="width: 10%;float: right;" >
+            <img src="../img/mylocationblue.png" style="width: 10%;float: right;" >
+            <!-- <img src="../img/mylocationblue.png" style="width: 40%;float: right;" > -->
         </a>
 		</div>
 </div>
@@ -106,7 +114,7 @@ function createMarker(latitude, longitude) {
     }
 
     var imageSize = new kakao.maps.Size(24, 24);
-    var imageSrc = 'img/reallocation.png';
+    var imageSrc = 'img/reallocationblue2.png';
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
@@ -139,6 +147,7 @@ function panTo() {
 }
 
 navigator.geolocation.getCurrentPosition(function(position) {
+
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
    
@@ -157,7 +166,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
  	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
+    
+    console.log();
     
     var data = [
         <c:forEach items="${imageAll}" var="all" varStatus="loop">
@@ -165,10 +175,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
             content: '<div class="custom-overlay-info">'
             +'<div><c:out value="${all.btitle}" />'
             +'</div><p style="white-space: nowrap;">'
-            +'<c:out value="${all.addr}" /></p>'
+            +'<c:out value="${all.addr}" /> 상세주소</p>'
             +'<c:choose><c:when test="${not empty all.realFile}">'
             +'<img src="/img/places/${all.realFile}">'
-          	+'</c:when><c:otherwise><p>이미지가 없습니다.</p></c:otherwise></c:choose>',
+          	+'</c:when><c:otherwise><p>이미지가 없습니다.</p></c:otherwise></c:choose>'
+          	+'<a href="/bdetail?bno=${all.bno}">예약하기</a>',
             latlng: new kakao.maps.LatLng(<c:out value="${all.latitude}" />, <c:out value="${all.longitude}" />)
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
@@ -176,15 +187,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
     
     // 새로운 마커 이미지 생성
-    var markerImage = new kakao.maps.MarkerImage('img/red24.png', new kakao.maps.Size(24, 24));
+    var markerImage = new kakao.maps.MarkerImage('img/blue192.png', new kakao.maps.Size(40, 40));
 
     // 반경 5km를 라디안 단위로 계산
-    var radiusInKm = 100;
+    var radiusInKm = 5;
     var radiusInRadians = radiusInKm / 6371; // 지구의 반지름
     
     // 데이터 배열을 순회하면서 거리를 계산하여 5km 이내의 장소만 선택
     data.forEach(function(item) {
-        var placeLat = item.latlng.getLat();
+        var placeLat = item.latlng.getLat();6
         var placeLng = item.latlng.getLng();
         
         // 현재 위치와 장소의 위치 간의 거리를 계산
@@ -223,7 +234,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             +'</div>';
 
             var infowindow = new kakao.maps.InfoWindow({
-                content: content,
+                content: content+'<div style="border:none;"></div>',
                 removable: true,
                 zIndex: 10
             });

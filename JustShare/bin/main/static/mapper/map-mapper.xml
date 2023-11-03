@@ -21,6 +21,7 @@
 	SELECT image.realFile, image.bno, image.main, board.bno, board.latitude, board.longitude, board.btitle, board.addr
 	FROM image
 	JOIN board ON image.bno = board.bno
+	WHERE main = 1
 
 </select>
 </mapper>
