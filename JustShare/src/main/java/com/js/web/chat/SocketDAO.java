@@ -46,6 +46,26 @@ public interface SocketDAO {
 
 
 
+	Integer msgcount(String mid);
+
+
+
+	int msgexit(Map<String, Object> map);
+
+
+
+
+
+
+
+	Integer fromexit(Map<String, Object> map);
+
+
+
+	int toexit(Map<String, Object> map);
+
+
+
 	;
 
 }

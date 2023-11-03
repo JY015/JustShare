@@ -61,7 +61,7 @@ public class SocketController {
 		 }
 		
 		*/
-		//System.out.println(result.toString());
+		System.out.println("서치아이디"+result.toString());
 		 json.put("result", result);
 		
 		
@@ -93,6 +93,48 @@ public class SocketController {
 		
 		 
 		 //System.out.println(result.toString());
+		return json.toString();
+	}
+
+	@ResponseBody
+	@GetMapping("/msgcount")
+	public String msgcount(@RequestParam String mid) {
+		//System.out.println("왜안줘?"+mid);
+		
+		Integer result = socketService.msgcount(mid);
+		System.out.println("msgcount"+result);
+		JSONObject json = new JSONObject();
+		if(result != null){	
+			
+			System.out.println("1번"+result);
+			 json.put("result", result);
+		} else {
+			 json.put("result", 0);
+				System.out.println("2번"+result);
+		}
+	
+		 //System.out.println("0일거야 "+result);
+		return json.toString();
+	}
+	
+	@ResponseBody
+	@GetMapping("/fromexit")
+	public String fromexit(@RequestParam Map<String,Object> map) {
+	
+		
+		Integer result = socketService.fromexit(map);
+		System.out.println("msgcount"+result);
+		JSONObject json = new JSONObject();
+		if(result != null){	
+			
+			//System.out.println("1번"+result);
+			 json.put("result", result);
+		} else {
+			 json.put("result", 0);
+				//System.out.println("2번"+result);
+		}
+	
+		 //System.out.println("0일거야 "+result);
 		return json.toString();
 	}
 

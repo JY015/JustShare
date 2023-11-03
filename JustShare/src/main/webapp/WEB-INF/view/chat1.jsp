@@ -15,6 +15,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
 
 <style type="text/css">
 	
@@ -38,7 +39,8 @@
 	});
 	
 
-	const socket = new WebSocket("ws://localhost:8080/chat");
+	//const socket = new WebSocket("ws://localhost:8080/chat");
+	const socket = new SockJS("//localhost:8080/chat");
 	 // ##소켓 연결##
      socket.onopen = function(event) {
        	console.log("커넥션이 만들어졌습니다.1");
@@ -47,7 +49,7 @@
        	// ## 1.세션이 연결될때  세션에있는 사용자 이름을 담아서 보내준다.##  --첫연결--로그인세션아이디보냄-- ##
     	var mid = sessionStorage.getItem("mid"); 
     	
-      	socket.send(JSON.stringify({ "mid": mid}));
+      	socket.send(JSON.stringify({"mid": mid}));
    
     	//chat.scrollTop = chat.scrollHeight;
 
@@ -58,6 +60,7 @@
     	var urlParams = new URLSearchParams(queryString);
     	 var toId = urlParams.get("toId");
 
+    
     	if (toId  ===null) {
     		
     	
@@ -126,15 +129,22 @@
                 	"mid" : mid
                 	},
                 success: function(data) {
-                	var jsonData = JSON.parse(data); 
-   
                 	
+                	
+                	
+                	var jsonData = JSON.parse(data); 
+                	//alert(jsonData.result[0].toId);
+                	//##만약 불러올 채팅창 내용이 없다면 기본삽입문실행
+                	
+           
                 	$(".msgload").remove();
                 	$(".contacts_card").hide();
         		    
                 	//## 3-3 대화창 재생성##
                 	//## 8-2 대화창 재생성##
                 	msgload(jsonData);
+                	
+                	
                 },
                 error: function() {
     		
@@ -166,10 +176,10 @@
  //## 6.서버로부터 메세지 수신##
 socket.onmessage = function(event) {
 
-
+	
 var data = JSON.parse(event.data);
 
-  
+  //alert(data.message);
 var currentScreen = getCurrentScreen();
 
 for (var key in data) {
@@ -179,29 +189,7 @@ for (var key in data) {
         
     } 
 
-       
-	//var msgcount = 0;
-
-	//if("sender" in data== )
-	//var noteNumElement = document.querySelector('.note-num');
-	
-	  //noteNumElement.addEventListener('click', function() {
-	        // 클릭 이벤트 핸들러
-	        //noteNumElement.style.display = 'none'; // 클릭 시 숨김
-	        //noteNumElement.textContent = 0;
-	        
-	       // socket.send(JSON.stringify({);
-	        
-	        // 텍스트 내용을 0으로 설정
-	        //msgcount = 0; // 메시지 카운트 초기화
-	        	
-	    //});
-	  
-	 // function handleNewMessage(noteNumElement) {
-			
-		    //msgcount += 1;
-		    //noteNumElement.textContent = msgcount;
-		//}
+ 
       
     if ("message" in data && "sender" in data && "time" in data) {  //일반메시지전송
     	
@@ -210,6 +198,8 @@ for (var key in data) {
         var sender = data.sender;
         var time = data.time;
         var sort = 1;
+        var readmsg=0;
+        
        
         
         if (currentScreen === 'contacts_card') {
@@ -221,6 +211,20 @@ for (var key in data) {
 
 
         } else if (currentScreen === 'msgload') {
+        	
+        	//같은화면에서 받았을경우 읽음처리 시키기 
+        	var toId = data.toId
+	          var jsonmsg= {
+	        		  
+	        			"toId" : sender,
+	        		  	"mid" : toId,
+	        		  	"readmsg":readmsg
+	          }
+
+	        
+	              socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+	              
+        	
         	
         	msgappend(message,sender);
         	
@@ -235,7 +239,7 @@ for (var key in data) {
     	
     	 var sender = data.sender;
          var message = data.message;
-       
+
          if(message ==="연결") { 
          
     	  if (currentScreen === 'contacts_card') {
@@ -253,20 +257,20 @@ for (var key in data) {
           }
     	  
          }else if(message ==="연결해제") {
-        	 
+        	
         	 if (currentScreen === 'contacts_card') {
-               	
+               
         		 
          		offupdate(sender);
 
                } else if (currentScreen === 'msgload') {
-               	
+                 
             	   msgoffupdate(sender);
                	
                } else {
                	
                	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
-               	
+            	
                }
         	 
         	 
@@ -478,7 +482,7 @@ function updateMessage(sender, time, message,sort) {
     
       if(!status){
     	  
-    	  //신규 대화 시작
+    	  //신규 대화 시작 
     	 
     	  var chatcreate ='<li><div class="d-flex bd-highlight" type="button"'; 
     	      chatcreate+='onclick="serchid(this)"><div class="img_cont">';
@@ -487,13 +491,13 @@ function updateMessage(sender, time, message,sort) {
     	      chatcreate+='<div class="user_info"><span class="toId">'+sender+'';
     	      chatcreate+='</span><span class="time">'+time+'</span>';
     	      
-    	      if (msgcount === 0) {
-    	    	 chatcreate+='<span class="note-num" style="display: none;">'+msgcount+'</span>';
+    	      //if (msgcount === 0) {
+    	    	 //chatcreate+='<span class="note-num" style="display: none;">'+msgcount+'</span>';
   	      		
-  	      	  }else{
-  	      		 chatcreate+='<span class="note-num" style="display: block;">'+msgcount+'</span>';
+  	      	  //}else{
+  	      		 chatcreate+='<span class="note-num" style="display: block;">'+1+'</span>';
   	      		  
-  	      	  }	
+  	      	  //}	
     	      
     	      chatcreate+='<p class="roommessage">'+message+'</p>';
     	      chatcreate+='</div></div></li>';
@@ -563,6 +567,8 @@ function sendMessage() {
   	              msgappendsend(content);  
   	              //내 대화방목록리스트 업데이트
   	              updateMessage(toId, formattedTime, message,sort);
+  	              //다른페이지 chat아이콘 신규 메시지 알림
+  	              
 
   	           // 스크롤을 아래로 이동시킵니다.
   	           chat.scrollTop = chat.scrollHeight;
@@ -969,12 +975,14 @@ function sendMessage() {
         	
         	//## 4. DB자료로 이전 대화창 생성 함수 ##
         	function msgload(msg) {
-        		
+        	
+        	
         		var conversationHTML = "";
         		var message = "";
         		var toimg = "";
         		var myimg = "";
         		var toId = msg.result[0].toId;
+        	
         		var readmsg;
         
         		var timestamp = "";
@@ -1071,8 +1079,8 @@ function sendMessage() {
         		    contenthead +='<span class="toId1">'+toId+'</span></div>';
         		    contenthead +='</div><span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>';
         		    contenthead +='<div class="action_menu"><ul><li><i class="fas fa-user-circle"></i> 사용자정보</li>';
-        		    contenthead +='<li><i class="fas fa-users"></i> 친구추가</li>';
-        		    contenthead +='<li><i class="fas fa-plus"></i> 아무거나?</li>';
+        		    contenthead +='<li><i class="fas fa-users"></i> 신고하기</li>';
+        		    contenthead +='<li type="button" onclick="msgexit()"><i class="fas fa-plus"></i> 대화나가기</li>';
         		    contenthead +='<li><i class="fas fa-ban"></i> 차단하기</li></ul></div></div>';
         		    contenthead +='<div class="card-body msg_card_body" id="chat">';
         		    
@@ -1109,6 +1117,127 @@ function sendMessage() {
         	           
         	}
         			
+        	
+        	//##대화나가기 (대화글 삭제로 돌리기,사용자에게는 안보임)
+        	function msgexit(){
+        
+        		  var toId = document.querySelector('.toId1').textContent;
+        		  var mid = sessionStorage.getItem("mid"); 
+        	
+        	
+        		  if(toId != null) {
+        			  
+        			  var jsonmsg ={
+            				  
+            				  "toId":toId,
+            				  "mid":mid,
+            				  "msgexit":1
+            				  
+            		  }
+            		  
+            		  socket.send(JSON.stringify(jsonmsg));
+            		
+            			$("#msgload").remove();
+            			$(".contacts_card").show();
+            			exitupdate(toId);
+                  
+                  }
+        	}
+                  
+        			  /*
+        			  $.ajax({
+                          type: "GET",
+                          url: "./fromexit", // 폼의 action URL
+                       
+                          data: {
+                          	
+                          	"mid" : mid,
+                          	"toId": toId
+                        
+                          
+                          	},
+                         	
+                          success: function(data) {
+                          	
+                              
+                          	
+                          	var jsonData = JSON.parse(data); 
+                          var json= jsonData.result;
+        			  
+                          if(json==1) {
+                        	  
+                         
+  									var jsonmsg ={
+                    				  
+                    				  "toId":toId,
+                    				  "mid":mid,
+                    				  "toexit":1
+                    				  
+                    		  }
+                    		  
+                    		  socket.send(JSON.stringify(jsonmsg));
+                    		
+                    			$("#msgload").remove();
+                    			$(".contacts_card").show();
+                    			exitupdate(toId);
+                        	  
+                          
+                        	  
+                          }else if (json==0) {
+                    		  var jsonmsg ={
+                    				  
+                    				  "toId":toId,
+                    				  "mid":mid,
+                    				  "msgexit":1
+                    				  
+                    		  }
+                    		  
+                    		  socket.send(JSON.stringify(jsonmsg));
+                    		
+                    			$("#msgload").remove();
+                    			$(".contacts_card").show();
+                    			exitupdate(toId);
+                          
+                          }
+                          
+                      	}
+        		
+        			
+        		  },
+        		  error: function() {
+              		
+              	}
+                  
+      });
+        
+        		
+        	} */
+        
+        	
+        	function exitupdate(target) {
+        		
+       
+        	   const toIdElements = document.querySelectorAll('.toId');
+  	 			 const userList = document.querySelectorAll('.user_info');
+  	 			var toId;
+
+  	 if(target !=null && toIdElements) {
+    for (var i =0; i < userList.length; i++) {
+    	 toId = userList[i].querySelector('.toId');
+
+     
+     
+		if (toId && toId.textContent == target) {
+			userList[i].closest("li").remove();
+ 
+            }
+        }
+  	 			}
+        	
+  }
+        	
+        	
+        	
         	//접속경로에따라 뒤로가기버튼을 다르게 줘야됨.
         	 function goBack() {
         		
@@ -1124,7 +1253,7 @@ function sendMessage() {
                     } else { 
                     
                     	$("#msgload").remove();
-                      	//msgroomload();
+                   
                     	$(".contacts_card").show();
                     	
                     	
