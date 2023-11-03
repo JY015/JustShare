@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 창</title>
+<title>마이페이지</title>
 <link href="css/index.css" rel="stylesheet" />
 </head>
 <body>
 <%@ include file="menu.jsp" %>  
 
-
+${mypage}
 <script type="text/javascript">
 
 </script>
