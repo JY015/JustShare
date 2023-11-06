@@ -21,6 +21,7 @@ public class MainController {
    
 
 
+
    @GetMapping("/")
    public String main(Model model, HttpSession session, @RequestParam Map<String, Object> map) {
    

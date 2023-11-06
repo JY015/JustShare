@@ -3,11 +3,25 @@
 
 <mapper namespace="com.js.web.mypage.MypageDAO">
 
-<select id="list" parameterType="String" resultType="com.js.web.mypage.MypageDTO">
-		SELECT
-		mid, mname, maddr, mbirth, mphone, memail
+<select id="list" parameterType="String" resultType="Map">
+		SELECT *
 		FROM members
 		WHERE mid =#{mid}
 	</select>
+	
+	<select id="listdetail" parameterType="String" resultType="Map">
+		SELECT i.realFile as realFile, i.bno as bno, COUNT(i.bno) as bnoCount FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 AND mid =#{mid}; 
+	</select>
+<select id="listdetail2" parameterType="String" resultType="Map">
+		SELECT i.realFile as realFile, i.bno as bno, b.btitle as btitle FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 AND mid =#{mid}; 
+	</select>
 
+  <select id="likelist" parameterType="String" resultType="Map">
+
+SELECT i.realFile as realFile, i.bno as bno, b.btitle as btitle
+FROM image i
+JOIN likeList l ON l.bno = i.bno
+JOIN board b ON b.bno = i.bno
+WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};  
+</select>  
 </mapper>

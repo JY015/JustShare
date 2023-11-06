@@ -278,11 +278,15 @@
 </head>
 	
 <body>
+<%@ include file="menu.jsp" %>  
   <form id="myForm" action="./join" method="post"> 
       <div class="join-div" align="center">
-         <div>
+      <div style="text-align:center;">
+<img alt="JustShare" src="./img/JustShare.png">
+</div>
+         
             <h1>회원가입<br></h1>
-         </div>
+   
          <div>
             <div class="idBox">
                <input class="input" type="text" name="mid" id="mid" placeholder="아이디를 3글자 이상 입력해 주세요"/>
@@ -337,7 +341,7 @@
            
          
               
-      <div class="form-group"> 전화번호 (숫자만 입력하세요.)
+<!--       <div class="form-group"> 전화번호 (숫자만 입력하세요.)
                       <div class="detail">
                       <input class="menu-title" type="text" id="phone" name="phone" placeholder="전화번호">
 						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
@@ -347,7 +351,7 @@
 						<div><span style="color: red;" class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span></div>
 						<input type="hidden" id="phoneDoubleChk"/>
 					</div>
-                  </div>
+                  </div> -->
                   
                   
                
