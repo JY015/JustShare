@@ -20,7 +20,7 @@ FROM UserMessages u
 
 WHERE (u.from_user_id = #{mid} AND u.to_user_id = #{toId} 
    OR u.from_user_id = #{toId} AND u.to_user_id = #{mid}) 
-   AND (u.deletemsg=0 OR u.deletemsg=2) 
+   AND FIND_IN_SET(#{mid}, u.exceptid)=0 
 
    ORDER BY u.timestamp ASC
 
@@ -28,8 +28,9 @@ WHERE (u.from_user_id = #{mid} AND u.to_user_id = #{toId}
 	
 	<insert id="msginsert" parameterType="Map">
 
+
 INSERT INTO UserMessages (to_user_id, content, from_user_id, timestamp, read_status)
-VALUES (#{toId}, #{text}, #{mid}, NOW(), 1);
+VALUES (#{toId}, #{text}, #{mid}, NOW(), 1)
 
 
 	</insert>
@@ -40,8 +41,9 @@ VALUES (#{toId}, #{text}, #{mid}, NOW(), 1);
 	  	
     		count(*) as count
     FROM UserMessages u	
- 	WHERE u.from_user_id = #{mid} AND u.to_user_id = #{toId} AND deletemsg=0
-  		OR u.from_user_id = #{toId} AND u.to_user_id = #{mid} AND deletemsg=0
+ 	WHERE (u.from_user_id = #{mid} AND u.to_user_id = #{toId}) 
+  		OR (u.from_user_id = #{toId} AND u.to_user_id = #{mid}) 
+  		AND u.exceptid !=#{mid}
     		
 	</select>
 	
@@ -51,6 +53,21 @@ VALUES (#{toId}, #{text}, #{mid}, NOW(), 1);
 	VALUE (#{toId},#{message},#{mid},NOW(),#{read_status},#{deletemsg})
 	
 	</insert>
+
+	<update id="Firstupdate" parameterType="Map">
+	
+	 UPDATE UserMessages
+    	SET
+        
+         exceptid = #{exceptid}
+         
+      
+    WHERE from_user_id = #{mid} AND to_user_id = #{toId} AND deletemsg=2
+  	 
+ 
+	
+	
+	</update>
 
 <select id="imgserch"  parameterType="Map" resultType="String">
 	
@@ -75,19 +92,20 @@ WHERE mid = #{mid}
     (
         SELECT COUNT(*)
         FROM UserMessages 
-        WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 AND deletemsg=0
+        WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 
     ) AS read_count
 FROM UserMessages m1
 WHERE m1.message_id IN (
     SELECT MAX(m2.message_id)
     FROM UserMessages m2
-    WHERE m2.from_user_id = #{mid} OR m2.to_user_id = #{mid} AND m2.deletemsg=0
+    WHERE (m2.from_user_id = #{mid} OR m2.to_user_id = #{mid}) 
+    AND FIND_IN_SET(#{mid}, m2.exceptid)=0 AND m2.deletemsg != 2
     GROUP BY 
         CASE 
             WHEN m2.from_user_id = #{mid} THEN m2.to_user_id
             WHEN m2.to_user_id = #{mid} THEN m2.from_user_id
         END
-) AND m1.deletemsg=0 
+) 
 ORDER BY latest_timestamp DESC;
 	</select>
 	
@@ -133,48 +151,114 @@ ORDER BY latest_timestamp DESC;
 	</select>
 	
 	
-	<update id="msgexit" parameterType="Map">
-	
+	<update id="exceptid" parameterType="Map">
+	  <![CDATA[
 	 UPDATE UserMessages
     	SET
         
-          deletemsg = 1,
+     
+      	  exceptid = 
       	  
-      	  fromexit=1
-    
-      
-    WHERE to_user_id= #{toId} AND from_user_id= #{mid} 
-    OR    from_user_id= #{toId} AND to_user_id= #{mid} 
- 
+        CASE
+        WHEN exceptid ='제외' THEN '제외'
+        WHEN exceptid='0' THEN #{exceptid}
+        WHEN FIND_IN_SET(#{exceptid}, exceptid) = 0 
+        THEN CONCAT(exceptid, CONCAT(',', #{exceptid}))
+        ELSE exceptid
+      END
+    WHERE (to_user_id= #{toId} AND from_user_id= #{mid}) 
+    OR    (from_user_id= #{toId} AND to_user_id= #{mid}) 
+   ]]>
 	
 	
 	</update>
 	
-	<select id="fromexit" parameterType="Map" resultType="Integer">
+	<select id="blockchk" parameterType="Map" resultType="Integer">
 	
-	SELECT COUNT(*) AS count  FROM UserMessages
+	SELECT COUNT(*) AS count  FROM chatblock
 	
-	WHERE from_user_id=#{mid} AND to_user_id= #{toId} 
-	AND fromexit =1 AND toexit =0
+	WHERE blocker_id=#{toId} AND blocked_id=#{mid}
 	
 	
 	</select>
 	
-	<update id="toexit" parameterType="Map">
+	<insert id="block" parameterType="Map">
 	
-	 UPDATE UserMessages
-    	SET
-        
-          toexit=1
-      	
-      
-    WHERE to_user_id= #{toId} AND from_user_id= #{mid} 
-    OR    from_user_id= #{toId} AND to_user_id= #{mid} 
+	
+	
+    INSERT INTO chatblock (blocker_id, blocked_id, timestamp)
+SELECT #{mid}, #{toId}, NOW()
+FROM dual
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM chatblock
+    WHERE blocker_id = #{mid} AND blocked_id = #{toId}
+)
+	
+	</insert>
+	
+	
+	<delete id="unblock" parameterType="Map">
+	
+		DELETE FROM chatblock
+		WHERE blocker_id = #{mid} AND blocked_id = #{toId}
+	
+	
+	</delete>
+	
+	
+	<select id="blocklist" parameterType="String" resultType="Map">
+	SELECT blocker_id, GROUP_CONCAT(blocked_id) as blocked_ids 
+	FROM chatblock 
+	GROUP BY blocker_id
+	
+	</select>
+	
+	<update id="excludeId" parameterType="Map">
+  <![CDATA[
+    UPDATE UserMessages
+    SET
+      deletemsg = 1,
+      exceptid = CASE
+        WHEN exceptid IS NULL THEN NULL
+        ELSE
+          TRIM(BOTH ',' FROM
+            REPLACE(
+              REPLACE(CONCAT(',', exceptid, ','), CONCAT(',', #{exceptid}, ','), ','),
+              ',,',
+              ','
+            )
+          )
+      END
+    WHERE (to_user_id = #{toId} AND from_user_id = #{mid})
+    OR (from_user_id = #{toId} AND to_user_id = #{mid})
+  ]]>
+</update>
+
+<select id="firstmsgchk" parameterType="Map" resultType="Integer">
  
+SELECT COUNT(*) as COUNT
+FROM UserMessages
+WHERE 
+(
+  (from_user_id=#{mid} AND to_user_id=#{sender}
+  AND (exceptid ='제외' OR exceptid ='0' OR exceptid = #{mid}))
+  
+  OR
+  (from_user_id=#{mid} AND to_user_id=#{sender}
+  AND (exceptid ='제외' OR exceptid ='0' OR exceptid =#{sender}))
+  
+  or
+  (from_user_id=#{sender} AND to_user_id=#{mid}
+  AND (exceptid ='제외' OR exceptid ='0' OR exceptid = #{mid}))
+  
+  or
+    (from_user_id=#{sender} AND to_user_id=#{mid}
+  AND (exceptid ='제외' OR exceptid ='0' OR exceptid =#{sender}))
+)
 	
-	
-	</update>
-	
+	</select>
+
 	
 	
 

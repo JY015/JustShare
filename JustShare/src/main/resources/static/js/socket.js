@@ -71,21 +71,61 @@ if (mid === null || mid == "null") {
 
 
 	socket.onmessage = function(event) {
-		
+		 //var json=0;
+		 var mid = sessionStorage.getItem("mid");
 	var currentScreen = getCurrentScreen();
 
 	var socketdata = JSON.parse(event.data);
 	
 
+  
+
 		if(currentScreen) {
+	getmsgcount(function(msgcount) {
 		
 	
 if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {  //일반메시지전송
     	
+   
+    
+    	$.ajax({
+                type: "GET",
+                url: "./firstmsgchk", 
+             
+                data: {
+                	
+                	"mid" : mid,
+                	"sender": socketdata.sender
+              
+                
+                	},
+               	
+                success: function(data) {
+                	
+                    
+                	
+                var jsonData = JSON.parse(data); 
+                var json = jsonData.result;
+                
+            
+             
+                if(json==0 || json==1 ||json==2 ) {
+					
+		alert(socketdata.sender+"님과 첫 대화가 시작 되었습니다.");
+				}
+			 
+             
+		  },
+		  error: function() {
+    		
+    	}
+        
+});
+
+    	
     
 		var noteNumElement = document.querySelector('.note-num');
-getmsgcount(function(msgcount) {
-	
+
 
       	  if (msgcount == 0) {
       		noteNumElement.style.display = 'block';
@@ -99,15 +139,36 @@ getmsgcount(function(msgcount) {
       		  
       	  }	
 
-	});	
+
+	} else if("mid" in socketdata && "sender" in socketdata && "firstmsg" in socketdata){
+		
+		
+		var noteNumElement = document.querySelector('.note-num');
+
+
+      	  if (msgcount == 0) {
+      		noteNumElement.style.display = 'block';
+      		noteNumElement.textContent = 1;
+      	  }else{
+      	noteNumElement.style.display = 'block';
+		if(msgcount<99) {
+  			msgcount +=1;
+			noteNumElement.textContent = msgcount;
+		}
+      		  
+      	  }	
+			
+  		
+		
 	}
+		});	
 	}
 	}
 	
 
 
 
-
+/*
 	//##현재화면을 확인후 메시지 전달 할지 체크
 	function getCurrentScreen() {
 	    if (document.querySelector('.contacts_card')) {
@@ -118,8 +179,20 @@ getmsgcount(function(msgcount) {
 	    // 다른 상태에 따른 처리 추가 가능
 	    return '1';
 	} //겟스크린끝
+*/
+//##현재화면을 확인후 메시지 전달 할지 체크 ( 숨겨짐여부까지 확인가능)
+ 	function getCurrentScreen() {
+ 	    var contactsCard = document.querySelector('.contacts_card');
+ 	    var msgLoad = document.getElementById('msgload');
 
-
+ 	    if (contactsCard && window.getComputedStyle(contactsCard).display !== 'none') {
+ 	        return 'contacts_card';
+ 	    } else if (msgLoad && window.getComputedStyle(msgLoad).display !== 'none') {
+ 	        return 'msgload';
+ 	    }
+ 	    
+ 	    return '1'; // 
+ 	}
   
 
 

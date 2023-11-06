@@ -24,14 +24,18 @@ public class SocketService {
             // 첫 대화인 경우 초기 메시지를 데이터베이스에 삽입
      
 			
-		System.out.println("첫대화");
+		//System.out.println("첫대화");
 			map.put("toId", toId); // f
 			map.put("mid", mid); // f
 			map.put("message", "");
 			map.put("read_status", 0);
 			map.put("deletemsg", 2);
+			map.put("exceptid", "제외");
 			//System.out.println(map.toString());
-			socketDAO.Firstmsg(map);
+		int result=socketDAO.Firstmsg(map);
+		//System.out.println("첫메시지 반환"+result);
+	
+		socketDAO.Firstupdate(map);
 		
 			
         }
@@ -110,30 +114,54 @@ public class SocketService {
 	}
 
 
-	public int msgexit(JSONObject jsonObject) {
-		
+	
+
+
+
+	
+
+
+	public int exceptid(JSONObject jsonObject) {
 		  Map<String, Object> map = new HashMap<>();
 		  jsonObject.keys().forEachRemaining(key -> map.put(key, jsonObject.get(key)));
-		  
-		 return socketDAO.msgexit(map);
-		 	
+		return socketDAO.exceptid(map);
 	}
 
 
-	public Integer fromexit(Map<String, Object> map) {
-		
-		
-		  
-		 return socketDAO.fromexit(map);
-		
+	public int block(JSONObject jsonObject) {
+		 Map<String, Object> map = new HashMap<>();
+		  jsonObject.keys().forEachRemaining(key -> map.put(key, jsonObject.get(key)));
+
+		return socketDAO.block(map);
 	}
 
 
-	public int toexit(JSONObject jsonObject) {
-		  Map<String, Object> map = new HashMap<>();
+	public List<Map<String, Object>> blocklist() {
+		
+		return socketDAO.blocklist();
+	}
+
+
+	public int blockchk(Map<String, Object> map) {
+		
+		return socketDAO.blockchk(map);
+	}
+
+
+	public int unblock(JSONObject jsonObject) {
+		 Map<String, Object> map = new HashMap<>();
 		  jsonObject.keys().forEachRemaining(key -> map.put(key, jsonObject.get(key)));
-		  
-		 return socketDAO.toexit(map);
+
+		return socketDAO.unblock(map);
+	}
+
+
+	public int firstmsgchk(Map<String, Object> map) {
+		
+
+		return socketDAO.firstmsgchk(map);
+		
+		
 	}
 
 

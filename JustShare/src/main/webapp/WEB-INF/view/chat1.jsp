@@ -5,16 +5,20 @@
 
 	<head>
 		<title>Chat</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" href="./css/chat.css">
+			<link rel="stylesheet" href="./css/toastr.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
 
 <style type="text/css">
@@ -37,6 +41,8 @@
 	$(document).on('click', '#action_menu_btn', function(){
 	    $('.action_menu').toggle();
 	});
+	
+
 	
 
 	//const socket = new WebSocket("ws://localhost:8080/chat");
@@ -106,9 +112,22 @@
  		} else if(toId.toLowerCase()===mid.toLowerCase()) {
  			
  			//event.preventDefault();
- 			alert("자기 자신과 대화를 할수 없습니다.");
- 			  window.history.back();
+ 			//alert("자기 자신과 대화를 할수 없습니다.");
  			
+        			
+ 		  //toastr.options.closeButton = true;
+ 		      toastr.options.newestOnTop = false;
+ 		      //toastr.options.progressBar = true;
+ 		     toastr.options.positionClass = 'toast-top-center';
+ 		    toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
+ 			
+        			  
+ 		   setTimeout(function() {
+ 			    window.history.back();
+ 			}, 1000);
+ 			  //window.history.back();
+
+ 		    
  			return false;
  		}
  		
@@ -199,8 +218,18 @@ for (var key in data) {
         var time = data.time;
         var sort = 1;
         var readmsg=0;
+        /*
+        var jsonmsg1= {
+       		  
+     			"firstmsg" : 1,
+     		  	"mid" : mid,
+     		  	"sender":sender
+       }
+
+     
+           socket.send(JSON.stringify(jsonmsg1));  
         
-       
+       */
         
         if (currentScreen === 'contacts_card') {
         	
@@ -309,12 +338,6 @@ for (var key in data) {
 
 };
 
-
-	//## 6-1 ##
-	
-	
-	//chat.scrollTop = chat.scrollHeight;
-  
 
 
 
@@ -480,14 +503,18 @@ function updateMessage(sender, time, message,sort) {
         
         	
     
-      if(!status){
+      if(!status && sort ===1){
+    	  
+    	
+    	  
     	  
     	  //신규 대화 시작 
-    	 
+    	 var mid = sessionStorage.getItem("mid"); 
+    	  
     	  var chatcreate ='<li><div class="d-flex bd-highlight" type="button"'; 
     	      chatcreate+='onclick="serchid(this)"><div class="img_cont">';
     	  	  chatcreate+='<img src="'+img+'" class="rounded-circle user_img">';
-    	      chatcreate+='<span class="online_icon"></span></div>';
+    	      chatcreate+='<span class="status online_icon"></span></div>';
     	      chatcreate+='<div class="user_info"><span class="toId">'+sender+'';
     	      chatcreate+='</span><span class="time">'+time+'</span>';
     	      
@@ -505,6 +532,22 @@ function updateMessage(sender, time, message,sort) {
   	    
   	    roomlist.insertAdjacentHTML('afterbegin', chatcreate);
   	    status=false;
+  	 
+  
+  		alert(sender+"님과 첫 대화가 시작 되었습니다.");
+  		
+  		
+  	
+  	/*
+  		if(currentScreen != 'contacts_card') {
+  			
+  			alert(sender+"님과 첫 대화가 시작 되었습니다.");
+  		}
+  	
+  */
+
+	
+     
       } 
     	  
       
@@ -559,39 +602,67 @@ function sendMessage() {
   	        		 
   	        		  
   	          }
+  	          
+  	          //##메시지 전송전 서버에서 차단리스트를 불러와서 비교
+  	        $.ajax({
+                type: "GET",
+                url: "./blockchk", 
+             
+                data: {
+                	
+                	"mid" : mid,
+                	"toId": toId
+              
+                
+                	},
+               	
+                success: function(data) {
+                	
+                    
+                	
+                var jsonData = JSON.parse(data); 
+                var json= jsonData.result;
+			  
+                if(json==0) {
+              	  
+                	 if (message.trim() !== "") { // 메시지가 비어 있지 않은 경우에만 전송
+         	              socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+         	              
+         	              //## 5-1 메시지전송 후 > 내 대화방에 내글추가 > 서버에서 메시지 전달  ##
+         	              msgappendsend(content);  
+         	              //내 대화방목록리스트 업데이트
+         	              updateMessage(toId, formattedTime, message,sort);
+         	              //다른페이지 chat아이콘 신규 메시지 알림
+         	              
 
-  	          if (message.trim() !== "") { // 메시지가 비어 있지 않은 경우에만 전송
-  	              socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
-  	              
-  	              //## 5-1 메시지전송 후 > 내 대화방에 내글추가 > 서버에서 메시지 전달  ##
-  	              msgappendsend(content);  
-  	              //내 대화방목록리스트 업데이트
-  	              updateMessage(toId, formattedTime, message,sort);
-  	              //다른페이지 chat아이콘 신규 메시지 알림
-  	              
-
-  	           // 스크롤을 아래로 이동시킵니다.
-  	           chat.scrollTop = chat.scrollHeight;
-  	              
-  	              messageInput.value = "";  // 대화창 다시 초기화 
-  	              
-  	           var sendButton = document.getElementById("send-button");
-  	          sendButton.style.display = "none";
-  	        hideandshow.style.display = "none";
-  	      
-  	              
-  	          } else {
-  	              alert("메시지를 입력하세요.");
-  	          }
-  				
-  				
-});
-         //시간 포맷해서 가져오기
-      
-          
+         	           // 스크롤을 아래로 이동시킵니다.
+         	           chat.scrollTop = chat.scrollHeight;
+         	              
+         	              messageInput.value = "";  // 대화창 다시 초기화 
+         	              
+         	           var sendButton = document.getElementById("send-button");
+         	          sendButton.style.display = "none";
+         	        hideandshow.style.display = "none";
+         	      
+         	              
+         	          } else {
+         	              alert("메시지를 입력하세요.");
+         	          }
+              	  
+                
+              	  
+                }else if (json!=0) {
+                	
+                	alert(toId+"님이 차단 하셨습니다.");
+          	
+                }
+		  },
+		  error: function() {
+    		
+    	}
         
-      
-          
+});
+});
 }        
 
   	function imgserch (mid,callback){
@@ -755,8 +826,17 @@ function sendMessage() {
         		
         	 if(mid.toLowerCase()===toId.toLowerCase()) {
         			
-        			alert("자기 자신과 대화를 할수 없습니다.");
-        		
+        		 //toastr.options.closeButton = true;
+    		      toastr.options.newestOnTop = false;
+    		      //toastr.options.progressBar = true;
+    		     toastr.options.positionClass = 'toast-top-center';
+    		    toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
+    			
+           			  
+    		   setTimeout(function() {
+    			    window.history.back();
+    			}, 1000);
+        			
         			return false;
         		}
         		
@@ -901,6 +981,11 @@ function sendMessage() {
       	  }	
       		
       		roombody +='<p class="roommessage">'+lastmessage+'</p></div></div></li>';
+      		//roombody +='<p class="roommessage">'+lastmessage+'</p><span id="action_menu_btn"></span>';
+      		//roombody +='<div class="action_menu"><ul><li><i class="fas fa-user-circle"></i> 사용자정보</li>';
+      		//roombody +='<li><i class="fas fa-users"></i> 신고하기</li>';
+      		//roombody +='<li type="button" onclick="msgexit()"><i class="fas fa-plus"></i> 대화나가기</li>';
+      		//roombody +='<li><i class="fas fa-ban"></i> 차단하기</li></ul></div></div></div></div></li>';
     
 		 roomContent += roombody;
       		
@@ -976,7 +1061,8 @@ function sendMessage() {
         	//## 4. DB자료로 이전 대화창 생성 함수 ##
         	function msgload(msg) {
         	
-        	
+        		 
+       	
         		var conversationHTML = "";
         		var message = "";
         		var toimg = "";
@@ -994,6 +1080,12 @@ function sendMessage() {
             	var fromuserid="";
             	var mid = sessionStorage.getItem("mid"); 
         		
+            	
+            	  blockchk(mid,toId, function(result) {
+            		  
+         	    	    var block = result.block;
+         	    	    var block1 = result.block1;
+         	    	    
         		for (var i = 0; i < msg.result.length; i++) {
             		var result = msg.result[i];
             		//alert(msg.from_user_id);
@@ -1044,6 +1136,8 @@ function sendMessage() {
     	       var imgElement;
     	       var toIdElement;
     	       var status;
+    	     
+    	   
 
     	       for (var i = 0; i < userList.length; i++) {
     	        toIdElement = userList[i].querySelector('.toId');
@@ -1064,9 +1158,12 @@ function sendMessage() {
            }
     		 
     	     }	 
- 
-        		
-        
+    	       
+    	       //## ajax db에서 불러와야됨
+ 				//## 임시 사용 board이미지
+        		var detail = "https://image.van-go.co.kr/place_main/2022/05/12/21736/7c2d3fb58557410689da918839a9747c_750O.jpg";
+    	    	var boardtitle;
+    	    
         
         		    var contenthead ='<div class="col-md-8 col-xl-6 chat" id="msgload">';
         		    contenthead +='<div class="card msgload"><div class="card-header msg_head">';
@@ -1077,13 +1174,15 @@ function sendMessage() {
         		    contenthead +='<span class="status1 '+classchange+'"></span></div>';
         		    contenthead +='<div class="user_info1">';
         		    contenthead +='<span class="toId1">'+toId+'</span></div>';
-        		    contenthead +='</div><span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>';
-        		    contenthead +='<div class="action_menu"><ul><li><i class="fas fa-user-circle"></i> 사용자정보</li>';
-        		    contenthead +='<li><i class="fas fa-users"></i> 신고하기</li>';
-        		    contenthead +='<li type="button" onclick="msgexit()"><i class="fas fa-plus"></i> 대화나가기</li>';
-        		    contenthead +='<li><i class="fas fa-ban"></i> 차단하기</li></ul></div></div>';
-        		    contenthead +='<div class="card-body msg_card_body" id="chat">';
+        		    contenthead +='</div><span id="action_menu_btn"><i class="fas fa-bars"></i></span>';
+        		    contenthead +='<div class="action_menu"><ul><li><span class="span1"><i class="fas fa-user-circle"></i></span><span class="span2"> 사용자정보</span></li>';
+        		    contenthead +='<li><span class="span1"><i class="fas fa-user-tie"></i></span><span class="span2"> 신고하기</span></li>';
+        		    contenthead +='<li type="button" onclick="msgexit(\'대화나가기\')"><span class="span1"><i class="fas fa-user-slash"></i></span><span class="span2"> 대화나가기</span></li>';
+        		    contenthead +='<li type="button" onclick="'+block+'"><span class="span1"><i class="fas fa-ban"></i></span><span class="span2"> '+block1+'</span></li>';
+        		    contenthead +='<li type="button" onclick="toggleActionMenu()"><span class="span1"><i class="fas fa-times"></i></span><span class="span2"> 취소</span></li>';
         		    
+        		    contenthead +='</ul></div><div class="msgdetail"><button class="trade">거래하기</button><button class="review">리뷰작성</button></div><div class="msgboard"><img src="'+detail+'"';
+        		    contenthead +=' class="boarddetail"><span class="boardtitle">'+"제목 들어갈 자리다asdfasdfasf"+'</span></div></div><div class="card-body msg_card_body" id="chat">';
         
 				var contentbody =conversationHTML;
 					
@@ -1107,20 +1206,78 @@ function sendMessage() {
 						parentContainer.insertAdjacentHTML('afterend', cardContent);
         		   
         		    
-        		 
+    	
         		    // 스크롤을 아래로 이동시킵니다.
         	          chat.scrollTop = chat.scrollHeight;
         		 
         		
         	           const goBackButton = document.getElementById('goBack');
         	           goBackButton.addEventListener('click', goBack);
+    	      	}); 
         	           
         	}
         			
-        	
-        	//##대화나가기 (대화글 삭제로 돌리기,사용자에게는 안보임)
-        	function msgexit(){
+        	 //## 대화창생성시 차단상대이면 차단해제 아니면 차단하기 2가지버전 (mid ,toid 반대로)
+ 	       
+ 	       function blockchk(mid,toId,callback) {
+ 	    	   var block;
+     	       var block1;
+     	   
+ 	       $.ajax({
+                type: "GET",
+                url: "./blockchk", 
+                data: {
+                	
+                	"mid" : toId,
+                	"toId": mid
+              
+                
+                	},
+               	
+                success: function(data) {
+                	
+                    
+                	
+                var jsonData = JSON.parse(data); 
+                var json= jsonData.result;
+			  
+                if(json==0) {
+             	   block = "msgexit(\'차단\')";
+             	   block1 = "차단하기";
+             	   
+             	  var result = {
+                          block: block,
+                          block1: block1
+                      };
+             	   
+             	   callback(result); 
+             	   
+                }else if(json!=0) {
+             	   
+             	   block = "msgexit(\'차단해제\')";
+             	   block1 = "차단해제";
+             	   
+             	  var result = {
+                          block: block,
+                          block1: block1
+                      };
+             	   
+             	   callback(result); 
+             	   
+                }
+               
+		  },
+		  error: function() {
+    		
+    	}
         
+});
+ 	       }	       
+        	
+        	//##대화나가기,차단하기(입력값에따라 결정)
+        	function msgexit(work){
+        
+        		
         		  var toId = document.querySelector('.toId1').textContent;
         		  var mid = sessionStorage.getItem("mid"); 
         	
@@ -1131,89 +1288,47 @@ function sendMessage() {
             				  
             				  "toId":toId,
             				  "mid":mid,
-            				  "msgexit":1
+            				  "exceptid":mid
             				  
             		  }
-            		  
-            		  socket.send(JSON.stringify(jsonmsg));
-            		
-            			$("#msgload").remove();
-            			$(".contacts_card").show();
-            			exitupdate(toId);
-                  
+        			  
+        			  //## 차단하기 
+        			  if (work =="차단") {
+        		            jsonmsg["block"] = toId;
+        		            
+        		            socket.send(JSON.stringify(jsonmsg));
+                    		
+                			$("#msgload").remove();
+                			$(".contacts_card").show();
+                			exitupdate(toId);  
+        		        } else if (work =="대화나가기") {
+        		        	 socket.send(JSON.stringify(jsonmsg));
+        	            		
+                 			$("#msgload").remove();
+                 			$(".contacts_card").show();
+                 			exitupdate(toId);  
+        		        	
+        		        } else if (work =="차단해제") {
+        		        	 jsonmsg["unblock"] = toId;
+        		        	 socket.send(JSON.stringify(jsonmsg));
+        		        	 
+        		     	  	$("#msgload").remove();
+        		     
+        		        	serchidutil(toId,mid);
+        		        
+        		        	//exitupdate(toId);  
+        		        	
+        		        }
+        		
+            	
                   }
         	}
-                  
-        			  /*
-        			  $.ajax({
-                          type: "GET",
-                          url: "./fromexit", // 폼의 action URL
-                       
-                          data: {
-                          	
-                          	"mid" : mid,
-                          	"toId": toId
-                        
-                          
-                          	},
-                         	
-                          success: function(data) {
-                          	
-                              
-                          	
-                          	var jsonData = JSON.parse(data); 
-                          var json= jsonData.result;
-        			  
-                          if(json==1) {
-                        	  
-                         
-  									var jsonmsg ={
-                    				  
-                    				  "toId":toId,
-                    				  "mid":mid,
-                    				  "toexit":1
-                    				  
-                    		  }
-                    		  
-                    		  socket.send(JSON.stringify(jsonmsg));
-                    		
-                    			$("#msgload").remove();
-                    			$(".contacts_card").show();
-                    			exitupdate(toId);
-                        	  
-                          
-                        	  
-                          }else if (json==0) {
-                    		  var jsonmsg ={
-                    				  
-                    				  "toId":toId,
-                    				  "mid":mid,
-                    				  "msgexit":1
-                    				  
-                    		  }
-                    		  
-                    		  socket.send(JSON.stringify(jsonmsg));
-                    		
-                    			$("#msgload").remove();
-                    			$(".contacts_card").show();
-                    			exitupdate(toId);
-                          
-                          }
-                          
-                      	}
-        		
-        			
-        		  },
-        		  error: function() {
-              		
-              	}
-                  
-      });
-        
-        		
-        	} */
-        
         	
+        	
+        	
+                 
+        
+        	//## 대화목록에서 대화나가기 상대 업데이트(삭제)
         	function exitupdate(target) {
         		
        
@@ -1292,7 +1407,10 @@ function sendMessage() {
         	        hideandshow.style.display = "block";
         	    }
         	}
-        	          
+        	function toggleActionMenu() {
+        	    $('.action_menu').toggle();
+        	}
+
         	
     </script>
 	</body>
