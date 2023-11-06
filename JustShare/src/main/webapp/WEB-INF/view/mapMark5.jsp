@@ -9,17 +9,71 @@
 <meta charset="UTF-8">
 <title>Map</title>
 <style>
-
-#map {
+body {
 	width: 100%;
 	height: 100%;
+	margin: 0;
+}
+#daumWrap {
+    position: relative;
+    min-width: 320px;
+    height: 100%;
+}
+.hide {
+    display: none;
+}
+.cont_map {
+    overflow: hidden;
+    width: 100%;
 }
 
-html, body {
-	width: 100%;
-	height: 100%;
-	margin: 0; /* 마진을 제거 */
+.content_map {
+    position: relative;
 }
+
+.map_area {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.map_area .wrap_tit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 0;
+    text-align: center;
+}
+
+
+.map_area .control_map {
+    left: 10px;
+    top: 20% ;
+}
+
+.map_area .set_map {
+	z-index: 10;
+    position: absolute;
+    width: 40px;
+}
+
+.set_map {
+    margin-bottom: 9px;
+    margin: auto;
+}
+
+ .control_map{
+    width: 20px;
+    height: 20px;
+    background-position: -20px 0;
+} 
+
+.set_map .mylocationblue_img{
+    margin-bottom: 9px;
+}
+
 
 .custom-infowindow {
     /* 여기에 원하는 스타일을 추가하세요 */
@@ -86,57 +140,59 @@ html, body {
     font-weight: bold;
 }
 
-.quick {
-  position: absolute;
-  top: 25%; /* 화면 높이의 중앙에 위치 */
-  right: 0%; /* 화면 너비의 중앙에 위치 */
-}
 
-/* 모바일 스타일 */
-@media (max-width: 767px) {
-  .quick {
-    width: 38px;
-    height: 38px;
-    top: -20%; /* 화면 높이의 20% 위치로 이동 */
-    right: 5%; /* 화면 너비의 오른쪽에서 5% 위치로 이동 */
-  }
-}
-
-#map_title {
-  position: absolute;
-	right: 1020%;
-    bottom: 1230%;
-}
-
-#aa{
-    white-space: nowrap; /* 텍스트가 자동으로 줄 바꿈되지 않도록 설정 */
-    overflow: hidden;
-    color: #555;
-    background-color: #fff;
-}
 .mylocationblue_img{
-    width:38px;
-    height:38px;
+	right: 10%;
+    width: 38px;
+}
+.tit_location{
+    overflow: hidden;
+    display: inline-block;
+    padding: 5px 14px 0;
+    margin: 8px auto 0;
+    height: 19px;
+    border-radius: 13px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 14px;
+    color: #555;
+    opacity: .9;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.16);
+    }
+    
+#map {
+    height: 965px;
 }
 </style>
+
 </head>
 <body>
-<div id="map">
-		<div class="quick" style="z-index:5;" >
-			<strong id="aa"></strong>
-		<div id="map_title">
-		</div>
-			<div class="mylocationblue">
-				<a href="javascript:;" onclick="panTo()" >
-	            <img class="mylocationblue_img" src="../img/mylocationblue.png" >
-	            <!-- <img src="../img/mylocationblue.png" style="width: 40%;float: right;" > -->
-	        	</a>
+	<div id="daumWrap">
+
+		<hr class="hide">
+
+		<article id="daumContent" role="main" class="cont_map">
+
+			<div class="content_map">
+				<div class="map_area hide" style="display: block;">
+					<div class="wrap_tit">
+						<strong class="tit_location"></strong>
+					</div>
+					<div id="map">
+						<div style="cursor: auto; z-index: 2;"></div>
+					</div>
+					<div class="set_map control_map">
+						<a href="javascript:;" onclick="panTo()" >
+						   <img class="mylocationblue_img" src="../img/mylocationblue.png" >
+	        			</a>
+					</div>
+				</div>
 			</div>
-		</div>
+	</article>
 </div>
-<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
- -->
+
  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
 
@@ -229,13 +285,14 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
         // 위도와 경도를 주소로 변환
         geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function(result, status) {
-          if (status === kakao.maps.services.Status.OK) {
-        	  document.getElementById("aa").innerHTML = result[0].address.address_name;
-          } else {
-            alert("주소를 찾을 수 없습니다.");
-          }
-        });
-    });
+            if (status === kakao.maps.services.Status.OK) {
+            	var address = result[0].address.address_name;
+            	document.querySelector(".tit_location").innerHTML = address;
+ 		} else {
+              alert("주소를 찾을 수 없습니다.");
+            }
+          });
+      });
     var data = [
         <c:forEach items="${imageAll}" var="all" varStatus="loop">
         {
