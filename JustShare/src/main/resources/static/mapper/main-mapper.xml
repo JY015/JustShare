@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.js.web.main.MainDAO">
-
-<select id="bannerlist" resultType="com.js.web.main.MainDTO"> 
-SELECT * FROM banner ORDER BY bano ASC 
-</select>
-
-<select id="imageD" resultType="Map"> 
-SELECT * FROM image WHERE main= 1 ORDER BY bno DESC 
-</select>
-
-<select id="imageC" resultType="Map"> 
-SELECT i.realFile, i.bno FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 ORDER BY b.bread DESC; 
-</select>
-
-<select id="cateList" resultType="Map">
-SELECT * FROM cate
-</select>
-
+	<select id="bannerlist" resultType="com.js.web.main.MainDTO"> 
+	SELECT * FROM banner ORDER
+		BY bano ASC 
+		</select>
+	<select id="imageD" resultType="Map"> 
+	SELECT * FROM image 
+	WHERE main=
+		1 ORDER BY bno DESC 
+		</select>
+	<select id="imageC" resultType="Map"> 
+	SELECT i.realFile, i.bno,
+		b.btitle, b.addr FROM image i JOIN board b ON i.bno = b.bno WHERE
+		i.main = 1 ORDER BY b.bread DESC; 
+		</select>
+	<select id="cateList" resultType="Map">
+	 SELECT * FROM cate 
+	 </select>
 </mapper>

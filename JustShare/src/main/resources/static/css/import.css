@@ -1,0 +1,144 @@
+@charset "UTF-8";
+/* 변경 x */
+/*reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*font*/
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Thin.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Thin.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Thin.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Thin.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 300;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Light.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Light.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Light.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Light.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 400;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Regular.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Regular.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Regular.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 500;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Medium.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Medium.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Medium.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 700;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Bold.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Bold.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Bold.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansCJKkr";
+  font-weight: 900;
+  font-display: swap;
+  src: url("./scss/import/fonts/NotoSansCJKkr-Black.eot");
+  src: url("./scss/import/fonts/NotoSansCJKkr-Black.eot") format("embedded-opentype"), url("./scss/import/fonts/NotoSansCJKkr-Black.woff") format("woff"), url("./scss/import/fonts/NotoSansCJKkr-Black.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Apple SD Gothic Neo";
+  font-weight: 900;
+  font-display: swap;
+  src: local("Apple SD Gothic Neo Bold"), url(./scss/import/fonts/AppleSDGothicNeoBold.woff2) format("woff2"), url(./scss/import/fonts/AppleSDGothicNeoBold.woff) format("woff"), url(./scss/import/fonts/AppleSDGothicNeoBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-display: swap;
+  src: local("Roboto"), url(./scss/import/fonts/Roboto.woff2) format("woff2"), url(./scss/import/fonts/Roboto.woff) format("woff"), url(./scss/import/fonts/Roboto.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Roboto bold"), url(./scss/import/fonts/Roboto-Bold.woff2) format("woff2"), url(./scss/import/fonts/Roboto-Bold.woff) format("woff"), url(./scss/import/fonts/Roboto-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 900;
+  font-display: swap;
+  src: local("Roboto bold"), url(./scss/import/fonts/Roboto-900.woff2) format("woff2"), url(./scss/import/fonts/Roboto-900.woff) format("woff"), url(./scss/import/fonts/Roboto-900.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Montserrat"), url(./scss/import/fonts/Montserrat-Bold.woff2) format("woff2"), url(./scss/import/fonts/Montserrat-Bold.woff) format("woff"), url(./scss/import/fonts/Montserrat-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-display: swap;
+  src: local("Montserrat"), url(./scss/import/fonts/Montserrat-Regular.woff2) format("woff2"), url(./scss/import/fonts/Montserrat-Regular.woff) format("woff"), url(./scss/import/fonts/Montserrat-Regular.otf) format("opentype");
+}
+/*# sourceMappingURL=import.css.map */
