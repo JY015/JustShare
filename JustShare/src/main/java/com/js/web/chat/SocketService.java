@@ -165,6 +165,32 @@ public class SocketService {
 	}
 
 
+	public void bnosave(Map<String, Object> map) {
+		socketDAO.bnosave(map);
+		
+	}
+
+
+	
+
+	public int bnoload(Map<String, Object> paramMap) {
+	
+		return socketDAO.bnoload(paramMap);
+	}
+
+
+	public Map<String, Object> tradechk(Map<String, Object> map) {
+	
+		return socketDAO.tradechk(map);
+	}
+
+
+	public int tradechkup(Map<String, Object> map) {
+		
+		return socketDAO.tradechkup(map);
+	}
+
+
 	
 
 }

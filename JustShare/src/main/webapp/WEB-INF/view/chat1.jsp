@@ -45,6 +45,8 @@
 
 	
 
+	
+
 	//const socket = new WebSocket("ws://localhost:8080/chat");
 	const socket = new SockJS("//localhost:8080/chat");
 	 // ##소켓 연결##
@@ -65,16 +67,17 @@
     	var queryString = window.location.search;
     	var urlParams = new URLSearchParams(queryString);
     	 var toId = urlParams.get("toId");
+    	 var bno = urlParams.get("bno");
 
     
-    	if (toId  ===null) {
+    	if (toId  ==null && bno ==null) {
     		
     	
     	} else {
     		
     		// ## 2-1 ##
-    	   	queryserchid(toId);
-    		
+    	   	queryserchid(toId,bno);
+    	   
     	}
     	
 
@@ -82,7 +85,7 @@
      };
      
  	//##.3 url에서 fromname 가져오는 함수##
- 	function queryserchid(toId) {
+ 	function queryserchid(toId,bno) {
  		
 
  		
@@ -91,7 +94,7 @@
  		 // 클릭한 li 요소에 "active" 클래스를 추가
     	
  		
- 		if(toId === null) {
+ 		if(toId == null && bno == null)  {
  			// 현재 페이지의 URL에서 쿼리 문자열을 가져옵니다.
      		var queryString = window.location.search;
 
@@ -100,10 +103,14 @@
 
      		// "fromname" 파라미터 값을 가져옵니다.
      		 toId = urlParams.get("toId");
-
+     		
+     
+     		 bno = urlParams.get("bno");
+     		 
      	
+     		
  		      // 3-1 Ajax통신으로 serchid함수실행
-     	  		serchidutil(toId,mid);
+     	  		serchidutil1(toId,mid,bno);
     		 
 				 
 		
@@ -131,13 +138,14 @@
  			return false;
  		}
  		
- 		serchidutil(toId,mid);
- 	
+ 		serchidutil1(toId,mid,bno);
+ 
 
  	}
  	
  	// ## 3-2 서버에게 재생성할 데이터 요청 ## 소켓서비스에서 첫 대화인 경우 isFirstConversation함수로 체크 후 공백 메세지 저장 ##
    	// ## 8-1 이어서 실행##	
+   	/*
  	function serchidutil(toId,mid) {
  		
     		$.ajax({
@@ -172,9 +180,45 @@
 });
  		
  	}
+ 		*/
+ 	function serchidutil1(toId,mid,bno) {
  	
+		$.ajax({
+            type: "GET",
+            url: "./serchid", // 폼의 action URL
+            data: {
+            	"toId" : toId,
+            	"mid" : mid,
+            	"bno" : bno
+            	
+            	},
+            success: function(data) {
+            	
+            	
+            	
+            	var jsonData = JSON.parse(data); 
+            	//alert(jsonData.result[0].toId);
+            	//##만약 불러올 채팅창 내용이 없다면 기본삽입문실행
+            	
+       
+            	$(".msgload").remove();
+            	$(".contacts_card").hide();
+    		    
+            	//## 3-3 대화창 재생성##
+            	//## 8-2 대화창 재생성##
+            	msgload(jsonData);
+            	
+            	
+            },
+            error: function() {
+		
+	}
+
+});
+		
+	}
  	
- 	
+ 
  	
  	//##현재화면을 확인후 메시지 전달 할지 체크 ( 숨겨짐여부까지 확인가능)
  	function getCurrentScreen() {
@@ -792,7 +836,9 @@ function sendMessage() {
 		function serchid(clickedElement) {
         		
         		
-        		
+				var bnoid = document.querySelector(".toId");
+				
+				var bno = bnoid.getAttribute("data-bno");
         		var toId = clickedElement.querySelector(".toId").textContent;
         		  
         		var mid = sessionStorage.getItem("mid"); 
@@ -840,7 +886,7 @@ function sendMessage() {
         			return false;
         		}
         		
-        		serchidutil(toId,mid);
+        		serchidutil1(toId,mid,bno);
         	
       
         	}
@@ -872,7 +918,7 @@ function sendMessage() {
         		var toimg = ""; // ajax로 마지막 메세지 아이디를 통신해서 그사람 사진가져오기
         		
         		var toimg1="";
-        	
+        	var bno;
             	var	toId = ""; // 대화상대 아이디 3개버전 신규 대화방 개설시 1개 , 기존대화방 로드시 1개 , 똑같은 상대방 일경우 기존 대화방으로 연결 
             
             	var mid =sessionStorage.getItem("mid"); // 조건문에 나랑 대화하는 상대 인걸 가져와야됨
@@ -885,6 +931,7 @@ function sendMessage() {
             	
            		var readmsg;
                 var msgcount = 0;	
+                
         		$.ajax({
                     type: "GET",
                     url: "./roomload", // 폼의 action URL
@@ -893,8 +940,6 @@ function sendMessage() {
                     	
                     	"mid" : mid
                   
-                    
-                    
                     	},
                    	
                     success: function(data) {
@@ -931,7 +976,7 @@ function sendMessage() {
                 
             
              
-                
+                bno=result.bno
                 lastmsgtime =result.latest_timestamp;
                 lastmessage =result.content;
                 
@@ -970,7 +1015,7 @@ function sendMessage() {
       		roombody ='<li><div class="d-flex bd-highlight" type="button" onclick="serchid(this)">';
       		roombody +='<div class="img_cont"><img src="'+toimg+'"class="rounded-circle user_img">';
       		roombody +='<span class="status offline"></span></div><div class="user_info">';
-      		roombody +='<span class="toId">'+toId+'</span><span class="time">'+formattedTime+'';
+      		roombody +='<span class="toId" data-bno="'+bno+'">'+toId+'</span><span class="time">'+formattedTime+'';
       		
       	  if (msgcount === 0) {
       		roombody +='</span><span class="note-num" style="display: none;">'+msgcount+'</span>';
@@ -1054,21 +1099,136 @@ function sendMessage() {
             return formattedTime;
         }
         
+	function tradechk(toId,mid,bno,callback) {
+		
+		//alert(toId+" "+mid+" "+bno+" ");
+		
+		var trademsg;
+		var tradeclass;
+		var to_user_chk;
+		var from_user_chk;
+		
+		 $.ajax({
+             type: "GET",
+             url: "./tradechk", 
+             data: {
+             	
+             	"mid" : mid,
+             	"toId": toId,
+             	"bno" : bno
+           
+             
+             	},
+            	
+             success: function(data) {
+             	
+                 
+             	
+             var jsonData = JSON.parse(data); 
+             var json= jsonData.result;
+			  
+  
+            trademsg = json.trademsg;
+            tradeclass= json.tradeclass;
+            to_user_chk=json.to_user_chk;
+            from_user_chk=json.from_user_chk;
+            
+          	   
+          
+            
+            var arr = { 
+            	"trademsg":trademsg,
+            	"tradeclass":tradeclass,
+            	"to_user_chk":to_user_chk,
+            	"from_user_chk":from_user_chk
+            	
+            	
+            };
+          	   callback(arr); 
+          	   
+            
+            
+		  },
+		  error: function() {
+ 		
+ 	}
+     
+});
+		
+		
+	}
+        	
 
+	$(document).on('click', '.trade, .traded, .trading', function(){
+		
+		var toId = document.querySelector(".toId1").textContent;
+		var mid = sessionStorage.getItem("mid"); 
+		
+		
+		var userchk = document.querySelector(".msgdetail");
+		var fromchk = userchk.getAttribute("data-fromuserchk");
+		var tochk = userchk.getAttribute("data-touserchk");
+		
+		var bnoid = document.querySelector(".boarddetail");
+		var bno = bnoid.getAttribute("data-bno");
+		
+		
+		alert(mid+toId+bno);
+		//## 여기서 조건식으로 2일경우 클릭 안하게 문제는 또 ajax?
+		if(fromchk==1 && tochk==1 ) {
+			
+		
+		}else {
+			
+	
+		
+		 $.ajax({
+             type: "GET",
+             url: "./tradechkup", 
+             data: {
+             	
+             	"mid" : mid,
+             	"toId": toId,
+             	"bno" : bno
+           
+             
+             	},
+            	
+             success: function(data) {
+             	
+          
+             //var jsonData = JSON.parse(data); 
+             //var json= jsonData.result;
 
+			  $("#msgload").remove();
+             serchidutil1(toId,mid,bno);
+            
+            
+		  },
+		  error: function() {
+ 		
+ 	}
+     
+});
+		
+		}
+	});
         	
         	
         	//## 4. DB자료로 이전 대화창 생성 함수 ##
         	function msgload(msg) {
         	
-        		 
-       	
+        		
+        		
+       			
+        		
         		var conversationHTML = "";
         		var message = "";
         		var toimg = "";
         		var myimg = "";
         		var toId = msg.result[0].toId;
         	
+         		
         		var readmsg;
         
         		var timestamp = "";
@@ -1079,13 +1239,47 @@ function sendMessage() {
             	var inputTime ="";
             	var fromuserid="";
             	var mid = sessionStorage.getItem("mid"); 
-        		
-            	
+
+        		var classchange = '';
+        		var userList = document.querySelectorAll('.user_info');
+    	   		 var imgList = document.querySelectorAll('.img_cont');
+    	   		 var statuslist = document.querySelectorAll('.status')
+    	   		 
+    	   		 
+    	       var imgElement;
+    	       var toIdElement;
+    	       var status;
+    	     var bimg;
+    	     var btitle;
+    	     var bno;
+            
+    	  
+    	    
+    	     
             	  blockchk(mid,toId, function(result) {
             		  
          	    	    var block = result.block;
          	    	    var block1 = result.block1;
          	    	    
+         	    	    for (var i = 0; i < userList.length; i++) {
+         	    	        toIdElement = userList[i].querySelector('.toId');
+         	    	        imgElement =imgList[i];
+         	    	     
+         	    	        status = statuslist[i];
+         	       
+         	           if (toIdElement.textContent === toId && status.classList.contains('offline')) {
+         	        	   
+         	        	   classchange = 'offline';
+         	           
+         	        	
+         	        	   
+         	           } else if (toIdElement.textContent === toId && status.classList.contains('online_icon')){
+         	           	
+         	        	   classchange = 'online_icon';
+         	           	
+         	           }
+         	    		 
+         	    	     }	 
         		for (var i = 0; i < msg.result.length; i++) {
             		var result = msg.result[i];
             		//alert(msg.from_user_id);
@@ -1095,6 +1289,9 @@ function sendMessage() {
             	  	toimg = result.toimg;
             		myimg = result.myimg;
             		timestamp= result.timestamp;
+            		bimg = result.bimg;
+            		btitle = result.btitle;
+            		bno = result.bno;
             		formattedTime = formatTimestamp(timestamp);
             		
             		//inputTime = new Date(timestamp);
@@ -1125,44 +1322,25 @@ function sendMessage() {
             	}
             		}
         				
+            		
         		}
         		
-        		var classchange = '';
-        		var userList = document.querySelectorAll('.user_info');
-    	   		 var imgList = document.querySelectorAll('.img_cont');
-    	   		 var statuslist = document.querySelectorAll('.status')
-    	   		 
-    	   		 
-    	       var imgElement;
-    	       var toIdElement;
-    	       var status;
-    	     
+        		 //여기 ajax 넣어서 거래하기 버튼 체크 하기 
+        		 
+        		 tradechk(toId,mid,bno, function(arr) {
     	   
 
-    	       for (var i = 0; i < userList.length; i++) {
-    	        toIdElement = userList[i].querySelector('.toId');
-    	        imgElement =imgList[i];
-    	     
-    	        status = statuslist[i];
-       
-           if (toIdElement.textContent === toId && status.classList.contains('offline')) {
-        	   
-        	   classchange = 'offline';
-           
+        	var tradeclass =arr.tradeclass;
+        	var trademsg =arr.trademsg;
+        	var touserchk =arr.to_user_chk;
+        	var fromuserchk =arr.from_user_chk;
         	
-        	   
-           } else if (toIdElement.textContent === toId && status.classList.contains('online_icon')){
-           	
-        	   classchange = 'online_icon';
-           	
-           }
-    		 
-    	     }	 
-    	       
+        	//alert(tradeclass);
+    	   
     	       //## ajax db에서 불러와야됨
  				//## 임시 사용 board이미지
-        		var detail = "https://image.van-go.co.kr/place_main/2022/05/12/21736/7c2d3fb58557410689da918839a9747c_750O.jpg";
-    	    	var boardtitle;
+        		//var detail = "https://image.van-go.co.kr/place_main/2022/05/12/21736/7c2d3fb58557410689da918839a9747c_750O.jpg";
+    	    	//var boardtitle;
     	    
         
         		    var contenthead ='<div class="col-md-8 col-xl-6 chat" id="msgload">';
@@ -1181,9 +1359,13 @@ function sendMessage() {
         		    contenthead +='<li type="button" onclick="'+block+'"><span class="span1"><i class="fas fa-ban"></i></span><span class="span2"> '+block1+'</span></li>';
         		    contenthead +='<li type="button" onclick="toggleActionMenu()"><span class="span1"><i class="fas fa-times"></i></span><span class="span2"> 취소</span></li>';
         		    
-        		    contenthead +='</ul></div><div class="msgdetail"><button class="trade">거래하기</button><button class="review">리뷰작성</button></div><div class="msgboard"><img src="'+detail+'"';
-        		    contenthead +=' class="boarddetail"><span class="boardtitle">'+"제목 들어갈 자리다asdfasdfasf"+'</span></div></div><div class="card-body msg_card_body" id="chat">';
+        		    contenthead +='</ul></div><div class="msgdetail" data-fromuserchk="'+fromuserchk+'" data-touserchk="'+touserchk+'">';
+        		    contenthead +='<button class="'+tradeclass+'"> '+trademsg+'</button><button class="review"'; 
+        		    contenthead +='>리뷰작성</button></div><div class="msgboard"><img src="'+bimg+'" class="boarddetail"';
+        		    contenthead +=' data-bno="'+bno+'"><span class="boardtitle">'+btitle+'</span></div></div><div class="card-body msg_card_body" id="chat">';
         
+        		    
+        		
 				var contentbody =conversationHTML;
 					
 				
@@ -1209,10 +1391,11 @@ function sendMessage() {
     	
         		    // 스크롤을 아래로 이동시킵니다.
         	          chat.scrollTop = chat.scrollHeight;
-        		 
+        	
         		
         	           const goBackButton = document.getElementById('goBack');
         	           goBackButton.addEventListener('click', goBack);
+        		 });
     	      	}); 
         	           
         	}

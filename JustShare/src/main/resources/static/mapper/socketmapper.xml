@@ -5,6 +5,70 @@
 
 
 
+
+<update id="tradechkup" parameterType="Map">
+    UPDATE trade
+    SET
+        to_user_chk = CASE
+            WHEN to_user_id = #{mid} THEN
+              CASE
+                  WHEN to_user_chk = 0 THEN 1
+           		  WHEN to_user_chk = 1 THEN 0
+  			 	WHEN to_user_chk = 1 AND from_user_chk = 1 
+   				THEN  to_user_chk 
+                    ELSE 0
+                END
+            ELSE to_user_chk
+        END,
+        
+        from_user_chk = CASE
+            WHEN from_user_id = #{mid} THEN
+                CASE
+                    WHEN from_user_chk = 0 THEN 1
+                    WHEN from_user_chk = 1 THEN 0
+                     WHEN to_user_chk = 1 AND from_user_chk = 1 
+   					THEN  from_user_chk
+                    ELSE 0
+                END
+            ELSE from_user_chk
+        END
+    WHERE
+        (to_user_id = #{toId} AND from_user_id = #{mid} AND bno = #{bno})
+        OR (to_user_id = #{mid} AND from_user_id = #{toId} AND bno = #{bno})
+</update>
+
+
+<select id="tradechk" parameterType="Map" resultType="Map">
+
+SELECT to_user_chk,from_user_chk
+FROM trade
+WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
+
+</select>
+
+<select id="bnoload" parameterType="Map" resultType="Integer">
+
+SELECT bno
+FROM trade 
+WHERE to_user_id = #{toId} AND from_user_id =#{mid}
+
+
+</select>
+
+<insert id="bnosave" parameterType="Map">
+	
+	INSERT INTO trade (to_user_id,from_user_id,bno,tradestatus)
+	VALUE (#{toId},#{mid},#{bno},0)
+	
+	ON DUPLICATE KEY UPDATE 
+	 bno = #{bno},
+    to_user_chk = 0,
+    from_user_chk = 0 
+	
+	
+	</insert>
+
+
 	<select id="serchid"  parameterType="Map" resultType="Map">
 	
 SELECT
@@ -14,7 +78,11 @@ SELECT
     (SELECT mimg FROM members WHERE mid= #{toId}) AS toimg,
     (SELECT mimg FROM members WHERE mid = #{mid}) AS myimg,
     u.timestamp,
-    (select mid from members where mid=#{toId}) AS toId
+    (SELECT mid from members WHERE mid=#{toId}) AS toId,
+    (SELECT bimg FROM jboard WHERE bno=#{bno}) AS bimg,
+    (SELECT btitle FROM jboard WHERE bno=#{bno}) AS btitle,
+	(SELECT bno FROM jboard WHERE bno=#{bno}) AS bno
+    
 
 FROM UserMessages u
 
@@ -94,6 +162,7 @@ WHERE mid = #{mid}
         FROM UserMessages 
         WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 
     ) AS read_count
+  
 FROM UserMessages m1
 WHERE m1.message_id IN (
     SELECT MAX(m2.message_id)

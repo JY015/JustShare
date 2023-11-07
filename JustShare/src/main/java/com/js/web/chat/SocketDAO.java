@@ -94,6 +94,26 @@ public interface SocketDAO {
 
 
 
+	void bnosave(Map<String, Object> map);
+
+
+
+
+
+
+
+	int bnoload(Map<String, Object> paramMap);
+
+
+
+	Map<String, Object> tradechk(Map<String, Object> map);
+
+
+
+	int tradechkup(Map<String, Object> map);
+
+
+
 	;
 
 }
