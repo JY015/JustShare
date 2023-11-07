@@ -27,10 +27,9 @@
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
-		
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 	<where>
@@ -49,10 +48,26 @@
 		<if test = "minPrice !=null and minPrice !=''">
 		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
+		AND b.bdel=1  
 		</where>
-	AND b.bdel=1
 	GROUP BY b.bno
-	ORDER BY b.bno desc
+	<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
 	LIMIT #{cri.pageStart}, #{cri.perPageNum}
 </select>
 
@@ -63,8 +78,8 @@
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -84,36 +99,28 @@
 		<if test = "minPrice !=null and minPrice !=''">
 		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
+		AND b.bdel=1
 		</where>
-	AND b.bdel=1
 	GROUP BY b.bno
-	ORDER BY b.bno desc
+<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
 	LIMIT #{nextPageLimitI}, #{limitI}
 </select>
-<!-- 
-<select id="listf" parameterType="Map" resultType="Map">
-	
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
-	FROM board b
-		
-	LEFT JOIN image i ON b.bno = i.bno
-	LEFT JOIN cate c ON b.cate = c.cate
-	<where>
-		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
-		</if>
-		<if test="areaArray != null and areaArray != ''"> 
-		 b.cate IN (#{areaArray})
-		</if>
-		</where>
-	AND b.bdel=1
-	GROUP BY b.bno
-	ORDER BY b.bno desc
-	LIMIT 0, 10
-	
-
-</select> -->
 
 <insert id="adr" parameterType="Map" >
 	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)

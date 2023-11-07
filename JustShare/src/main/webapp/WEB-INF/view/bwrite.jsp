@@ -210,8 +210,8 @@ $(function(){
         	
         }
 
-		if(title === "" || title.length < 3 || title.length > 100){
-			 $("#resultMSG").text("제목은 3글자 이상, 100글자 이하이어야 합니다.");
+		if(title === "" || title.length < 3 || title.length > 31){
+			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
              $("#resultMSG").css("font-weight", "bold");
              $("#resultMSG").css("font-size", "10pt");
 			return false;

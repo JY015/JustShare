@@ -36,13 +36,13 @@ public class BoardController {
 			@RequestParam(name = "areas", required = false) String areas,
 			@RequestParam(name = "categories", required = false) String categories,
 			@RequestParam(name = "equipments", required = false) String equipments, HttpSession session) {
-		
-		
+	
+		map.put("sid", session.getAttribute("mid"));
 		map.put("areas", areas);
 		map.put("categories", categories);
 		map.put("equipments", equipments);
 		
-
+		// 리스트 총개수 뽑기 
 		int listNum = boardService.listNum(map);
 
 		// 지역구 / 시설 / 카테고리 전부 꺼내기 << 모달로 띄울 필터창에 보여줄 목록을 가져오기 위해서
@@ -74,18 +74,18 @@ public class BoardController {
 	// 인피니트 페이지 두번째 페이지 부터 계속 ajax로 생성해서 붙이기
 	@ResponseBody
 	@PostMapping("/board")
-	public String boardp(@RequestParam Map<String, Object> map) {
-
+	public String boardp(@RequestParam Map<String, Object> map,HttpSession session) {
+		System.out.println(map);
 		// 전체 글 숫자 + 검색
 		int listNum = boardService.listNum(map);
 
 		// map 에서 꺼내서 형 변환
 		int limitI = Integer.parseInt(map.get("limit").toString());
 		int nextPageLimitI = Integer.parseInt(map.get("nextPageLimit").toString());
-
+		
 		map.put("limitI", limitI);
 		map.put("nextPageLimitI", nextPageLimitI);
-		
+		map.put("sid", session.getAttribute("mid"));
 
 		// 최대보다 많으면 더이상 뽑지 않으면
 		if (nextPageLimitI < (listNum + 10)) {
@@ -331,6 +331,9 @@ public class BoardController {
 			List<Map<String, Object>> reportCateList = boardService.reportCateList();
 			// 신고하는 사람 넣기 
 			map.put("rmid", session.getAttribute("mid"));
+			// 중복 신고 확인하기 
+			int dp = boardService.dp(map);
+			map.put("dp",dp);
 			model.addAttribute("reportCateList",reportCateList);
 			model.addAttribute("map", map);
 			return "report";
@@ -367,6 +370,7 @@ public class BoardController {
 	  @PostMapping("/like") 
 	  public  ResponseEntity<String> like(@RequestParam Map<String, Object> map) {
 		 // 좋아요가 찍혀있으면 삭제/ 없으면 추가 
+		 // 작성 글이 본인 글이라면 좋아요 할 수 없게 ? 걸어야하나 말아야하나 ?
 		  String likes = String.valueOf(map.get("likes"));
 		  if(likes.equalsIgnoreCase("off")) {
 			  boardService.deleteLike(map);

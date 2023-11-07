@@ -26,7 +26,13 @@ img {
     bottom: 20px;
     right: 40px;
     z-index: 998;
+    }
+.selectBoxList button {
+    display: block;
+    width: 5%;
+    margin-bottom: 10px; /* 버튼 간의 간격을 조절할 수 있는 마진 값을 설정합니다. */
 }
+
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -46,7 +52,19 @@ img {
 	<!-- 필터 버튼 -->
 	<button type="button" id="myBtn">필터</button>
 	<!-- 필터 버튼 -->
-
+	<!-- 분류버튼 -->
+	<div class="selectBox">
+	<button type="button" id="selectBtn" class="selectBtn">여기가 sort값에 따라 변해야함 + 이미지  이거누르면 리스트가 보이게 </button>
+	<div class="selectBoxList">
+		<button type="button" class="sort1">최신</button>
+		<button type="button" class="sort2">좋아요</button>
+		<button type="button" class="sort3">조회수</button>
+		<button type="button" class="sort4">낮은 가격</button>
+		<button type="button" class="sort5">높은 가격</button>
+	</div>
+	</div>
+	<!-- 분류버튼 -->
+	
 	<!--   검색창  -->
 
 	<form action="./board" method="get" class="search"  id="searchForm">
@@ -56,6 +74,7 @@ img {
 		<input type="hidden" name="equipments" value="${param.equipments }">
 		<input type="hidden" name="minPrice" value="${param.minPrice }">
 		<input type="hidden" name="maxPrice" value="${param.maxPrice }">
+		<input type="hidden" name="sort" value="${param.sort }">
 		<button type="submit" class="buttonf btn btn-border-d btn-round">검색</button>
     	<button type="button" class="buttonf btn btn-border-d btn-round" id="resetButton">검색 초기화</button>
 	</form>
@@ -78,6 +97,18 @@ img {
 			<c:forEach items="${list}" var="row">
 				<tr class="row detail"  data-bno="${row.bno}">
 					<td class="col-4"><img src="/img/places/${row.realFile}">
+						<div class="inf2">  
+       					<c:choose>
+						<c:when test="${row.isLiked eq 1  }">     
+						<span><i class="fas fa-heart" style='color:red'></i> 찜 </span>
+						</c:when>
+						<c:otherwise>
+						<span><i class="far fa-heart" ></i> 찜 </span>
+						</c:otherwise>
+						</c:choose>  	
+						<span class="likes_count" data-count=${row.likesCount } >${row.likesCount }</span>
+        				</div>
+					
 					&nbsp;</td>
 					<td class="col-2" onclick="location.href='./bdetail?bno=${row.bno}'">${row.btitle }&nbsp;</td>
 					<td class="col-2 bb">${row.bdate }</td>
@@ -85,7 +116,6 @@ img {
 					<td class="col-1 bb">${row.bprice }</td>
 					<td class="col-1 bb">${row.cname }</td>
 					<td class="col-1 bb">${row.bread }</td>
-
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -126,7 +156,7 @@ img {
 								<!--Content-->
 								<h1>지역</h1>
 								<c:forEach items="${areaList }" var="n">
-									<input type="checkbox" name="area" value="${n.ano }" data-aname="${n.aname}"> ${n.aname } 
+									<input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano }" data-aname="${n.aname}"> ${n.aname } 
             					</c:forEach>
 							</div>
 
@@ -134,7 +164,7 @@ img {
 								<!--Content-->
 								<h1>공간 유형</h1>
 								<c:forEach items="${catelist }" var="n" >
-									<input type="checkbox" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }
+									<input type="checkbox" id="cate_${n.cate }" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }
 								</c:forEach>
 							</div>
 
@@ -154,7 +184,7 @@ img {
 								<!--Content-->
 								<h1>시설물</h1>
 								<c:forEach items="${equiplist }" var="n">
-									<input type="checkbox" name="equipment" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }
+									<input type="checkbox" name="equipment" id="equip_${n.eid }" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }
 								</c:forEach>
 							</div>
 					
@@ -183,7 +213,7 @@ img {
 		let noMoreData = false; 
 
 		//데이터 가져오는 함수
-		function getData(limit, searchV, areas, categories, equipments, minPrice,maxPrice) {
+		function getData(limit, searchV, areas, categories, equipments, minPrice,maxPrice,sort) {
 			 if (noMoreData) {
 			        console.log("No more data available.");
 			        return; // 더 이상 데이터를 받아오지 않도록 함수 종료
@@ -206,49 +236,35 @@ img {
 							"categories" : categories,
 							"equipments" : equipments,
 							"minPrice" : minPrice,
-							"maxPrice" : maxPrice
+							"maxPrice" : maxPrice,
+							"sort":sort
 						},
-						success : function(data) {
-							// 성공적으로 응답을 받았을 때 처리
-							if (data && data.length > 0) {
-								// 테이블 내용 생성
-								var desiredOrder = [ 'realFile', 'btitle',
-										'bno', 'bprice', 'bcontent', 'bdate',
-										'cate', 'bread', 'addr', 'mid', 'cname'];
-								data
-										.forEach(function(item) {
-											var newRow = "<tr class='row detail'>";
-											desiredOrder
-													.forEach(function(prop) {
-														if (prop === 'realFile') {
-															// 'realFile' 속성일 경우 이미지로 표시
-															newRow += "<td class='col-4'><div class='imgBox'><img src='/img/places/" + item[prop] + "' alt='Image' style='width: 150px; height: 150px;'><div class='inf2'></div></div></td>";
-														} else if(prop =='btitle'){newRow += "<td >"
-															+ item[prop]
-														+ "</td>";
-															
-														}else {
-															// 다른 속성은 텍스트로 표시
-															newRow += "<td onclick=\"location.href='./bdetail?bno="
-																+ item.bno + "'\">"
-																	+ item[prop]
-																	+ "</td>";
-														}
-													});
-											newRow += "</tr>";
+						success: function(data) {
+						    if (data && data.length > 0) {
+						        data.forEach(function(item) {
+						            var newRow = "<tr class='row detail' data-bno=" + item.bno + ">";
+						            var isLikedIcon = item.isLiked === 1 ? "<i class='fas fa-heart' style='color:red'></i>" : "<i class='far fa-heart'></i>";
+						            newRow += "<td class='col-4'><img src='/img/places/" + item.realFile + "' alt='Image' style='width: 150px; height: 150px;'><div class='inf2'><span>" + isLikedIcon + " 찜</span><span class='likes_count' data-count=" + item.likesCount + ">" + item.likesCount + "</span></div></td>";
+						            newRow += "<td>" + item.btitle + "</td>";
+						            newRow += "<td onclick=\"location.href='./bdetail?bno=" + item.bno + "'\">" + item.bno + "</td>";
+						            newRow += "<td>" + item.bprice + "</td>";
+						            newRow += "<td>" + item.bcontent + "</td>";
+						            newRow += "<td>" + item.bdate + "</td>";
+						            newRow += "<td>" + item.cate + "</td>";
+						            newRow += "<td>" + item.bread + "</td>";
+						            newRow += "<td>" + item.addr + "</td>";
+						            newRow += "<td>" + item.mid + "</td>";
+						            newRow += "<td>" + item.cname + "</td>";
+						            newRow += "</tr>";
 
-											// 테이블의 tbody에 새로운 행 추가	
-											$("#tableContainer tbody").append(
-													newRow);
-										});
-
-								
-								} else {
-									 // 더 이상의 데이터가 없음을 나타내는 메시지 출력
-					                console.log("No more data available.");
-					                noMoreData = true; // 데이터를 더 이상 받아오지 않음을 나타내는 변수를 true로 설정
-							}
-
+						            // 테이블의 tbody에 새로운 행 추가
+						            $("#tableContainer tbody").append(newRow);
+						        });
+						    } else {
+						        // 더 이상의 데이터가 없음을 나타내는 메시지 출력
+						        console.log("No more data available.");
+						        noMoreData = true; // 데이터를 더 이상 받아오지 않음을 나타내는 변수를 true로 설정
+						    }
 						},
 						error : function(xhr, status, error) {
 							// 에러 발생 시 처리
@@ -292,7 +308,8 @@ img {
 											"${param.categories}",
 											"${param.equipments}",
 											"${param.minPrice}",
-											"${param.maxPrice}");
+											"${param.maxPrice}",
+											"${param.sort}");
     								}
 								}
 							}
@@ -308,6 +325,16 @@ img {
 	<script type="text/javascript">
 		/* 모달 내 선택 옵션을 찍어주는 스크립트 + 가격  슬라이더  */
 		jQuery(document).ready(function($) {
+			// sort 값 미리 찍기 
+				
+			    var sort = parseInt("${param.sort}");
+
+   				 if (isNaN(sort)) {
+        			sort = 1; // 정수로 변환할 수 없는 경우 기본값 1로 설정
+    			}
+
+   				 // 이후에 sort 변수를 사용하여 필요한 작업을 수행할 수 있습니다.
+   				 
 				/* 모달 열기 스크립트 */ 
 				$("#myBtn").on("click", function() {
 				$("#test_modal").modal("show");
@@ -329,45 +356,8 @@ img {
 					$(activeTab).fadeIn(); 
 					return false;
 				});
-				/* 모달에서 선택한 옵션을 보내 주는  스크립트 */
 				
-				$("#applyButton").on("click",function() {
-							// 선택한 값들을 수집
-							var selectedAreas = $("input[name='area']:checked")
-									.map(function() {
-										return $(this).val();
-									}).get();
-
-							var selectedCategories = $(
-									"input[name='category']:checked").map(
-									function() {
-										return $(this).val();
-									}).get();
-
-							var selectedEquipments = $(
-									"input[name='equipment']:checked").map(
-									function() {
-										return $(this).val();
-									}).get();
-							
-						    var minPrice = ($("#min-price").val() * 10000);
-						    var maxPrice = ($("#max-price").val() * 10000);
-						    
-							// 선택한 값들을 URL 파라미터로 추가
-							var queryString = "?searchV=${param.searchV}"
-									+ "&areas=" + selectedAreas.join(",")
-									+ "&categories="
-									+ selectedCategories.join(",")
-									+ "&equipments="
-									+ selectedEquipments.join(",")
-									+ "&minPrice=" + minPrice
-					        		+ "&maxPrice=" + maxPrice;
-									
-							// 현재 페이지 URL에 파라미터를 추가한 뒤 리다이렉트
-							window.location.href = window.location.pathname
-									+ queryString;
-						});
-				
+			
 			
 				/* 가격 슬라이더 관련 스크립트 */
 				 $("#price-slider").slider({
@@ -444,39 +434,80 @@ img {
 					
 			    var selectedOptions = [];
 			    const iconHtml = '<i class="fa-solid fa-xmark"></i>';
+				
+			    
+				/* 모달에서 파라미터로 옵션을 보내 주는  스크립트 */
+				
+				
+				
+				var areaParam = "${param.areas}";
+				var categoryParam = "${param.categories}"; // 예시: 서버에서 받은 카테고리 파라미터 값
+				var minPriceParam = ("${param.minPrice}"/10000); // 예시: 서버에서 받은 최소 가격 파라미터 값
+				var maxPriceParam = ("${param.maxPrice}"/10000); // 예시: 서버에서 받은 최대 가격 파라미터 값
+				var equipmentParam = "${param.equipments}"; // 예시: 서버에서 받은 시설물 파라미터 값
+				
+				// 지역 체크박스 설정
+				$("input[name='area']").each(function() {
+				    var areaValue = $(this).val();
+				    if (areaParam.includes(areaValue)) {
+				        $(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
+				    }
+				});
+				// 카테고리 체크박스 설정
+				$("input[name='category']").each(function() {
+   					 var categoryValue = $(this).val();
+    				if (categoryParam.includes(categoryValue)) {
+        			$(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
+   					 }
+				});
 
+					// 가격 슬라이더 및 입력 필드 설정
+				$("#min-price").val(minPriceParam);
+				$("#max-price").val(maxPriceParam);
+				$("#price-slider").slider("values", [minPriceParam, maxPriceParam]);
+
+					// 시설물 체크박스 설정
+				$("input[name='equipment']").each(function() {
+    			var equipmentValue = $(this).val();
+    			if (equipmentParam.includes(equipmentValue)) {
+        		$(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
+    			}
+			});
+			    
+			    
+			    
 			    // 각 탭에서 선택된 값들을 가져와서 selectedOptions 배열에 저장하는 함수
 			    function updateSelectedOptions() {
-			        selectedOptions = [];
+			        
+			    	selectedOptions = [];
+			  
 
 			        $("input[name='area']:checked").each(function() {
-			            var aname = $(this).data("aname");
+			        	var ano = $(this).val(); 
+			        	var aname = $(this).data("aname");
 			            var optionValue = "area:" + aname;
-			            selectedOptions.push("<span data-option-value='" + optionValue + "'>" + aname + iconHtml + "</span>");
+			            selectedOptions.push("<span data-option-value='area_" + ano + "'>" + aname + iconHtml + "</span>");
 			            
 			        });
 
 			        $("input[name='category']:checked").each(function() {
-			            var cname = $(this).data("cname");
+			        	var cno = $(this).val(); 
+			        	var cname = $(this).data("cname");
 			            var optionValue = "category:" + cname;
-			            selectedOptions.push("<span data-option-value='" + optionValue + "'>" + cname + iconHtml + "</span>");
+			            selectedOptions.push("<span data-option-value='cate_" + cno + "'>" + cname + iconHtml + "</span>");
 			            
 			        });
 
 			        var minPrice = $("#min-price").val();
 			        var maxPrice = $("#max-price").val();
 
-			        // 가격이 선택되지 않은 경우에도 표시하기 위해 조건문 추가
-			        if (minPrice || maxPrice) {
-			        	var optionValue = "price:" + minPrice + "-" + maxPrice;
-			        	selectedOptions.push("<span data-option-value='" + optionValue + "'>" + minPrice + "만원 ~ " + maxPrice + "만원" + iconHtml + "</span>");
-			            
-			        }
+			       
 
 			        $("input[name='equipment']:checked").each(function() {
-			            var ename = $(this).data("ename");
+			        	var eno = $(this).val(); 
+			        	var ename = $(this).data("ename");
 			            var optionValue = "equipment:" + ename;
-			            selectedOptions.push("<span data-option-value='" + optionValue + "'>" + ename + iconHtml + "</span>");
+			            selectedOptions.push("<span data-option-value='equip_" + eno + "'>" + ename + iconHtml + "</span>");
 			           
 			        });
 
@@ -510,30 +541,142 @@ img {
 			        updateSelectedOptions();
 			    });
 			    
-			  /*  여기 고장남 지금 해당 마크를 클릭해도 지워지지 않음 주의주의주의   1103 1750
-			     */
-			    
+			 // 삭제 시 처리
 			    $(document).on("click", "#test_modal .fa-xmark", function(event) {
 			        event.stopPropagation();
 			        var optionValue = $(this).closest('span').data("option-value");
-			        console.log("Clicked option value: " + optionValue); // 클릭한 옵션과 관련된 데이터
 
-			        // 배열에서 해당 값이 존재하는지 확인
+			        // prefix 추출
+			        var prefix = optionValue.split(":")[0];
+			        // minPrice 또는 maxPrice 삭제 처리
+			        if (prefix === "price") {
+			        	$("#price-slider").slider("values", [0, 100]);
+			        	 $("#min-price").val(0);
+			             $("#max-price").val(100);
+			        	
+			        } else {
+			            // 기타 옵션 삭제 처리
+			            var inputId = optionValue.replace(prefix + "_", '');
+			            var correspondingInput = $("#" + inputId);
+
+			            // 체크된 <input> 요소를 찾아 체크 해제
+			            correspondingInput.prop("checked", false);
+			        }
+
+			        // 해당 값이 존재하는지 확인하고 제거
 			        var optionIndex = selectedOptions.findIndex(function(item) {
 			            return $(item).data("option-value") === optionValue;
 			        });
-			        console.log("Option index: " + optionIndex);
 
-			        // 선택된 옵션 업데이트 및 해당 값이 존재할 경우 제거
 			        if (optionIndex !== -1) {
 			            selectedOptions.splice(optionIndex, 1);
 			            updateSelectedOptions();
-
-			            // 클릭한 아이콘과 연결된 특정 <span> 요소를 화면에서 제거
-			            $(this).closest('span').remove();
 			        }
-			    });
 
+			        // data("option-value") 값과 일치하는 <span> 요소 제거
+			        $("#footer").find("span[data-option-value='" + optionValue + "']").remove();
+			    });
+			  
+				
+				$("#applyButton").on("click",function() {
+							// 선택한 값들을 수집
+							var selectedAreas = $("input[name='area']:checked")
+									.map(function() {
+										return $(this).val();
+									}).get();
+							
+							var selectedCategories = $(
+									"input[name='category']:checked").map(
+									function() {
+										return $(this).val();
+									}).get();
+
+							var selectedEquipments = $(
+									"input[name='equipment']:checked").map(
+									function() {
+										return $(this).val();
+									}).get();
+							
+						    var minPrice = ($("#min-price").val() * 10000);
+						    var maxPrice = ($("#max-price").val() * 10000);
+						    
+						    
+							// 선택한 값들을 URL 파라미터로 추가
+							var queryString = "?searchV=${param.searchV}"
+									+ "&areas=" + selectedAreas.join(",")
+									+ "&categories="
+									+ selectedCategories.join(",")
+									+ "&equipments="
+									+ selectedEquipments.join(",")
+									+ "&minPrice=" + minPrice
+					        		+ "&maxPrice=" + maxPrice
+									+ "&sort="+sort;
+							// 현재 페이지 URL에 파라미터를 추가한 뒤 리다이렉트
+							window.location.href = window.location.pathname
+									+ queryString;
+						});
+									
+							// 파라미터로 추가된 옵션들도 footer 에 찍어주기 
+							// 파라미터로 받아온 옵션 값들을 이용하여 span 태그를 생성하고 #footer에 추가하는 함수
+							function addOptionsToFooter() {
+							    var areaParam = "${param.areas}";
+							    var categoryParam = "${param.categories}";
+							    var equipmentParam = "${param.equipments}";
+							    var minPriceParam = parseInt("${param.minPrice}")/10000;
+							    var maxPriceParam = parseInt("${param.maxPrice}")/10000;
+
+							    // 지역 옵션 추가
+							    if (areaParam) {
+							        var selectedAreas = areaParam.split(",");
+							        selectedAreas.forEach(function(area) {
+							            var areaElement = $("#area_" + area);
+							            if (areaElement.length > 0) {
+							                var areaName = areaElement.data("aname"); // 해당 지역의 이름을 가져옴
+							                $("#footer").append("<span data-option-value='area_" + area + "'>" + areaName + iconHtml + "</span>");
+							            }
+							        });
+							    }
+
+							    // 카테고리 옵션 추가
+							    if (categoryParam) {
+							        var selectedCategories = categoryParam.split(",");
+							        selectedCategories.forEach(function(category) {
+							            var categoryElement = $("#cate_" + category);
+							            if (categoryElement.length > 0) {
+							                var categoryName = categoryElement.data("cname"); // 해당 카테고리의 이름을 가져옴
+							                $("#footer").append("<span data-option-value='cate_" + category + "'>" + categoryName + iconHtml + "</span>");
+							            }
+							        });
+							    }
+
+							    // 시설물 옵션 추가
+							    if (equipmentParam) {
+							        var selectedEquipments = equipmentParam.split(",");
+							        selectedEquipments.forEach(function(equipment) {
+							            var equipmentElement = $("#equip_" + equipment);
+							            if (equipmentElement.length > 0) {
+							                var equipmentName = equipmentElement.data("ename"); // 해당 시설물의 이름을 가져옴
+							                $("#footer").append("<span data-option-value='equip_" + equipment + "'>" + equipmentName + iconHtml + "</span>");
+							            }
+							        });
+							    }
+							    if (!isNaN(minPriceParam) && !isNaN(maxPriceParam) && (minPriceParam !== 0 && maxPriceParam !== 1000000)) {
+							        var priceOption = "price:" + minPriceParam + "-" + maxPriceParam;
+							        $("#footer").append("<span data-option-value='" + priceOption + "'>" + minPriceParam + "만원 ~ " + maxPriceParam + "만원" + iconHtml + "</span>");
+							    }else{
+							    	   $("#min-price").val(0);
+								       $("#max-price").val(100);
+								       $("#price-slider").slider("values", [0, 100]);
+							    }
+							    
+							}
+
+							// 페이지 로드 시 실행하여 파라미터로 받아온 옵션들을 #footer에 추가
+							$(document).ready(function() {
+							    addOptionsToFooter();
+							});
+			  
+			  
 			}); 
 	 
 </script>
@@ -576,6 +719,108 @@ $("#writeButton").click(function() {
 
     location.href = '/bwrite'; // 이동할 페이지의 URL로 수정하세요.
 });
+
+// 나열 버튼 
+
+
+$(document).ready(function() {
+    // 초기에는 selectBoxList를 숨김
+    $(".selectBoxList").hide();
+
+    // selectBtn을 클릭했을 때 이벤트 핸들러 등록
+    $("#selectBtn").click(function() {
+        // selectBoxList의 현재 상태를 확인하여 보이기/숨기기 토글
+        $(".selectBoxList").toggle();
+    });
+    
+    
+
+// 버튼 클릭 이벤트 처리   분류순
+    function sortBoardPage(sortValue) {
+        var queryParams = {
+            searchV: "${param.searchV}",
+            areas: "${param.areas}",
+            categories: "${param.categories}",
+            equipments: "${param.equipments}",
+            minPrice: "${param.minPrice}",
+            maxPrice: "${param.maxPrice}",
+            sort: sortValue
+        };
+
+        var queryString = $.param(queryParams);
+        location.href = "/board?" + queryString;
+    }
+
+    $(".sort1").click(function() {
+    	sortBoardPage(1);
+    });
+
+    $(".sort2").click(function() {
+    	sortBoardPage(2);
+    });
+
+    $(".sort3").click(function() {
+    	sortBoardPage(3);
+    });
+
+    $(".sort4").click(function() {
+    	sortBoardPage(4);
+    });
+
+    $(".sort5").click(function() {
+    	sortBoardPage(5);
+    });
+
+  	// 좋아요 보드에서 찍기 
+    
+    $(document).on("click", ".inf2 i", function() {
+        const mid = "${sessionScope.mid}";
+        // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+        if (!mid) {
+            alert("로그인이 필요합니다.");
+            return;
+        }
+
+        const bno = $(this).closest(".row").data("bno");
+        const isLiked = $(this).hasClass("fas");
+        const $likesCountElement = $(this).closest(".row").find(".likes_count");
+
+        const data = {
+            mid: mid,
+            likes: isLiked ? "off" : "on",
+            bno: bno
+        };
+
+        // $(this)를 저장한 변수 사용
+        const $icon = $(this);
+
+        $.ajax({
+            url: "/like",
+            type: "POST",
+            data: data
+        })
+        .done(function(result){
+            console.log(result.body);
+            let likesCount = $likesCountElement.data("count");
+
+            if (isLiked) {
+                $icon.removeClass("fas").addClass("far");
+                $likesCountElement.text(likesCount - 1);
+                $likesCountElement.data("count", likesCount - 1);
+            } else {
+                $icon.removeClass("far").addClass("fas");
+                $likesCountElement.text(likesCount + 1);
+                $likesCountElement.data("count", likesCount + 1);
+            }
+        })
+        .fail(function(error){
+            alert(error.responseText);
+        });
+    });
+    
+});
+
+
 </script>
 
 
