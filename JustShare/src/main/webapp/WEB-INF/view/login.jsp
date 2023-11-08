@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,20 +26,8 @@
 <link rel="stylesheet" href="./css/login.css">
 <script src="./js/jquery-3.7.0.min.js"></script>
 </head>
-<body>
-<div style="text-align:center;">
-<img alt="login" src="./img/JustShare.png">
-<div class="login-form">
-		<form action="./login" method="post">
-			<input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br>
-			<input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br>
-			<button type="submit">로그인</button><br><br>
-			</form>
-	</div>
-	<a href="./findId">아이디 찾기 ㅣ</a>
-	<a href="./findPw">비밀번호 찾기 ㅣ</a>
-	<a href="./join">회원가입 </a>
-</div>
+
+
 
 
    <link rel="stylesheet" href="/css/main_page.css" />
@@ -92,10 +79,10 @@ var _ss_user_id   = "";
       <div class="header__inner">
         <div class="header__first_row">
            <div class="sign-area">
-         <a href="/login">로그인</a>
+         <a href="./login">로그인</a>
          <div class="half-line"></div> 
             <!--a href="/member/register">회원가입</a-->
-         <a href="/member/register_type">회원가입</a>
+         <a href="./join">회원가입</a>
             
          <div class="half-line"></div>
             <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>
@@ -109,7 +96,7 @@ var _ss_user_id   = "";
         <div class="header__second_row"> 
          <div class="left-side">   
             <div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./main2'">
+            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./'">
          </div>
         <div class="right-side">
             <div class="sign-group">
@@ -126,7 +113,7 @@ var _ss_user_id   = "";
          <div class="first_row">
            <div class="left-side">
             <div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./main2'">
+            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./'">
            </div>
          </div>
 
