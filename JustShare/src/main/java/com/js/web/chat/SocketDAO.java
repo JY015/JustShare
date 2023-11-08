@@ -110,10 +110,26 @@ public interface SocketDAO {
 
 
 
-	int tradechkup(Map<String, Object> map);
 
 
 
-	;
+
+	int toIdbnochk(Map<String, Object> map);
+
+
+
+	int fromup(Map<String, Object> map);
+
+
+
+	int toup(Map<String, Object> map);
+
+
+
+	int bnochk(Map<String, Object> map);
+
+
+
+	
 
 }

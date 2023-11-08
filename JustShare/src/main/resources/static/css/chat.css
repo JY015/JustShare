@@ -235,7 +235,7 @@ body,html{
 		color: white;
 		border-radius: 15px;
 		top: 30px;
-		right: 15px;
+		right: 24px;
 		display: none;
 	}
 	.action_menu ul{
@@ -379,7 +379,7 @@ body,html{
 
 .msgboard{
 	
-margin-top:10px;
+margin-top:12px;
 color: white;
 border-radius:15px;
 width: 350.76px;
@@ -393,12 +393,18 @@ width: 350.76px;
 }
 .boardtitle{
 	
-	margin-left: 10px;
-	font-size:18px;
+	
+	font-size:14px;
 	height: 60px;
-	overflow: hidden;
+
 	width: 230px;
 	float: right;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	max-width: 230px;
+	  text-overflow: ellipsis;
 }
 .msgdetail{
 	height: 40px; 
@@ -412,6 +418,7 @@ width: 350.76px;
 	background-color: #1E90FF;
 	color: white;
 	font-weight: bold;
+	border: none;
 }
 .review{
 	width:170px;
@@ -426,3 +433,24 @@ width: 350.76px;
 	
 }
 
+
+.trading {
+	
+	width:170px;
+	height: 35px;
+	border-radius:5px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	background-color: #ff791e;
+}
+
+.traded {
+	width:170px;
+	height: 35px;
+	border-radius:5px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	background-color: #ff1e1e;
+}

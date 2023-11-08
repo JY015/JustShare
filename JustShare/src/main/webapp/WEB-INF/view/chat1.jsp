@@ -182,6 +182,7 @@
  	}
  		*/
  	function serchidutil1(toId,mid,bno) {
+ 			
  	
 		$.ajax({
             type: "GET",
@@ -615,6 +616,10 @@ function sendMessage() {
           var formattedTime = getCurrentTimeFormatted();
           //var myimg = document.getElementById('myimg').src;
           
+          var bnoid = document.querySelector(".boarddetail");
+		var bno = bnoid.getAttribute("data-bno");
+		
+          
         	imgserch(mid, function(result) {
   				img= result;
   				
@@ -640,7 +645,8 @@ function sendMessage() {
   	        		  	"mid" : mid,
   	        		  	"toId" : toId,
   	        		  	"text" : message,
-  	        		  	"time":formattedTime
+  	        		  	"time":formattedTime,
+  	        		  	"bno":bno
   	        		
   	        		  	
   	        		 
@@ -837,8 +843,8 @@ function sendMessage() {
         		
         		
 				var bnoid = document.querySelector(".toId");
-				
 				var bno = bnoid.getAttribute("data-bno");
+				
         		var toId = clickedElement.querySelector(".toId").textContent;
         		  
         		var mid = sessionStorage.getItem("mid"); 
@@ -853,6 +859,7 @@ function sendMessage() {
         		       "toId":toId,
         		       "mid":mid,
         		       "readmsg":0
+        		      
         		       
         		       }
         		        
@@ -1107,7 +1114,8 @@ function sendMessage() {
 		var tradeclass;
 		var to_user_chk;
 		var from_user_chk;
-		
+	
+
 		 $.ajax({
              type: "GET",
              url: "./tradechk", 
@@ -1173,47 +1181,147 @@ function sendMessage() {
 		var bno = bnoid.getAttribute("data-bno");
 		
 		
-		alert(mid+toId+bno);
+		//alert(mid+toId+bno);
 		//## 여기서 조건식으로 2일경우 클릭 안하게 문제는 또 ajax?
-		if(fromchk==1 && tochk==1 ) {
-			
-		
-		}else {
-			
-	
-		
-		 $.ajax({
-             type: "GET",
-             url: "./tradechkup", 
-             data: {
-             	
-             	"mid" : mid,
-             	"toId": toId,
-             	"bno" : bno
-           
-             
-             	},
-            	
-             success: function(data) {
-             	
-          
-             //var jsonData = JSON.parse(data); 
-             //var json= jsonData.result;
+			toIdbnochk(mid,toId,bno, function(json) {	
 
-			  $("#msgload").remove();
-             serchidutil1(toId,mid,bno);
-            
-            
+				if(json ==1) {
+					
+					//to가to,다 내가 from임
+					
+					if(fromchk==1 && tochk==1 ) {
+						
+						//거래완료상태 아무동작하지않음
+						}else if (fromchk==1 && tochk==0) {
+						userchk.setAttribute('data-fromuserchk',0);
+						fromup(mid,toId,bno);
+					} else if (fromchk==0 && tochk==1){
+						userchk.setAttribute('data-fromuserchk',1);
+						fromup(mid,toId,bno);
+					} else if (fromchk==0 && tochk==0) {
+						userchk.setAttribute('data-fromuserchk',1);
+						fromup(mid,toId,bno);
+						
+					}
+					
+				} else {
+					
+						if(fromchk==1 && tochk==1 ) {
+						
+						//거래완료상태 아무동작하지않음
+						}else if (fromchk==1 && tochk==0) {
+						userchk.setAttribute('data-touserchk',1);
+						toup(mid,toId,bno);
+					} else if (fromchk==0 && tochk==1){
+						userchk.setAttribute('data-touserchk',0);
+						toup(mid,toId,bno);
+					} else if (fromchk==0 && tochk==0) {
+						userchk.setAttribute('data-touserchk',1);
+						toup(mid,toId,bno);
+						
+					}
+					
+					
+					
+					//from이다
+				}
+		
+			
+	});
+	});
+        
+	function toIdbnochk(mid,toId,bno,callback){ 
+		 $.ajax({
+           type: "GET",
+           url: "./toIdbnochk", 
+           data: {
+           	
+           	"mid" : mid,
+           	"toId": toId,
+           	"bno" : bno
+         
+           
+           	},
+          	
+           success: function(data) {
+           	
+        
+           var jsonData = JSON.parse(data); 
+           var json= jsonData.result;
+           
+           callback(json); 
+          
 		  },
 		  error: function() {
- 		
- 	}
-     
-});
 		
-		}
-	});
-        	
+	}
+   
+});
+	}
+	
+	 //to to 버전 내가from
+	function fromup(mid,toId,bno){ 
+		 $.ajax({
+            type: "GET",
+            url: "./fromup", 
+            data: {
+            	
+            	"mid" : mid,
+            	"toId": toId,
+            	"bno" : bno
+          
+            
+            	},
+           	
+            success: function(data) {
+            	
+         
+            //var jsonData = JSON.parse(data); 
+            //var json= jsonData.result;
+
+			  $("#msgload").remove();
+            serchidutil1(toId,mid,bno);
+           
+           
+		  },
+		  error: function() {
+		
+	}
+    
+});
+	}
+	 
+	 //to from버전내가to임
+	function toup(mid,toId,bno){ 
+		 $.ajax({
+           type: "GET",
+           url: "./toup", 
+           data: {
+           	
+           	"mid" : mid,
+           	"toId": toId,
+           	"bno" : bno
+         
+           
+           	},
+          	
+           success: function(data) {
+           	
+        
+           //var jsonData = JSON.parse(data); 
+           //var json= jsonData.result;
+
+			  $("#msgload").remove();
+           serchidutil1(toId,mid,bno);
+          
+          
+		  },
+		  error: function() {
+		
+	}
+   
+});
+	}
         	
         	//## 4. DB자료로 이전 대화창 생성 함수 ##
         	function msgload(msg) {
