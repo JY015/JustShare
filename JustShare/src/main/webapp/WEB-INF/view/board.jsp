@@ -78,6 +78,21 @@
 .modal-body{
 	text-align: center;
 }
+.AreaGroupContainer {
+    float: left; /* 왼쪽으로 부유(floating)시킴 */
+    width: 30%; /* 부모 요소의 50% 너비를 차지하도록 설정 */
+   
+}
+
+.Citycontainer {
+    float: right; /* 오른쪽으로 부유(floating)시킴 */
+    width: 70%; /* 부모 요소의 50% 너비를 차지하도록 설정 */
+}
+
+.AreaGroupContainer button {
+    display: block; /* 블록 레벨 요소로 변경하여 세로 배치 */
+    margin-bottom: 10px; /* 각 버튼 사이에 10px의 여백 추가 */
+}
 </style>
  
 </head>
@@ -236,9 +251,19 @@
 							<div id="tab1" class="tab_content">
 								<!--Content-->
 								<h1>지역</h1>
-								<c:forEach items="${areaList }" var="n">
+								<div class="AreasContainer">
+								<div class="AreaGroupContainer">
+								<c:forEach items="${regionList }" var="r">
+								<button type="button" class="regionButton ${r.rno }">${r.rname }</button>
+								</c:forEach>
+								</div>
+								<div class="Citycontainer">
+									<c:forEach items="${areaList }" var="n">
 									<input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano }" data-aname="${n.aname}"> ${n.aname } 
             					</c:forEach>
+								</div>
+								</div>
+								
 							</div>
 
 							<div id="tab2" class="tab_content">
@@ -442,6 +467,27 @@
 					$(activeTab).fadeIn(); 
 					return false;
 				});
+				
+		        $(".regionButton").on("click", function() {
+		            console.log("클릭했습니다");
+		        	// 선택된 버튼의 클래스를 가져옴
+		            var selectedClass = $(this).attr("class").split(' ')[1];
+		            console.log(selectedClass);
+		            // Citycontainer 내용을 선택된 클래스에 따라 변경
+		            switch (selectedClass) {
+		                case "1":
+		                	 $(".Citycontainer").html("내용5");
+		                case "2":
+		                    // class2에 해당하는 내용으로 변경
+		                    $(".Citycontainer").html("내용2");
+		                    break;
+		                // 추가적인 클래스에 대한 경우도 처리할 수 있음
+		                // ...
+		                default:
+		                    // 기본적으로 표시할 내용
+		                    $(".Citycontainer").html("기본 내용");
+		            }
+		        });
 				
 			
 			

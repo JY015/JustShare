@@ -64,6 +64,8 @@ public interface BoardDAO {
 
 	List<Integer> isLikeList(Map<String, Object> map);
 
+	List<Map<String, Object>> regionList();
+
 
 	
 }

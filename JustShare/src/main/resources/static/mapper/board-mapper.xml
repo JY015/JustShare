@@ -73,9 +73,13 @@
 </select>
 
 <select id="areaList" parameterType="Map" resultType="Map">
-	SELECT ano,aname
+	SELECT ano,aname,rno
 	FROM area
 	
+</select>
+<select id="regionList">
+	SELECT rno,rname
+	FROM region
 </select>
 
 <select id="listp">

@@ -189,4 +189,9 @@ public class BoardService {
 		return boardDAO.isLikeList(map);
 	}
 
+	public List<Map<String, Object>> regionList() {
+		
+		return boardDAO.regionList();
+	}
+
 }

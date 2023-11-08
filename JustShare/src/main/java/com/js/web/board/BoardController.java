@@ -47,6 +47,7 @@ public class BoardController {
 
 		// 지역구 / 시설 / 카테고리 전부 꺼내기 << 모달로 띄울 필터창에 보여줄 목록을 가져오기 위해서
 		List<Map<String, Object>> areaList = boardService.areaList();
+		List<Map<String,Object>> regionList = boardService.regionList();
 		List<Map<String, Object>> cl = boardService.cl();
 		List<Map<String, Object>> el = boardService.el();
 
@@ -68,6 +69,7 @@ public class BoardController {
 		model.addAttribute("areaList", areaList);
 		model.addAttribute("catelist", cl);
 		model.addAttribute("equiplist", el);
+		model.addAttribute("regionList",regionList);
 		return "board";
 	}
 
