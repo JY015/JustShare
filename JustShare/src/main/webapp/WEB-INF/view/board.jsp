@@ -14,13 +14,14 @@ img {
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
 	<h1>board</h1>
@@ -36,6 +37,9 @@ img {
 		<input type="hidden" name="areas" value="${param.areas }"> <input
 			type="hidden" name="categories" value="${param.categories }">
 		<input type="hidden" name="equipments" value="${param.equipments }">
+		<input type="hidden" name="minPrice" value="${param.minPrice }">
+		<input type="hidden" name="maxPrice" value="${param.maxPrice }">
+		
 		<button type="submit" class="buttonf btn btn-border-d btn-round">검색</button>
 	</form>
 	<!--   검색창  -->
@@ -62,7 +66,7 @@ img {
 						&nbsp;</td>
 					<td class="col-2">${row.btitle }&nbsp;</td>
 					<td class="col-2 bb">${row.bdate }</td>
-					<td class="col-1 bb">${row.mno }</td>
+					<td class="col-1 bb">${row.mid }</td>
 					<td class="col-1 bb">${row.bprice }</td>
 					<td class="col-1 bb">${row.cname }</td>
 					<td class="col-1 bb">${row.bread }</td>
@@ -122,7 +126,13 @@ img {
 							<div id="tab3" class="tab_content">
 								<!--Content-->
 								<h1>가격</h1>
-								내용
+								가격범위 
+								<div id="price-slider"></div>
+								<label for="min-price">최소 가격:</label>
+								<input type="number" id="min-price" name="minPrice" value="0"  > 만원 &nbsp;
+								<label for="max-price">최대 가격:</label>
+								<input type="number" id="max-price" name="maxPrice" value="100" > 만원
+								<!-- 여기 입력값 최대값 최소값 설정하기  -->
 							</div>
 
 							<div id="tab4" class="tab_content">
@@ -156,7 +166,7 @@ img {
 		let nextPageLimit = 0;
 
 		//데이터 가져오는 함수
-		function getData(limit, searchV, areas, categories, equipments) {
+		function getData(limit, searchV, areas, categories, equipments, minPrice,maxPrice) {
 
 			//다음페이지
 			nextPageLimit = (page + 1) * limit;
@@ -173,7 +183,9 @@ img {
 							"searchV" : searchV,
 							"areas" : areas,
 							"categories" : categories,
-							"equipments" : equipments
+							"equipments" : equipments,
+							"minPrice" : minPrice,
+							"maxPrice" : maxPrice
 						},
 						success : function(data) {
 							// 성공적으로 응답을 받았을 때 처리
@@ -181,7 +193,7 @@ img {
 								// 테이블 내용 생성
 								var desiredOrder = [ 'realFile', 'btitle',
 										'bno', 'bprice', 'bcontent', 'bdate',
-										'cate', 'bread', 'addr', 'mno', 'cname' ];
+										'cate', 'bread', 'addr', 'mid', 'cname' ];
 								data
 										.forEach(function(item) {
 											var newRow = "<tr onclick=\"location.href='./bdetail?bno="
@@ -243,7 +255,9 @@ img {
 									getData(10, "${param.searchV }",
 											"${param.areas}",
 											"${param.categories}",
-											"${param.equipments}");
+											"${param.equipments}",
+											"${param.minPrice}",
+											"${param.maxPrice}");
 
 								}
 							}
@@ -257,6 +271,8 @@ img {
 	
 	<!--  모달 필터 관련 스크립트 -->
 	<script type="text/javascript">
+		
+	
 		$(document).ready(function() {
 			$("#myBtn").on("click", function() {
 				$("#test_modal").modal("show");
@@ -265,20 +281,20 @@ img {
 
 		$(document).ready(function() {
 
-			//When page loads...
-			$(".tab_content").hide(); //Hide all content
-			$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-			$(".tab_content:first").show(); //Show first tab content
+			
+			$(".tab_content").hide(); 
+			$("ul.tabs li:first").addClass("active").show(); 
+			$(".tab_content:first").show(); 
 
-			//On Click Event
+			
 			$("ul.tabs li").click(function() {
 
-				$("ul.tabs li").removeClass("active"); //Remove any "active" class
-				$(this).addClass("active"); //Add "active" class to selected tab
-				$(".tab_content").hide(); //Hide all tab content
+				$("ul.tabs li").removeClass("active"); 
+				$(this).addClass("active"); 
+				$(".tab_content").hide(); 
 
-				var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-				$(activeTab).fadeIn(); //Fade in the active ID content
+				var activeTab = $(this).find("a").attr("href"); 
+				$(activeTab).fadeIn(); 
 				return false;
 			});
 
@@ -354,19 +370,51 @@ img {
 									function() {
 										return $(this).val();
 									}).get();
-
+							
+						    var minPrice = ($("#min-price").val() * 10000);
+						    var maxPrice = ($("#max-price").val() * 10000);
+						    
 							// 선택한 값들을 URL 파라미터로 추가
 							var queryString = "?searchV=${param.searchV}"
 									+ "&areas=" + selectedAreas.join(",")
 									+ "&categories="
 									+ selectedCategories.join(",")
 									+ "&equipments="
-									+ selectedEquipments.join(",");
-
+									+ selectedEquipments.join(",")
+									+ "&minPrice=" + minPrice
+					        		+ "&maxPrice=" + maxPrice;
+									
 							// 현재 페이지 URL에 파라미터를 추가한 뒤 리다이렉트
 							window.location.href = window.location.pathname
 									+ queryString;
 						});
+		 
+		 
+		 $("#price-slider").slider({
+			    range: true, // 최소와 최대 값 사이의 범위 슬라이더로 설정
+			    min: 0,      // 최소 값
+			    max: 100,   // 최대 값
+			    values: [0, 100], // 초기 값 (최소와 최대 값)
+			    slide: function(event, ui) {
+			        // 슬라이더의 값이 변경될 때마다 호출되는 콜백 함수
+			        // 변경된 최소와 최대 값을 각각의 input 요소에 표시
+			        $("#min-price").val(ui.values[0]);
+			        $("#max-price").val(ui.values[1]);
+			    }
+			});
+		 
+		// 직접 입력 필드의 값이 변경될 때 슬라이더의 값도 업데이트
+		 $("#min-price").on("input", function() {
+		     var minPrice = parseInt($(this).val());
+		     var maxPrice = parseInt($("#max-price").val());
+		     $("#price-slider").slider("values", [minPrice, maxPrice]);
+		 });
+
+		 $("#max-price").on("input", function() {
+		     var minPrice = parseInt($("#min-price").val());
+		     var maxPrice = parseInt($(this).val());
+		     $("#price-slider").slider("values", [minPrice, maxPrice]);
+		 });
 	</script>
 
 
