@@ -44,7 +44,4 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> main

@@ -3,15 +3,14 @@
 
 <mapper namespace="com.js.web.main.MainDAO">
 
-<<<<<<< HEAD
 <select id="bannerlist" resultType="com.js.web.main.MainDTO"> 
-SELECT * FROM banner ORDER BY bano ASC 
-=======
+	SELECT * FROM banner ORDER BY bano ASC 
+</select>
+
 <select id="login" parameterType="Map" resultType="Map">
 		SELECT count(*) as count, mname, mid
 		FROM members
 		WHERE mid = #{mid } AND mpw = #{mpw}
->>>>>>> main
 </select>
 
 <select id="imageD" resultType="Map"> 

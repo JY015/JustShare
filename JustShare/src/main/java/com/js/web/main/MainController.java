@@ -1,7 +1,6 @@
 package com.js.web.main;
 
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -25,72 +24,7 @@ public class MainController {
 	
 
 	@GetMapping("/")
-<<<<<<< HEAD
 	public String main2(Model model, HttpSession session, @RequestParam Map<String, Object> map) {
-=======
-	public String main() {
-		return "index";
-	}
-
-
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "login";
-	}
-
-	@PostMapping("/login")
-	public String login(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
-		Map<String, Object> res = mainService.login(map);
-		System.out.println(res);
-		if (String.valueOf(res.get("count")).equals("1")) {
-			session.setAttribute("mid", map.get("mid"));
-			session.setAttribute("mname", res.get("mname"));		
-			return "redirect:/";
-		} else {
-			model.addAttribute("loginCheckCount", 1);
-			return "login";		
-		}
-	}
-
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		if (session.getAttribute("mid") != null) {
-			session.removeAttribute("mid");
-		}
-		if (session.getAttribute("mname") != null) {
-			session.removeAttribute("mname");
-		}
-		session.invalidate();
-		return "redirect:/";
-	}
-
-	@GetMapping("/findId")
-	public String findId() {
-
-		return "findId";
-	}
-
-	@PostMapping("/findId")
-	public String findId(@RequestParam String mname, @RequestParam String mphone, Model model) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("mphone", mphone);
-		map.put("mname", mname);
-		String findId = mainService.findId(map);
-		if (findId != null) {
-			System.out.println(mname);
-			System.out.println(mphone);
-			System.out.println(findId);
-			model.addAttribute("findId", findId);
-			model.addAttribute("count", 1);
-		return "findId";
-		}
-		model.addAttribute("count", 0);
-		return "findId";
-	}
-	
-	@GetMapping("/findPw")
-	public String findPw() {
->>>>>>> main
 		
 				//배너
 				List<MainDTO> bannerlist = mainService.bannerlist();
@@ -126,9 +60,7 @@ public class MainController {
 				System.out.println(imgsubst);
 				
 		return "main";
+
 	}
-
-
-	
 
 }

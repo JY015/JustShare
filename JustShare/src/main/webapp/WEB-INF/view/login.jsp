@@ -19,7 +19,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-=======
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -41,7 +41,7 @@
 	<a href="./findPw">비밀번호 찾기 ㅣ</a>
 	<a href="./join">회원가입 </a>
 </div>
->>>>>>> main
+
 
    <link rel="stylesheet" href="/css/main_page.css" />
    <link rel="stylesheet" href="./css/login.css">
@@ -52,7 +52,6 @@
    <!-- 폰트어썸 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<<<<<<< HEAD
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
    
@@ -82,13 +81,7 @@
     <script src="/js/cookie.js?ver=20000120" defer></script>
 <script>
 var _ss_user_id   = "";
-=======
-<script type="text/javascript">
 
-
-
-
->>>>>>> main
 </script>
   </head>
 <body>
@@ -673,29 +666,7 @@ document.addEventListener('DOMContentLoaded', function () { // document ready
 
 <!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1157263171706557');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1157263171706557&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script type="text/javascript">
-if(!wcs_add) var wcs_add = {};
-wcs_add["wa"] = "110e8399a196c90";
-if(window.wcs) {
-wcs_do();
-}
 </script>
   </body>
 </html>
