@@ -87,14 +87,10 @@ ${i.realFile}
 (${i.latitude},${i.longitude})
 </c:forEach>
 </body>
-<div id="map">
-		<div class="quick" style="z-index:5;" >
-			<a href="javascript:;" onclick="panTo()" >
-            <img src="../img/mylocationwhie.png" style="width:10%;float: right;" >
-            <img src="../img/mylocationblue2.png" style="width: 10%;float: right;" >
-            <img src="../img/mylocationblue.png" style="width: 10%;float: right;" >
-            <!-- <img src="../img/mylocationblue.png" style="width: 40%;float: right;" > -->
-        </a>
+
+<div id="map" style="width:100%; height:990px;margin:0px;"></div>
+		<div class="quick" style="z-index:100;">
+			<a href="javascript:;" onclick="panTo()"><img src="../img/mylocation64.png" ></a>
 		</div>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d"></script>
