@@ -4,7 +4,7 @@
 <mapper namespace="com.js.web.main.MainDAO">
 
 <select id="login" parameterType="Map" resultType="Map">
-		SELECT count(*) as count, mname 
+		SELECT count(*) as count, mname, mid
 		FROM members
 		WHERE mid = #{mid } AND mpw = #{mpw}
 </select>
