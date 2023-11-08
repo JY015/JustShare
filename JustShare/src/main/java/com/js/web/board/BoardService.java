@@ -162,7 +162,31 @@ public class BoardService {
 		return boardDAO.reportCateList();
 	}
 
-	
+	public Integer isLike(Map<String, Object> map) {
+		
+		return boardDAO.isLike(map);
+	}
 
+	public Integer likesCount(Map<String, Object> map) {
+		
+		return boardDAO.likesCount(map);
+	}
+
+	public void deleteLike(Map<String, Object> map) {
+		
+		boardDAO.deleteLike(map);
+		
+	}
+
+	public void insertLike(Map<String, Object> map) {
+		
+		boardDAO.insertLike(map);
+		
+	}
+
+	public List<Integer> isLikeList(Map<String, Object> map) {
+		
+		return boardDAO.isLikeList(map);
+	}
 
 }
