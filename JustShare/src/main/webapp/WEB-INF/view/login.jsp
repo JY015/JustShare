@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>로그인 창</title>
 <link rel="stylesheet" href="./css/login.css">
+<script src="./js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <div style="text-align:center;">
@@ -29,6 +30,10 @@
 </div>
 
 <script type="text/javascript">
+
+
+
+
 </script>
 </body>
 </html>
