@@ -42,7 +42,7 @@ public class LoginController {
 			if ((int)res.get("mgrade") == 4) {
 				return "admin/admin";
 			}
-			return "redirect:/main2";
+			return "redirect:/";
 		} else {
 			model.addAttribute("loginCheckCount", 1);
 			return "login";		
@@ -58,7 +58,7 @@ public class LoginController {
 			session.removeAttribute("mname");
 		}
 		session.invalidate();
-		return "redirect:/main2";
+		return "redirect:/";
 	}
 
 	@GetMapping("/findId")

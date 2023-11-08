@@ -12,7 +12,7 @@
 <%-- ${result} --%>
 <%-- ${bcx} --%>
 </body>
-<div id="map" style="width:70%; height:360px"></div>
+<div id="map" style="width:100%; height:990px;margin:0px;"></div>
 		<div class="quick" style="z-index:100;">
 			<a href="javascript:;" onclick="panTo()"><img src="../img/mylocation64.png" ></a>
 		</div>

@@ -16,5 +16,6 @@ public interface MainDAO {
 	List<Map<String, Object>> imageD();
 
 	List<Map<String, Object>> imageC();
+
 	
 }

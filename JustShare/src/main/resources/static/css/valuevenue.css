@@ -3976,11 +3976,11 @@ display: block;
         right: -10px; 
         top: -15px; 
         content: '';
-        width: 6px; /* 占싼딆뵠筌앾옙 */
-        height: 6px; /* 占싼딆뵠筌앾옙 */
-        border-top: 1px solid #666666; /* 占쏙옙 占쎈Þ�� */
-        border-right: 1px solid #666666; /* 占쏙옙 占쎈Þ�� */
-        transform: rotate(45deg); /* 揶쏄낮猷� */
+        width: 6px; 
+        height: 6px; 
+        border-top: 1px solid #666666; 
+        border-right: 1px solid #666666; 
+        transform: rotate(45deg); 
     }
     .m-pdr0{
         padding-right: 0px;

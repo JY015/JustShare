@@ -31,7 +31,7 @@ public class MypageController {
 			return "mypage";
 			
 		} else {
-			return "redirect:/main2";
+			return "redirect:/";
 		}
 
 	}
