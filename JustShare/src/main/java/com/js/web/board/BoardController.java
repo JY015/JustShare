@@ -62,7 +62,7 @@ public class BoardController {
 		
 		// 리스트 뽑기 + 검색시 + 필터
 		List<Map<String, Object>> boardList = boardService.list(map);
-		
+		model.addAttribute("listNum",listNum);
 		model.addAttribute("list", boardList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("areaList", areaList);

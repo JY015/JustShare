@@ -22,6 +22,7 @@
 		<if test = "minPrice !=null and minPrice !=''">
 		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
+		AND b.bdel=1  
 		</where>
 	
 </select>

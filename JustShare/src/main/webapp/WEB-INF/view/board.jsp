@@ -2,22 +2,51 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+	<meta name="description" content="공간 공유 플랫폼"/>
+    <title>Just Share</title>
+	<!-- 기존에 사용하던 jquery , bootstrap , 기타등등 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- 추가한거 -->
+<link rel="stylesheet" href="/css/import.css?ver=20000120" />
+<link rel="stylesheet" href="/css/style.css?ver=20000120" />
+<link rel="stylesheet" href="/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+<link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+<link rel="stylesheet" href="/css/main_page.css" />
+<!-- 회원가입 3가지회원 유형 css new -->
+	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
+	<!-- 고객센터 css -->
+	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+	<!-- 폰트어썸 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+	<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+	
+ <script src="/js/valuevenue.js?ver=20000120" defer></script>
+ <script src="/js/owl.carousel.min.js"></script>
+ <script src="/js/common.js?ver=20000120" defer></script>
+ <script src="/js/cookie.js?ver=20000120" defer></script>
+ <style type="text/css">
 .row detail{
 	width: 100%;
 	}
 
-img {
-	height: 150px;
-	width: 150px;
-}
 .fixed-button {
+    color:#819FF7;
     position: fixed;
-    bottom: 50px;
+    bottom: 80px;
     right: 40px;
     z-index: 999;
 }
@@ -32,21 +61,27 @@ img {
     width: 5%;
     margin-bottom: 10px; /* 버튼 간의 간격을 조절할 수 있는 마진 값을 설정합니다. */
 }
-
+.addrp{
+	color: #819FF7;
+	
+}
+.price{
+	margin-bottom: 8px;
+	
+}
+.nav-tabs{
+	margin-bottom:10px;
+}
+.nav-item {
+    margin-right: 10px; 
+}
+.modal-body{
+	text-align: center;
+}
 </style>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+ 
 </head>
 <body>
-	<h1>board</h1>
 	<div class="body__container section">
 	<!-- 모바일 버전 헤더  -->
 	<header class="header__topnav_type2">
@@ -72,26 +107,26 @@ img {
 			<input type="hidden" name="minPrice" value="${param.minPrice }">
 			<input type="hidden" name="maxPrice" value="${param.maxPrice }">
 			<input type="hidden" name="sort" value="${param.sort }">
-			<button type="submit" class="submit_btn">검색</button>
-    		<button type="button" class="submit_btn" id="resetButton">검색 초기화</button>
+			<button type="submit" class="submit_btn1"><i class="fa-solid fa-magnifying-glass" style="color: #fafafa;"></i></button>
+    		<button type="submit" id="sresetButton" class="submit_btn2"><i class="fa-solid fa-magnifying-glass-minus" style="color: #ffffff;"></i></button>
 		 </form>
 		 <!-- 필터 버튼 -->
 		 <div class="tab-filter">
 		 	<div class="list-tab">
 		 		<div class="card-content">
-		 			<button type="button"class="cardlistBtn  gubun_btn ver2">지역</button>
+		 			<button type="button" class="cardlistBtn  gubun_btn ver2"  onfocus="this.blur()" data-target="#tab1">지역</button>
 		 		</div>
 		 		<div class="half-line"></div>
 		 		<div class="card-content">
-                   <button type="button"class="cardlistBtnbold-active  gubun_btn ver2">공간유형</button>
+                   <button type="button" class="cardlistBtn gubun_btn ver2"  onfocus="this.blur()" data-target="#tab2">공간유형</button>
                 </div>
 			    <div class="half-line"></div>
                 <div class="card-content">
-                  <button type="button"class="cardlistBtn gubun_btn ver2">가격</button>
+                  <button type="button"  class="cardlistBtn gubun_btn ver2"  onfocus="this.blur()" data-target="#tab3">가격</button>
                 </div>
 			    <div class="half-line"></div>
                 <div class="card-content">
-                  <button type="button"class="cardlistBtn gubun_btn ver2">시설물</button>
+                  <button type="button"  class="cardlistBtn gubun_btn ver2"  onfocus="this.blur()" data-target="#tab4">시설물</button>
                 </div>
 		 	</div>
 		 </div>
@@ -99,25 +134,43 @@ img {
 		 <!-- 필터 끝  -->
 		 <div class="tabcontent" id="cards">
 		     <div class="number-arrange">
-              <span class="list-title"></span>
+              <span class="list-title">총 ${listNum } 개 </span>
               <!-- 분류버튼 -->
-             	<div class="selectBox">
-					<button type="button" id="selectBtn" class="selectBtn">여기가 sort값에 따라 변해야함 + 이미지  이거누르면 리스트가 보이게 </button>
-					<div class="selectBoxList">
-					<button type="button" class="sort1">최신</button>
-					<button type="button" class="sort2">좋아요</button>
-					<button type="button" class="sort3">조회수</button>
-					<button type="button" class="sort4">낮은 가격</button>
-					<button type="button" class="sort5">높은 가격</button>
-					</div>
+             	<div> 
+                    <select class="selectBox-re" id="sort_sel">
+                    <option selected value="1">최신</option>
+                    <option  value="2">좋아요</option>
+                    <option  value="3">조회수</option>
+                    <option  value="4">낮은 가격</option>
+                    <option  value="5">높은 가격</option>
+                    </select>
+                </div>  
 				</div>
              </div>
              <!-- 전체 리스트 보여주는 컨테이너  -->
              <div class="card-container">
              <!-- 리스트 하나씩 forEach로  -->
              <c:forEach items="${list}" var="row">
-             <div class="card_item2 pop-up">
-             <div class="cccc"></div>
+             <div class="card_item2 pop-up" data-bno="${row.bno}">
+             <div class="cccc">
+             <img src="/img/places/${row.realFile}">
+             </div>
+             <a class="card-surface" href="./bdetail?bno=${row.bno}">
+             <div class="card_inner2">
+             <div class="txt__wrap2">
+             <p class="txt__card__tit">
+             ${row.btitle } <span class="read_count"><i class="fa-solid fa-book-open"></i> ${row.bread }</span>
+             </p>
+             <p class="txt__subtit__event addrp">
+             ${row.addr }<span class="likes_count" data-count=${row.likesCount } ><i class="far fa-heart" ></i> ${row.likesCount }</span> 
+             </p>
+             <hr class="card-line">
+              <p class="txt__card__tit price"> <span class="read_count">${row.bdate }</span>
+             ${row.bprice }원
+             </p>
+             </div>
+             </div>
+             </a>
              </div>
              </c:forEach>
              </div>
@@ -147,47 +200,8 @@ img {
 	</form>
 	<!--   검색창  -->
 	
-	<!-- 리스트 -->
-	<table class="tableContainer" id="tableContainer">
-		<thead>
-			<tr class="row">
-				<td class="col-4">사진</td>
-				<th class="col-2 ">제목</th>
-				<th class="col-2 bb">날짜</th>
-				<th class="col-1 bb">글쓴이</th>
-				<th class="col-1 bb">가격</th>
-				<th class="col-1 bb">태그</th>
-				<th class="col-1 bb">조회수</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${list}" var="row">
-				<tr class="row detail"  data-bno="${row.bno}">
-					<td class="col-4"><img src="/img/places/${row.realFile}">
-						<div class="inf2">  
-       					<c:choose>
-						<c:when test="${row.isLiked eq 1  }">     
-						<span><i class="fas fa-heart" style='color:red'></i> 찜 </span>
-						</c:when>
-						<c:otherwise>
-						<span><i class="far fa-heart" ></i> 찜 </span>
-						</c:otherwise>
-						</c:choose>  	
-						<span class="likes_count" data-count=${row.likesCount } >${row.likesCount }</span>
-        				</div>
-					
-					&nbsp;</td>
-					<td class="col-2" onclick="location.href='./bdetail?bno=${row.bno}'">${row.btitle }&nbsp;</td>
-					<td class="col-2 bb">${row.bdate }</td>
-					<td class="col-1 bb">${row.mid }</td>
-					<td class="col-1 bb">${row.bprice }</td>
-					<td class="col-1 bb">${row.cname }</td>
-					<td class="col-1 bb">${row.bread }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<!-- 리스트 -->
+	
+	
 
 
 	<button type="button" class="fixed-button" id="writeButton">글쓰기</button>
@@ -208,11 +222,11 @@ img {
 
 					<div id="wrapper">
 						<!--탭 메뉴 영역 -->
-						<ul class="tabs">
-							<li><a href="#tab1">지역</a></li>
-							<li><a href="#tab2">공간유형</a></li>
-							<li><a href="#tab3">가격</a></li>
-							<li><a href="#tab4">시설물</a></li>
+						<ul class="nav nav-tabs nav-fill" >
+							<li class="nav-item"><a href="#tab1">지역</a></li>
+							<li class="nav-item"><a href="#tab2">공간유형</a></li>
+							<li class="nav-item"><a href="#tab3">가격</a></li>
+							<li class="nav-item"><a href="#tab4">시설물</a></li>
 						</ul>
 
 
@@ -309,33 +323,30 @@ img {
 						success: function(data) {
 						    if (data && data.length > 0) {
 						        data.forEach(function(item) {
-						            var newRow = "<tr class='row detail' data-bno=" + item.bno + ">";
-						            var isLikedIcon = item.isLiked === 1 ? "<i class='fas fa-heart' style='color:red'></i>" : "<i class='far fa-heart'></i>";
-						            newRow += "<td class='col-4'><img src='/img/places/" + item.realFile + "' alt='Image' style='width: 150px; height: 150px;'><div class='inf2'><span>" + isLikedIcon + " 찜</span><span class='likes_count' data-count=" + item.likesCount + ">" + item.likesCount + "</span></div></td>";
-						            newRow += "<td>" + item.btitle + "</td>";
-						            newRow += "<td onclick=\"location.href='./bdetail?bno=" + item.bno + "'\">" + item.bno + "</td>";
-						            newRow += "<td>" + item.bprice + "</td>";
-						            newRow += "<td>" + item.bcontent + "</td>";
-						            newRow += "<td>" + item.bdate + "</td>";
-						            newRow += "<td>" + item.cate + "</td>";
-						            newRow += "<td>" + item.bread + "</td>";
-						            newRow += "<td>" + item.addr + "</td>";
-						            newRow += "<td>" + item.mid + "</td>";
-						            newRow += "<td>" + item.cname + "</td>";
-						            newRow += "</tr>";
+						            // 새로운 카드 아이템 생성
+						            var newCardItem = "<div class='card_item2 pop-up' data-bno='" + item.bno + "'>";
+						            newCardItem += "<div class='cccc'><img src='/img/places/" + item.realFile + "'></div>";
+						            newCardItem += "<a class='card-surface' href='./bdetail?bno=" + item.bno + "'>";
+						            newCardItem += "<div class='card_inner2'>";
+						            newCardItem += "<div class='txt__wrap2'>";
+						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
+						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
+						            newCardItem += "<hr class='card-line'>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.bdate + "</span> " + item.bprice + "원</p>";
+						            newCardItem += "</div></div></a></div>";
 
-						            // 테이블의 tbody에 새로운 행 추가
-						            $("#tableContainer tbody").append(newRow);
+						            // 새로운 카드 아이템을 기존의 div에 추가
+						            $(".card-container").append(newCardItem);
 						        });
 						    } else {
-						        // 더 이상의 데이터가 없음을 나타내는 메시지 출력
+						        // 더 이상의 데이터가 없음을 나타내는 메시지 출력 또는 처리
 						        console.log("No more data available.");
 						        noMoreData = true; // 데이터를 더 이상 받아오지 않음을 나타내는 변수를 true로 설정
 						    }
 						},
-						error : function(xhr, status, error) {
-							// 에러 발생 시 처리
-							console.error("Error occurred: " + error);
+						error: function(xhr, status, error) {
+						    // 에러 발생 시 처리
+						    console.error("Error occurred: " + error);
 						}
 					});
 
@@ -403,19 +414,27 @@ img {
    				 // 이후에 sort 변수를 사용하여 필요한 작업을 수행할 수 있습니다.
    				 
 				/* 모달 열기 스크립트 */ 
-				$("#myBtn").on("click", function() {
+				$(".cardlistBtn").on("click", function() {
 				$("#test_modal").modal("show");
+				var targetTab = $(this).data('target');
+		        
+		        // 해당 탭을 보이게 함
+		        $('.tab_content').hide();
+		        $(targetTab).show();
+				
 				});	
+   				 
+			
 				
 				/* 모달 내 탭 관련 스크립트 */
 				$(".tab_content").hide(); 
-				$("ul.tabs li:first").addClass("active").show(); 
+				$("ul.nav-tabs li:first").addClass("active").show(); 
 				$(".tab_content:first").show(); 
 
 				
-				$("ul.tabs li").click(function() {
+				$("ul.nav-tabs li").click(function() {
 
-					$("ul.tabs li").removeClass("active"); 
+					$("ul.nav-tabs li").removeClass("active"); 
 					$(this).addClass("active"); 
 					$(".tab_content").hide(); 
 
@@ -752,7 +771,7 @@ img {
 // 문서가 로드된 후에 실행되도록 이벤트 핸들러 등록
 document.addEventListener("DOMContentLoaded", function() {
     // 초기화 버튼에 클릭 이벤트 핸들러 등록
-    document.getElementById("resetButton").addEventListener("click", function() {
+    document.getElementById("sresetButton").addEventListener("click", function() {
         // searchV 필드 초기화
         document.getElementsByName("searchV")[0].value = "";
         // 검색 폼 제출
@@ -803,41 +822,42 @@ $(document).ready(function() {
     
 
 // 버튼 클릭 이벤트 처리   분류순
-    function sortBoardPage(sortValue) {
-        var queryParams = {
-            searchV: "${param.searchV}",
-            areas: "${param.areas}",
-            categories: "${param.categories}",
-            equipments: "${param.equipments}",
-            minPrice: "${param.minPrice}",
-            maxPrice: "${param.maxPrice}",
-            sort: sortValue
-        };
+  // URL에서 sort 매개변수 값을 읽어옴
+function getSortValueFromUrl() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var sortValue = urlParams.get('sort');
+    return sortValue;
+}
 
-        var queryString = $.param(queryParams);
-        location.href = "/board?" + queryString;
+// 페이지 로드 시 URL에서 sort 매개변수 값을 읽어와서 선택된 옵션 설정
+$(document).ready(function() {
+    var sortValue = getSortValueFromUrl();
+    if (sortValue) {
+        $("#sort_sel").val(sortValue);
     }
 
-    $(".sort1").click(function() {
-    	sortBoardPage(1);
+    // select 요소의 값이 변경될 때 이벤트 핸들러
+    $("#sort_sel").change(function() {
+        var selectedValue = $(this).val();
+        sortBoardPage(selectedValue);
     });
+});
 
-    $(".sort2").click(function() {
-    	sortBoardPage(2);
-    });
+// 분류 버튼 클릭 이벤트 처리 함수
+function sortBoardPage(sortValue) {
+    var queryParams = {
+        searchV: "${param.searchV}",
+        areas: "${param.areas}",
+        categories: "${param.categories}",
+        equipments: "${param.equipments}",
+        minPrice: "${param.minPrice}",
+        maxPrice: "${param.maxPrice}",
+        sort: sortValue
+    };
 
-    $(".sort3").click(function() {
-    	sortBoardPage(3);
-    });
-
-    $(".sort4").click(function() {
-    	sortBoardPage(4);
-    });
-
-    $(".sort5").click(function() {
-    	sortBoardPage(5);
-    });
-
+    var queryString = $.param(queryParams);
+    location.href = "/board?" + queryString;
+}
   	// 좋아요 보드에서 찍기 
     
     $(document).on("click", ".inf2 i", function() {
@@ -848,9 +868,9 @@ $(document).ready(function() {
             return;
         }
 
-        const bno = $(this).closest(".row").data("bno");
+        const bno = $(this).closest(".card_item2 pop-up").data("bno");
         const isLiked = $(this).hasClass("fas");
-        const $likesCountElement = $(this).closest(".row").find(".likes_count");
+        const $likesCountElement = $(this).closest(".card_item2 pop-up").find(".likes_count");
 
         const data = {
             mid: mid,
