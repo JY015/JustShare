@@ -223,7 +223,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 
 	   	        
 	   	        sendMessageToClient(toId, message1,session);
-	   	     System.out.println("거래테스트 0");
+	   	     System.out.println("거래테스트 서버수신확인 0");
 	         		
 	         	} else if(jsonObject.has("mid") && jsonObject.has("toId") && jsonObject.has("bno") 
 	         			&& jsonObject.has("tochk") && !jsonObject.has("exceptid")  
@@ -240,7 +240,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		   	   	 messageData.put("toId", toId);
 		   	   	 messageData.put("bno", bno);
 		   	   	 messageData.put("tochk", tochk);
-		   	   	 System.out.println("거래테스트 1");
+		   	   	 System.out.println("거래테스트 서버수신확인 1");
 
 		   	   	 TextMessage message1 = new TextMessage(messageData.toString());
 
@@ -338,12 +338,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    private void handleMessage(JSONObject jsonObject, WebSocketSession session) {
 	        String toId = jsonObject.optString("toId", "");
 	        String mid = jsonObject.optString("mid", "");
-	       
+	       String bno = jsonObject.optString("bno","");
 	        String text = jsonObject.optString("text","");
 	        String time = jsonObject.optString("time","");
 	   	 JSONObject messageData = new JSONObject();
 	   	 messageData.put("mid", mid); // 내 아이디
-	  
+	   	 messageData.put("bno", bno); // 내 아이디
 	   	 messageData.put("toId", toId);
 	   	 messageData.put("text", text);
 	   	 messageData.put("time", time);
@@ -368,7 +368,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    		
 	    		if(jsonObject.has("mid") && jsonObject.has("sender") && jsonObject.has("firstmsg")) {
 	    			
-	    			System.out.println("이거출력");
+	    			//System.out.println("이거출력");
 	    			WebSocketSession clientSession = clients.get(toId);
 	    			
 	    			String sender = jsonObject.optString("sender", "");
@@ -400,7 +400,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    			
 	    		}else if(jsonObject.has("mid") && jsonObject.has("toId") && jsonObject.has("bno") 
 		         			&& jsonObject.has("fromchk") && !jsonObject.has("exceptid") 
-		         			&& !jsonObject.has("tochk") ) {
+		         			&& !jsonObject.has("tochk") && !jsonObject.has("time") ) {
 	    			
 	    			
 	    			WebSocketSession clientSession = clients.get(toId);
@@ -442,15 +442,15 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    			}
 	    			else if(jsonObject.has("mid") && jsonObject.has("toId") && jsonObject.has("bno") 
 	    					&& jsonObject.has("tochk") && !jsonObject.has("fromchk") 
-	    					&& !jsonObject.has("exceptid")) {
+	    					&& !jsonObject.has("exceptid") && !jsonObject.has("time")) {
 	    				
 	    				WebSocketSession clientSession = clients.get(toId);
-		    			
+	    	    		System.out.println("거래테스트1");
 		    			
 		         		String mid = jsonObject.optString("mid", "");
 		         		String bno= jsonObject.optString("bno", "");
 		         		String tochk= jsonObject.optString("tochk", "");
-		         		System.out.println("거래테스트1");
+		         	
 		         		
 		    			if(!blockedClients.contains(mid)) {	
 		    		
@@ -478,8 +478,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 			    	    } 
 		    			
 	    			} else {
-	    		
-	    		
+	    				
 	    		// "message" 필드에서 메시지 값을 추출
 	    			
 	    		WebSocketSession clientSession = clients.get(toId);
@@ -487,6 +486,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    		String message = jsonObject.optString("text","");
 	    		String sender = jsonObject.optString("mid","");
 	    		String time = jsonObject.optString("time","");
+	    		String bno = jsonObject.optString("bno","");
 	    		
 	    	if(!blockedClients.contains(sender)) {	
 	    		
@@ -495,6 +495,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    		messageObject.put("message", message);
 	    		messageObject.put("sender", sender);
 	    		messageObject.put("time", time);
+	    		messageObject.put("bno", bno);
 	    		
 	    		//TextMessage message2 = new TextMessage(message);
 	    		TextMessage message2 = new TextMessage(messageObject.toString());
@@ -514,10 +515,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    	   }else {
 	    		   System.out.println("차단당해서못보냄2");
 	    	   }
-	    	 } //else 끝단
+	    	 } //끝단
+	    		 
+	    	 }
 	    		
 	    	}
-	    }
+	    
 	    		
 		
 

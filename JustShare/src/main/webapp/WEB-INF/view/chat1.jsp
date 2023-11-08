@@ -255,7 +255,8 @@ for (var key in data) {
 
  
       
-    if ("message" in data && "sender" in data && "time" in data) {  //일반메시지전송
+    if ("message" in data && "sender" in data && "time" in data
+    	 && "bno" in data) {  //일반메시지전송
     	
 
         var message =data.message;
@@ -263,11 +264,12 @@ for (var key in data) {
         var time = data.time;
         var sort = 1;
         var readmsg=0;
+        var bno= data.bno;
      
         
         if (currentScreen === 'contacts_card') {
         	
-        	updateMessage(sender, time, message,sort);
+        	updateMessage(sender, time, message,sort,bno);
         
 
 
@@ -275,6 +277,7 @@ for (var key in data) {
         	
         	//같은화면에서 받았을경우 읽음처리 시키기 
         	var toId = data.toId
+        	 sort =0;
 	          var jsonmsg= {
 	        		  
 	        			"toId" : sender,
@@ -282,8 +285,9 @@ for (var key in data) {
 	        		  	"readmsg":readmsg
 	          }
 
-	        
+       
 	              socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+	          	updateMessage(sender, time, message,sort,bno); //이렇게들어가면 읽음처리되야됨
 	              
         	
         	
@@ -339,8 +343,9 @@ for (var key in data) {
          }
     
     } else if("toId" in data && "mid" in data && "bno" in data
-    		 &&"fromchk" in data && !("tochk" in data)) { //거래창업데이트
-    	
+    		 &&"fromchk" in data && !("tochk" in data)
+    		 && !("time" in data)) { //거래창업데이트
+    
     	var toId = data.toId;
     	var mid = data.mid;
     	var bno = data.bno;
@@ -348,9 +353,7 @@ for (var key in data) {
     
 		if (currentScreen === 'contacts_card') {
         	
-			//모듈화
-			tradefromupdate();
-			
+		
         
 
         } else if (currentScreen === 'msgload') {
@@ -361,7 +364,8 @@ for (var key in data) {
     
     
  	}else if("toId" in data && "mid" in data && "bno" in data
-		 && "tochk" in data  && !("fromchk" in data)) {
+		 && "tochk" in data  && !("fromchk" in data)
+		 && !("time" in data)) {
  		
  		var toId = data.toId;
     	var mid = data.mid;
@@ -370,14 +374,14 @@ for (var key in data) {
 	 
 	 if (currentScreen === 'contacts_card') {
      	//여기부터
-     	tradetoupdate();
-     	
+     
 			
      	
 
 
      } else if (currentScreen === 'msgload') {
     	 
+    	 	tradetoupdate();
      }
 	 
 	 
@@ -423,19 +427,27 @@ function tradefromupdate() {
 	 var bno = bnoid.getAttribute("data-bno");
     
 	 
+	 var msgdetail = document.querySelector('.msgdetail');
+	 
 	 if(fromchk==1 && tochk==1 ) {
 			
 			//거래완료상태 아무동작하지않음
 			}else if (fromchk==1 && tochk==0) {
 			userchk.setAttribute('data-fromuserchk',0);
-          
-	            socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+			msgdetail.querySelector('.trading').textContent = '거래하기';
+			msgdetail.querySelector('.trading').classList.replace('trading', 'trade');
+			
+			
 		} else if (fromchk==0 && tochk==1){
 			userchk.setAttribute('data-fromuserchk',1);
-	
+			msgdetail.querySelector('.trading').textContent = '거래완료';
+			msgdetail.querySelector('.trading').classList.replace('trading', 'traded');
+			
 			
 		} else if (fromchk==0 && tochk==0) {
 			userchk.setAttribute('data-fromuserchk',1);
+			msgdetail.querySelector('.trade').textContent = '확인요청';
+			msgdetail.querySelector('.trade').classList.replace('trade', 'trading');
 		
 
 		}
@@ -453,24 +465,28 @@ function tradetoupdate(){
 	  var bnoid = document.querySelector(".boarddetail");
 	 var bno = bnoid.getAttribute("data-bno");
   
-	 
+	 var msgdetail = document.querySelector('.msgdetail');
 		
 	if(fromchk==1 && tochk==1 ) {
 			
 			//거래완료상태 아무동작하지않음
 			}else if (fromchk==1 && tochk==0) {
 			userchk.setAttribute('data-touserchk',1);
-
-	
+			msgdetail.querySelector('.trading').textContent = '거래완료';
+			msgdetail.querySelector('.trading').classList.replace('trading', 'traded');
+		
 			  
 		} else if (fromchk==0 && tochk==1){
 			userchk.setAttribute('data-touserchk',0);
+			msgdetail.querySelector('.trading').textContent = '거래하기';
+			msgdetail.querySelector('.trading').classList.replace('trading', 'trade');
 			
 			
 			
 		} else if (fromchk==0 && tochk==0) {
 			userchk.setAttribute('data-touserchk',1);
-		
+			msgdetail.querySelector('.trade').textContent = '확인요청';
+			msgdetail.querySelector('.trade').classList.replace('trade', 'trading');
 			
 		}
 	}
@@ -573,7 +589,7 @@ function onlineupdate(sender) {
 
 
  //## 대화목록리스트 메세지업데이트 (sender받을떄 ,toId로받을떄 2가지버전)
-function updateMessage(sender, time, message,sort) {
+function updateMessage(sender, time, message,sort,bno) {
 
     var userList = document.querySelectorAll('.user_info');
     var roomlist = document.getElementById("roomlist");
@@ -651,7 +667,7 @@ function updateMessage(sender, time, message,sort) {
     	      chatcreate+='onclick="serchid(this)"><div class="img_cont">';
     	  	  chatcreate+='<img src="'+img+'" class="rounded-circle user_img">';
     	      chatcreate+='<span class="status online_icon"></span></div>';
-    	      chatcreate+='<div class="user_info"><span class="toId">'+sender+'';
+    	      chatcreate+='<div class="user_info"><span class="toId" data-bno="'+bno+'">'+sender+'';
     	      chatcreate+='</span><span class="time">'+time+'</span>';
     	      
     	      //if (msgcount === 0) {
@@ -772,7 +788,7 @@ function sendMessage() {
          	              //## 5-1 메시지전송 후 > 내 대화방에 내글추가 > 서버에서 메시지 전달  ##
          	              msgappendsend(content);  
          	              //내 대화방목록리스트 업데이트
-         	              updateMessage(toId, formattedTime, message,sort);
+         	              updateMessage(toId, formattedTime, message,sort,bno);
          	              //다른페이지 chat아이콘 신규 메시지 알림
          	              
 
@@ -1297,23 +1313,36 @@ function sendMessage() {
 						//거래완료상태 아무동작하지않음
 						}else if (fromchk==1 && tochk==0) {
 						userchk.setAttribute('data-fromuserchk',0);
+						
 						fromup(mid,toId,bno);
 				
 					     jsonmsg["fromchk"] = 0;
+					     
+					     userchk.querySelector('.trading').textContent = '거래하기';
+					     userchk.querySelector('.trading').classList.replace('trading', 'trade');
      		            
-				            socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+				          
+				            
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-fromuserchk',1);
 						fromup(mid,toId,bno); 
 						jsonmsg["fromchk"] = 1;
-						
+						userchk.querySelector('.trading').textContent = '거래완료';
+						userchk.querySelector('.trading').classList.replace('trading', 'traded');
+						 
 					} else if (fromchk==0 && tochk==0) {
 						userchk.setAttribute('data-fromuserchk',1);
 						fromup(mid,toId,bno);
 						 jsonmsg["fromchk"] = 1;
-						
+						 userchk.querySelector('.trade').textContent = '확인요청';
+						 userchk.querySelector('.trade').classList.replace('trade', 'trading');
+						 
 					}
+				
+					  socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					
+					  //socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+					  
 				} else {
 					
 						if(fromchk==1 && tochk==1 ) {
@@ -1323,26 +1352,32 @@ function sendMessage() {
 						userchk.setAttribute('data-touserchk',1);
 						toup(mid,toId,bno);
 						  jsonmsg["tochk"] = 1;
+						  userchk.querySelector('.trading').textContent = '거래완료';
+						  userchk.querySelector('.trading').classList.replace('trading', 'traded');
 						  
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-touserchk',0);
 						toup(mid,toId,bno);
 						
 						  jsonmsg["tochk"] = 0;
+						  userchk.querySelector('.trading').textContent = '거래하기';
+						  userchk.querySelector('.trading').classList.replace('trading', 'trade');
 					} else if (fromchk==0 && tochk==0) {
 						userchk.setAttribute('data-touserchk',1);
 						toup(mid,toId,bno);
 						
 						  jsonmsg["tochk"] = 1;
+						  userchk.querySelector('.trade').textContent = '확인요청';
+						  userchk.querySelector('.trade').classList.replace('trade', 'trading');
 						
 					}
 					
-					
-					
+			
+						 socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					//from이다
 				}
 		
-			
+				
 	});
 	});
         
@@ -1395,8 +1430,8 @@ function sendMessage() {
             //var jsonData = JSON.parse(data); 
             //var json= jsonData.result;
 
-			  $("#msgload").remove();
-            serchidutil1(toId,mid,bno);
+			  //$("#msgload").remove();
+            //serchidutil1(toId,mid,bno);
            
            
 		  },
@@ -1427,8 +1462,8 @@ function sendMessage() {
            //var jsonData = JSON.parse(data); 
            //var json= jsonData.result;
 
-			  $("#msgload").remove();
-           serchidutil1(toId,mid,bno);
+			  //$("#msgload").remove();
+           //serchidutil1(toId,mid,bno);
           
           
 		  },

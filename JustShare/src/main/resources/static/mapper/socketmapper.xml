@@ -305,26 +305,7 @@ WHERE NOT EXISTS (
 	
 	</select>
 	
-	<update id="excludeId" parameterType="Map">
-  <![CDATA[
-    UPDATE UserMessages
-    SET
-      deletemsg = 1,
-      exceptid = CASE
-        WHEN exceptid IS NULL THEN NULL
-        ELSE
-          TRIM(BOTH ',' FROM
-            REPLACE(
-              REPLACE(CONCAT(',', exceptid, ','), CONCAT(',', #{exceptid}, ','), ','),
-              ',,',
-              ','
-            )
-          )
-      END
-    WHERE (to_user_id = #{toId} AND from_user_id = #{mid})
-    OR (from_user_id = #{toId} AND to_user_id = #{mid})
-  ]]>
-</update>
+
 
 <select id="firstmsgchk" parameterType="Map" resultType="Integer">
  
