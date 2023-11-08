@@ -47,30 +47,97 @@ img {
 </head>
 <body>
 	<h1>board</h1>
+	<div class="body__container section">
+	<!-- 모바일 버전 헤더  -->
+	<header class="header__topnav_type2">
+		  <div class="header_topnav_inner_n">
+			<div class="first_row">
+			  <div class="left-side">
+				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
+				<h1 class="logo"><a href="/">로고</a></h1>
+			  </div>
+			</div>
+
+		  </div>
+		</header>
+		<section class="section section--searchResult">
+		 <div class="list--inner">
+		 <div class="list--headermb">
+		 <!--   검색창  -->
+		 <form class="searchbar search" action="./board" method="get" id="searchForm" >
+		 	<input type="text" name="searchV" required="required" id="stxm" placeholder="키워드를 입력해주세요." style="padding-right: 50px; ">
+			<input type="hidden" name="areas" value="${param.areas }"> 
+			<input type="hidden" name="categories" value="${param.categories }">
+			<input type="hidden" name="equipments" value="${param.equipments }">
+			<input type="hidden" name="minPrice" value="${param.minPrice }">
+			<input type="hidden" name="maxPrice" value="${param.maxPrice }">
+			<input type="hidden" name="sort" value="${param.sort }">
+			<button type="submit" class="submit_btn">검색</button>
+    		<button type="button" class="submit_btn" id="resetButton">검색 초기화</button>
+		 </form>
+		 <!-- 필터 버튼 -->
+		 <div class="tab-filter">
+		 	<div class="list-tab">
+		 		<div class="card-content">
+		 			<button type="button"class="cardlistBtn  gubun_btn ver2">지역</button>
+		 		</div>
+		 		<div class="half-line"></div>
+		 		<div class="card-content">
+                   <button type="button"class="cardlistBtnbold-active  gubun_btn ver2">공간유형</button>
+                </div>
+			    <div class="half-line"></div>
+                <div class="card-content">
+                  <button type="button"class="cardlistBtn gubun_btn ver2">가격</button>
+                </div>
+			    <div class="half-line"></div>
+                <div class="card-content">
+                  <button type="button"class="cardlistBtn gubun_btn ver2">시설물</button>
+                </div>
+		 	</div>
+		 </div>
+		 </div>
+		 <!-- 필터 끝  -->
+		 <div class="tabcontent" id="cards">
+		     <div class="number-arrange">
+              <span class="list-title"></span>
+              <!-- 분류버튼 -->
+             	<div class="selectBox">
+					<button type="button" id="selectBtn" class="selectBtn">여기가 sort값에 따라 변해야함 + 이미지  이거누르면 리스트가 보이게 </button>
+					<div class="selectBoxList">
+					<button type="button" class="sort1">최신</button>
+					<button type="button" class="sort2">좋아요</button>
+					<button type="button" class="sort3">조회수</button>
+					<button type="button" class="sort4">낮은 가격</button>
+					<button type="button" class="sort5">높은 가격</button>
+					</div>
+				</div>
+             </div>
+             <!-- 전체 리스트 보여주는 컨테이너  -->
+             <div class="card-container">
+             <!-- 리스트 하나씩 forEach로  -->
+             <c:forEach items="${list}" var="row">
+             <div class="card_item2 pop-up">
+             <div class="cccc"></div>
+             </div>
+             </c:forEach>
+             </div>
+		 </div>
+		 </div>
+		
+		</section>
+		
+	</div>
+	
 		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
 		<button id="scrollToTopBtn">^</button>
 	<!-- 필터 버튼 -->
 	<button type="button" id="myBtn">필터</button>
 	<!-- 필터 버튼 -->
-	<!-- 분류버튼 -->
-	<div class="selectBox">
-	<button type="button" id="selectBtn" class="selectBtn">여기가 sort값에 따라 변해야함 + 이미지  이거누르면 리스트가 보이게 </button>
-	<div class="selectBoxList">
-		<button type="button" class="sort1">최신</button>
-		<button type="button" class="sort2">좋아요</button>
-		<button type="button" class="sort3">조회수</button>
-		<button type="button" class="sort4">낮은 가격</button>
-		<button type="button" class="sort5">높은 가격</button>
-	</div>
-	</div>
-	<!-- 분류버튼 -->
-	
-	<!--   검색창  -->
 
 	<form action="./board" method="get" class="search"  id="searchForm">
 		<input type="text" name="searchV" required="required" class="searchV">
-		<input type="hidden" name="areas" value="${param.areas }"> <input
-			type="hidden" name="categories" value="${param.categories }">
+		<input type="hidden" name="areas" value="${param.areas }"> 
+		<input type="hidden" name="categories" value="${param.categories }">
 		<input type="hidden" name="equipments" value="${param.equipments }">
 		<input type="hidden" name="minPrice" value="${param.minPrice }">
 		<input type="hidden" name="maxPrice" value="${param.maxPrice }">

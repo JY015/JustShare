@@ -75,7 +75,7 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/board")
 	public String boardp(@RequestParam Map<String, Object> map,HttpSession session) {
-		System.out.println(map);
+		
 		// 전체 글 숫자 + 검색
 		int listNum = boardService.listNum(map);
 
@@ -106,25 +106,6 @@ public class BoardController {
 		}
 	}
 
-	// 필터 적용하기 배열로 받아오기 힘듦 // 지금 보내고 받는게 이상함 배열로 보내고 배열로 받아와야함 << 문제있음
-
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/boardFilter") public String boardf(@RequestBody FilterData
-	 * filterData){ // 배열 받아와서 분리해서 하나하나 찾아주기 > ㄴㄴ > 이거 concat으로 찾아주기 Map<String,
-	 * String> map = new HashMap<String, String>(); String areaArray =
-	 * Arrays.toString(filterData.getAreas()).replaceAll("\\[|\\]", ""); String
-	 * cateArray = Arrays.toString(filterData.getCategories()).replaceAll("\\[|\\]",
-	 * ""); String equipArray =
-	 * Arrays.toString(filterData.getEquipments()).replaceAll("\\[|\\]", "");
-	 * System.out.println(areaArray); map.put("areaArray", areaArray);
-	 * map.put("cateArray", cateArray); map.put("equipArray", equipArray);
-	 * List<Map<String, Object>> listf = boardService.listf(map);
-	 * System.out.println(listf); JSONArray jsonArray = new JSONArray(); for
-	 * (Map<String, Object> item : listf) { JSONObject jsonObject = new
-	 * JSONObject(item); jsonArray.put(jsonObject); } return jsonArray.toString(); }
-	 */
 
 	@GetMapping("/bwrite") // 글 작성
 	public String bwrite(HttpSession session, Model model) {
