@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.js.web.board.BoardDAO">
+
+<select id="listNum">
+	SELECT count(distinct b.bno)
+	FROM board b 
+	JOIN boardEquipment be
+	<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
+		<if test="areas != null and areas != '' ">
+		 AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		</where>
+	
+</select>
+
+<select id="list" parameterType="Map" resultType="map">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
+	FROM board b
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+	<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
+		<if test="areas != null and areas != '' ">
+		 AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		AND b.bdel=1  
+		</where>
+	GROUP BY b.bno
+	<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
+	LIMIT #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="areaList" parameterType="Map" resultType="Map">
+	SELECT ano,aname
+	FROM area
+	
+</select>
+
+<select id="listp">
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
+	FROM board b
+	LEFT JOIN image i ON b.bno = i.bno
+	LEFT JOIN cate c ON b.cate = c.cate
+		<where>
+		<if test="searchV != null and searchV != ''">
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
+		</if>
+		<if test="areas != null and areas != '' ">
+		 AND b.ano IN (#{areas})
+		</if>
+		<if test="categories !=null and categories !=''">
+		AND b.cate IN (#{categories})
+		</if>
+		<if test ="equipmetns !=null and equipments !=''">
+		AND be.eid IN (#{equipments})
+		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		AND b.bdel=1
+		</where>
+	GROUP BY b.bno
+<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
+	LIMIT #{nextPageLimitI}, #{limitI}
+</select>
+
+<insert id="adr" parameterType="Map" >
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano})
+</insert>
+
+<select id="bno">
+	SELECT last_insert_id();
+</select>
+
+<insert id="equip">
+	INSERT INTO boardEquipment (bno,eid)
+	VALUES (#{bno},#{i})
+</insert>
+
+<insert id="image">
+	INSERT INTO image (originalFile,realFile,bno ,main)
+	VALUES (#{originalFilename},#{realFileName},#{bno},#{main})
+</insert>
+
+<select id="cl">
+	SELECT cate,cname
+	FROM cate
+
+</select>
+
+<select id="el">
+	SELECT eid,ename
+	FROM equipment
+
+</select>
+
+<select id="detail" parameterType="Map" resultType="Map">
+	SELECT *
+	FROM board
+	WHERE bno=#{bno}
+</select>
+
+<select id="imageD">
+	SELECT realFile
+	FROM image
+	WHERE bno=#{bno}
+	ORDER BY ino
+</select>
+
+<select id="equipD">
+	SELECT e.ename
+	FROM boardEquipment be
+	JOIN board b ON b.bno=be.bno
+	JOIN equipment e ON e.eid=be.eid
+	WHERE be.bno=#{bno}
+	ORDER BY be.eid
+	
+</select>
+
+<update id="del">
+	 UPDATE board
+	 SET bdel =0 
+	 WHERE bno = #{bno}
+</update>
+
+<select id="equipDE">
+	SELECT eid
+	FROM boardEquipment
+	WHERE bno=#{bno}
+
+</select>
+
+<update id="read" parameterType="Map">
+	UPDATE board
+	SET bread=bread+1
+	WHERE bno = #{bno}
+</update>
+
+<insert id="report" parameterType="Map">
+	INSERT INTO report (rmid,mid,bno,rcontent,rcate)
+	VALUES (#{rmid},#{mid},#{bno},#{rcontent},#{rcate} )
+</insert>
+
+<update id="breport">
+	UPDATE board
+	SET brno=brno+1
+	WHERE bno=#{bno}
+</update>
+
+<select id="dp" parameterType="Map" resultType="Integer">
+	SELECT Count(*)
+	FROM report
+	WHERE rmid=#{rmid} and bno=#{bno}
+</select>
+
+<select id="areaN" parameterType="Map" resultType="Map">
+	SELECT a.ano,r.rno
+	FROM area a 
+	JOIN region r ON a.rno = r.rno
+	WHERE a.aname = #{area} and r.rname=#{region}
+</select>
+
+<update id="bedit">
+	UPDATE board
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum}
+	WHERE bno=#{bno}
+	
+</update>
+<delete id="deleteEquip">
+	delete from boardEquipment where bno=#{bno}
+</delete>
+<select id="reportCateList">
+	SELECT *
+	FROM reportCate
+</select>
+<select id="isLike" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE mid=#{sid} AND bno=#{bno}
+</select>
+<select id="likesCount" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE bno=#{bno}
+</select>
+
+<delete id="deleteLike">
+	delete from likeList where mid=#{mid} AND bno=#{bno}
+</delete>
+
+<insert id="insertLike">
+	INSERT INTO likeList (bno,mid)
+	VALUES (#{bno},#{mid})
+</insert>
+
+<select id="isLikeList">
+	SELECT bno
+	FROM likeList
+	WHERE mid=#{sid}
+</select>
+</mapper>

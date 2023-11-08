@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>메인 페이지</title>
+        <title>메인 페이지 </title>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -107,6 +107,7 @@
     <div class="category culture"><a href="cafe">공연장</a></div>
   </div>
   <script>
+<<<<<<< HEAD
   
   document.addEventListener('DOMContentLoaded', function () {
 		
@@ -118,6 +119,11 @@
 		
   });
 
+=======
+  let mid = "${sessionScope.mid}"
+  alert(mid);
+  
+>>>>>>> main
   showCategory("all");
   
     $("button").click(function() {
