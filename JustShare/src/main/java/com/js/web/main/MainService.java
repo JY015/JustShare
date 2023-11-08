@@ -1,5 +1,6 @@
 package com.js.web.main;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +12,34 @@ public class MainService {
 	@Autowired 
 	private MainDAO mainDAO;
 
-	public Map<String, Object> login(Map<String, Object> map) {
+
+
+	public List<MainDTO> bannerlist() {
 		
-		return mainDAO.login(map);
+		return mainDAO.bannerlist();
 	}
 
-	public String findId(Map<String, Object> map) {
-		
-		return mainDAO.findId(map);
+
+
+	public List<Map<String, Object>> cateList() {
+	
+		return mainDAO.cateList();
 	}
 
-	public Map<String, Object> findPwCheck(Map<String, Object> map) {
+
+
+	public List<Map<String, Object>> imageD() {
 		
-		return mainDAO.findPwCheck(map);
+		return mainDAO.imageD();
 	}
+
+
+
+	public List<Map<String, Object>> imageC() {
+
+		return mainDAO.imageC();
+	}
+
 
 
 	
