@@ -4,11 +4,7 @@
 <mapper namespace="com.js.web.main.MainDAO">
 
 <select id="login" parameterType="Map" resultType="Map">
-<<<<<<< HEAD
-		SELECT count(*) as count, mname,mid 
-=======
 		SELECT count(*) as count, mname, mid
->>>>>>> main
 		FROM members
 		WHERE mid = #{mid } AND mpw = #{mpw}
 </select>
