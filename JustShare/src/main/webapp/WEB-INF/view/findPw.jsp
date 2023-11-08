@@ -79,15 +79,28 @@ uuid : ${uuid}<br>
 uuidPw : ${uuidPw} 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 function findPwFinal() { 
     var input = document.getElementById('findPwFinalCode'); 
     var findPwFinalCode = '${uuidPw}'; 
+=======
+function findPwFinal() {
+    var input = document.getElementById('findPwFinalCode'); 
+    var findPwFinalCode = '01234567'; 
+
+>>>>>>> main
     if (input.value === findPwFinalCode) {
         alert('임시비밀번호가 일치합니다.');
         document.getElementById('findPwFinal').submit();
+<<<<<<< HEAD
         alert("로그인해주세요.")
     } else {   
         alert('임시비밀번호가 일치하지 않습니다.');
+=======
+    } else {
+       
+        alert('인증번호가 일치하지 않습니다.');
+>>>>>>> main
     }
 }
 </script>

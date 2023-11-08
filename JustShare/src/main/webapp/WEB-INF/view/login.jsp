@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,6 +19,29 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+=======
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인 창</title>
+<link rel="stylesheet" href="./css/login.css">
+<script src="./js/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+<div style="text-align:center;">
+<img alt="login" src="./img/JustShare.png">
+<div class="login-form">
+		<form action="./login" method="post">
+			<input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br>
+			<input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br>
+			<button type="submit">로그인</button><br><br>
+			</form>
+	</div>
+	<a href="./findId">아이디 찾기 ㅣ</a>
+	<a href="./findPw">비밀번호 찾기 ㅣ</a>
+	<a href="./join">회원가입 </a>
+</div>
+>>>>>>> main
 
    <link rel="stylesheet" href="/css/main_page.css" />
    <link rel="stylesheet" href="./css/login.css">
@@ -28,6 +52,7 @@
    <!-- 폰트어썸 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+<<<<<<< HEAD
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
    
@@ -57,6 +82,13 @@
     <script src="/js/cookie.js?ver=20000120" defer></script>
 <script>
 var _ss_user_id   = "";
+=======
+<script type="text/javascript">
+
+
+
+
+>>>>>>> main
 </script>
   </head>
 <body>

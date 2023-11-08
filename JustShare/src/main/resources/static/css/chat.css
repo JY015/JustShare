@@ -3,9 +3,8 @@
 body,html{
 			height: 100%;
 			margin: 0;
-			background: #7F7FD5;
-	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+			background:white;
+	  
 		}
 
 		.chat{
@@ -15,7 +14,7 @@ body,html{
 		.card{
 			height: 851px;
 			border-radius: 15px !important;
-			background-color: rgba(0,0,0,0.4) !important;
+			background-color:#495057 !important;
 			width:393px;
 		}
 		.contacts_body{
@@ -32,6 +31,7 @@ body,html{
 		}
 	 .card-footer{
 		border-radius: 0 0 15px 15px !important;
+		background-color: rgba(0,0,0,0.3) !important;
 			border-top: 0 !important;
 	}
 		.container{
@@ -85,7 +85,7 @@ body,html{
 		}
 		.contacts li{
 			width: 100% !important;
-			padding: 5px 10px;
+			padding: 10px 10px;
 			
 		}
 	.active{
@@ -148,14 +148,15 @@ body,html{
 		margin-top: 10px;
 		margin-bottom: auto;
 		margin-left: 15px;
+		width:75%;
 	}
 	.user_info1 span{
 		font-size: 20px;
 		color: white;
 	}
 	.user_info p{
-	font-size: 18px;
-	color: rgba(255,255,255,0.6);
+	
+	color:#e9ecef;
 	}
 	.video_cam{
 		margin-left: 50px;
@@ -223,6 +224,8 @@ body,html{
 		color: white;
 		cursor: pointer;
 		font-size: 20px;
+			
+	margin-top: 20px;
 	}
 	.action_menu{
 		z-index: 1;
@@ -232,7 +235,7 @@ body,html{
 		color: white;
 		border-radius: 15px;
 		top: 30px;
-		right: 15px;
+		right: 24px;
 		display: none;
 	}
 	.action_menu ul{
@@ -247,6 +250,7 @@ body,html{
 	}
 	.action_menu ul li i{
 		padding-right: 10px;
+		width:30px;
 	
 	}
 	.action_menu ul li:hover{
@@ -268,20 +272,34 @@ body,html{
 
 }
 	#chat::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 	}
 	
 	#chat::-webkit-scrollbar-track {
-  background-color: #e4e4e4;
+ 
   border-radius: 100px;
 }
 
 	#chat::-webkit-scrollbar-thumb {
   border-radius: 100px;
-  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  background-color: #212529;
   box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
 }
 
+#contacts_body::-webkit-scrollbar {
+  width: 10px;
+	}
+	
+	#contacts_body::-webkit-scrollbar-track {
+ 
+  border-radius: 100px;
+}
+
+	#contacts_body::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: #212529;
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+}
 #message {
 	
 	resize: none;
@@ -326,9 +344,8 @@ body,html{
 .time {
 	font-size: 12px;
 	margin-top: 4px;
-		color:  #c0c0c0;
-		position: absolute;
-		right: 20px;
+		color:  #dee2e6;
+		float:right;
 	
 }
 
@@ -345,8 +362,8 @@ body,html{
 
     right: 28px;
     z-index: 2; /* 숫자 아이콘을 아이콘 위에 겹치게 하려면 z-index를 조절 */
-    height: 21px;
-    width: 20px;
+    height: 22px;
+    width: 22px;
     line-height: 20px;
     text-align: center;
     background-color: red;
@@ -354,4 +371,86 @@ body,html{
 	display:block;
     color: white;
 	
+}
+.span1{
+	text-align: center;
+	
+}
+
+.msgboard{
+	
+margin-top:12px;
+color: white;
+border-radius:15px;
+width: 350.76px;
+
+}
+
+.boarddetail{
+	height: 70px; 
+	width:100px;
+	border-radius:10px;
+}
+.boardtitle{
+	
+	
+	font-size:14px;
+	height: 60px;
+
+	width: 230px;
+	float: right;
+	text-align: center;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	max-width: 230px;
+	  text-overflow: ellipsis;
+}
+.msgdetail{
+	height: 40px; 
+	margin-top: 20px;
+	
+}
+.trade{
+	width:170px;
+	height: 35px;
+	border-radius:5px;
+	background-color: #1E90FF;
+	color: white;
+	font-weight: bold;
+	border: none;
+}
+.review{
+	width:170px;
+	margin-left: 10.76px;
+	height: 35px;
+	border-radius:5px;
+	border-color: #1E90FF;
+	border-width:2px;
+	border-style: solid;
+	color:#1E90FF;
+	font-weight: bold;
+	
+}
+
+
+.trading {
+	
+	width:170px;
+	height: 35px;
+	border-radius:5px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	background-color: #ff791e;
+}
+
+.traded {
+	width:170px;
+	height: 35px;
+	border-radius:5px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	background-color: #ff1e1e;
 }

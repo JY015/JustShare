@@ -8,10 +8,10 @@
 	JOIN boardEquipment be
 	<where>
 		<if test="searchV != null and searchV != ''">
-		btitle Like CONCAT('%',#{searchV},'%') or bcontent Like CONCAT('%',#{searchV},'%') or addr Like CONCAT('%',#{searchV},'%')
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -19,23 +19,25 @@
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
 		</if>
-	</where>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		</where>
 	
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
-		
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 	<where>
 		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -43,10 +45,29 @@
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
 		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		AND b.bdel=1  
 		</where>
-	AND b.bdel=1
 	GROUP BY b.bno
-	ORDER BY b.bno desc
+	<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
 	LIMIT #{cri.pageStart}, #{cri.perPageNum}
 </select>
 
@@ -57,17 +78,17 @@
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
 		<where>
 		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
+		( b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%') )
 		</if>
 		<if test="areas != null and areas != '' ">
-		AND b.ano IN (#{areas})
+		 AND b.ano IN (#{areas})
 		</if>
 		<if test="categories !=null and categories !=''">
 		AND b.cate IN (#{categories})
@@ -75,40 +96,35 @@
 		<if test ="equipmetns !=null and equipments !=''">
 		AND be.eid IN (#{equipments})
 		</if>
+		<if test = "minPrice !=null and minPrice !=''">
+		AND b.bprice  between #{minPrice} AND #{maxPrice} 
+		</if>
+		AND b.bdel=1
 		</where>
-	AND b.bdel=1
 	GROUP BY b.bno
-	ORDER BY b.bno desc
+<choose>
+     <when test= "sort == 2">
+        ORDER BY (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) DESC
+    </when>
+    <when test= "sort == 3">
+        ORDER BY b.bread DESC
+    </when>
+    <when test= "sort == 4">
+    	ORDER BY b.bprice ASC
+    </when>
+    <when test="sort==5">
+   		ORDER BY b.bprice DESC
+    </when>
+    <otherwise>
+        ORDER BY b.bno DESC 
+    </otherwise>
+</choose>
 	LIMIT #{nextPageLimitI}, #{limitI}
 </select>
-<!-- 
-<select id="listf" parameterType="Map" resultType="Map">
-	
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mno,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,
-	c.cname
-	FROM board b
-		
-	LEFT JOIN image i ON b.bno = i.bno
-	LEFT JOIN cate c ON b.cate = c.cate
-	<where>
-		<if test="searchV != null and searchV != ''">
-		b.btitle Like CONCAT('%',#{searchV},'%') or b.bcontent Like CONCAT('%',#{searchV},'%') or b.addr Like CONCAT('%',#{searchV},'%')
-		</if>
-		<if test="areaArray != null and areaArray != ''"> 
-		 b.cate IN (#{areaArray})
-		</if>
-		</where>
-	AND b.bdel=1
-	GROUP BY b.bno
-	ORDER BY b.bno desc
-	LIMIT 0, 10
-	
-
-</select> -->
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mno,addNum,addDetail,rno,ano)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mno},#{addNum},#{addD},#{rno},#{ano})
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano})
 </insert>
 
 <select id="bno">
@@ -180,8 +196,8 @@
 </update>
 
 <insert id="report" parameterType="Map">
-	INSERT INTO report (rmno,mno,bno,rcontent)
-	VALUES (#{rmno},#{mno},#{bno},#{rcontent} )
+	INSERT INTO report (rmid,mid,bno,rcontent,rcate)
+	VALUES (#{rmid},#{mid},#{bno},#{rcontent},#{rcate} )
 </insert>
 
 <update id="breport">
@@ -193,7 +209,7 @@
 <select id="dp" parameterType="Map" resultType="Integer">
 	SELECT Count(*)
 	FROM report
-	WHERE rmno=#{rmno} and bno=#{bno}
+	WHERE rmid=#{rmid} and bno=#{bno}
 </select>
 
 <select id="areaN" parameterType="Map" resultType="Map">
@@ -201,5 +217,44 @@
 	FROM area a 
 	JOIN region r ON a.rno = r.rno
 	WHERE a.aname = #{area} and r.rname=#{region}
+</select>
+
+<update id="bedit">
+	UPDATE board
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum}
+	WHERE bno=#{bno}
+	
+</update>
+<delete id="deleteEquip">
+	delete from boardEquipment where bno=#{bno}
+</delete>
+<select id="reportCateList">
+	SELECT *
+	FROM reportCate
+</select>
+<select id="isLike" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE mid=#{sid} AND bno=#{bno}
+</select>
+<select id="likesCount" parameterType="Map" resultType="Integer">
+	SELECT count(mid)
+	FROM likeList
+	WHERE bno=#{bno}
+</select>
+
+<delete id="deleteLike">
+	delete from likeList where mid=#{mid} AND bno=#{bno}
+</delete>
+
+<insert id="insertLike">
+	INSERT INTO likeList (bno,mid)
+	VALUES (#{bno},#{mid})
+</insert>
+
+<select id="isLikeList">
+	SELECT bno
+	FROM likeList
+	WHERE mid=#{sid}
 </select>
 </mapper>

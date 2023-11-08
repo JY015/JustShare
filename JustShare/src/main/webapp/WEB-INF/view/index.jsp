@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>메인 페이지</title>
+        <title>메인 페이지 </title>
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -109,6 +109,7 @@
   </style>
 </head>
 <body>
+<<<<<<< HEAD
 <div class="all-category-container">
     <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
     <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
@@ -117,6 +118,59 @@
     <div class="category-item"><img class="business" alt="business" src="./img/category/business.png"><p>업무</p></div>
     </div>
     <hr>
+=======
+  <div class="all-category-container">	
+  <button data-category="all">전체</button>
+  <button data-category="commercial">상업</button>
+  <button data-category="studio">스튜디오</button>
+  <button data-category="culture">문화</button>
+  <button data-category="business">업무</button>
+  </div>
+  <br><br>
+  <div class="category-container">		
+    <div class="category commercial"><a href="cafe">카페</a></div>
+    <div class="category commercial"><a href="cafe">식당</a></div>
+    <div class="category commercial"><a href="cafe">술집</a></div>
+    <div class="category commercial"><a href="cafe">공방</a></div>
+    
+    <div class="category studio"><a href="cafe">연습실</a></div>
+    <div class="category studio"><a href=cafe>녹음실</a></div>
+    <div class="category studio"><a href="cafe">파티룸</a></div>
+    <div class="category studio"><a href="cafe">세트장</a></div>  
+      
+    <div class="category business"><a href="cafe">사무실</a></div>
+    <div class="category business"><a href="cafe">오피스텔</a></div>
+    <div class="category business"><a href="cafe">강당</a></div>
+    <div class="category business"><a href="cafe">기타</a></div>
+    
+    <div class="category culture"><a href="cafe">갤러리</a></div>
+    <div class="category culture"><a href="cafe">공연장</a></div>
+  </div>
+  <script>
+<<<<<<< HEAD
+  
+  document.addEventListener('DOMContentLoaded', function () {
+		
+		//세션에 저장된 count를 storage에 저장
+		sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
+		
+		
+		const mid = sessionStorage.getItem("mid"); 	
+		
+  });
+
+=======
+  let mid = "${sessionScope.mid}"
+  alert(mid);
+  
+>>>>>>> main
+  showCategory("all");
+  
+    $("button").click(function() {
+      var category = $(this).data("category");
+      showCategory(category);
+    });
+>>>>>>> main
 
 <div class="entire-cate">
 <div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
@@ -140,6 +194,7 @@
 	    showCategory(category);
 	  });
 
+<<<<<<< HEAD
 	  $(".all").click(function() {
 	    showCategory('all');
 	  });
@@ -156,6 +211,13 @@
 	  function showAllItems() {
 	    $(".category").show();
 	  }
+=======
+    function showAllItems() {
+      $(".category").show();
+    }
+    
+    
+>>>>>>> main
   </script>
         <script src="js/swipeScript1.js"></script>
 <br>
