@@ -263,25 +263,12 @@ for (var key in data) {
         var time = data.time;
         var sort = 1;
         var readmsg=0;
-        /*
-        var jsonmsg1= {
-       		  
-     			"firstmsg" : 1,
-     		  	"mid" : mid,
-     		  	"sender":sender
-       }
-
      
-           socket.send(JSON.stringify(jsonmsg1));  
-        
-       */
         
         if (currentScreen === 'contacts_card') {
         	
         	updateMessage(sender, time, message,sort);
-        	
-        	//handleNewMessage(noteNumElement);
-    		//noteNumElement.style.display = 'block';
+        
 
 
         } else if (currentScreen === 'msgload') {
@@ -351,9 +338,50 @@ for (var key in data) {
         	 
          }
     
-    } 
+    } else if("toId" in data && "mid" in data && "bno" in data
+    		 &&"fromchk" in data && !("tochk" in data)) { //거래창업데이트
+    	
+    	var toId = data.toId;
+    	var mid = data.mid;
+    	var bno = data.bno;
+    	var fromchk = data.fromchk;
+    
+		if (currentScreen === 'contacts_card') {
+        	
+			//모듈화
+			tradefromupdate();
+			
+        
+
+        } else if (currentScreen === 'msgload') {
+        	
+        	tradefromupdate();
+        }
+    	
     
     
+ 	}else if("toId" in data && "mid" in data && "bno" in data
+		 && "tochk" in data  && !("fromchk" in data)) {
+ 		
+ 		var toId = data.toId;
+    	var mid = data.mid;
+    	var bno = data.bno;
+    	var tochk = data.tochk;
+	 
+	 if (currentScreen === 'contacts_card') {
+     	//여기부터
+     	tradetoupdate();
+     	
+			
+     	
+
+
+     } else if (currentScreen === 'msgload') {
+    	 
+     }
+	 
+	 
+ }
 	 //alert(currentScreen);
     if(value ==="연결불러오기") {  // 로그인시 기존접속자 온라인,오프라인 표시하기
     	
@@ -383,6 +411,69 @@ for (var key in data) {
 
 };
 
+
+//##우선 toto일때 from업데이트
+function tradefromupdate() {
+    // 모든 user_info1 엘리먼트를 찾기
+      var userchk = document.querySelector(".msgdetail");
+	  var fromchk = userchk.getAttribute("data-fromuserchk");
+	  var tochk = userchk.getAttribute("data-touserchk");
+       
+	  var bnoid = document.querySelector(".boarddetail");
+	 var bno = bnoid.getAttribute("data-bno");
+    
+	 
+	 if(fromchk==1 && tochk==1 ) {
+			
+			//거래완료상태 아무동작하지않음
+			}else if (fromchk==1 && tochk==0) {
+			userchk.setAttribute('data-fromuserchk',0);
+          
+	            socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+		} else if (fromchk==0 && tochk==1){
+			userchk.setAttribute('data-fromuserchk',1);
+	
+			
+		} else if (fromchk==0 && tochk==0) {
+			userchk.setAttribute('data-fromuserchk',1);
+		
+
+		}
+       
+	
+}
+
+//##to가from일떄 to업하기 
+function tradetoupdate(){
+		
+	   var userchk = document.querySelector(".msgdetail");
+	  var fromchk = userchk.getAttribute("data-fromuserchk");
+	  var tochk = userchk.getAttribute("data-touserchk");
+     
+	  var bnoid = document.querySelector(".boarddetail");
+	 var bno = bnoid.getAttribute("data-bno");
+  
+	 
+		
+	if(fromchk==1 && tochk==1 ) {
+			
+			//거래완료상태 아무동작하지않음
+			}else if (fromchk==1 && tochk==0) {
+			userchk.setAttribute('data-touserchk',1);
+
+	
+			  
+		} else if (fromchk==0 && tochk==1){
+			userchk.setAttribute('data-touserchk',0);
+			
+			
+			
+		} else if (fromchk==0 && tochk==0) {
+			userchk.setAttribute('data-touserchk',1);
+		
+			
+		}
+	}
 
 
 
@@ -1180,11 +1271,23 @@ function sendMessage() {
 		var bnoid = document.querySelector(".boarddetail");
 		var bno = bnoid.getAttribute("data-bno");
 		
+		  
+            
+		
 		
 		//alert(mid+toId+bno);
 		//## 여기서 조건식으로 2일경우 클릭 안하게 문제는 또 ajax?
 			toIdbnochk(mid,toId,bno, function(json) {	
 
+				var jsonmsg= {
+		        		  
+		      			"toId" : toId,
+		      		  	"mid" : mid,
+		      		  	"bno":bno
+		      		 
+		        }
+
+				
 				if(json ==1) {
 					
 					//to가to,다 내가 from임
@@ -1195,12 +1298,19 @@ function sendMessage() {
 						}else if (fromchk==1 && tochk==0) {
 						userchk.setAttribute('data-fromuserchk',0);
 						fromup(mid,toId,bno);
+				
+					     jsonmsg["fromchk"] = 0;
+     		            
+				            socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-fromuserchk',1);
-						fromup(mid,toId,bno);
+						fromup(mid,toId,bno); 
+						jsonmsg["fromchk"] = 1;
+						
 					} else if (fromchk==0 && tochk==0) {
 						userchk.setAttribute('data-fromuserchk',1);
 						fromup(mid,toId,bno);
+						 jsonmsg["fromchk"] = 1;
 						
 					}
 					
@@ -1212,12 +1322,18 @@ function sendMessage() {
 						}else if (fromchk==1 && tochk==0) {
 						userchk.setAttribute('data-touserchk',1);
 						toup(mid,toId,bno);
+						  jsonmsg["tochk"] = 1;
+						  
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-touserchk',0);
 						toup(mid,toId,bno);
+						
+						  jsonmsg["tochk"] = 0;
 					} else if (fromchk==0 && tochk==0) {
 						userchk.setAttribute('data-touserchk',1);
 						toup(mid,toId,bno);
+						
+						  jsonmsg["tochk"] = 1;
 						
 					}
 					
@@ -1571,7 +1687,8 @@ function sendMessage() {
         		
         		  var toId = document.querySelector('.toId1').textContent;
         		  var mid = sessionStorage.getItem("mid"); 
-        	
+        			var bnoid = document.querySelector(".boarddetail");
+        			var bno = bnoid.getAttribute("data-bno");
         	
         		  if(toId != null) {
         			  
@@ -1605,7 +1722,7 @@ function sendMessage() {
         		        	 
         		     	  	$("#msgload").remove();
         		     
-        		        	serchidutil(toId,mid);
+        		        	serchidutil1(toId,mid,bno);
         		        
         		        	//exitupdate(toId);  
         		        	

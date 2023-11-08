@@ -58,6 +58,20 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
+    
+    <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+		
+		//세션에 저장된 count를 storage에 저장
+		sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
+		
+		
+		const mid = sessionStorage.getItem("mid"); 	
+		
+		
+  });
+
+    </script>
 <script>
 var _ss_user_id   = "";
 </script>
@@ -391,7 +405,7 @@ var _ss_user_id   = "";
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/images/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="/img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -447,7 +461,7 @@ navigation: {   // 버튼 사용자 지정
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/images/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="/img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -501,7 +515,7 @@ navigation: {   // 버튼 사용자 지정
 						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
 					</div>
 					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+					  <img class="card_img" src="/img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
 				</div>
   	<div  class="card__inner2">         
@@ -563,7 +577,7 @@ navigation: {   // 버튼 사용자 지정
 						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
 					</div>
 					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+					  <img class="card_img" src="/img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
 				</div>
   	<div  class="card__inner2">         

@@ -58,6 +58,7 @@ public class LoginController {
 			session.removeAttribute("mname");
 		}
 		session.invalidate();
+		
 		return "redirect:/";
 	}
 

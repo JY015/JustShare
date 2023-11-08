@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -205,6 +206,7 @@ img {
 
 	<!-- 페이지 덧붙이기 스크립트 -->
 	<script type="text/javascript">
+
 		//현재 스크롤 위치 저장
 		let lastScroll = 0;
 		let page = 0;

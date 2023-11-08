@@ -72,10 +72,10 @@ OR to_user_id=#{mid} AND from_user_id=#{toId} AND bno=#{bno}
 
 SELECT bno
 FROM UserMessages
-WHERE to_user_id = #{toId} AND from_user_id = #{mid}
-ORDER BY timestamp DESC
+WHERE (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus=0)
+   OR (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus = 1)
+ORDER BY CASE WHEN tradestatus = 0 THEN 0 ELSE 1 END, timestamp DESC
 LIMIT 1;
-
 </select>
 
 <insert id="bnosave" parameterType="Map">
@@ -103,9 +103,9 @@ SELECT
     (SELECT mimg FROM members WHERE mid = #{mid}) AS myimg,
     u.timestamp,
     (SELECT mid from members WHERE mid=#{toId}) AS toId,
-    (SELECT bimg FROM jboard WHERE bno=#{bno}) AS bimg,
-    (SELECT btitle FROM jboard WHERE bno=#{bno}) AS btitle,
-	(SELECT bno FROM jboard WHERE bno=#{bno}) AS bno
+    (SELECT realFile FROM image WHERE bno=#{bno} AND main=1) AS bimg,
+    (SELECT btitle FROM board WHERE bno=#{bno}) AS btitle,
+	(SELECT bno FROM board WHERE bno=#{bno}) AS bno
     
 
 FROM UserMessages u
@@ -121,8 +121,8 @@ WHERE (u.from_user_id = #{mid} AND u.to_user_id = #{toId}
 	<insert id="msginsert" parameterType="Map">
 
 
-INSERT INTO UserMessages (to_user_id, content, from_user_id, timestamp, read_status,bno)
-VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno})
+INSERT INTO UserMessages (to_user_id, content, from_user_id, timestamp, read_status,bno,tradestatus)
+VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno},0)
 
 
 	</insert>
@@ -141,8 +141,8 @@ VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno})
 	
 	<insert id="Firstmsg" parameterType="Map">
 	
-	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status,deletemsg,bno)
-	VALUE (#{toId},#{message},#{mid},NOW(),#{read_status},#{deletemsg},#{bno})
+	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status,deletemsg,bno,tradestatus)
+	VALUE (#{toId},#{message},#{mid},NOW(),#{read_status},#{deletemsg},#{bno},0)
 	
 	</insert>
 
@@ -203,19 +203,17 @@ ORDER BY latest_timestamp DESC;
 	</select>
 	
 	<update id="readupdate" parameterType="Map">
-	
-	 UPDATE UserMessages um
-	 INNER JOIN members AS m ON um.to_user_id = m.mid
-    SET
-        um.read_status =0,
-          m.mchatcount = m.mchatcount - (
-            SELECT COUNT(*) FROM UserMessages
+
+UPDATE UserMessages AS u
+INNER JOIN members AS m ON u.to_user_id = m.mid
+SET u.read_status = 0,
+    m.mchatcount = m.mchatcount - (
+        SELECT sub_count FROM (
+            SELECT COUNT(*) AS sub_count FROM UserMessages
             WHERE to_user_id = #{mid} AND from_user_id = #{toId} AND read_status = 1
-        )
-      
-    WHERE um.to_user_id = #{mid} AND um.from_user_id = #{toId}
- 
-	
+        ) sub_query
+    )
+WHERE u.to_user_id = #{mid} AND u.from_user_id = #{toId}
 	
 	</update>
 	
