@@ -14,7 +14,9 @@ public interface MypageDAO {
 
 	List<Map<String, Object>> listdetail2(String mid);
 
-	List<Map<String, Object>> likelist(String mid); 
+	List<Map<String, Object>> likelist(String mid);
+
+	Map<String, Object> info(Map<String, Object> map); 
 
 
 	

@@ -23,5 +23,15 @@ FROM image i
 JOIN likeList l ON l.bno = i.bno
 JOIN board b ON b.bno = i.bno
 WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};  
-</select>  
+</select>
+
+<select id="info" parameterType="Map" resultType="Map">
+		select mid, mname, maddr, mbirth, mphone, memail
+		from members
+		where mname = #{mname}
+		</select>
+
+
+
+  
 </mapper>

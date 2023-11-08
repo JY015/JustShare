@@ -55,7 +55,7 @@ public class LoginController {
 			session.removeAttribute("mname");
 		}
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/index";
 	}
 
 	@GetMapping("/findId")

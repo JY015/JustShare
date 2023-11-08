@@ -32,6 +32,11 @@ public class MypageService {
 		return mypageDAO.likelist(mid);
 	}
 
+	public Map<String, Object> info(Map<String, Object> map) {
+	
+		return mypageDAO.info(map);
+	}
+
 
 
 

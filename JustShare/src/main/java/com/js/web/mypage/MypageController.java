@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -49,9 +50,26 @@ public class MypageController {
 		} else {
 			return "redirect:/";
 		}
-
+	}
+		
+		
+		@GetMapping("/member/modify")
+		public String modify(HttpSession session, Model model, @RequestParam Map<String, Object> map) {
+			
+			if(session.getAttribute("mid") != null) {
+				map.put("mname", session.getAttribute("mname"));
+				Map<String, Object> info = mypageService.info(map);
+				model.addAttribute("info", info);
+				return "/member/modify";
+			} else {
+				return "redirect:/login";
+			}	
+			
+		}
+		
+		
 	}
 
 
 
-}
+

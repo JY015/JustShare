@@ -187,7 +187,7 @@ var _ss_user_id	= "515a65b9da51420ab0583ee4807c7c1f";
                     <img src="/img/ico_more.png" alt="" />
                     <ul id="more_div" style='display:none'>
                       <li><a href='/member/modify'>회원정보 수정</a></li>
-                      <li><a href='/logout'>로그아웃</a></li>
+                      <li><a href="/logout" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a></li>
                     </ul>
                   </div>
             </div>
@@ -271,6 +271,8 @@ $(function () {
       <div class="mypage-lay1-gridC2" id="brand_guide_div" style='display:none'>
         <p class="mypage_title_guide"><img src="/img/places/heart.png">관심목록</p>
         <div class="btn-group">
+        <div class="swiper event_card1_swiper">
+		  <div class="swiper-wrapper">
            <c:forEach items="${likelist }" var="row" varStatus="loop">  
        <div class="card__item4 swiper-slide">			  
 				<div class="img-box">
@@ -291,6 +293,9 @@ $(function () {
 				</a>
 			</div>
 			</c:forEach>  
+			
+			</div>
+			</div>
          
          
          
