@@ -107,9 +107,23 @@
     <div class="category culture"><a href="cafe">공연장</a></div>
   </div>
   <script>
+<<<<<<< HEAD
+  
+  document.addEventListener('DOMContentLoaded', function () {
+		
+		//세션에 저장된 count를 storage에 저장
+		sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
+		
+		
+		const mid = sessionStorage.getItem("mid"); 	
+		
+  });
+
+=======
   let mid = "${sessionScope.mid}"
   alert(mid);
   
+>>>>>>> main
   showCategory("all");
   
     $("button").click(function() {
@@ -129,6 +143,8 @@
     function showAllItems() {
       $(".category").show();
     }
+    
+    
   </script>
 <br>
         <!-- Section-->
@@ -348,5 +364,5 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
->>>>>>> main
+
 </html>

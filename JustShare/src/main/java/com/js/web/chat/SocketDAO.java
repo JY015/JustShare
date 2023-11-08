@@ -22,7 +22,7 @@ public interface SocketDAO {
 
 
 
-	void Firstmsg(Map<String, Object> map);
+	int Firstmsg(Map<String, Object> map);
 
 
 
@@ -35,5 +35,101 @@ public interface SocketDAO {
 
 
 	List<Map<String, Object>> roomload(Map<String, Object> map);
+
+
+
+	void readupdate(Map<String, Object> map);
+
+
+
+	void chatcount(String toId);
+
+
+
+	Integer msgcount(String mid);
+
+
+
+
+
+
+
+
+
+
+
+
+	int toexit(Map<String, Object> map);
+
+
+
+	int exceptid(Map<String, Object> map);
+
+
+
+
+
+
+	void Firstupdate(Map<String, Object> map);
+
+
+
+	int block(Map<String, Object> map);
+
+
+
+	List<Map<String, Object>> blocklist();
+
+
+
+	int blockchk(Map<String, Object> map);
+
+
+
+	int unblock(Map<String, Object> map);
+
+
+
+	int firstmsgchk(Map<String, Object> map);
+
+
+
+	void bnosave(Map<String, Object> map);
+
+
+
+
+
+
+
+	int bnoload(Map<String, Object> paramMap);
+
+
+
+	Map<String, Object> tradechk(Map<String, Object> map);
+
+
+
+
+
+
+
+	int toIdbnochk(Map<String, Object> map);
+
+
+
+	int fromup(Map<String, Object> map);
+
+
+
+	int toup(Map<String, Object> map);
+
+
+
+	int bnochk(Map<String, Object> map);
+
+
+
+	
 
 }
