@@ -278,6 +278,7 @@
 </head>
 	
 <body>
+
   <form id="myForm" action="./join" method="post"> 
       <div class="join-div" align="center">
          <div>
@@ -383,7 +384,7 @@
 
 
 
-
+<%@ include file="footer.jsp"%>
 
 
 </body>

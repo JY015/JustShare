@@ -27,7 +27,7 @@ public class LoginController {
 	private Util util;
 
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}
 
@@ -39,9 +39,15 @@ public class LoginController {
 			session.setAttribute("mid", map.get("mid"));
 			session.setAttribute("mname", res.get("mname"));
 			session.setAttribute("mgrade", res.get("mgrade"));
-			if ((int)res.get("mgrade") == 4) {
-				return "admin/admin";
-			}
+			
+			  if ((int)res.get("mgrade") == 4) { 				  
+							  
+				  return "redirect:/admin/";				  
+			  }
+			  if ((int)res.get("mgrade") <= 2) { 				  
+				  session.invalidate(); 
+				  return "redirect:/error";				  
+			  }
 			return "redirect:/";
 		} else {
 			model.addAttribute("loginCheckCount", 1);
@@ -130,10 +136,5 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/cafe")
-	public String cafe() {
-		
-		return "cafe";	
-	}
 
 }

@@ -63,7 +63,7 @@
 			<input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="임시비밀번호 6자리" required="required" maxlength="6"><br>
 			<input type="hidden" name="memail" value="${memail}">
 			<input type="hidden" name="uuid" value="${uuid}">
-			<button type="button" onclick="findPwFinal()">확인</button>
+			<button type="button"  id="send" onclick="findPwFinal()">확인</button>
 </form>	
 </c:if>
 
@@ -94,6 +94,32 @@ function findPwFinal() {
         alert('임시비밀번호가 일치하지 않습니다.');
 
     }
+    const remainingMin = document.getElementById("remaining__min");
+    const remainingSec = document.getElementById("remaining__sec");
+    const completeBtn = document.getElementById("userNum");
+    var get__number = document.getElementById("send");
+
+    let time = 3;
+
+    const takeTarget = () => {
+        timerInterval = setInterval(function () {
+            if (time == 0) {
+                $('#userNum').attr('disabled', true);
+                resetTimer();
+            } else if (time > 0) {
+                $('#send').attr('disabled', true);
+                $('#to').attr('disabled', true);
+                $('#userNum').attr('disabled', false);
+                time = time - 1;
+                let min = Math.floor(time / 60);
+                let sec = String(time % 60).padStart(2, "0");
+                remainingMin.innerText = min;
+                remainingSec.innerText = sec;
+            } else {
+                $('#userNum').attr('disabled', true);
+            }
+        }, 1000);
+    };
 }
 </script>
 </body>

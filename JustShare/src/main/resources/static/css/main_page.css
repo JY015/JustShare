@@ -1,5 +1,5 @@
 
-/* 硫붿씤 異붽� css*/
+/* 硫붿씤 異붽  css*/
 .font_w300{
   font-weight: 300;
 }
@@ -7,7 +7,7 @@
   color: #4091f6 !important;
   font-weight: 500;
 }
-/*硫붿씤 諛곕꼫 */
+/*硫붿씤 諛곕꼫 */
 .banner_img_wrap{
   width: 1900px;
   height: 760px;
@@ -163,7 +163,7 @@
 
 
 
-/* �④낵 */
+/*  ④낵 */
 .swiper-slide .bottle-bg {
   transition-duration: 0.6s;
   opacity: 0;
@@ -194,7 +194,7 @@
  }
 
 
- /* 紐⑤컮�� header new */
+ /* 紐⑤컮   header new */
  .header_topnav_new{
   display: none;
  }
@@ -203,12 +203,12 @@
  }
  .header_topnav_new .header_topnav_inner_n{
   width: 100%;
-  padding: 31px 16px 16px;
+  padding: 19px 16px 16px;
  }
  .header_topnav_new .header_topnav_inner_n .first_row{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 17px;
+  margin-bottom: 0px;
   align-items: center;
  }
  .header_topnav_new .header_topnav_inner_n .first_row h1{
@@ -353,7 +353,7 @@
   color: rgb(0, 0, 0);
 }
 
- .home_btn {
+.home_btn {
   width: 60px;
   height: 60px;
   border: solid 4px white;
@@ -362,7 +362,8 @@
   box-shadow: 0 -2px 8px #4122d3 inset;
   background-color: #6b4bf5;
   /* background-color: #7759ff; */
-  margin: -12px auto;
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
 }
 
 .container_w {
@@ -486,7 +487,7 @@
 
 
 
-/* �쒕툝由�/紐⑤컮�� */
+/*  쒕툝由 /紐⑤컮   */
 @media screen and (max-width:2510px){
   .banner_img_wrap ul li .main_banner2_list2{
     width: 52%;
@@ -570,7 +571,7 @@
 }
 
 
-		
+      
 @media screen /* and (max-width:550px) */ /*여기 수정함*/{
   .banner_back_img .mo_banner{
     display: block;

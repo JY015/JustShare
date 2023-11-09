@@ -8,5 +8,38 @@
 	and mgrade = 4
 </select>
 
+<select id="memberList" resultType="map">	
+	SELECT mno, mid, mname, maddr, mbirth, mjoindate, memail, mphone, mgrade
+	FROM members
+</select>
+
+
+<update id="gradeChange" parameterType="map" >
+UPDATE members
+SET mgrade=#{grade} 
+WHERE mno=#{mno}
+
+</update>
+
+<select id="reportList" resultType="map">	
+	SELECT rno, rmid, mid, bno, rcontent, rcate
+	FROM report
+</select>
+
+<select id="reportListMember" parameterType="Map" resultType="Map">
+	SELECT mid, COUNT(*) as count
+	FROM report
+	GROUP BY mid;
+</select>
+
+<update id="gradeDown">
+	UPDATE members
+	SET mgrade = 1 WHERE MID IN (
+  	SELECT MID FROM report
+  	GROUP BY MID
+  	HAVING COUNT(*) >= 5
+);
+</update>
+
 
 </mapper>
