@@ -68,9 +68,63 @@
     margin: 0 atuo ;
 }
 
-    </style>
+</style>
 </head>
 <body>
+<div class="body__container section">
+	<!-- 모바일 버전 헤더  -->
+	<header class="header__topnav_type2">
+		  <div class="header_topnav_inner_n">
+			<div class="first_row">
+			  <div class="left-side">
+				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
+				<h1 class="logo"><a href="/">로고</a></h1>
+			  </div>
+			</div>
+
+		  </div>
+		</header>
+	<section class="section section--spacedetail">
+		<div class="spacedetail--inner">
+		<section class="section section--space--category">
+		<div id="thumb_list" class="owl-carousel owl-theme card__carousel lightbox_type card__type__shadow">
+		 <!-- 반복문 돌리기  -->
+		 <c:forEach items="${imageD }" var="n">
+		 <div class="img_cnt card__item black">
+		 <img src="/img/places/${n }">
+		 </c:forEach>
+		 <div>
+		 <p class="visible-mo"><span>1</span>/0</p>
+		 </div>
+		 </div>
+		
+		</div>
+		</section>
+		<section class="section section--spaceDetail">
+			 <div class="spaceDetailInfo">
+			  <div class="spDetail_topinfo pd0">
+			     <div class="tag__wrap txt__tag">
+                 <ul class="tag">
+                 <li class="on">판매중</li>
+                 </ul>
+                 </div>
+                 <p class="txt__tit26">${detail.btitle }</p>
+                 <!-- 여기 이미지 넣기 대충 그 네비게이션 모양  -->
+                 <div class="location"><img src="../images/ic_location_line.svg" alt=""> <span class="address2">${detail.addr }</span></div>
+			  </div>
+			   <hr class="detail-divline">
+			   <div class="spaceDetailInfo_summary">
+			   <div style="display: flex; align-items:baseline;"><p class="txt__tit">공간 소개</p></div>
+			   </div>
+			 </div>
+		</section>
+		</div>
+	
+	</section>
+</div>
+
+
+
 	<h1>Share</h1>
 <button type="submit" onclick="edit()">수정</button>
 <button type="submit" onclick="del()">삭제</button>

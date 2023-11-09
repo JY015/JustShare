@@ -85,6 +85,8 @@
 }
 
 .Citycontainer {
+  	 display: flex;
+    flex-wrap: wrap;
     float: right; /* 오른쪽으로 부유(floating)시킴 */
     width: 70%; /* 부모 요소의 50% 너비를 차지하도록 설정 */
 }
@@ -92,6 +94,50 @@
 .AreaGroupContainer button {
     display: block; /* 블록 레벨 요소로 변경하여 세로 배치 */
     margin-bottom: 10px; /* 각 버튼 사이에 10px의 여백 추가 */
+}
+
+.Citycontainer .col-md-4 {
+    flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+    box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
+    padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+}
+.cateContainer{
+ 	display: flex;
+    flex-wrap: wrap;
+
+}
+.equipContainer{
+	display: flex;
+    flex-wrap: wrap;
+}
+.cateContainer .col-md-4{
+	 flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+    box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
+    padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+}
+.equipContainer .col-md-4{
+	 flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+    box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
+    padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+}
+.imageContainer {
+        position: relative;
+        display: inline-block;
+    }
+
+    .likeon, .likeoff {
+        width: 30px; /* 원하는 너비로 조절합니다. */
+        height: 30px; /* 원하는 높이로 조절합니다. */
+        position: absolute;
+        top: 0;
+        left: 95%; /* 가운데 정렬을 위해 left 값을 조정합니다. */
+        transform: translateX(-50%); /* left 값의 50%만큼 왼쪽으로 이동하여 중앙 정렬합니다. */
+        z-index: 1; /* 다른 요소들보다 위에 표시되도록 z-index 값을 설정합니다. */
+    }
+.cccc .imageContainer .main {
+		width: 360px;
+		height: 240px;
+
 }
 </style>
  
@@ -166,9 +212,23 @@
              <div class="card-container">
              <!-- 리스트 하나씩 forEach로  -->
              <c:forEach items="${list}" var="row">
-             <div class="card_item2 pop-up" data-bno="${row.bno}">
+             <div class="card_item2 pop-up" >
              <div class="cccc">
-             <img src="/img/places/${row.realFile}">
+             <div class="imageContainer" >
+             <img class="main" src="/img/places/${row.realFile}">
+             <div class="like" data-bno="${row.bno}">
+             <c:choose>
+             <c:when test="${row.isLiked eq 1  }">
+             <img class="likeon" src="../img/icon/zzheart.png" />
+             <img class="likeoff" src="../img/icon/zheart.png" style='display: none'/>
+             </c:when>
+             <c:otherwise>
+             <img class="likeon" src="../img/icon/zzheart.png" style='display: none'/>
+             <img class="likeoff" src="../img/icon/zheart.png" />
+             </c:otherwise>
+             </c:choose>
+             </div>
+             </div>
              </div>
              <a class="card-surface" href="./bdetail?bno=${row.bno}">
              <div class="card_inner2">
@@ -180,7 +240,7 @@
              ${row.addr }<span class="likes_count" data-count=${row.likesCount } ><i class="far fa-heart" ></i> ${row.likesCount }</span> 
              </p>
              <hr class="card-line">
-              <p class="txt__card__tit price"> <span class="read_count">${row.bdate }</span>
+              <p class="txt__card__tit price"> <span class="read_count">${row.fdate }</span>
              ${row.bprice }원
              </p>
              </div>
@@ -195,7 +255,7 @@
 		</section>
 		
 	</div>
-	
+	<%@ include file="footer.jsp" %> 
 		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
 		<button id="scrollToTopBtn">^</button>
 	<!-- 필터 버튼 -->
@@ -258,22 +318,22 @@
 								</c:forEach>
 								</div>
 								<div class="Citycontainer">
-									<c:forEach items="${areaList }" var="n">
-									<input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano }" data-aname="${n.aname}"> ${n.aname } 
-            					</c:forEach>
+								<c:forEach items="${areaList}" var="n" begin="0" end="24">
+		                       	<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>
+				            	</c:forEach>
 								</div>
 								</div>
-								
 							</div>
 
 							<div id="tab2" class="tab_content">
 								<!--Content-->
 								<h1>공간 유형</h1>
+								<div class="cateContainer">
 								<c:forEach items="${catelist }" var="n" >
-									<input type="checkbox" id="cate_${n.cate }" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }
+									<div class="col-md-4"><input type="checkbox" id="cate_${n.cate }" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }</div>
 								</c:forEach>
-							</div>
-
+								</div>
+								</div>
 							<div id="tab3" class="tab_content">
 								<!--Content-->
 								<h1>가격</h1>
@@ -289,9 +349,11 @@
 							<div id="tab4" class="tab_content">
 								<!--Content-->
 								<h1>시설물</h1>
+								<div class="equipContainer">
 								<c:forEach items="${equiplist }" var="n">
-									<input type="checkbox" name="equipment" id="equip_${n.eid }" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }
+									<div class="col-md-4"><input type="checkbox" name="equipment" id="equip_${n.eid }" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }</div>
 								</c:forEach>
+								</div>
 							</div>
 					
 						</div>
@@ -357,7 +419,7 @@
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
 						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
 						            newCardItem += "<hr class='card-line'>";
-						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.bdate + "</span> " + item.bprice + "원</p>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.bprice + "원</p>";
 						            newCardItem += "</div></div></a></div>";
 
 						            // 새로운 카드 아이템을 기존의 div에 추가
@@ -468,26 +530,239 @@
 					return false;
 				});
 				
-		        $(".regionButton").on("click", function() {
-		            console.log("클릭했습니다");
-		        	// 선택된 버튼의 클래스를 가져옴
-		            var selectedClass = $(this).attr("class").split(' ')[1];
-		            console.log(selectedClass);
-		            // Citycontainer 내용을 선택된 클래스에 따라 변경
-		            switch (selectedClass) {
-		                case "1":
-		                	 $(".Citycontainer").html("내용5");
-		                case "2":
-		                    // class2에 해당하는 내용으로 변경
-		                    $(".Citycontainer").html("내용2");
-		                    break;
-		                // 추가적인 클래스에 대한 경우도 처리할 수 있음
-		                // ...
-		                default:
-		                    // 기본적으로 표시할 내용
-		                    $(".Citycontainer").html("기본 내용");
-		            }
-		        });
+				// 지역버튼 누르면 해당 지역의 구역이 나오게 한다.
+				
+				$(".regionButton").on("click", function() {
+				    // 클릭된 버튼의 두 번째 클래스 이름을 가져옵니다.
+				    var selectedClass = $(this).attr("class").split(' ')[1];
+				    var checkboxesHTML = "";
+				    var areaParamArray = "${param.areas}".split(',');
+				    console.log(areaParamArray);
+
+				    // 선택된 클래스 이름에 따라 areaList를 반복합니다.
+				    switch (selectedClass) {
+				        case "1":
+				            <c:forEach items="${areaList}" var="n" begin="0" end="24">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case "2":
+				            <c:forEach items="${areaList}" var="n" begin="25" end="55">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case "3":
+				            <c:forEach items="${areaList}" var="n" begin="56" end="65">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"4":
+				            <c:forEach items="${areaList}" var="n" begin="66" end="81">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"5":
+				            <c:forEach items="${areaList}" var="n" begin="82" end="86">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"6":
+				            <c:forEach items="${areaList}" var="n" begin="87" end="94">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"7":
+				            <c:forEach items="${areaList}" var="n" begin="95" end="99">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"9":
+				            <c:forEach items="${areaList}" var="n" begin="100" end="104">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break; 
+				        case"10":
+				            <c:forEach items="${areaList}" var="n" begin="105" end="121">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break; 
+				        case"11":
+				            <c:forEach items="${areaList}" var="n" begin="122" end="132">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break; 
+				        case"12":
+				            <c:forEach items="${areaList}" var="n" begin="133" end="147">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+		                    </c:forEach>
+				            break; 
+				        case"13":
+				            <c:forEach items="${areaList}" var="n" begin="148" end="166">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+		                    </c:forEach>
+				            break; 
+				        case"14":
+				            <c:forEach items="${areaList}" var="n" begin="167" end="183">	
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				            </c:forEach>
+				            break;
+				        case"15":
+				        	<c:forEach items="${areaList}" var="n" begin="184" end="197">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				        </c:forEach>
+				        break;
+				        case"16":
+				        	<c:forEach items="${areaList}" var="n" begin="198" end="219">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				        </c:forEach>
+				        break;
+				        case"17":
+				        	<c:forEach items="${areaList}" var="n" begin="220" end="221">
+				            var paramValue = "${n.ano}";
+				            var paramMatch = areaParamArray.includes(paramValue);
+				            var rno = parseInt("${n.rno}");
+				            var selectedRno = parseInt(selectedClass);
+		                    if (selectedRno === rno && paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                    } else if (selectedRno === rno && !paramMatch) {
+		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                    }
+				        </c:forEach>
+				        break;
+				        default:
+				            // 위의 어떤 조건도 맞지 않는 경우 기본적으로 표시할 내용
+				            $(".Citycontainer").html("기본 내용");
+				    }
+
+				    // 생성된 체크박스로 .Citycontainer를 업데이트합니다.
+				    $(".Citycontainer").html(checkboxesHTML);
+
+				    // 'area' 이름을 가진 체크박스에 변경 이벤트 핸들러를 추가하고, 변경되면 updateSelectedOptions() 함수를 호출합니다.
+				    $("input[name='area']").on("change", function() {
+				        updateSelectedOptions();
+				    });
+				});
+
 				
 			
 			
@@ -572,23 +847,26 @@
 				
 				
 				
-				var areaParam = "${param.areas}";
-				var categoryParam = "${param.categories}"; // 예시: 서버에서 받은 카테고리 파라미터 값
+				var areaParamArray = "${param.areas}".split(',');
+				var categoryParamArray = "${param.categories}".split(','); // 예시: 서버에서 받은 카테고리 파라미터 값
 				var minPriceParam = ("${param.minPrice}"/10000); // 예시: 서버에서 받은 최소 가격 파라미터 값
 				var maxPriceParam = ("${param.maxPrice}"/10000); // 예시: 서버에서 받은 최대 가격 파라미터 값
-				var equipmentParam = "${param.equipments}"; // 예시: 서버에서 받은 시설물 파라미터 값
+				var equipmentParamArray = "${param.equipments}".split(','); // 예시: 서버에서 받은 시설물 파라미터 값
 				
 				// 지역 체크박스 설정
+				
+					// 지역 체크박스 설정
 				$("input[name='area']").each(function() {
 				    var areaValue = $(this).val();
-				    if (areaParam.includes(areaValue)) {
+				    if (areaParamArray.includes(areaValue)) {
 				        $(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
 				    }
 				});
+		
 				// 카테고리 체크박스 설정
 				$("input[name='category']").each(function() {
    					 var categoryValue = $(this).val();
-    				if (categoryParam.includes(categoryValue)) {
+    				if (categoryParamArray.includes(categoryValue)) {
         			$(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
    					 }
 				});
@@ -601,7 +879,7 @@
 					// 시설물 체크박스 설정
 				$("input[name='equipment']").each(function() {
     			var equipmentValue = $(this).val();
-    			if (equipmentParam.includes(equipmentValue)) {
+    			if (equipmentParamArray.includes(equipmentValue)) {
         		$(this).prop("checked", true); // 파라미터 값에 해당하는 체크박스 체크
     			}
 			});
@@ -906,50 +1184,60 @@ function sortBoardPage(sortValue) {
 }
   	// 좋아요 보드에서 찍기 
     
-    $(document).on("click", ".inf2 i", function() {
-        const mid = "${sessionScope.mid}";
-        // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
-        if (!mid) {
-            alert("로그인이 필요합니다.");
-            return;
+$(document).on("click", ".like", function() {
+    const mid = "${sessionScope.mid}";
+    // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+    if (!mid) {
+        alert("로그인이 필요합니다.");
+        return;
+    }
+
+    const bno = $(this).closest(".like").data("bno");
+    const $img = $(this).find("img.likeon");
+    console.log(bno);
+    let likes = "";
+
+    if ($img.css("display") === "none") {
+        likes = "on";
+        $img.show(); // 이미지를 보이게 함
+        $img.siblings(".likeoff").hide(); // 형제 엘리먼트를 숨김
+    } else {
+        likes = "off";
+        $img.hide(); // 이미지를 숨김
+        $img.siblings(".likeoff").show(); // 형제 엘리먼트를 보이게 함
+    }
+
+    const $likesCountElement = $(this).closest(".card_item2.pop-up").find(".likes_count");
+    console.log($likesCountElement);
+
+    const data = {
+        mid: mid,
+        likes: likes,
+        bno: bno
+    };
+
+    $.ajax({
+        url: "/like",
+        type: "POST",
+        data: data
+    })
+    .done(function(result) {
+        console.log(result.body);
+        let likesCount = $likesCountElement.data("count");
+
+        $likesCountElement.text(likesCount);
+        if (likes == "on") {
+            $likesCountElement.text(likesCount + 1);
+            $likesCountElement.data("count", likesCount + 1);
+        } else {
+            $likesCountElement.text(likesCount - 1);
+            $likesCountElement.data("count", likesCount - 1);
         }
-
-        const bno = $(this).closest(".card_item2 pop-up").data("bno");
-        const isLiked = $(this).hasClass("fas");
-        const $likesCountElement = $(this).closest(".card_item2 pop-up").find(".likes_count");
-
-        const data = {
-            mid: mid,
-            likes: isLiked ? "off" : "on",
-            bno: bno
-        };
-
-        // $(this)를 저장한 변수 사용
-        const $icon = $(this);
-
-        $.ajax({
-            url: "/like",
-            type: "POST",
-            data: data
-        })
-        .done(function(result){
-            console.log(result.body);
-            let likesCount = $likesCountElement.data("count");
-
-            if (isLiked) {
-                $icon.removeClass("fas").addClass("far");
-                $likesCountElement.text(likesCount - 1);
-                $likesCountElement.data("count", likesCount - 1);
-            } else {
-                $icon.removeClass("far").addClass("fas");
-                $likesCountElement.text(likesCount + 1);
-                $likesCountElement.data("count", likesCount + 1);
-            }
-        })
-        .fail(function(error){
-            alert(error.responseText);
-        });
+    })
+    .fail(function(error) {
+        alert(error.responseText);
     });
+});
     
 });
 

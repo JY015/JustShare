@@ -29,6 +29,6 @@
 	</c:forEach>
 	<script type="text/javascript">		
 	</script>
-	<%@ include file="footer2.jsp"%>
+	<%@ include file="footer.jsp" %> 
 </body>
 </html>

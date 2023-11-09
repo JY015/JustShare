@@ -28,7 +28,7 @@
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
 	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
@@ -83,7 +83,7 @@
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
 	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
