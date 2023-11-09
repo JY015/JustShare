@@ -203,12 +203,12 @@
  }
  .header_topnav_new .header_topnav_inner_n{
   width: 100%;
-  padding: 31px 16px 16px;
+  padding: 19px 16px 16px;
  }
  .header_topnav_new .header_topnav_inner_n .first_row{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 17px;
+  margin-bottom: 0px;
   align-items: center;
  }
  .header_topnav_new .header_topnav_inner_n .first_row h1{
@@ -353,7 +353,7 @@
   color: rgb(0, 0, 0);
 }
 
- .home_btn {
+.home_btn {
   width: 60px;
   height: 60px;
   border: solid 4px white;
@@ -362,7 +362,8 @@
   box-shadow: 0 -2px 8px #4122d3 inset;
   background-color: #6b4bf5;
   /* background-color: #7759ff; */
-  margin: -12px auto;
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
 }
 
 .container_w {

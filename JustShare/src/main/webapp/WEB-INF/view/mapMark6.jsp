@@ -2,79 +2,68 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
+    <title>Just Share</title>
+   <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
+    <link rel="stylesheet" href="/css/fullcalendar.css" />
+    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+   <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
+   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
+   <link rel="stylesheet" href="/css/main_page.css" />
+
+   <!-- 회원가입 3가지회원 유형 css new -->
+   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
+   <!-- 고객센터 css -->
+   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+   <!-- 폰트어썸 -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+   
+   
+   
+   <meta property="og:locale"       content="ko_KR" />
+   <meta property="og:type"       content="website" />
+   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta property="og:url"          content="https://www.valuevenue.co.kr/" />
+   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
+   <meta property="og:site_name"    content="가치공간" />
+   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
+
+   <meta name="twitter:card"       content="summary" />
+   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
+   <meta name="twitter:domain"       content="가치공간" />
+   
+   <meta name="robots" content="index,follow">
+   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
+   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="/js/valuevenue.js?ver=20000120" defer></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/common.js?ver=20000120" defer></script>
+    <script src="/js/cookie.js?ver=20000120" defer></script>
 
 <meta charset="UTF-8">
 <title>Map</title>
 <style>
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-}
-
-#daumWrap {
-	position: relative;
-	min-width: 320px;
-	height: 100%;
-}
-
-#daumWrap .map_header {
-	position: relative;
-	z-index: 10;
-	height: 44px;
-	background-color: #fff;
-}
-
-.k_head {
-	background: #fff;
-}
-
-.k_head .tit_daum {
-	overflow: hidden;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -19px 0 0 -59px;
-}
-
-.k_head .link_gnb {
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	padding: 10px 14px 9px;
-	vertical-align: top;
-}
-
-.k_head #kakaoLogo {
-	display: block;
-	height: 20px;
-	padding: 10px 10px 10px 14px;
-}
-
-.k_head .wrap_until {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.k_head .img_logo {
-	display: block;
-}
 
 .hide {
 	display: none;
-}
-
-#daumWrap .menu_map {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: -100%;
-	z-index: 1010;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
 }
 
 .cont_map {
@@ -103,14 +92,14 @@ body {
 }
 
 .map_area .control_map {
-	left: 2px;
+	left: -11px;
 	top: 20%;
 }
 
 .map_area .set_map {
-	z-index: 10;
-	position: absolute;
-	width: 40px;
+    z-index: 10;
+    position: absolute;
+    width: 100px;
 }
 
 .set_map {
@@ -141,13 +130,8 @@ body {
 	text-decoration: none;
 }
 
-.custom-infowindow .desc {
-	/* .desc 스타일을 추가하세요 */
-	
-}
 
 .custom-infowindow .close-button {
-	/* .close-button 스타일을 추가하세요 */
 	background-color: #004AAD;
 	color: #fff;
 	border: none;
@@ -156,9 +140,7 @@ body {
 	cursor: pointer;
 }
 
-------------2번째
- 
-코드-------------------------
+------------2번째 코드-------------------------
 .custom-overlay-info {
 	/* 여기에 원하는 스타일을 추가하세요 */
 	border-bottom: 2px solid #ddd;
@@ -196,8 +178,7 @@ body {
 }
 
 .mylocationblue_img {
-	right: 10%;
-	width: 35px;
+	width: 45px;
 }
 
 .tit_location {
@@ -218,7 +199,9 @@ body {
 }
 
 #map {
-	height: 965px;
+	    position: relative;
+    overflow: hidden;
+    height: 763px;
 }
 
     :root { 
@@ -226,11 +209,11 @@ body {
         -padding-horizontal-negative: calc(-1 * var(- -padding-horizontal))
     }
     
-    @media screen and (max-width: 319px) {
+/*     @media screen and (max-width: 319px) {
         :root { 
             -padding-horizontal: 10px
         }
-    }
+    } */
 
     .EEbJ3 {
         position: fixed;
@@ -263,7 +246,7 @@ body {
 
     .bTbC9 {
         margin-top: 4px;
-        font-size: 1.5rem
+        font-size: 1.0rem
     }
     
     .bTbC9 .E3JsK::after {
@@ -343,7 +326,7 @@ body {
         line-height: 1.8rem;
         text-align: center
     }
-    
+/*     
     .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ {
         overflow: hidden;
         overflow-y: auto;
@@ -354,7 +337,7 @@ body {
         border-top-color: #f0f0f3;
         border-top-color: rgba(var(- -gray90), 1)
     }
-    
+     */
     .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar {
         width: 6px;
         height: 6px
@@ -365,11 +348,11 @@ body {
         background: #c4c6c8
     }
     
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar-track-piece {
+/*     .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar-track-piece {
         background: #f0f0f3;
         background: rgba(var(- -gray90), 1)
     }
-    
+     */
     .place_on_mobileweb .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar,
         .place_on_nmap .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar
         {
@@ -430,11 +413,11 @@ body {
         margin: 0 5px 0 0
     }
     
-    .AhhJ9 .qUp9v+.qUp9v {
+   /*  .AhhJ9 .qUp9v+.qUp9v {
         border-left: 1px solid;
         border-left-color: #f0f0f3;
         border-left-color: rgba(var(- -gray90), 1)
-    }
+    } */
     
     .AhhJ9.J6Sua:not(.zkAHQ) {
         height: 80px;
@@ -458,14 +441,10 @@ body {
     }
     
     .o6AYQ {
-        padding: 16px;
-        border: 1px solid rgba(0, 0, 0, .1);
-        border-bottom: 0;
-        border-radius: 18px 18px 0 0;
-        background-clip: padding-box;
-        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
-        background: #fff;
-        background: rgba(var(- -bgSurface), 1)
+        padding: 0px;
+        border: 1px solid black;
+        /* border-radius: 18px 18px 0 0; */
+        background: #fcfcfc;
     }
     
     .o6AYQ.IgtKb .BaVYi {
@@ -479,26 +458,20 @@ body {
         padding: 8px
     }
     
-    .o6AYQ.IgtKb+.o6AYQ.IgtKb {
+  /*   .o6AYQ.IgtKb+.o6AYQ.IgtKb {
         border-top: 1px solid;
         border-top-color: #f0f0f3;
         border-top-color: rgba(var(- -gray90), 1)
-    }
+    } */
     
     .D6DtM {
         overflow: hidden
     }
     
     .HuWKL .vWRnd {
-        display: block;
-        display: -webkit-box;
-        overflow: hidden;
-        max-height: 4.8rem;
-        line-height: 2.4rem;
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        white-space: normal
+    font-size:1.5rem;
+    line-height: 4.4rem;
+
     }
     
     .HuWKL .AIPix {
@@ -556,30 +529,240 @@ body {
     .G5wJ8 {
         position: fixed;
         right: 0;
-        bottom: 0;
+        bottom: 56px;
         left: 0;
-        z-index: 5000
+        z-index: 5000;
     }
 #app-root {
   display: none;
 }
+
+.map_wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+/* .custom_zoomcontrol {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 18%;
+    height: auto;
+    overflow: hidden;
+    z-index: 1;
+}
+.radius_border{
+	border-radius:5px;
+}     
+
+.custom_zoomcontrol button {
+	display:block;
+    width: 100%;
+    height: auto;
+	text-align:center;
+	cursor:pointer;
+	background: none;
+}     
+
+.custom_zoomcontrol button img {
+	width: 40px;
+    height: auto;
+    padding: 3px 0;
+    border: none
+}      */
+
+/* .mylocationblue_btn{
+	border: 0; 
+	background: none;
+	 cursor: pointer; 
+	 float: right; 
+	 margin-left: 10px;
+} */
+	         
+	         
+.map_area .radius_border {
+    top: 8px;
+    left: 10px;
+}
+.map_area .custom_zoomcontrol {
+    position: absolute;
+   top: -1px;
+    left: 3px;
+    z-index: 10;
+    width: 40px;
+}
+
+.custom_zoomcontrol .mylocationblue_btn {
+        width: 40px;
+    margin-right: 4px;
+    margin-bottom: -9px;
+}
+.mylocationblue_btn{
+    width: 55px;
+    height: 60px;
+	background: none;
+}
+.control_map .mylocationblue_img {
+    width: 20px;
+    height: 20px;
+    background-position: -20px 0;
+}
+.control_map {
+    position: relative;
+    width: 36px;
+    height: 34px;
+    margin-bottom: 0;
+    margin-left: 1px;
+    border-bottom: 0 none;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+#zoomInButton {
+    position: relative;
+    width: 38px;
+    height: 60px;
+    margin-bottom: -10px;
+    margin-left: 1px;
+	background: none;
+    border: none;
+    
+}
+.radius_border {
+    position: relative;
+    width: 36px;
+    height: 34px;
+    margin: 1px 0 0 1px;
+	background: none;
+  	border: none;
+}
+#zoomOutButton {
+    position: relative;
+    margin: -17px 0 0 1px;
+    background: none;
+ 	border: none;
+}
+.radius_border #zoomOutButton {
+    width: 38px;
+    height: 60px;
+
+}  
+
+.map_viewer_txt {
+	position: relative;
+	min-height: 101px;
+	margin: 0 5px 5px;
+	padding: 14px 58px 14px 14px;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	background: rgba(255, 255, 255, 0.96);
+	background-clip: padding-box;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.map_viewer_txt p {
+	overflow: hidden;
+	max-width: 100%;
+	padding-top: 4px;
+	font-size: 15px;
+	color: #666;
+	line-height: 19px;
+}
+
+.map_viewer_txt strong {
+	font-size: 18px;
+	color: #111;
+	font-weight: normal;
+	line-height: 22px;
+	vertical-align: top;
+}
+
+.map_viewer_txt strong span {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.map_viewer_txt .item_cate {
+	display: inline-block;
+	margin-top: 2px;
+	font-size: 13px;
+	color: #999;
+	vertical-align: top;
+}
+
+.map_viewer_txt .item_tel {
+	display: inline-block;
+	margin-top: 2px;
+	font-size: 13px;
+	color: #4783e6;
+	vertical-align: top;
+}
+
+.map_viewer_txt .item_cate + .item_tel:before {
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 10px;
+	border-left: 1px solid #ebebeb;
+	vertical-align: top;
+	margin: 3px 8px 0;
+}
+
+.map_viewer_txt_end {
+	min-height: 101px;
+	padding: 14px !important;
+}
+
+.map_viewer_txt_end .search_txt_msg {
+	margin-right: -36px;
+	padding: 26px 0 0;
+	font-size: 14px;
+	color: #999;
+	text-align: center;
+}
+
+.map_viewer_txt_end .search_txt_msg .ico_i {
+	margin: 2px 4px 0 0;
+}
+
+.map_viewer_txt_shopping {
+	padding: 12px 92px 12px 14px;
+}
+
+.map_viewer_txt_shopping p {
+	max-width: none;
+	padding-top: 3px;
+	margin-right: -31px;
+}
+
+.map_viewer_txt_shopping .item_thumb ~ p,
+.map_viewer_txt_shopping .item_thumb ~ .item_name {
+	margin-right: 0;
+}
+
+.map_viewer_txt_shopping .item_thumb {
+	overflow: hidden;
+	position: absolute;
+	top: 12px;
+	right: 13px;
+}
 </style>
 
 </head>
+<header class="header_topnav_new">
+        <div class="header_topnav_inner_n">
+         <div class="first_row">
+          <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
+         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">&nbsp;
+          <div class="logo"><img src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
+          </div>
+</div>
+</header>
 <body>
-	<div id="daumWrap">
-		<header id="daumHead" class="map_header">
-			<div id="webHeader" class="k_head">
-				<h1 class="tit_daum">
-					<a href="/" id="kakaoLogo" class="img_comm"> <img
-						src="../img/JustShare_map.png"
-						style="max-width: 100%; height: auto;" class="img_logo" alt="logo">
-					</a>
-				</h1>
-			</div>
-		</header>
-
-		<hr class="hide">
 		<hr class="hide">
 
 		<article id="daumContent" role="main" class="cont_map">
@@ -589,22 +772,26 @@ body {
 					<div class="wrap_tit">
 						<strong class="tit_location"></strong>
 					</div>
+					<div class="map_wrap">
 					<div id="map">
 						<div style="cursor: auto; z-index: 2;"></div>
 					</div>
-					<div class="set_map control_map">
-						<!-- <a href="javascript:;" onclick="panTo()" >
-						   <img class="mylocationblue_img" src="../img/mylocationblue.png" >
-	        			</a> -->
-						<button type="button" onclick="panTo()"
-							style="border: 0; background: none; cursor: pointer; float: right; margin-left: 10px;">
-							<img class="mylocationblue_img" src="../img/mylocationblue.png">
+
+					<div class="custom_zoomcontrol radius_border">
+						<button type="button" onclick="panTo()"class="mylocationblue_btn">
+							<img class="mylocationblue_img" src="../img/mylocationblue.png" >
+						</button>
+					    <button id="zoomInButton">
+					    	<img src="../img/plus.png" alt="확대">
+					    </button>
+						<button id="zoomOutButton">
+							<img src="../img/minus.png" alt="축소">
 						</button>
 					</div>
 				</div>
 			</div>
-		</article>
 	</div>
+		</article>
 <div id="app-root" class="place_didmount">
     <div>
         <div class="BXtr_">
@@ -612,31 +799,22 @@ body {
                 <div style="min-height:auto">
                     <div class="rAcDm">
                         <div class="G5wJ8">
-                            <div class="YbMH5">
-                                <div class="o6AYQ">
-                                    <div class="D6DtM">
-                                        <div class="HuWKL">
-                                        	<div class="map_img"><span class="place-image"></span></div>
-                                            <div class="vWRnd"><span class="btitle"></span></div>
-                                        </div>
-                                        <div class="bTbC9">
-                                            <div class="E3JsK">
-                                                <div class="enwXz"><span class="baddr"></span></div>
-                                                <!-- <div class="IaqcP">
-                                                    <div class="aib5d"><span class="_1vEbV"></span></div>
-                                                </div> -->
-                                            </div>
-                                        </div>
+                            <div class="YbMH5"></div> 
+                                        <div class="map_viewer_txt map_viewer_txt_shopping _linkSiteview">
+							                    <div class="item_thumb"><span class="place-image" ></span></div>
+							                    <div class="item_name"><strong class="btitle"></strong></div>
+							                    <p class="item_addr"><span class="wrap_addr"></span></p><br>
+							                    <div class="map_bno"><span class="bno"></span></div>
+							                </div>
+							            </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+  
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
@@ -669,6 +847,8 @@ function createMarker(latitude, longitude) {
         zIndex: 5,
         image: markerImage
     });
+    
+    
 }
 
 function panTo() {
@@ -704,6 +884,7 @@ function closeCustomOverlay() {
 }
 
 navigator.geolocation.getCurrentPosition(function(position) {
+	
 
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
@@ -719,10 +900,23 @@ navigator.geolocation.getCurrentPosition(function(position) {
     };
 
     map = new kakao.maps.Map(mapContainer, mapOption);
-
- 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
-    var zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
+    
+   // HTML 버튼 요소를 가져옵니다
+	var zoomInButton = document.getElementById("zoomInButton");
+	var zoomOutButton = document.getElementById("zoomOutButton");
+	
+	// 확대 버튼 클릭 이벤트 처리
+	zoomInButton.addEventListener("click", function() {
+	    var level = map.getLevel();
+	    map.setLevel(level - 1);
+	});
+	
+	// 축소 버튼 클릭 이벤트 처리
+	zoomOutButton.addEventListener("click", function() {
+	    var level = map.getLevel();
+	    map.setLevel(level + 1);
+	});
+     
     
     kakao.maps.load(function() {
         var geocoder = new kakao.maps.services.Geocoder();
@@ -794,12 +988,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
         	 if (currentCustomOverlay) {
                  currentCustomOverlay.setMap(null); // 이전의 커스텀 오버레이 닫기
              };
-             var content = '<div class="custom-infowindow">'
+             
+             
+             var content = '<div style="display:none"><a><strong>' + item.content + '</strong></a></div>'
+            	/*  '<div class="custom-infowindow" style="display:none";>'
      	        + '<a><strong>' + item.content + '</strong></a>'
      	        + '<div class="desc">'
      	        + '</div>'
      	        + '<button class="close-button" onclick="closeCustomOverlay()">닫기</button>' 
-     	        + '</div>';
+     	        + '</div>' */;
 
             var customOverlay  = new kakao.maps.CustomOverlay({
             	clickable: true,
@@ -814,35 +1011,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
            
             var appRoot = document.getElementById("app-root");
 
-            function applyStylesForMobile() {
-                appRoot.style.position = "relative";
-                appRoot.style.width = "100%";
-                appRoot.style.textAlign = "center";
-            }
-
             function applyStylesForDesktop() {
                 appRoot.style.display = "block";
                 appRoot.style.position = "absolute";
                 appRoot.style.bottom = "25%";
                 appRoot.style.left = "0";
             }
-
-            // 미디어 쿼리 시뮬레이션
-            if (window.innerWidth <= 600) { // 화면 폭이 600px 이하인 경우 (모바일 화면)
-                applyStylesForMobile();
-            } else {
-                applyStylesForDesktop();
-            }
-
-            // 브라우저 창 크기가 변경될 때 스타일 업데이트
-            window.addEventListener("resize", function() {
-                if (window.innerWidth <= 600) {
-                    applyStylesForMobile();
-                } else {
-                    applyStylesForDesktop();
-                }
-            });
-            
+            applyStylesForDesktop();
             
          // 모든 요소를 선택
             var btitleElements = document.querySelectorAll('.btitle');
@@ -856,7 +1031,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             });
             
             // 가져온 데이터로 HTML 업데이트
-            var btitleElement = document.querySelector('.vWRnd .btitle');
+            var btitleElement = document.querySelector('.item_name .btitle');
             btitleElement.textContent = btitleValues[0]
             
             
@@ -870,25 +1045,28 @@ navigator.geolocation.getCurrentPosition(function(position) {
             console.log("addr 값:", addrValue);
             
          // 값을 넣을 요소를 선택
-            var enwXzElement = document.querySelector('.enwXz');
+            var enwXzElement = document.querySelector('.item_addr');
 
             // 해당 요소 내부의 span 요소를 선택
             var spanElement = enwXzElement.querySelector('span');
 
             // 값을 설정
             spanElement.textContent =  addrElement.textContent;
+            console.log(spanElement.textContent )
             
             //======================================================
 
          // map_img 클래스가 있는 div 요소를 선택
-            var mapImageContainer = document.querySelector('.map_img');
+            var mapImageContainer = document.querySelector('.item_thumb');
 
             // 이미지를 나타내는 img 요소를 선택
             var imageElement = document.querySelector('.place-image');
 
             // 이미지의 경로를 가져옴
             var imagePath = imageElement.src;
-            imagesrc = imagePath.substring(22, imagePath.length);
+            imagesrc = imagePath.substring(25, imagePath.length);
+            console.log(imagePath)
+            console.log(imagesrc)
 
             // map_img 요소 안에 이미지가 이미 있는지 확인
             var existingImage = mapImageContainer.querySelector('img');
@@ -901,16 +1079,65 @@ navigator.geolocation.getCurrentPosition(function(position) {
             // 새로운 img 요소를 생성
             var imageTag = document.createElement('img');
             imageTag.src = imagesrc; // 이미지 경로 설정
-            imageTag.width = 200; // 가로 크기 설정 (픽셀)
-            imageTag.height = 150; // 세로 크기 설정 (픽셀)
+            imageTag.width = 70; // 가로 크기 설정 (픽셀)
+            imageTag.height = 70; // 세로 크기 설정 (픽셀)
 
             // map_img 요소 안에 새로운 img 요소를 추가
             mapImageContainer.appendChild(imageTag);
 
+            // 요소를 선택
+            var bnoElement = document.querySelector('.reservation-link');
+
+        	 // href 속성 값을 가져옴
+            var hrefValue = bnoElement.getAttribute('href');
+
+	         
+	      // .bno 요소를 선택
+	         var bnoSpan = document.querySelector('.bno');
+
+	         // hrefValue 값을 .bno 요소의 내부 텍스트로 설정
+	         bnoSpan.textContent = hrefValue;
+	         
+	         // 결과를 출력하거나 다른 작업을 수행
+	         console.log("href 값:",  bnoSpan.textContent);
+	         
+	      // .map_bno 요소를 선택
+	         var mapBnoElement = document.querySelector('.map_bno');
+	      
+	      // "/bdetail?bno=" 부분을 빈 문자열로 대체하여 원하는 값으로 설정
+	         var cleanedHrefValue = hrefValue.replace(bnoSpan.textContent, "");
+
+	         // .bno 요소의 내부 텍스트를 수정
+	         bnoSpan.textContent = cleanedHrefValue;
+
+	         // 결과를 출력
+	         console.log("변경된 href 값:", bnoSpan.textContent);
+
+	         // 새로운 링크 엘리먼트를 생성
+	         var linkElement = document.createElement('a');
+	     		// href 속성을 설정
+	     		linkElement.href = hrefValue;
+
+	     		// 내부 텍스트를 추가
+	     		linkElement.textContent = " 상세보기";
+
+	     		// 링크 엘리먼트를 .map_bno 요소에 추가
+	     		mapBnoElement.appendChild(linkElement);
+	     		
+	     		var existingLinkElement = appRoot.querySelector('.map_bno a');
+
+	     		if (existingLinkElement) {
+	     		    // 부모 요소에서 자식 요소 제거
+	     		    existingLinkElement.parentNode.removeChild(existingLinkElement);
+	     		}
+	     		mapBnoElement.appendChild(linkElement);
+
+
         });
     });
-    
 });
 
 </script>
+<%@ include file="footer.jsp"%>
+</body>
 </html>

@@ -155,7 +155,13 @@ var _ss_user_id   = "";
          <div class="left-side">   
             <h1 class="logo"><a href="/">로고</a></h1>
          </div>
-          <div class="search-area">
+         <div class="right-side">
+            <div class="sign-group">
+			
+            </div>
+          </div>
+		</div>
+         <!--  <div class="search-area">
             <form class="searchbar searchbar-length" action="/schedule/search">
               <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="" style="padding-right: 50px;">
               <button type="submit"> <img src="/images/ic_search.svg" alt=""></button> 
@@ -168,7 +174,7 @@ var _ss_user_id   = "";
          
             </div>
           </div>
-      </div>
+      </div> -->
 
         <div class="header__third_row">
           <div class="main-menu-area">
@@ -183,11 +189,23 @@ var _ss_user_id   = "";
         </div>  
       </div>
     </header>
+<header class="header__topnav_type2">
+		  <div class="header_topnav_inner_n">
+			<div class="first_row">
+			  <div class="left-side">
+				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
+				<h1 class="logo"><a href="/">로고</a></h1>
+			  </div>
+			</div>
 
-      <header class="header_topnav_new">
+		  </div>
+		</header>
+     <%--  <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">
-             <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main2'">
+             <div class="logo">             
+             <img src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./main2'">
+             </div>
               <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
@@ -201,7 +219,8 @@ var _ss_user_id   = "";
            </form>
          </div>
         </div>
-      </header>
+      </header> --%>
+      
       <section class="myinfo__pop">
         <div class="myInfo__inner">
           <div class="myregInfo">
@@ -235,14 +254,14 @@ var _ss_user_id   = "";
       </section>
    <div class="banner_img_back">
    <section class="banner_img_wrap mySwiper swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
-      <ul class="swiper-wrapper" id="swiper-wrapper-84f107fad5823f5ee" aria-live="off" style="transition-duration: 0ms;">
+      <ul class="swiper-wrapper" id="swiper-wrapper-84f107fad5823f5ee" aria-live="off">
     
          
-         <li class="swiper-slide tranEff">
+         <li class="swiper-slide tranEff tranEff swiper-slide-next" role="group"">
 <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc1.jpg" onerror="this.src='/images/no_image.png'" alt="배너">
-                                 <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/images/no_image.png'" alt="배너 모바일" />
+                  <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/images/no_image.png'" alt="배너 모바일" />
                </div>                
                
                <div class="main_banner_text">
@@ -256,7 +275,7 @@ var _ss_user_id   = "";
             </div>
          </li>
     
-      <li class="swiper-slide tranEff swiper-slide-prev" style="width: 893px; opacity: 1; transform: translate3d(-893px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 3" data-swiper-slide-index="0">
+      <li class="swiper-slide tranEff swiper-slide-prev" >
             <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
@@ -273,7 +292,7 @@ var _ss_user_id   = "";
 </div>
          </div>
             </div>
-         </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active" style="width: 893px; opacity: 1; transform: translate3d(-1786px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 3" data-swiper-slide-index="1">
+         </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active">
             <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc3.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
@@ -789,59 +808,8 @@ function search_check_m2()
         </div>
       </div>
     </section>
-      <nav class="bottom_nav_menu">
-        <ul>
-          <li class="input--search m_search_input b_nav_list">
-            <a href="#">
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M21.5 20.0585L16.4719 15.0304C18.9818 12.0171 18.6777 7.56252 15.7815 4.91827C12.8854 2.27402 8.42161 2.37546 5.64853 5.14853C2.87546 7.92161 2.77402 12.3854 5.41827 15.2815C8.06252 18.1777 12.5171 18.4818 15.5304 15.9719L20.5585 21L21.5 20.0585ZM5.08015 10.3504C5.08015 7.16356 7.66356 4.58015 10.8504 4.58015C14.0372 4.58015 16.6206 7.16356 16.6206 10.3504C16.6206 13.5372 14.0372 16.1206 10.8504 16.1206C7.66503 16.117 5.08368 13.5357 5.08015 10.3504Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">검색</p>
-            </a>
-          </li>
 
-          <li class="b_nav_list">
-            <a href="javascript:alert('로그인 후 이용이 가능합니다.');location.href='/login.php?s_url=%2Fschedule%2Fmy_schedule'">
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.6 12H9.4V13.8H7.6V12M20.2 6.6V19.2C20.2 20.1941 19.3941 21 18.4 21H5.8C4.801 21 4 20.19 4 19.2V6.6C4 5.60589 4.80589 4.8 5.8 4.8H6.7V3H8.5V4.8H15.7V3H17.5V4.8H18.4C19.3941 4.8 20.2 5.60589 20.2 6.6M5.8 8.4H18.4V6.6H5.8V8.4M18.4 19.2V10.2H5.8V19.2H18.4M14.8 13.8H16.6V12H14.8V13.8M11.2 13.8H13V12H11.2V13.8Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">내 일정</p>
-            </a>
-          </li>
-        
-          <li class="">
-            <a href="/main2">
-              <div class="home_btn">
-            <div class="container_w">
-               <div class="svgm">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                     <path fill-rule="evenodd" clip-rule="evenodd" d="M24 10L11.5 0L0 10H2.66602V22.5H8.49935V14.3333H15.4993V22.5H21.3327V10H24Z" fill="white" />
-                  </svg>
-               </div>
-            </div>
-           </div>
-            </a>
-          </li>
-
-          <li class="b_nav_list ">
-            <a href='/mypage'>
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5C14.2091 5 16 6.79086 16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5M12 7C10.8954 7 10 7.89543 10 9C10 10.1046 10.8954 11 12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7M12 14C14.67 14 20 15.33 20 18V21H4V18C4 15.33 9.33 14 12 14M12 15.9C9.03 15.9 5.9 17.36 5.9 18V19.1H18.1V18C18.1 17.36 14.97 15.9 12 15.9Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">마이페이지</p>
-            </a>
-          </li>
-
-          <li class="b_nav_list">
-            <a class="btn-aside-open">
-              <svg class="black_c" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M5 5V7H18V5H5M5 11V13H18V11H5M5 17V19H18V17H5" fill="#98A8AF"/>
-           </svg>
-           <p>더보기</p>
-            </a>
-          </li>
-        </ul>
-      </nav>
+       <%@ include file="footer.jsp"%>
       
       
  <!-- 내가 만진 부분-->     
