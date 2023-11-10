@@ -61,7 +61,7 @@
     width: 5%;
     margin-bottom: 10px; /* 버튼 간의 간격을 조절할 수 있는 마진 값을 설정합니다. */
 }
-.addrp{
+.txt__subtit__event .addrp{
 	color: #819FF7;
 	
 }
@@ -207,7 +207,7 @@
                     </select>
                 </div>  
 				</div>
-             </div>
+             
              <!-- 전체 리스트 보여주는 컨테이너  -->
              <div class="card-container">
              <!-- 리스트 하나씩 forEach로  -->
@@ -249,12 +249,13 @@
              </div>
              </c:forEach>
              </div>
+             </div>
 		 </div>
-		 </div>
-		
 		</section>
 		
 	</div>
+		
+		
 	<%@ include file="footer.jsp" %> 
 		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
 		<button id="scrollToTopBtn">^</button>

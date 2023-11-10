@@ -41,12 +41,26 @@
 	</c:forEach>
 	</select>
 	</div>
+	사용 가능 시간
+	<div>
+	<input type="number"  min="0" max="24" name="startTime" id="startTimeInput"> 시
+	~
+	<input type="number"  min="0" max="24" name="endTime"id="endTimeInput" > 시 
+	<br><span id="resultTime"></span>
+	</div>
+	
 	가격
 	<div>
-	<input type="number" name="price" id="priceInput">
+	<input type="number" name="price" id="priceInput"> 원
 	 <br><span id="resultP"></span>
 	</div>
-	시설
+	
+	면적
+	<div>
+	<input type="number" name="size" id="sizeInput"> ㎡
+	<br><span id="resultS"></span>
+	</div>
+	보유 시설
 	<div>
 	<c:forEach items="${equiplist }" var="n">
 	<input type="checkbox" name="equipment" value="${n.eid }"> ${n.ename }
@@ -193,7 +207,9 @@ $(function(){
         const postcodeInput = document.getElementById('sample2_postcode');
         const addressInput = document.getElementById('sample2_address');
         const priceInput = document.getElementById('priceInput');
-       
+        const startTimeInput = document.getElementById('startTimeInput');
+        const endTimeInput = document.getElementById('endTimeInput');
+        const sizeInput =  document.getElementById('sizeInput');
        
 
         const title = titleInput.value.trim();
@@ -201,6 +217,9 @@ $(function(){
         const postcode = postcodeInput.value.trim();
         const address = addressInput.value.trim();
         const price = parseInt(priceInput.value); // 가격을 정수로 변환
+        const startTime =parseInt(startTimeInput.value);
+        const endTime =parseInt(endTimeInput.value);
+        const size = parseInt(sizeInput.value);
        
         if(fileInput.files.length === 0){
         	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
@@ -216,12 +235,24 @@ $(function(){
              $("#resultMSG").css("font-size", "10pt");
 			return false;
 		}
+		if (isNaN(startTime) ||startTime < 0 || isNaN(endTime) ||endTime >= 25) {
+			 $("#resultTime").text("올바른 시간을 입력하세요");
+             $("#resultTime").css("font-weight", "bold");
+             $("#resultTime").css("font-size", "10pt");
+            return false;
+        }
 		if (isNaN(price) || price <= 1000) {
 			 $("#resultP").text("올바른 가격을 입력하세요");
              $("#resultP").css("font-weight", "bold");
              $("#resultP").css("font-size", "10pt");
             return false;
         }
+		if (isNaN(size) || size <= 0) {
+			 $("#resultS").text("올바른 면적을 입력하세요");
+            $("#resultS").css("font-weight", "bold");
+            $("#resultS").css("font-size", "10pt");
+           return false;
+       }
 	
 		if(content ==="" || content.length < 10 || content.length > 1000){
 			$("#resultCON").text("상세 내용은 10글자 이상, 1000자 이하여야 합니다.")

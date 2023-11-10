@@ -194,4 +194,14 @@ public class BoardService {
 		return boardDAO.regionList();
 	}
 
+	public List<Map<String, Object>> equipDetail(Map<String, Object> map) {
+		
+		return boardDAO.equipDetail(map);
+	}
+
+	public List<Map<String, Object>> place(Map<String, Object> map) {
+		
+		return boardDAO.place(map);
+	}
+
 }

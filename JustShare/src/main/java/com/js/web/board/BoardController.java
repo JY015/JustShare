@@ -130,6 +130,7 @@ public class BoardController {
 		if(session.getAttribute("mid") != null) {
 		// 로그인 후 글 작성 내용 insert 
 		map.put("mid", session.getAttribute("mid"));
+		System.out.println(map);
 		Integer adr = boardService.adr(map);
 
 		// 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기
@@ -208,19 +209,26 @@ public class BoardController {
 		Map<String, Object> detail = boardService.detail(map);
 		// 게시글에 연관된 시설명 / 사진 모두 가져오기
 		List<String> imageD = boardService.imageD(map);
-		List<String> equipD = boardService.equipD(map);
+		List<Map<String, Object>> equipDetail = boardService.equipDetail(map);
 		// 해당글의 좋아요 수 가져오기 
 		Integer likesCount = boardService.likesCount(map); 
 		// 로그인 한 사람의 좋아요 가져오기
 		String sid = String.valueOf( session.getAttribute("mid")) ;
 		map.put("sid",sid);
 		Integer isLike = boardService.isLike(map);
+		// 비슷한 글 꺼내오기 
+		map.put("cate",detail.get("cate"));
+		map.put("ano", detail.get("ano"));
+		
+		List<Map<String, Object>> place = boardService.place(map);
+		
 		
 		model.addAttribute("likesCount", likesCount);
 		model.addAttribute("isLike", isLike);
 		model.addAttribute("imageD", imageD);
-		model.addAttribute("equipD", equipD);
+		model.addAttribute("equipDetail",equipDetail);
 		model.addAttribute("detail", detail);
+		model.addAttribute("place", place);
 		return "bdetail";
 	}
 

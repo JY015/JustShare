@@ -128,8 +128,8 @@
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano})
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano,size,startTime,endTime)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano},#{size},#{startTime},#{endTime})
 </insert>
 
 <select id="bno">
@@ -159,9 +159,10 @@
 </select>
 
 <select id="detail" parameterType="Map" resultType="Map">
-	SELECT *
-	FROM board
-	WHERE bno=#{bno}
+	SELECT b.bno,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.latitude,b.longitude,b.mid,b.addr,b.addDetail,b.addNum,b.ano,(SELECT c.cname from cate c where b.cate=c.cate)as cateName,(SELECT c.cicon from cate c where b.cate=c.cate)as cateIcon,
+	b.size,b.startTime,b.endTime
+	FROM board b 
+	WHERE b.bno=#{bno}
 </select>
 
 <select id="imageD">
@@ -179,6 +180,16 @@
 	WHERE be.bno=#{bno}
 	ORDER BY be.eid
 	
+</select>
+
+<select id="equipDetail">
+	SELECT e.ename,e.eicon
+	FROM boardEquipment be
+	JOIN board b ON b.bno=be.bno
+	JOIN equipment e ON e.eid=be.eid
+	WHERE be.bno=#{bno}
+	ORDER BY be.eid
+
 </select>
 
 <update id="del">
@@ -261,5 +272,13 @@
 	SELECT bno
 	FROM likeList
 	WHERE mid=#{sid}
+</select>
+
+<select id="place">
+ SELECT b.btitle,b.startTime,b.endTime,b.addr,(SELECT i.realFile from image i where b.bno = i.bno and i.main = 1 )as image ,b.bno
+ FROM board b
+ WHERE b.cate=#{cate} and b.ano=#{ano}
+ ORDER by RAND() LIMIT 1;
+
 </select>
 </mapper>

@@ -4,70 +4,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+	<meta name="description" content="공간 공유 플랫폼"/>
+    <title>Just Share</title>
+	<!-- 기존에 사용하던 jquery , bootstrap , 기타등등 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- 추가한거 -->
+<link rel="stylesheet" href="/css/import.css?ver=20000120" />
+<link rel="stylesheet" href="/css/style.css?ver=20000120" />
+<link rel="stylesheet" href="/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+<link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+<link rel="stylesheet" href="/css/main_page.css" />
+<link rel="stylesheet" href="/css/spacedetail.css" />
+<!-- 회원가입 3가지회원 유형 css new -->
+	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
+	<!-- 고객센터 css -->
+	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+	<!-- 폰트어썸 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+	<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+<!-- fancybox -->
+	<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
+ <script src="/js/valuevenue.js?ver=20000120" defer></script>
+ <script src="/js/owl.carousel.min.js"></script>
+ <script src="/js/common.js?ver=20000120" defer></script>
+ <script src="/js/cookie.js?ver=20000120" defer></script>
  <style>
-      html,
-      body {
-        position: relative;
-        height: 100%;
-        text-align: center;
-      }
-
-      body {
-        background: #eee;
-        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        color: #000;
-        margin: 0;
-        padding: 0;
-      }
-
-      .swiper {
-        width: 50%;
-        height:50%;
-      }
-
-      .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-      }
-
-      .swiper-slide img {
-        display: block;
-        width: 50%;
-        height: 50%;
-        object-fit: cover;
-      }
-      
-     #map {
-    width: 350px;
-    height: 350px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0 atuo ;
+.fancybox__container *, .fancybox__container *::before, .fancybox__container *::after { color: white;}
+.fancybox__counter{display:none;}
+.fancybox__content{max-width:1400px;max-height:1050px;}
+		
+ .swiper {
+  width: 400px;
+  height: 300px;
 }
+      
+  
+.fc-direction-ltr .fc-daygrid-event.fc-event-end{height:5px}
+.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end){height:5px}
 
+.fc-col-header .fc-scrollgrid-sync-table{
+	width:300px;
+}
+.fc{
+	display:inline;
+	border:none;
+}
+.fc .fc-toolbar{display:inline}
+
+.fc-toolbar-chunk{text-align:center;}
+
+.ui-datepicker{z-index:1000001 !important;}
+
+.fa-solid{line-height:2;}
+
+.section--spaceDetail .txt__tit26{text-align: left;}
+
+.spaceDetailInfo_summary .host{background-color:#004AAD; margin-bottom: 15px; border-radius: 10px;}
+
+.spaceDetailInfo_summary .host .txt__tit {color:white; margin-bottom:5px; margin-left: 10px;}
+.spaceDetailInfo_summary .host .txt__tit .fa-ban{right:4px; }
+.spDetail_topinfo .spaceDetailInfo_summary  .txt__tit26 {margin-bottom : 17px;}
+.spDetail_topinfo .tag__wrap {width: 100%;}
+.spDetail_topinfo .tag__wrap button {background-color : #3C7CF5; color:white; padding: 0 0.5rem; border-radius: 1.5rem; margin-right: 0.375rem; font:inherit;}
+.detailContext {margin-top:18px;  margin-bottom: 18px; }
+.detailContext .detailp {margin-top : 18px; margin-bottom: 18px;}
+.detailContext .detailc {margin-top : 18px; margin-bottom: 18px; font-size: 18px; line-height: 2;}
+.cate{height: 40px; width: 40px;}
+.swiper-slide .frontImage{height:300px; width: 400px;}
 </style>
 </head>
 <body>
@@ -87,51 +105,112 @@
 	<section class="section section--spacedetail">
 		<div class="spacedetail--inner">
 		<section class="section section--space--category">
-		<div id="thumb_list" class="owl-carousel owl-theme card__carousel lightbox_type card__type__shadow">
-		 <!-- 반복문 돌리기  -->
-		 <c:forEach items="${imageD }" var="n">
-		 <div class="img_cnt card__item black">
-		 <img src="/img/places/${n }">
-		 </c:forEach>
-		 <div>
-		 <p class="visible-mo"><span>1</span>/0</p>
-		 </div>
-		 </div>
-		
-		</div>
+	
+	<div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <c:forEach items="${imageD }" var="n">
+        <div class="swiper-slide"><img class="frontImage" src="/img/places/${n }"></div>
+        </c:forEach>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
 		</section>
 		<section class="section section--spaceDetail">
 			 <div class="spaceDetailInfo">
 			  <div class="spDetail_topinfo pd0">
-			     <div class="tag__wrap txt__tag">
-                 <ul class="tag">
+			     <div class="tag__wrap txt__tag" style="display: flex; justify-content: space-between;">
+                 <ul class="tag" style="margin-right: auto;">
                  <li class="on">판매중</li>
                  </ul>
+                  <c:if test="${sessionScope.mid eq detail.mid }">
+                 <button class="edit" onclick="edit()">수정</button>
+                 <button class="del"  onclick="del()" >삭제</button>
+                 </c:if> 
                  </div>
                  <p class="txt__tit26">${detail.btitle }</p>
-                 <!-- 여기 이미지 넣기 대충 그 네비게이션 모양  -->
-                 <div class="location"><img src="../images/ic_location_line.svg" alt=""> <span class="address2">${detail.addr }</span></div>
-			  </div>
+                 <div class="location"><i class="fa-solid fa-location-dot"></i> &nbsp; <span class="address2">${detail.addr }</span></div>
+                 </div>
 			   <hr class="detail-divline">
 			   <div class="spaceDetailInfo_summary">
+			   <div class="host" style="display: flex; align-items:baseline;"><p class="txt__tit">호스트 &nbsp;${detail.mid } &nbsp;<i class="fa-solid fa-star" style="color: #e2d86a;"></i> 5 
+			   <i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i></p></div>
 			   <div style="display: flex; align-items:baseline;"><p class="txt__tit">공간 소개</p></div>
-			   </div>
+			   		<div class="detailContext">
+			   			<p class="txt__tit26">공간 정보</p>
+			   			<p class="detailc">
+			   			 <img class="cate" src="../img/icon/${detail.cateIcon }" /> &nbsp; ${detail.cateName } </p>
+			   			 <p class="detailc">
+			   			 <img class="cate" src="../img/icon/clock.png" /> &nbsp; 대여가능시간 : ${detail.startTime }:00 ~ ${detail.endTime }:00 </p>
+			   			<p class="detailp">${detail.bcontent }</p>
+			   		</div>
+			   		
+			   		<div class="detailContext">
+			   			<p class="txt__tit26">시설정보</p>
+			   			<p class="detailc"><img class="cate" src="../img/icon/cube.png" /> &nbsp; 공간 면적 : ${detail.size } ㎡ </p>
+			   			<c:forEach items="${equipDetail }" var="n">
+			   			<p class="detailc"><img class="cate" src="../img/icon/${n.eicon }" /> &nbsp; ${n.ename } </p>
+			   			</c:forEach>
+			   			
+			   		</div>
+			   		<div class="detailContext">
+			   		<p class="txt__tit26">주의사항</p>
+			   		<div class="precautionTextContainer">
+			   		<p class="detailp">
+			   		- 대여 시간보다 적게 사용 하더라도 대관비는 환불되지 않습니다.
+			   		</p>
+			   		<p class="detailp">
+			   		- 기물 파손 및 청소 등의 사유로 보증금을 호스트에게 입금하여야 합니다.
+			   		</p>
+			   		<p class="detailp">
+			   		- 사용기간이 추가될 경우, 협의를 통해 추가 지불을 해야합니다.
+			   		</p>
+			   		<p class="detailp">
+			   		- 개인간의 거래에 대한 책임은 어플에서 책임지지 않습니다.
+			   		</p>
+			   		<p class="detailp">
+			   		- 시설 훼손 및 기물 파손 시 손해액을 호스트에게 배상하여야 합니다..
+			   		</p>
+			   		</div>
+			   		
+			   		</div>
+			  
 			 </div>
-		</section>
-		</div>
+			 </div>
+	<section class="full-section slide_limit">
+	<hr class="detail-divline2">
+	<div class="spaceDetailInfo_summary">
+	<p class="txt__tit">
+	위치 
+	</p>
+	<div id="map" style='height:auto; width: 100%; aspect-ratio: auto 4 / 2.5;'></div>
+	<div> <i class="fa-solid fa-location-dot"></i> 상세 주소 -  ${detail.addNum }   / ${detail.addr }  ${detail.addDetail } </div>
+	</div>
+	<hr class="detail-divline2">
+	<section class="section--story inner pdb0 m--pdt110" id="similar-space">
+	<p class="txt__tit">비슷한 공간</p>
+	<div class="owl-carousel owl-theme card__carousel card owl-loaded">
+		<!-- 요 밑에 친구를 foreach로 돌리기  -->
+		<div class="calender-cardmb-normal" onclick="window.location.href='./bdetail?bno=${place[0].bno}'">
+		<div class="imagemb-box">
+        <img  src="/img/places/${place[0].image }" alt="" onerror="this.src='/images/no_image.png'">
+        </div>
+        <div class="calendercard-innermb">
+        <p class="txt__card__tit">${place[0].btitle }<p class="txt__subtit__sm">${place[0].addr }</p>
+         <div class="txt__subtit__eventmb">대여시간 <span class="term">${place[0].startTime }:00 -${place[0].endTime } :00</span></div>
+        </div>
+        </div>
+	</div>
+	</section>
+
+	</section>
+	</section>
+		
 	
+	</div>
 	</section>
 </div>
-
-
-
-	<h1>Share</h1>
-<button type="submit" onclick="edit()">수정</button>
-<button type="submit" onclick="del()">삭제</button>
-<button type="submit" onclick="report()">신고</button>
-
-		
-
  		<div class="inf2" data-bno=${param.bno }>  
        	<c:choose>
 		<c:when test="${isLike eq 1  }">     
@@ -144,29 +223,9 @@
 		<span class="likes_count" data-count=${likesCount } >${likesCount }</span>
         </div>
 
-
-	
-    <!--스와이퍼 -->
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <c:forEach items="${imageD }" var="n">
-        <div class="swiper-slide"><img src="/img/places/${n }"></div>
-        </c:forEach>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-pagination"></div>
-    </div>
-      <!--스와이퍼 -->
-
-<br>
-<c:forEach items="${equipD }" var="n">
-	${n }
-</c:forEach>		
-<br>
 <button type="submit" onclick="chat()">거래하기</button>
-${detail.bcontent }
-<div id="map" style="width:350px;height:350px;"></div>
+
+
 
 <script type="text/javascript">
 	let sid = "${sessionScope.mid}";
@@ -264,25 +323,37 @@ content : iwContent
 infowindow.open(map, marker); 
 </script>
 <!-- 스와이퍼 사용  -->
-<script>
-      var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
+ <script>
+    
+      const swiper = new Swiper('.swiper', {
+    	  // Optional parameters
+    	  direction: 'vertical',
+    	  autoplay: {
+              delay: 2500,
+              disableOnInteraction: false,
+            },
+    	  loop: true,
+    	  pagination: {
+    	    el: '.swiper-pagination',
+    	    clickable: true,
+    	  },
 
+    	  // Navigation arrows
+    	  navigation: {
+    	    nextEl: '.swiper-button-next',
+    	    prevEl: '.swiper-button-prev',
+    	  },
+
+    	  // And if we need scrollbar
+    	  scrollbar: {
+    	    el: '.swiper-scrollbar',
+    	  },
+    	});
+      
+      
     </script>
+
+   
  <!-- 스와이퍼 사용  -->   
 
 <!-- 좋아요 스크립트 -->

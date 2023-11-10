@@ -66,6 +66,10 @@ public interface BoardDAO {
 
 	List<Map<String, Object>> regionList();
 
+	List<Map<String, Object>> equipDetail(Map<String, Object> map);
+
+	List<Map<String, Object>> place(Map<String, Object> map);
+
 
 	
 }
