@@ -1,9 +1,5 @@
 package com.js.web.join;
 
-import java.util.Random;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,7 +59,14 @@ public class JoinController {
 	
 	
 	
-	
+	@ResponseBody
+	@PostMapping("/emailchk")
+	public String emailchk(@RequestParam("mid") String mid) {
+		
+		int result = joinService.emailchk(mid);
+		
+		return result +"";
+	}
 	
 	
 	

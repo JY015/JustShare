@@ -16,8 +16,13 @@ public interface MypageDAO {
 
 	List<Map<String, Object>> likelist(String mid);
 
-	Map<String, Object> info(Map<String, Object> map); 
+	Map<String, Object> info(Map<String, Object> map);
 
+	Map<String, Object> idchk(String id);
+
+	Map<String, Object> emailchk(String email, String mid); 
+
+	void infoChange(Map<String, Object> map);
 
 	
 }

@@ -6,11 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -66,6 +69,101 @@ public class MypageController {
 			}	
 			
 		}
+		
+	
+		@ResponseBody
+		@PostMapping("/idchk")
+		public String idchk(@RequestParam(name="id", required = true) String id, HttpSession session) {
+			System.out.println(id);
+			if(session.getAttribute("mid") != null) {
+				Map<String, Object> map = mypageService.idchk(id);
+				JSONObject json = new JSONObject();
+				json.put("count", map.get("count"));
+				json.put("mno", map.get("mno"));
+				return json.toString();
+			} else {
+				return "redirect:/login";
+			}
+		}
+		
+		@ResponseBody
+		@PostMapping("/emailchk")
+		public String emailchk(@RequestParam(name="email", required = true) String email, HttpSession session) {
+			System.out.println(email);
+			if(session.getAttribute("mid") != null) {
+				String mid = (String)session.getAttribute("mid");
+				Map<String, Object> map = mypageService.emailchk(email, mid);
+				System.out.println(map);
+				JSONObject json = new JSONObject();
+				json.put("count", map.get("count"));
+				return json.toString();
+			} else {
+				return "redirect:/login";
+			}
+		}
+		
+	/*	@PostMapping("/infoChange")
+		public String infoChange(@RequestParam Map<String, Object> map, HttpSession session) {
+			System.out.println(map);// {postcode=0, address=서울, detailAddress=11, extraAddress= (신사동)}
+			// 아무것도 없을 때 : {id=, pw=, postcode=, address=, detailAddress=, extraAddress=, birth=, emailId=dddd, selectEmailDomain=0, emailDomain=}
+			if(session.getAttribute("mid") != null) {
+				
+				  String address = (String) map.get("address"); String postcode = (String)
+				  map.get("postcode"); String detailAddress = (String)
+				  map.get("detailAddress"); String extraAddress = (String)
+				  map.get("extraAddress");
+				 
+				String id = (String) map.get("id");
+				String pw = (String) map.get("pw");
+				String birth = (String) map.get("birth");
+				String emailBefore = (String) map.get("emailId");
+				String selectEmailDomain = (String) map.get("selectEmailDomain");
+				String emailDomain = (String) map.get("emailDomain");
+				String phone = (String) map.get("phone");
+				System.out.println(id + " " +pw);
+				
+				if(id != null && !id.isEmpty() || pw != null && !pw.isEmpty() || 
+						birth != null && !birth.isEmpty() || address != null && !address.isEmpty() &&
+						postcode != null && !postcode.isEmpty() &&
+						detailAddress != null && !detailAddress.isEmpty() &&
+						extraAddress != null && !extraAddress.isEmpty() ||
+						emailBefore != null && !emailBefore.isEmpty() &&
+						selectEmailDomain != null && !selectEmailDomain.isEmpty() ||
+						phone != null && !phone.isEmpty()) {
+					
+					if(postcode != null && !postcode.isEmpty() &&
+							detailAddress != null && !detailAddress.isEmpty() &&
+							extraAddress != null && !extraAddress.isEmpty()) {
+						
+						String addr = address + " " + postcode + " " + detailAddress + " " + extraAddress;
+						map.put("addr", addr);
+					}
+					
+					if(emailBefore != null && !emailBefore.isEmpty() &&
+							selectEmailDomain != null && !selectEmailDomain.isEmpty()) {
+						String email = "";
+						if(selectEmailDomain.equals("5")) {
+							email = emailBefore + "@" + emailDomain;
+						} else {
+							email = emailBefore + "@" + selectEmailDomain;
+						}
+						map.put("email", email);
+					}
+					map.put("mno", session.getAttribute("mno"));
+					System.out.println(map);
+					mypageService.infoChange(map);
+					return "redirect:/mypage/info";
+				}
+				return "redirect:/mypage/info?error=empty";
+				
+			} else {
+				return "redirect:/login";
+			}
+		}
+		
+		*/
+		
+		
 		
 		
 	}

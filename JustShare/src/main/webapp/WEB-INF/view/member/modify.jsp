@@ -35,13 +35,7 @@
 					</div>
 				</div>
 			</div>
-		  <div class="container">
-            <div class="row">
-            	<c:if test="${param.error eq 'empty' }">
-            	
-            	</c:if>
-            </div>
-           </div>
+		 
           <div class="container">
             <div class="row">
             <form action="./infoChange" method="post" class="row" onsubmit="return validateForm()">
@@ -134,6 +128,7 @@
               	</div>
 		    </form>
             </div>
+            
           </div>
 		</div>
 	</main>

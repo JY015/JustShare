@@ -16,6 +16,11 @@ public class JoinService {
 	public int checkID(String mid) {
 		return joinDAO.checkID(mid);
 	}
+
+	public int emailchk(String email) {
+		
+		return joinDAO.emailchk(email);
+	}
 	
 	/*
 	 * public String PhoneNumberCheck(String to) throws CoolsmsException {

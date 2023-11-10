@@ -7,6 +7,8 @@ public interface JoinDAO{
 	public int join(JoinDTO joinDTO);
 
 	public int checkID(String mid);
+
+	public int emailchk(String email);
 	
 	
 }

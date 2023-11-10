@@ -37,10 +37,19 @@ public class MypageService {
 		return mypageDAO.info(map);
 	}
 
+	public Map<String, Object> idchk(String id) {
+		
+		return mypageDAO.idchk(id);
+	}
+
+	public Map<String, Object> emailchk(String email, String mid) {
+		return mypageDAO.emailchk(email, mid);
+	}
 
 
-
-	
+	public void infoChange(Map<String, Object> map) {
+		mypageDAO.infoChange(map);
+	}
 	
 	
 }

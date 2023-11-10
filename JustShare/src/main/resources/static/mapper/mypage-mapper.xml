@@ -31,7 +31,32 @@ WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};
 		where mname = #{mname}
 		</select>
 
+	<select id="idchk" parameterType="String" resultType="Map">
+		select mid, count(*) as count
+		from members
+		where mno = #{mno}
+	</select>
+	
+	<select id="emailchk" parameterType="String" resultType="Map">
+		select count(*) as count
+		from members
+		where memail = #{arg0} and mid = #{arg1} 
+	</select>
 
+	<update id="infoChange" parameterType="Map">
+		update members set
+			<choose>
+				<when test="id != null and id != ''">mid = #{id}</when>
+				<when test="pw != null and pw != ''">mpw = #{pw}</when>
+				<when test="birth != null and birth != ''">mbirth = #{birth}</when>
+				<when test="addr != null and addr != ''">maddr = #{addr}</when>
+				<when test="email != null and email != ''">memail = #{email}</when>
+				<when test="phone != null and phone != ''">mphone = #{phone}</when>
+			</choose>
+		<where>
+			mno = #{mno}
+		</where>
+	</update>
 
   
 </mapper>
