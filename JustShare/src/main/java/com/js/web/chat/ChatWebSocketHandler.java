@@ -15,10 +15,14 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.js.web.login.LoginController;
+
 
 
 
 public class ChatWebSocketHandler extends TextWebSocketHandler{
+	
+	
 	
 	
 	@Autowired
@@ -223,7 +227,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 
 	   	        
 	   	        sendMessageToClient(toId, message1,session);
-	   	     System.out.println("거래테스트 서버수신확인 0");
+	   	     //System.out.println("거래테스트 서버수신확인 0");
 	         		
 	         	} else if(jsonObject.has("mid") && jsonObject.has("toId") && jsonObject.has("bno") 
 	         			&& jsonObject.has("tochk") && !jsonObject.has("exceptid")  
@@ -240,7 +244,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		   	   	 messageData.put("toId", toId);
 		   	   	 messageData.put("bno", bno);
 		   	   	 messageData.put("tochk", tochk);
-		   	   	 System.out.println("거래테스트 서버수신확인 1");
+		   	   	 //System.out.println("거래테스트 서버수신확인 1");
 
 		   	   	 TextMessage message1 = new TextMessage(messageData.toString());
 
@@ -445,7 +449,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    					&& !jsonObject.has("exceptid") && !jsonObject.has("time")) {
 	    				
 	    				WebSocketSession clientSession = clients.get(toId);
-	    	    		System.out.println("거래테스트1");
+	    	    		//System.out.println("거래테스트1");
 		    			
 		         		String mid = jsonObject.optString("mid", "");
 		         		String bno= jsonObject.optString("bno", "");

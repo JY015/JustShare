@@ -271,4 +271,26 @@ public class SocketController {
 		return json.toString();
 	}
 	
+	@PostMapping("/tradecopy")
+	public String tradecopy(@RequestParam Map<String,Object> map) {
+	
+		int result = socketService.tradestatus(map);
+		System.out.println("result" + result);
+		if(result ==1) {
+			
+			int result1 = socketService.tradecopy(map);
+			System.out.println("result1" + result1);
+		}
+	
+		//System.out.println("msgcount"+result);
+		//JSONObject json = new JSONObject();
+		
+			
+			//System.out.println("1번"+result);
+			 //json.put("result", result);
+	
+		 //System.out.println("결과체크"+result);
+		return "chat1";
+	}
+	
 }

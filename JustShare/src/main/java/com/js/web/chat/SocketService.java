@@ -210,8 +210,20 @@ public class SocketService {
 	}
 
 
+	public int tradecopy(Map<String, Object> map) {
+	
+		return socketDAO.tradecopy(map);
 
 
+
+	}
+
+
+	public int tradestatus(Map<String, Object> map) {
+		
+		return socketDAO.tradestatus(map);
+
+	}
 	
 
 }

@@ -7,15 +7,31 @@ body,html{
 	  
 		}
 
+		.h100 {
+		
+		padding: 0;
+		}
 		.chat{
 			margin-top: auto;
 			margin-bottom: auto;
+			height: 100%;
+			width: 100%;
+		border-radius: 0;
+		
+				margin: 0 auto;
 		}
+		
 		.card{
-			height: 851px;
-			border-radius: 15px !important;
+			height: 100%;
+
 			background-color:#495057 !important;
-			width:393px;
+			width:100%;
+			border:none;
+			border-radius: 0;
+			padding: 0;
+		
+			margin: 0 auto;
+
 		}
 		.contacts_body{
 			padding:  0.75rem 0 !important;
@@ -33,6 +49,8 @@ body,html{
 		border-radius: 0 0 15px 15px !important;
 		background-color: rgba(0,0,0,0.3) !important;
 			border-top: 0 !important;
+			height: 30%;
+			padding: 30px 40px 30px 40px;
 	}
 		.container{
 			align-content: center;
@@ -51,7 +69,7 @@ body,html{
 			background-color: rgba(0,0,0,0.3) !important;
 			border:0 !important;
 			color:white !important;
-			height: 60px !important;
+			height:160px;
 			overflow-y: auto;
 		}
 			.type_msg:focus{
@@ -64,6 +82,7 @@ body,html{
 			border:0 !important;
 			color: white !important;
 			cursor: pointer;
+			padding: 30px;
 		}
 		.send_btn{
 	border-radius: 0 15px 15px 0 !important;
@@ -92,15 +111,16 @@ body,html{
 			background-color: rgba(0,0,0,0.3);
 	}
 		.user_img{
-			height: 70px;
-			width: 70px;
-			border:1.5px solid #f5f6fa;
-		
+			height: 160px;
+			width: 160px;
+			border:3px solid #f5f6fa;
+			margin-top: 10px;
+			margin-left: 10px;	
 		}
 		.user_img_msg{
-			height: 40px;
-			width: 40px;
-			border:1.5px solid #f5f6fa;
+			height: 110px;
+			width: 110px;
+			border:3px solid #f5f6fa;
 		
 		}
 	.img_cont{
@@ -116,27 +136,36 @@ body,html{
 	.img_cont_msg{
 			height: 40px;
 			width: 40px;
+			margin-right: 90px;
+			
+	}
+ 	.img_cont_msg0{
+			height: 40px;
+			width: 40px;
+			margin-left:25px;
+			margin-right: 70px;
+			
 	}
 	.online_icon{
 		position: absolute;
-		height: 15px;
-		width:15px;
+		height: 40px;
+		width:40px;
 		background-color: #4cd137;
 		border-radius: 50%;
-		bottom: 0.2em;
-		right: 0.4em;
-		border:1.5px solid white;
+		top: 130px;
+		left: 130px;
+		border:3px solid white;
 	}
 	.offline{
 		background-color: #c23616 !important;
 			position: absolute;
-		height: 15px;
-		width:15px;
+		height: 40px;
+		width:40px;
 	
 		border-radius: 50%;
-		bottom: 0.2em;
-		right: 0.4em;
-		border:1.5px solid white;
+		top: 130px;
+		left: 130px;
+		border:3px solid white;
 	}
 	.user_info1{
 		margin-top: auto;
@@ -151,8 +180,9 @@ body,html{
 		width:75%;
 	}
 	.user_info1 span{
-		font-size: 20px;
+		font-size: 60px;
 		color: white;
+		margin-left: 120px;
 	}
 	.user_info p{
 	
@@ -171,61 +201,73 @@ body,html{
 	
 	.msgback {
 	color: white;
-		font-size: 35px;
+		font-size: 85px;
 		cursor: pointer;
 	
 	margin-right:15px;
-	margin-top:10px;
+	margin-top:25px;
+	margin-left: 20px;
 	}
 	.msg_cotainer{
-		margin-top: auto;
-		margin-bottom: auto;
-		margin-left: 10px;
-		border-radius: 25px;
+
+		margin-left: 16px;
+		border-radius: 50px;
 		background-color: #82ccdd;
-		padding: 10px;
+	
 		position: relative;
 		white-space: pre;
+		    font-size: 45px;
+    margin-top: 8px;
+    padding-right: 30px;
+		padding-left: 30px;
+		padding-top: 12px;
+				padding-bottom: 8px;
+				 max-width:63%;
 	}
 	.msg_cotainer_send{
-		margin-top: auto;
-		margin-bottom: auto;
-		margin-right: 10px;
-		border-radius: 25px;
+	
+		margin-right: 16px;
+		border-radius: 50px;
 		background-color: #78e08f;
-		padding: 8px;
-		 max-width: 500px; /* 원하는 최대 너비 설정 */
+	
+		 max-width:63%; /* 원하는 최대 너비 설정 */
 		white-space: pre;
     overflow: hidden;
-		
+    font-size: 45px;
+    margin-top: 8px;
+    padding-right: 30px;
+		padding-left: 30px;
+		padding-top: 12px;
+		padding-bottom: 8px;
 	
 	}
 	.msg_time{
 		
-		margin-top: 28px;
-		margin-left: 10px;
+		margin-top: 65px;
+		margin-left: 20px;
 		color: rgba(255,255,255,0.5);
-		font-size: 10px;
+		font-size: 25px;
 	}
 	.msg_time_send{
 	
-	margin-top: 28px;
-	margin-right: 10px;
+	margin-top: 68px;
+	margin-right: 20px;
 		color: rgba(255,255,255,0.5);
-		font-size: 10px;
+		font-size: 25px;
 	}
 	.msg_head{
 		position: relative;
+		padding: 12px 20px 0px 20px;
 	}
 	#action_menu_btn{
 		position: absolute;
-		right: 10px;
+		right: 30px;
 		top: 10px;
 		color: white;
 		cursor: pointer;
-		font-size: 20px;
+		font-size: 80px;
 			
-	margin-top: 20px;
+	margin-top: 25px;
 	}
 	.action_menu{
 		z-index: 1;
@@ -234,8 +276,8 @@ body,html{
 		background-color: rgba(0,0,0,0.5);
 		color: white;
 		border-radius: 15px;
-		top: 30px;
-		right: 24px;
+		top: 60px;
+		right: 85px;
 		display: none;
 	}
 	.action_menu ul{
@@ -245,12 +287,13 @@ body,html{
 	}
 	.action_menu ul li{
 		width: 100%;
-		padding: 10px 15px;
+		padding: 25px 40px;
 		margin-bottom: 5px;
+		font-size: 50px;
 	}
 	.action_menu ul li i{
-		padding-right: 10px;
-		width:30px;
+		
+	margin-right: 20px;
 	
 	}
 	.action_menu ul li:hover{
@@ -272,22 +315,23 @@ body,html{
 
 }
 	#chat::-webkit-scrollbar {
-  width: 10px;
+  width: 20px;
 	}
 	
 	#chat::-webkit-scrollbar-track {
  
   border-radius: 100px;
+  
 }
 
 	#chat::-webkit-scrollbar-thumb {
   border-radius: 100px;
   background-color: #212529;
-  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  
 }
 
 #contacts_body::-webkit-scrollbar {
-  width: 10px;
+  width: 20px;
 	}
 	
 	#contacts_body::-webkit-scrollbar-track {
@@ -298,7 +342,7 @@ body,html{
 	#contacts_body::-webkit-scrollbar-thumb {
   border-radius: 100px;
   background-color: #212529;
-  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+
 }
 #message {
 	
@@ -311,12 +355,12 @@ body,html{
 
 #send-button{
 	
-	width:40px;
+	width:110px;
 	display: none;
 }
 
 #input-group-append { 
-	width:40px;
+	width:100px;
 	
 	    border-radius: 0 15px 15px 0 !important;
     background-color: rgba(0,0,0,0.3) !important;
@@ -379,31 +423,31 @@ body,html{
 
 .msgboard{
 	
-margin-top:12px;
+margin-top:13%;
 color: white;
-border-radius:15px;
-width: 350.76px;
+border-radius:20px;
+width: 100%;
 
 }
 
 .boarddetail{
-	height: 70px; 
-	width:100px;
+	height: 30%; 
+	width: 30%;
 	border-radius:10px;
 }
 .boardtitle{
 	
 	
-	font-size:14px;
-	height: 60px;
+	font-size:35px;
+margin-top:3%;
 
-	width: 230px;
+	width: 68%;
 	float: right;
 	text-align: center;
 	align-items: center;
-	display: flex;
+	 display: flex;
 	justify-content: center;
-	max-width: 230px;
+
 	  text-overflow: ellipsis;
 }
 .msgdetail{
@@ -412,45 +456,271 @@ width: 350.76px;
 	
 }
 .trade{
-	width:170px;
-	height: 35px;
-	border-radius:5px;
+	margin-top:35px;
 	background-color: #1E90FF;
 	color: white;
 	font-weight: bold;
 	border: none;
+	width:48.5%;
+	height: 95px;
+	border-radius:15px;
+	font-size: 45px;
+	margin-top:15px;
 }
 .review{
-	width:170px;
-	margin-left: 10.76px;
-	height: 35px;
-	border-radius:5px;
+	width:48.5%;
+	margin-top:35px;
+	margin-left: 10px;
+		height: 95px;
+	border-radius:15px;
 	border-color: #1E90FF;
-	border-width:2px;
+	border-width:3px;
 	border-style: solid;
 	color:#1E90FF;
 	font-weight: bold;
+	font-size: 45px;
 	
 }
 
 
 .trading {
-	
-	width:170px;
-	height: 35px;
-	border-radius:5px;
-	color: white;
+		margin-top:35px;
 	font-weight: bold;
 	border: none;
+	width:48.5%;
+		height: 95px;
+	border-radius:15px;
+	
+font-size: 45px;
+	color: white;
+
 	background-color: #ff791e;
 }
 
 .traded {
-	width:170px;
-	height: 35px;
-	border-radius:5px;
-	color: white;
+		margin-top:35px;
 	font-weight: bold;
 	border: none;
+	width:48.5%;
+	height: 95px;
+border-radius:15px;
+	
+font-size: 45px;
+	color: white;
+
 	background-color: #ff1e1e;
 }
+
+.bottom_nav_menu{
+
+ 
+  width: 100%;
+  min-height: 7%;
+  color: #262626;
+  text-align: center;
+  z-index: 10;
+ 
+  background: #fcfcfc;
+  -webkit-transition: bottom 0.2s;
+  transition: bottom 0.2s;
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+
+ }
+ 
+ .bottom_nav_menu ul .b_nav_list a svg{
+  position: relative;
+  top: 5px;
+ }
+
+.bottom_nav_menu ul li a p{
+  font-size: 12px;
+  line-height: normal;
+  font-weight: 500;
+  color: #98a8af;
+  font-weight: 500;
+  margin-top: 5px;
+ }
+
+ .bottom_nav_menu ul{
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 65px;
+ }
+ .bottom_nav_menu ul li{
+  width: 20%;
+  height: 100%;
+  font-size: 65px;
+ }
+ .bottom_nav_menu ul li a{
+  color: #262626;
+  display: block;
+  height: 100%;
+ }
+ .bottom_nav_menu ul li a p{
+  font-size: 35px;
+  line-height: normal;
+  font-weight: 500;
+  color: #98a8af;
+  font-weight: 500;
+  margin-top: 5px;
+ }
+ .bottom_nav_menu ul .b_nav_list a svg{
+  position: relative;
+  top: 5px;
+ }
+ 
+ .black_c.active path{
+   fill: rgb(0, 0, 0);
+ }
+.b_nav_list a p.active{
+  color: rgb(0, 0, 0);
+}
+
+ .home_btn {
+  width: 140px;
+  height: 140px;
+  border: solid 4px white;
+  border-radius: 200px;
+  /* box-shadow: 0 -2px 8px #ffffff inset; */
+  box-shadow: 0 -2px 8px #4122d3 inset;
+  background-color: #6b4bf5;
+  /* background-color: #7759ff; */
+  margin: -12px auto;
+}
+
+.container_w {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: white;
+  position: relative;
+
+}
+
+.black_c{
+  fill: #0300ad;
+}
+
+.container_w::before,
+.container_w::after {
+  position: absolute;
+  content: "";
+  height: 55%;
+  width: 35%;
+  border-radius: 50%;
+  opacity: 1;
+  filter: blur(6px);
+}
+
+
+.container_w::after {
+  /* background-color: #1673ff; */
+  background: linear-gradient(144deg, #1673ff 100%, #0300ad 100%);
+  z-index: 1;
+  animation: backglow2 3s ease infinite;
+  top: 15px;
+  left: 9px;
+}
+
+.container_w::before {
+  /* background-color: #ff2c6b; */
+  background: linear-gradient(100deg, #FF48CC 100%, #0300ad 100%);
+  z-index: 1;
+  animation: backglow1 3s ease infinite;
+  top: 14px;
+  left: 22px;
+}
+
+.svgm {
+  width: 35%;
+  height: 98%;
+  margin: 0px auto;
+  z-index: 2;
+  position: relative;
+}
+
+.svgm svg {
+  width: 100%;
+  height: 100%;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+
+  font-size: 100%;
+
+  vertical-align: baseline;
+}
+
+ 
+
+.col-md-4 {
+    flex: none !important; /* 또는 -ms-flex: 0; */
+    max-width: none !important;
+    max-height: none !important;
+     padding: 0;
+}
+
+
+.col-md-8 {
+    flex: none !important; /* 또는 -ms-flex: 0; */
+    max-width: none !important;
+    max-height: none !important;
+    padding: 0;
+}
+
+.mb-4, .my-4 {
+	margin-bottom: 50px !important;
+	
+	
+}
+
+		.input-group-text {
+		font-size: 40px;
+	
+   
+   }
+   
+   .input-group{
+   
+   border-radius: 30px;
+   
+   }
+   
+   .input-group-append {
+    margin-left: -1px;
+    height: 160px;
+}
+ 
+ .fa-location-arrow {
+ 
+ margin-top: 10px;
+ }
+ 
+ textarea.form-control {
+ font-size: 40px !important;
+ height: 160px;
+ 
+ }
