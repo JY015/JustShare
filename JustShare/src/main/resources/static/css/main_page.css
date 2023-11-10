@@ -111,6 +111,12 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 550px){
+.header_topnav_new{
+    display: block;
+}
+}
 .banner_img_wrap ul li .main_banner3_list img{
   width: 100%;
   height: 100%;
@@ -217,15 +223,15 @@
   flex: none;
  }
  .header_topnav_new .header_topnav_inner_n .first_row h1 a{
-  background: url(../images/logo_m_active2.png);
-  width: 114px;
-  height: 21px;
+  background: url(../img/JustSharelogo.png);
+    width: 130px;
+    height: 41px;
   display: block;
   background-size: cover;
   text-indent: -9999px;
  }
  .header_topnav_new .header_topnav_inner_n .first_row .blue_btn a{
-  border: 0.5px solid rgb(0, 0, 0);
+
   border-radius: 20px;
   padding: 3px 26px 3px 14px;
   color: rgb(0, 0, 0);
@@ -235,26 +241,18 @@
   position: relative;
  }
  .header_topnav_new .header_topnav_inner_n .first_row .blue_btn a i::before{
-  content: "";
+
   height: 8px;
   width: 8px;
   display: block;
-  border: 2px solid #000000;
   border-left-width: 0;
   border-top-width: 0;
   border-bottom-width: 0;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
   position: absolute;
-  top: 6px;
-  right: -16px;
+  top: -16px;
   border-radius: 0 0 1px 1px;
  }
  .header_topnav_new .header_topnav_inner_n .first_row .blue_btn a i::after{
-  content: "";
   height: 2px;
   width: 12px;
   display: block;
@@ -572,7 +570,7 @@
 
 
 		
-@media screen /* and (max-width:550px) */ /*여기 수정함*/{
+@media screen  and (max-width:550px) {
   .banner_back_img .mo_banner{
     display: block;
   }
@@ -621,7 +619,7 @@
   }
 }
 
-@media screen and (max-width:310px){
+ @media screen and (max-width:310px){
   .header_topnav_new .header_topnav_inner_n .first_row h1 a{
     width: 91px;
     height: 17px;
@@ -633,4 +631,4 @@
   .header_topnav_new .header_topnav_inner_n .first_row .blue_btn a i{
     top: -3px;
   }
-}
+} 

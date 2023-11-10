@@ -369,4 +369,9 @@ public class MapController {
 
 		return "mapMark7";
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
 }

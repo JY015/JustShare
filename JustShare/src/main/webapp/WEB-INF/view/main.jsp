@@ -61,20 +61,9 @@
 <script>
 var _ss_user_id   = "";
 </script>
-  </head>
-<body>
-  <div class="body__container section">
-  <input type="hidden" class="is_phpself" value="/index.php">
-  <input type="hidden" class="is_app_banner" value="">
-   
-   <div class="top_app_banner" style="display:none;background-color: #fff7e1">
-      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
-         <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
-      </div>
-      <div class="app_div_close"></div>
-   </div>
 
-   <style>
+
+  <style>
    .top_app_banner{
       height:30px;
       width:100%;
@@ -101,7 +90,8 @@ var _ss_user_id   = "";
       height:22px; 
       padding:10px 10px 20px 0px;
    }
-      .all-category-container {
+  /* 기본 스타일 */
+    .all-category-container {
         display: flex;
         justify-content: space-between;
     }
@@ -128,16 +118,80 @@ var _ss_user_id   = "";
         flex-basis: calc(25% - 10px); 
         text-align: center;
     }
+ .all-container{
+ margin: 26%;
+margin-top:1%;
+margin-bottom:1%;
+}
+
+/* 미디어 쿼리 - 화면 크기에 따라 스타일 조정 */
+@media screen and (max-width: 768px) {
+        .all-category-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .all-category-container .category-item {
+        text-align: center;
+        margin-right: 20px;
+        margin-left: 20px; 
+    }
+
+    .all-category-container img,
+    .entire-cate img {
+        max-width: 50px; 
+        height: auto; 
+    }
+
+    .entire-cate {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; 
+    }
+
+    .entire-cate .category {
+        flex-basis: calc(25% - 10px); 
+        text-align: center;
+    }
+   .all-container{
+       margin: 0%; 
+ 
+}
    
-   
+} 
+
+.nav-link2{
+       display: none;
+}
+
+/* 모바일 환경에서는 아이콘을 보이도록 설정 */
+@media screen and (max-width: 413px) {
+    .nav-link2 {
+            display: inline;
+    }
+}
    </style>
+  </head> 
+<body>
+
+  <div class="body__container section">
+  <input type="hidden" class="is_phpself" value="/index.php">
+  <input type="hidden" class="is_app_banner" value="">
+   
+   <div class="top_app_banner" style="display:none;background-color: #fff7e1">
+      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
+         <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
+      </div>
+      <div class="app_div_close"></div>
+   </div>
+   <!--헤더-->
    <header id="header" class="header_bg_new">
       <div class="header__inner">
         <div class="header__first_row">
            <div class="sign-area">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -153,74 +207,37 @@ var _ss_user_id   = "";
         <div class="full-line"></div>
         <div class="header__second_row"> 
          <div class="left-side">   
-            <h1 class="logo"><a href="/">로고</a></h1>
+         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
+            <h1 class="logo"><a href="/"></a></h1>
          </div>
-         <div class="right-side">
-            <div class="sign-group">
-			
-            </div>
-          </div>
-		</div>
-         <!--  <div class="search-area">
-            <form class="searchbar searchbar-length" action="/schedule/search">
-              <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="" style="padding-right: 50px;">
-              <button type="submit"> <img src="/images/ic_search.svg" alt=""></button> 
-            </form>
-          </div>
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
-           <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>            
-         
+           <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                     
             </div>
           </div>
-      </div> -->
-
-        <div class="header__third_row">
-          <div class="main-menu-area">
-            <div><a class="" href="/schedule/search?gubun=popup">팝업 스토어</a></div>
-            <div><a class="" href="/schedule/search?gubun=space">리테일 공간 대관</a></div>
-            <div><a class="" href="/schedule/search?gubun=event">전국 행사 정보</a></div>
-            <div><a class="" href="/help/leasing?gubun=leasing">LEASING</a></div>
-          </div>
-          <div class="btn-com">
-            <a href="https://www.value-venue.com/index.html" target='_blank'>About VALUEVENUE<i></i></a>
-          </div>
-        </div>  
+      </div>
+ 
       </div>
     </header>
-<header class="header__topnav_type2">
+          
+          <!--  모바일  -->
+  <header class="header_topnav_new">
 		  <div class="header_topnav_inner_n">
 			<div class="first_row">
-			  <div class="left-side">
-				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-				<h1 class="logo"><a href="/">로고</a></h1>
-			  </div>
+			<img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
+
+			  <h1 class="logo"><a href="/"></a></h1>
+			  <div class="blue_btn">
+			  <c:choose>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></c:otherwise>
+                        </c:choose>    
+              </div>
 			</div>
 
 		  </div>
 		</header>
-     <%--  <header class="header_topnav_new">
-        <div class="header_topnav_inner_n">
-         <div class="first_row">
-             <div class="logo">             
-             <img src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./main2'">
-             </div>
-              <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
-                        </c:choose>     
-         </div>
-
-         <div class="topnav_searchbar_new">
-           <form action="/schedule/search" method="get">
-            <input type="text" placeholder="전체 둘러보기" name="stx" id="stx" value="">
-            <button type="submit"> <img src="/images/ico_topnav_search_mo.svg" alt=""></button> 
-           </form>
-         </div>
-        </div>
-      </header> --%>
-      
       <section class="myinfo__pop">
         <div class="myInfo__inner">
           <div class="myregInfo">
@@ -254,14 +271,14 @@ var _ss_user_id   = "";
       </section>
    <div class="banner_img_back">
    <section class="banner_img_wrap mySwiper swiper-fade swiper-initialized swiper-horizontal swiper-watch-progress swiper-backface-hidden">
-      <ul class="swiper-wrapper" id="swiper-wrapper-84f107fad5823f5ee" aria-live="off">
+      <ul class="swiper-wrapper" id="swiper-wrapper-84f107fad5823f5ee" aria-live="off" style="transition-duration: 0ms;">
     
          
-         <li class="swiper-slide tranEff tranEff swiper-slide-next" role="group"">
+         <li class="swiper-slide tranEff">
 <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc1.jpg" onerror="this.src='/images/no_image.png'" alt="배너">
-                  <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/images/no_image.png'" alt="배너 모바일" />
+                                 <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/images/no_image.png'" alt="배너 모바일" />
                </div>                
                
                <div class="main_banner_text">
@@ -275,7 +292,7 @@ var _ss_user_id   = "";
             </div>
          </li>
     
-      <li class="swiper-slide tranEff swiper-slide-prev" >
+      <li class="swiper-slide tranEff swiper-slide-prev" style="width: 893px; opacity: 1; transform: translate3d(-893px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 3" data-swiper-slide-index="0">
             <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
@@ -292,7 +309,7 @@ var _ss_user_id   = "";
 </div>
          </div>
             </div>
-         </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active">
+         </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active" style="width: 893px; opacity: 1; transform: translate3d(-1786px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 3" data-swiper-slide-index="1">
             <div class="main_banner_w">
                <div class="banner_back_img">
                   <img class="pc_banner" src="/img/pc3.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
@@ -321,28 +338,28 @@ var _ss_user_id   = "";
    <script>
   var swiper = new Swiper(".mySwiper", {
   slidesPerView: 2,
-	  navigation: {
-		nextEl: ".swiper-button-next.main",
-		prevEl: ".swiper-button-prev.main" 
-		},
-			
-	  effect: "fade",
-	  loop: "infinite",
-		autoHeight: false, // 슬라이드 높이 자동 조절 비활성화
-	  pagination: {   //페이징 사용자 설정
-			el: ".pagination_bullet",   //페이징 태그 클래스 설정 
-			type : 'bullets'
-		},
-		
-	  });
+     navigation: {
+      nextEl: ".swiper-button-next.main",
+      prevEl: ".swiper-button-prev.main" 
+      },
+         
+     effect: "fade",
+     loop: "infinite",
+      autoHeight: false, // 슬라이드 높이 자동 조절 비활성화
+     pagination: {   //페이징 사용자 설정
+         el: ".pagination_bullet",   //페이징 태그 클래스 설정 
+         type : 'bullets'
+      },
+      
+     });
 
-	swiper.on('slideChange', function (sld) {
-	  document.body.setAttribute('data-sld', sld.realIndex);
-	});
-	
-	</script>
+   swiper.on('slideChange', function (sld) {
+     document.body.setAttribute('data-sld', sld.realIndex);
+   });
+   
+   </script>
 
-
+<div class="all-container">
 <div class="all-category-container">
     <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
     <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
@@ -352,7 +369,6 @@ var _ss_user_id   = "";
     </div>
     <hr>
     <br>
-
 <div class="entire-cate">
 <div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
 <div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
@@ -367,6 +383,7 @@ var _ss_user_id   = "";
 <div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
 <div class="category culture"><img alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
 <div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+</div>
 </div>
  <script>
   $(".commercial, .business, .studio, .culture").click(function () {
@@ -441,8 +458,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -496,34 +513,34 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
 </script>
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-	  <h4 class="txt__tit">찜 높은순</h4>
-	  <span class="txt__subtit">찜이 높아요</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+     <h4 class="txt__tit">찜 높은순</h4>
+     <span class="txt__subtit">찜이 높아요</span>
+     <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
+     <div>
+      <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
+   <c:forEach items="${imgsubst }" var="row" varStatus="loop">
+         <div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">           
+            <div class="cccc">
+               <div class="card-sign-group">
+               </div>
+               <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
+               <div class="location-box">
+                  <img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
+               </div>
+                <a href="./bdetail?bno=${row.bno}">
+                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
-				</div>
-  	<div  class="card__inner2">         
+            </div>
+     <div  class="card__inner2">         
               <div class="txt__wrap2">
                <p class="txt__card__tit">${row.btitle}</p>
                <p class="txt__subtit__sm">${row.addDetail}</p>
@@ -532,18 +549,18 @@ navigation: {   // 버튼 사용자 지정
                <span class="term">${row.bdate}</span></div>
                
               </div>
-            </div>			
-			</div>
-			</a>
-			 </c:forEach> 
-			</div>
-		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-	  </div>
-	  <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
-	  <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
+            </div>         
+         </div>
+         </a>
+          </c:forEach> 
+         </div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+     </div>
+     <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
+     <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
 
 
-	</section>
+   </section>
    
    <script>
    var mySwiper = new Swiper('.swiper', {
@@ -557,8 +574,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -566,26 +583,26 @@ navigation: {   // 버튼 사용자 지정
 
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-	  <h4 class="txt__tit">더미1</h4>
-	  <span class="txt__subtit">더미1</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+     <h4 class="txt__tit">더미1</h4>
+     <span class="txt__subtit">더미1</span>
+     <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
+     <div>
+      <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
+   <c:forEach items="${imgsubst }" var="row" varStatus="loop">
+         <div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">           
+            <div class="cccc">
+               <div class="card-sign-group">
+               </div>
+               <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
+               <div class="location-box">
+                  <img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
+               </div>
+                <a href="./bdetail?bno=${row.bno}">
+                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
-				</div>
-  	<div  class="card__inner2">         
+            </div>
+     <div  class="card__inner2">         
               <div class="txt__wrap2">
                <p class="txt__card__tit">${row.btitle}</p>
                <p class="txt__subtit__sm">${row.addDetail}</p>
@@ -594,18 +611,18 @@ navigation: {   // 버튼 사용자 지정
                <span class="term">${row.bdate}</span></div>
                
               </div>
-            </div>			
-			</div>
-			</a>
-			 </c:forEach> 
-			</div>
-		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-	  </div>
-	  <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
-	  <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
+            </div>         
+         </div>
+         </a>
+          </c:forEach> 
+         </div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+     </div>
+     <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
+     <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
 
 
-	</section>
+   </section>
 
    <div class="partition-line"></div>
    <script>
@@ -620,8 +637,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -664,6 +681,19 @@ function search_check_m2()
 }
 
 </script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+      
+      //세션에 저장된 count를 storage에 저장
+      sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
+      
+      
+      const mid = sessionStorage.getItem("mid");    
+      
+      
+  });
+
+    </script>
       <section class="section section--m--search">
         <div class="container">
           <header id="header" class="header__type2">
@@ -734,14 +764,6 @@ function search_check_m2()
     <section class="aside-layerpop">
       <div class="aside-wrap">
         <div class="aside-content">
-          <div class="aside-header">
-            <a href="/"><img style="width: 100px;" src="/images/mo/logo_m_active2.svg" alt=""></a>
-           <form class="searchbar searchbar-length" action="/schedule/search">
-            <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="">
-            <button type="submit"> <img src="/images/ico_search.svg" alt=""></button> 
-           </form>
-              <div class="btn-aside-layerpop-close">닫기버튼</div>
-          </div>
           <div class="aside-body">
          <!-- 브랜드 stats가 없는경우에만 "non-stat" 추가-->
             <div class="aside-sign-group non-stat">
@@ -808,8 +830,7 @@ function search_check_m2()
         </div>
       </div>
     </section>
-
-       <%@ include file="footer.jsp"%>
+    <%@ include file="footer.jsp"%>
       
       
  <!-- 내가 만진 부분-->     
@@ -826,9 +847,7 @@ function search_check_m2()
               <li><a href="/faq">자주 묻는 질문</a></li>
               <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
               <li><a href="/help/policy">이용약관</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/help/privacy">개인정보처리방침</a></li>
-             
+                   <c:if test="${sessionScope.mgrade eq 4}"><a href="./admin/main">관리자페이지</a></c:if>             
             </ul>
           </div>
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
@@ -857,7 +876,6 @@ function search_check_m2()
       </footer>
     </div>
 <!-- 내가 만진 부분-->
-
    <section class="mobile_pop_section mobile_pop" style="display:none;">
       <div class="mb-banner">
          <div class="banner-wrap">
@@ -911,20 +929,7 @@ function search_check_m2()
    }
    .notScroll {overflow: hidden;width: 100%;height: 100vh;}
    </style>
-   <!-- 내가 만진 부분-->
-   <script>
-   $(document).ready(function() {
-       // "마이페이지" 링크를 클릭했을 때
-       $(".b_nav_list a").click(function(event) {
-           if (${sessionScope.mid eq null}) {
-               // sessionScope.mid가 null일 때 알림 메시지 표시
-               alert("로그인 후 이용이 가능합니다.");
-               event.preventDefault(); // 링크 이동을 막음
-           }
-       });
-   });
-   <!-- 내가 만진 부분-->
-   </script>
+
 
     <!--date layer-->
     <div class="dateLayer" id="container"></div>

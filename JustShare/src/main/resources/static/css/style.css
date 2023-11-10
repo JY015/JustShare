@@ -805,6 +805,7 @@
 }
 
 @media screen and (max-width: 720px) {
+
   .txt__tit {
     font-size: 20px;
     line-height: 36px;
@@ -1816,6 +1817,7 @@ select.selectBox.select-hidden {
 
 a.btn {
   display: inline-block;
+  
 }
 
 .btn--primary {
@@ -10230,6 +10232,7 @@ ul.msgTxtList li.left div {
 }
 
 @media screen and (max-width: 1058px) {
+	
   * {
     -webkit-tap-highlight-color: transparent;
   }
@@ -10244,9 +10247,9 @@ ul.msgTxtList li.left div {
     padding-left: 20px;
     padding-right: 20px;
   }
-  header {
+/*   header {
     border-bottom: 1px solid #e0e0e0;
-  }
+  } */
   header .header__wrap {
     height: 80px;
     width: 100%;
@@ -10820,7 +10823,7 @@ ul.msgTxtList li.left div {
     padding: 0;
   }
   header {
-    border-bottom: 1px solid #e0e0e0;
+   /*  border-bottom: 1px solid #e0e0e0; */
     width: 100%;
     padding: initial;
     max-width: 100%;

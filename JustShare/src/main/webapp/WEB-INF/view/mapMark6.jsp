@@ -753,15 +753,7 @@
 </style>
 
 </head>
-<header class="header_topnav_new">
-        <div class="header_topnav_inner_n">
-         <div class="first_row">
-          <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
-         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">&nbsp;
-          <div class="logo"><img src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
-          </div>
-</div>
-</header>
+<%@ include file="header.jsp"%>
 <body>
 		<hr class="hide">
 
