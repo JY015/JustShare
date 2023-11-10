@@ -74,7 +74,7 @@ var _ss_user_id   = "";
       <div class="app_div_close"></div>
    </div>
 
-   <style>
+  <style>
    .top_app_banner{
       height:30px;
       width:100%;
@@ -101,7 +101,8 @@ var _ss_user_id   = "";
       height:22px; 
       padding:10px 10px 20px 0px;
    }
-      .all-category-container {
+  /* 기본 스타일 */
+    .all-category-container {
         display: flex;
         justify-content: space-between;
     }
@@ -128,8 +129,47 @@ var _ss_user_id   = "";
         flex-basis: calc(25% - 10px); 
         text-align: center;
     }
+ .all-container{
+ margin: 26%;
+margin-top:1%;
+margin-bottom:1%;
+}
+
+/* 미디어 쿼리 - 화면 크기에 따라 스타일 조정 */
+@media screen and (max-width: 768px) {
+        .all-category-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .all-category-container .category-item {
+        text-align: center;
+        margin-right: 20px;
+        margin-left: 20px; 
+    }
+
+    .all-category-container img,
+    .entire-cate img {
+        max-width: 50px; 
+        height: auto; 
+    }
+
+    .entire-cate {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; 
+    }
+
+    .entire-cate .category {
+        flex-basis: calc(25% - 10px); 
+        text-align: center;
+    }
+   .all-container{
+       margin: 0%; 
+ 
+}
    
-   
+} 
    </style>
    <!--헤더-->
    <header id="header" class="header_bg_new">
@@ -156,12 +196,6 @@ var _ss_user_id   = "";
          <div class="left-side">   
             <h1 class="logo"><a href="/">ㅋㅋ</a></h1>
          </div>
-          <div class="search-area">
-            <form class="searchbar searchbar-length" action="/schedule/search">
-              <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="" style="padding-right: 50px;">
-              <button type="submit"> <img src="/images/ic_search.svg" alt=""></button> 
-            </form>
-          </div>
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
@@ -169,41 +203,19 @@ var _ss_user_id   = "";
             </div>
           </div>
       </div>
-
-        <div class="header__third_row">
-          <div class="main-menu-area">
-            <div><a class="" href="/schedule/search?gubun=popup">팝업 스토어</a></div>
-            <div><a class="" href="/schedule/search?gubun=space">리테일 공간 대관</a></div>
-            <div><a class="" href="/schedule/search?gubun=event">전국 행사 정보</a></div>
-            <div><a class="" href="/help/leasing?gubun=leasing">LEASING</a></div>
-          </div>
-          <div class="btn-com">
-            <a href="https://www.value-venue.com/index.html" target='_blank'>About VALUEVENUE<i></i></a>
-          </div>
-        </div>  
+ 
       </div>
     </header>
-
-
-
+        <c:choose>
+                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
+                        </c:choose>   
       <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">
           <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
 			<img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">&nbsp;
-          <div class="logo"><img alt="logo" src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
-              <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
-                        </c:choose>     
-         </div>
-         
-
-         <div class="topnav_searchbar_new">
-           <form action="/schedule/search" method="get">
-            <input type="text" placeholder="전체 둘러보기" name="stx" id="stx" value="">
-            <button type="submit"> <img src="/images/ico_topnav_search_mo.svg" alt=""></button> 
-           </form>
+          <div class="logo"><img alt="logo" src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>        
          </div>
         </div>
       </header>
@@ -328,7 +340,7 @@ var _ss_user_id   = "";
 	
 	</script>
 
-
+<div class="all-container">
 <div class="all-category-container">
     <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
     <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
@@ -338,7 +350,6 @@ var _ss_user_id   = "";
     </div>
     <hr>
     <br>
-
 <div class="entire-cate">
 <div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
 <div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
@@ -353,6 +364,7 @@ var _ss_user_id   = "";
 <div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
 <div class="category culture"><img alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
 <div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+</div>
 </div>
  <script>
   $(".commercial, .business, .studio, .culture").click(function () {
@@ -733,14 +745,6 @@ document.addEventListener('DOMContentLoaded', function () {
     <section class="aside-layerpop">
       <div class="aside-wrap">
         <div class="aside-content">
-          <div class="aside-header">
-            <a href="/"><img style="width: 100px;" src="/images/mo/logo_m_active2.svg" alt=""></a>
-           <form class="searchbar searchbar-length" action="/schedule/search">
-            <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="">
-            <button type="submit"> <img src="/images/ico_search.svg" alt=""></button> 
-           </form>
-              <div class="btn-aside-layerpop-close">닫기버튼</div>
-          </div>
           <div class="aside-body">
          <!-- 브랜드 stats가 없는경우에만 "non-stat" 추가-->
             <div class="aside-sign-group non-stat">

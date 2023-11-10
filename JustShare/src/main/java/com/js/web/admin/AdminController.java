@@ -57,6 +57,17 @@ public class AdminController {
 		return "admin/reportList";
 	}
 	
+	@GetMapping("/admin/tradeList")
+	public String tradeList(Model model) {
+		
+		List<Map<String, Object>> tradeList = adminService.tradeList();
+		List<Map<String, Object>> totalTradeList = adminService.totalTradeList();
+		model.addAttribute("tradeList", tradeList);
+		model.addAttribute("totalTradeList", totalTradeList);
+		System.out.println(tradeList);
+		return "admin/tradeList";
+	}
+	
 }
 
 	

@@ -18,7 +18,6 @@
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 	  <link rel="stylesheet" href="/css/main_page.css" />
-   <link rel="stylesheet" href="./css/login.css">
    <!-- 회원가입 3가지회원 유형 css new -->
    <link rel="stylesheet" href="/css/register.css?ver=20000120" />
    <!-- 고객센터 css -->
@@ -51,7 +50,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 창</title>
-<link rel="stylesheet" href="./css/login.css">
+
 <script src="./js/jquery-3.7.0.min.js"></script>
 </head>
 
@@ -114,13 +113,15 @@ var _ss_user_id   = "";
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
 
-<div class="login_inner">
-<h4 class="login_t">LOGIN</h4>
-<div class="login-form">
-      <form action="./login" method="post">
-      <h3><label for="name">아이디</label></h3>
+<div class="login_inner" style="text-align: center">
+
+<div class="login-form" >
+
+      <form action="./login" method="post" class="container">
+      <h4 class="login_t" style="text-align: left;">LOGIN</h4>
+      <h3 style="text-align: left;"><label for="name">아이디</label></h3>
          <input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br><br><br>
-      <h3><label for="name">비밀번호</label></h3>
+      <h3 style="text-align: left;"><label for="name">비밀번호</label></h3>
          <input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br><br>
  	  <div style="text-align:center;">
 	<c:if test="${loginCheckCount eq 1}">
@@ -132,15 +133,14 @@ var _ss_user_id   = "";
    </div>
 
    <div style="text-align: center">
-   <a href="./findId">아이디 찾기 | </a><a href="./findPw">비밀번호 찾기 | </a><a href="./join">회원가입</a>
+   <a href="./findId">아이디 찾기 | </a><a href="./findPw">비밀번호 찾기</a>
 </div>
       <div class="sign_movement">
             <p>
                회원가입 후 <span>JustShare 서비스를 이용</span>해보세요
             </p>
-            <a href="/join"><button class="sign_btn btn_clear_black">회원가입 하기</button></a>
+            <a href="/join"><button class="sign_btn btn_clear_black" style=" border: solid 1px #020202 !important; color:black !important; background-color: white !important;">회원가입 하기</button></a>
          </div>
-   
    </div>
       <br><br>
 
@@ -186,6 +186,7 @@ var _ss_user_id   = "";
     </div>
 
    <style>
+
    .mb-banner {
       height:200px;
       margin: 0 10px 120px 10px;
@@ -219,12 +220,36 @@ var _ss_user_id   = "";
       left:0;      
    }
    .notScroll {overflow: hidden;width: 100%;height: 100vh;}
+       button {
+            background-color: #f64d61 !important;
+            color: white !important;
+            padding: 10px 20px !important;
+            border: none !important;
+            cursor: pointer !important;
+            border-radius: 4px !important;
+            font-size: 16px !important;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+         input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-width: 600px;
+        }
+           .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+          
+        }
+
    </style>
-
-
-
-
-
 <!-- Meta Pixel Code -->
 <script>
 

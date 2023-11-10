@@ -42,6 +42,16 @@ public class AdminService {
 		adminDAO.gradeDown();
 	}
 
+	public List<Map<String, Object>> tradeList() {
+		
+		return adminDAO.tradeList();
+	}
+
+	public List<Map<String, Object>> totalTradeList() {
+		
+		return adminDAO.totalTradeList();
+	}
+
 
 
 

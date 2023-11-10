@@ -35,9 +35,7 @@
 
 <script type="text/javascript">
 function gradeCh(mno, name, value){
-	/* let select = document.getElementById("grade")[0];  */
-/* 	let selectName =select.options[select.selectedIndex].text;
-	let selectValue=select.options[select.selectedIndex].value; */
+
 if(confirm(name + "님의 등급을 변경하시겟습니까?")){
 location.href="./gradeChange?mno="+mno+"&grade="+value;
 
@@ -112,6 +110,6 @@ select {
 			</div>
 		</c:forEach>
 	</div>
-	<%@ include file="../footer.jsp"%>
+	<%@ include file="adminfooter.jsp"%>
 </body>
 </html>

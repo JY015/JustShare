@@ -2673,7 +2673,7 @@ align-items: center;
 gap: 34px;
 }
 .header_bg_new .header__inner .header__second_row h1 a {
-background: url(../images/mo/ico_logo_origin.svg);
+background: url(../img/JustSharelogo.png);
 /* background: url(../images/logo_m_active2.png); */
 background-repeat: no-repeat;
 width: 162px;
@@ -3486,9 +3486,9 @@ display: block;
 /*--------------------------------------------------- 硫붿씤�섏씠吏� 移대뱶�좏삎 諛� 移대뱶 而⑦뀒�대꼫 �묒뾽 ---------------------------------------------------*/
 /* �쒕툕諛곕꼫 */
 
-.sub-banner{
-    width: 100%;
-    margin: 0 auto;
+.sub-banner {
+     width: 100%;
+    margin: 0 -11px;
     background-color: #1F6CFD;
 }
 .banner-wrap{

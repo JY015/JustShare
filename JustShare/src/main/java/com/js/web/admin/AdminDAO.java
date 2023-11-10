@@ -20,4 +20,8 @@ public interface AdminDAO {
 
 	void gradeDown();
 
+	List<Map<String, Object>> tradeList();
+
+	List<Map<String, Object>> totalTradeList();
+
 }

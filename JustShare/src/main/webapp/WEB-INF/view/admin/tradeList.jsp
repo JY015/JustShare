@@ -51,45 +51,29 @@
 	border: 1px solid #f0f0f0;
 }
 </style>
-
-<a href="./member">-멤버 관리-</a> 
 	<div class="div-table">
 		<div class="div-row">
-			<div class="div-cell">신고번호</div>
-			<div class="div-cell">신고한 사람</div>
-			<div class="div-cell">신고 당한 사람</div>
-			<div class="div-cell">신고 내용</div>
-			<div class="div-cell">신고 카테고리</div>
+			<div class="div-cell">구매자</div>
+			<div class="div-cell">판매자</div>
+			<div class="div-cell">거래시간</div>
+			<div class="div-cell">글번호</div>
 			<div class="div-cell">글 확인</div>
+			<div class="div-cell">카운트</div>
 		</div>
-		<c:forEach items="${reportList}" var="row">
+		<c:forEach items="${tradeList}" var="row">
 			<div class="div-row">
-				<div class="div-cell">${row.rno}</div>
-				<div class="div-cell">${row.rmid}</div>
-				<div class="div-cell">${row.mid}</div>
-				<div class="div-cell">${row.rcontent}</div>
-				<div class="div-cell">${row.rcate}</div>
+				<div class="div-cell">${row.from_user_id}</div>
+				<div class="div-cell">${row.to_user_id}</div>
+				<div class="div-cell">${row.timestamp}</div>
+				<div class="div-cell">${row.bno}</div>
 				<div class="div-cell"><button onclick="location.href='/bdetail?bno=${row.bno}'">글 확인</button></div>
+				<div class="div-cell">${row.total_count}</div>
 </div>
 </c:forEach>
 </div>
+				총 결제 횟수: ${totalTradeList[0].total_count}
 
 <br><br><br>
-<div class="div-table">
-		<div class="div-row">
-			<div class="div-cell">신고 아이디</div>
-			<div class="div-cell">신고 누적</div>
-		</div>
-		
-		<c:forEach items="${reportListMember}" var="m">
-			<div class="div-row">
-				<div class="div-cell">${m.mid}</div>
-				<div class="div-cell">${m.count}회
-				<c:if test="${m.count >= 5}">&nbsp&nbsp&nbsp<span style="color: red">신고 누적횟수가 5회 이상이라 계정이 일시정지 되었습니다.</span></c:if>
-			</div>
-		</div>
-</c:forEach>
-</div>			
 <%@ include file="adminfooter.jsp"%>
 		
 				
