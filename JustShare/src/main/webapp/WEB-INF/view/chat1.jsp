@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
+
+<head>
 		<title>Chat</title>
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -13,30 +15,47 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<link rel="stylesheet" href="./css/chat.css">
-			<link rel="stylesheet" href="./css/toastr.min.css">
+		
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<link rel="stylesheet" href="/css/import.css?ver=20000120" />
+<link rel="stylesheet" href="/css/style.css?ver=20000120" />
+<link rel="stylesheet" href="/css/main_page.css" />
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
 
-<style type="text/css">
-	
-</style>
 
-
-	
-<!------ Include the above in your HEAD tag ---------->
 	</head>
 
-	<!--Coded With Love By Mutiullah Samim-->
+	
 	<body>
 	
-
-			<script type="text/javascript">
+		<script type="text/javascript">
 
 	
+				//## 대화창에서 이미지 클릭시 board디테일로 이동 
+				$(document).on('click', '.msgboard',function(){
+			
+		const imageElement = document.querySelector('.boarddetail');
+		const dataBno = imageElement.getAttribute('data-bno');
+		
+		
+		
+				
+				
+
+			    // 클릭한 이미지의 data-bno 값을 사용하여 새로운 URL로 이동합니다.
+			    const newURL = '/bdetail?bno=' + dataBno; // 여기서 'your_base_url/'은 새로운 URL의 기본 부분을 나타냅니다.
+
+			    // 실제로 새로운 URL로 이동하는 방법은 여러 가지가 있을 수 있습니다.
+			    // 예를 들어, 다음과 같이 사용자를 해당 URL로 리다이렉트할 수 있습니다.
+			    window.location.href = newURL;
+				});
+			
+			//}
 	//  ##대화창 메뉴바 출력##
 	$(document).on('click', '#action_menu_btn', function(){
 	    $('.action_menu').toggle();
@@ -118,20 +137,20 @@
  			
  		} else if(toId.toLowerCase()===mid.toLowerCase()) {
  			
- 			//event.preventDefault();
- 			//alert("자기 자신과 대화를 할수 없습니다.");
+ 			event.preventDefault();
+ 			alert("자기 자신과 대화를 할수 없습니다.");
  			
         			
  		  //toastr.options.closeButton = true;
- 		      toastr.options.newestOnTop = false;
+ 		      //toastr.options.newestOnTop = false;
  		      //toastr.options.progressBar = true;
- 		     toastr.options.positionClass = 'toast-top-center';
- 		    toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
+ 		     //toastr.options.positionClass = 'toast-top-center';
+ 		    //toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
  			
         			  
- 		   setTimeout(function() {
- 			    window.history.back();
- 			}, 1000);
+ 		   //setTimeout(function() {
+ 			    //window.history.back();
+ 			//}, 1000);
  			  //window.history.back();
 
  		    
@@ -949,6 +968,7 @@ function sendMessage() {
 		function serchid(clickedElement) {
         		
         		
+        		
 				var bnoid = document.querySelector(".toId");
 				var bno = bnoid.getAttribute("data-bno");
 				
@@ -961,6 +981,11 @@ function sendMessage() {
         		noteNumElement.style.display = 'none';
         		
         		
+        			
+ 				var element = document.getElementById('chat3'); // 대상 요소의 ID
+ 				 
+ 					    element.classList.add('d-none'); 
+ 				
         		       var jsondata = {
         		    		   
         		       "toId":toId,
@@ -975,6 +1000,7 @@ function sendMessage() {
         		      
         		        socket.send(JSON.stringify(jsondata));
         		        
+        		        /*
         		 // 클릭한 li 요소에 "active" 클래스를 추가
            		var liElements = document.querySelectorAll("li");
        			for (var i = 0; i < liElements.length; i++) {
@@ -983,19 +1009,21 @@ function sendMessage() {
       				 clickedElement.parentElement.classList.add("active");
         		
         		
-        		
+        		*/
         	 if(mid.toLowerCase()===toId.toLowerCase()) {
         			
         		 //toastr.options.closeButton = true;
-    		      toastr.options.newestOnTop = false;
+    		      //toastr.options.newestOnTop = false;
     		      //toastr.options.progressBar = true;
-    		     toastr.options.positionClass = 'toast-top-center';
-    		    toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
-    			
+    		     //toastr.options.positionClass = 'toast-top-center';
+    		    //toastr.error('자기 자신과 대화를 할수 없습니다.','오류',{timeOut: 1000});
+    				event.preventDefault();
+ 					alert("자기 자신과 대화를 할수 없습니다.");
+ 			
            			  
-    		   setTimeout(function() {
-    			    window.history.back();
-    			}, 1000);
+    		  // setTimeout(function() {
+    			   // window.history.back();
+    			//}, 1000);
         			
         			return false;
         		}
@@ -1026,7 +1054,7 @@ function sendMessage() {
         	
         	// ## 7.처음 대화방 목록 디폴트 생성 함수 ( 예정)
         function msgroomload(){
-        		
+        	
         		
         		var status = "";
         		var toimg = ""; // ajax로 마지막 메세지 아이디를 통신해서 그사람 사진가져오기
@@ -1069,7 +1097,7 @@ function sendMessage() {
             				roomheader +='<div class="msgback roomback" id="roomback"><span><i class="xi-arrow-left"></i></span></div>';
             				roomheader +='<div class="card-header"><div class="input-group">';
             				roomheader +='<input type="text" placeholder="Search..." name="" class="form-control search">';
-            				roomheader +='<div class="input-group-prepend"><span class="input-group-text search_btn">';
+            				roomheader +='<div class="input-group-prepend"><span class="input-group-text1 search_btn">';
             				roomheader +='<i class="fas fa-search"></i></span></div></div></div><div class="card-body contacts_body" id="contacts_body">';	
             				roomheader +='<ui class="contacts" id="roomlist">';						
             				
@@ -1130,16 +1158,17 @@ function sendMessage() {
       		roombody +='<div class="img_cont"><img src="'+toimg+'"class="rounded-circle user_img">';
       		roombody +='<span class="status offline"></span></div><div class="user_info">';
       		roombody +='<span class="toId" data-bno="'+bno+'">'+toId+'</span><span class="time">'+formattedTime+'';
+      		roombody +='</span><p class="roommessage">'+lastmessage+'';
       		
       	  if (msgcount === 0) {
-      		roombody +='</span><span class="note-num" style="display: none;">'+msgcount+'</span>';
+      		roombody +='<span class="note-num" style="display: none;">'+msgcount+'</span></p></div></div></li>';
       		
       	  }else{
-      		roombody +='</span><span class="note-num" style="display: block;">'+msgcount+'</span>';
+      		roombody +='</span><span class="note-num" style="display: block;">'+msgcount+'</span></p></div></div></li>';
       		  
       	  }	
       		
-      		roombody +='<p class="roommessage">'+lastmessage+'</p></div></div></li>';
+      		
       		//roombody +='<p class="roommessage">'+lastmessage+'</p><span id="action_menu_btn"></span>';
       		//roombody +='<div class="action_menu"><ul><li><i class="fas fa-user-circle"></i> 사용자정보</li>';
       		//roombody +='<li><i class="fas fa-users"></i> 신고하기</li>';
@@ -1152,8 +1181,41 @@ function sendMessage() {
            
                     }
                     
-                	var roomfooter ='</ui></div><div class="card-footer"></div></div></div></div></div>'; 
+                	//var roomfooter ='</ui></div><div class="card-footer"></div></div></div></div></div>'; 
+                	//
+     
                 	
+          var roomfooter='</ui></div><nav class="bottom_nav_menu" style="display: block !important;"><ul><li class="b_nav_listb "><a href="/board">';
+  
+          roomfooter+='<i class="xi-document"></i> </svg><p class="">게시판</p></a></li><li class="b_nav_listb "><a href="/mapMark6">';
+
+          roomfooter+='<i class="xi-gps"></i> </svg><p class="">내위치</p></a></li> <li class=""><a href="/">';
+          roomfooter+='<div class="home_btn"><div class="container_w"><div class="svgm">';
+          roomfooter+='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23"';
+          roomfooter+='fill="none"><path fill-rule="evenodd" clip-rule="evenodd"';    
+          roomfooter+='d="M24 10L11.5 0L0 10H2.66602V22.5H8.49935V14.3333H15.4993V22.5H21.3327V10H24Z"';
+          roomfooter+='fill="white" /></svg></div></div></div></a></li><li class="b_nav_list "><a href="/chat1">';  
+          roomfooter+='<i class="xi-message-o"></i></svg><p class="">채팅</p></a></li>';       
+          roomfooter+='<li class="b_nav_list "><a href="/mypage"> <i class="xi-user-o"></i></svg>';   
+          roomfooter+='<p class="">마이페이지</p></a></li></ul></nav></div></div></div></div>';
+               
+            
+     
+
+      
+
+      
+   
+
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	//
                     var parentContainer = document.body; 
              
                 	var roombody1=roomheader+roomContent+roomfooter;
@@ -1289,7 +1351,7 @@ function sendMessage() {
 		
 		  
             
-		
+		 const confirmationText = "거래가 완료되면 취소 할 수 없습니다.";
 		
 		//alert(mid+toId+bno);
 		//## 여기서 조건식으로 2일경우 클릭 안하게 문제는 또 ajax?
@@ -1324,12 +1386,21 @@ function sendMessage() {
 				          
 				            
 					} else if (fromchk==0 && tochk==1){
+						
+						   const userConfirmed = window.confirm(confirmationText);
+						 
+
+						    if (userConfirmed) {
 						userchk.setAttribute('data-fromuserchk',1);
-						fromup(mid,toId,bno); 
 						jsonmsg["fromchk"] = 1;
 						userchk.querySelector('.trading').textContent = '거래완료';
 						userchk.querySelector('.trading').classList.replace('trading', 'traded');
-						 
+						
+						fromup(mid,toId,bno, function() {
+						tradecopy(mid,toId,bno);
+						});  
+						}
+						    
 					} else if (fromchk==0 && tochk==0) {
 						userchk.setAttribute('data-fromuserchk',1);
 						fromup(mid,toId,bno);
@@ -1349,12 +1420,21 @@ function sendMessage() {
 						
 						//거래완료상태 아무동작하지않음
 						}else if (fromchk==1 && tochk==0) {
+					const userConfirmed = window.confirm(confirmationText);
+								 
+
+							    if (userConfirmed) {
 						userchk.setAttribute('data-touserchk',1);
-						toup(mid,toId,bno);
-						  jsonmsg["tochk"] = 1;
+						//toup(mid,toId,bno,callback);
+						 jsonmsg["tochk"] = 1;
 						  userchk.querySelector('.trading').textContent = '거래완료';
 						  userchk.querySelector('.trading').classList.replace('trading', 'traded');
 						  
+						toup(mid,toId,bno, function() {
+						tradecopy(toId,mid,bno); // mid,toId 순서 바꿔서 보내야됨 
+						
+						 
+						}); }
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-touserchk',0);
 						toup(mid,toId,bno);
@@ -1380,7 +1460,38 @@ function sendMessage() {
 				
 	});
 	});
-        
+    
+	//# 거래완료시 거래상태값 변경후 거래완료테이블에 복사해서 넣기 
+	function tradecopy(mid,toId,bno) {
+		
+		$.ajax({
+	           type: "post",
+	           url: "./tradecopy", 
+	           data: {
+	           	
+	           	"mid" : mid,
+	           	"toId": toId,
+	           	"bno" : bno
+	         
+	           
+	           	},
+	          	
+	           success: function(data) {
+	           	
+	   
+	     
+	          
+			  },
+			  error: function() {
+			
+		}
+	   
+	});
+		
+		
+	}
+	
+	
 	function toIdbnochk(mid,toId,bno,callback){ 
 		 $.ajax({
            type: "GET",
@@ -1411,7 +1522,7 @@ function sendMessage() {
 	}
 	
 	 //to to 버전 내가from
-	function fromup(mid,toId,bno){ 
+	function fromup(mid,toId,bno,callback){ 
 		 $.ajax({
             type: "GET",
             url: "./fromup", 
@@ -1426,14 +1537,12 @@ function sendMessage() {
            	
             success: function(data) {
             	
+            	 if (typeof callback === 'function') {
+                     callback();
+                 }
+            	
          
-            //var jsonData = JSON.parse(data); 
-            //var json= jsonData.result;
-
-			  //$("#msgload").remove();
-            //serchidutil1(toId,mid,bno);
-           
-           
+      
 		  },
 		  error: function() {
 		
@@ -1443,7 +1552,7 @@ function sendMessage() {
 	}
 	 
 	 //to from버전내가to임
-	function toup(mid,toId,bno){ 
+	function toup(mid,toId,bno,callback){ 
 		 $.ajax({
            type: "GET",
            url: "./toup", 
@@ -1458,13 +1567,10 @@ function sendMessage() {
           	
            success: function(data) {
            	
-        
-           //var jsonData = JSON.parse(data); 
-           //var json= jsonData.result;
-
-			  //$("#msgload").remove();
-           //serchidutil1(toId,mid,bno);
-          
+        	   if (typeof callback === 'function') {
+                   callback();
+               }
+     
           
 		  },
 		  error: function() {
@@ -1477,6 +1583,18 @@ function sendMessage() {
         	//## 4. DB자료로 이전 대화창 생성 함수 ##
         	function msgload(msg) {
         	
+        		
+        		var element = document.getElementById('chat3'); 
+				 
+				    element.classList.add('d-none'); 
+				    
+				    var element1 = document.querySelector('.bottom_nav_menu'); 
+		        	if (element1) { 
+				
+			
+					  
+		        		element1.style.cssText = "display: none !important;";
+		        	}
         		
         		
        			
@@ -1565,7 +1683,7 @@ function sendMessage() {
             		if(mid===touserid) {
          			//조건문으로 내아이디랑 비교해서 발신,수신 비교 후 출력하기 왼쪽	(반복)		
            conversationHTML+='<div class="d-flex justify-content-start mb-4" >';
-           conversationHTML+='<div class="img_cont_msg"><img src="'+toimg+'" class="rounded-circle user_img_msg toimg">';
+           conversationHTML+='<div class="img_cont_msg0"><img src="'+toimg+'" class="rounded-circle user_img_msg toimg">';
            conversationHTML+='</div><div class="msg_cotainer">'+message+'</div>';
            conversationHTML+='<span class="msg_time">'+formattedTime+'</span></div>';		
             
@@ -1613,14 +1731,14 @@ function sendMessage() {
         		    contenthead +='<span class="toId1">'+toId+'</span></div>';
         		    contenthead +='</div><span id="action_menu_btn"><i class="fas fa-bars"></i></span>';
         		    contenthead +='<div class="action_menu"><ul><li><span class="span1"><i class="fas fa-user-circle"></i></span><span class="span2"> 사용자정보</span></li>';
-        		    contenthead +='<li><span class="span1"><i class="fas fa-user-tie"></i></span><span class="span2"> 신고하기</span></li>';
+        		    //contenthead +='<li><span class="span1"><i class="fas fa-user-tie"></i></span><span class="span2"> 신고하기</span></li>';
         		    contenthead +='<li type="button" onclick="msgexit(\'대화나가기\')"><span class="span1"><i class="fas fa-user-slash"></i></span><span class="span2"> 대화나가기</span></li>';
         		    contenthead +='<li type="button" onclick="'+block+'"><span class="span1"><i class="fas fa-ban"></i></span><span class="span2"> '+block1+'</span></li>';
         		    contenthead +='<li type="button" onclick="toggleActionMenu()"><span class="span1"><i class="fas fa-times"></i></span><span class="span2"> 취소</span></li>';
         		    
         		    contenthead +='</ul></div><div class="msgdetail" data-fromuserchk="'+fromuserchk+'" data-touserchk="'+touserchk+'">';
-        		    contenthead +='<button class="'+tradeclass+'"> '+trademsg+'</button><button class="review"'; 
-        		    contenthead +='>리뷰작성</button></div><div class="msgboard"><img src="'+bimg+'" class="boarddetail"';
+        		    contenthead +='<button class="'+tradeclass+'"> '+trademsg+'</button><button class="review1"'; 
+        		    contenthead +='>리뷰작성</button></div><div class="msgboard"><img src="img/places/'+bimg+'" class="boarddetail"';
         		    contenthead +=' data-bno="'+bno+'"><span class="boardtitle">'+btitle+'</span></div></div><div class="card-body msg_card_body" id="chat">';
         
         		    
@@ -1654,6 +1772,7 @@ function sendMessage() {
         		
         	           const goBackButton = document.getElementById('goBack');
         	           goBackButton.addEventListener('click', goBack);
+        	           
         		 });
     	      	}); 
         	           
@@ -1814,6 +1933,11 @@ function sendMessage() {
                    
                     	$(".contacts_card").show();
                     	
+                    	var element = document.getElementById('chat3'); 
+                    	var element1 = document.querySelector('.bottom_nav_menu'); 
+ 					    element.classList.remove('d-none'); 
+ 					   element1.style.cssText = "display: block !important;";
+ 					   
                     	
                     }
         		 }
@@ -1854,7 +1978,9 @@ function sendMessage() {
         	    $('.action_menu').toggle();
         	}
 
-        	
+		
     </script>
+<%@ include file="gmfooter.jsp"%>
+
 	</body>
 </html>

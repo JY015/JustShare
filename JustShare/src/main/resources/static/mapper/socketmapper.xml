@@ -3,6 +3,31 @@
 
 <mapper namespace="com.js.web.chat.SocketDAO">
 
+<update id="tradestatus" parameterType="Map">
+
+ UPDATE trade
+    	SET
+        
+         tradestatus = 1
+         
+      
+    WHERE from_user_id = #{mid} AND to_user_id = #{toId} 
+    AND tradestatus=0 AND from_user_chk=1 AND to_user_chk=1
+  	 
+
+
+</update>
+
+<insert id="tradecopy" parameterType="Map">
+ 
+    INSERT INTO tradehistory (from_user_id, to_user_id, bno, timestamp) 
+    SELECT from_user_id, to_user_id, bno, now()
+    FROM trade
+    WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
+        AND tradestatus=1
+
+  </insert>
+
 <select id="bnochk" parameterType="Map" resultType="Integer">
 
 SELECT count(*) as count

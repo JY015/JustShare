@@ -58,7 +58,9 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
-    
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+      
     <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
 		
@@ -70,6 +72,36 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 		
   });
+  /*
+function logoutAndCloseSocket() {
+    // 여기서 WebSocket 연결을 닫는 코드를 추가
+    
+     var confirmLogout = confirm('로그아웃 하시겠습니까?');
+
+     if (socket) {
+         socket.close(); // WebSocket 연결을 닫습니다
+     }
+    
+    
+if (confirmLogout) {
+    var mid = sessionStorage.getItem("mid"); 
+    
+    if(mid!=null) { 
+
+	var jsonmsg={
+		
+		"mid":mid,
+		"close":"연결해제"
+		
+	}
+
+ socket.send(JSON.stringify(jsonmsg));
+	 //window.location.href = './logout';
+    }
+ 
+}
+}
+*/
 
     </script>
 <script>
@@ -151,7 +183,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -364,6 +396,8 @@ var _ss_user_id   = "";
 <div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
 </div>
  <script>
+ 
+
   $(".commercial, .business, .studio, .culture").click(function () {
        var category = $(this).attr("class");
        showCategory(category);
@@ -984,7 +1018,7 @@ function search_check_m2()
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!-- 구글 애널리틱스 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-234069340-1"></script>
-
+ <script src="./js/socket.js"></script>
 
   </body>
 </html>

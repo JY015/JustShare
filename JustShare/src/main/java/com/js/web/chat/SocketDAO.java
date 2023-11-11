@@ -130,6 +130,14 @@ public interface SocketDAO {
 
 
 
+	int tradecopy(Map<String, Object> map);
+
+
+
+	int tradestatus(Map<String, Object> map);
+
+
+
 	
 
 }
