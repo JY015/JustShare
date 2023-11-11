@@ -122,7 +122,10 @@ public class BoardController {
 		return "redirect:/board";
 		}
 		}
-
+	
+	
+	/* 글쓰기 부분 수정하기 */
+	
 	@PostMapping("/bwrite")
 	public String bwrite(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "equipment", required = false) Integer[] equipment,

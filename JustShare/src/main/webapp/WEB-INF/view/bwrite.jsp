@@ -1,91 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+	<meta name="description" content="공간 공유 플랫폼"/>
+    <title>Just Share</title>
+	<!-- 기존에 사용하던 jquery , bootstrap , 기타등등 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- 추가한거 -->
+<link rel="stylesheet" href="/css/import.css?ver=20000120" />
+<link rel="stylesheet" href="/css/style.css?ver=20000120" />
+<link rel="stylesheet" href="/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+<link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+<link rel="stylesheet" href="/css/main_page.css" />
+<!-- 회원가입 3가지회원 유형 css new -->
+	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
+	<!-- 고객센터 css -->
+	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+	<!-- 폰트어썸 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+	<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+	
+ <script src="/js/valuevenue.js?ver=20000120" defer></script>
+ <script src="/js/owl.carousel.min.js"></script>
+ <script src="/js/common.js?ver=20000120" defer></script>
+ <script src="/js/cookie.js?ver=20000120" defer></script>
+ <style type="text/css">
 <style>
        .image-preview {
             display: inline-block; /* 이미지를 가로로 나열하기 위해 인라인-블록 요소로 설정 */
             margin: 10px; /* 이미지 사이의 간격 조정 */
         }
         .preview-image {
-            max-width: 300px; /* 최대 너비를 조절하여 이미지 크기 제한 */
-            max-height: 300px; /* 최대 높이를 조절하여 이미지 크기 제한 */
+            max-width: 70px; /* 최대 너비를 조절하여 이미지 크기 제한 */
+            max-height: 70px; /* 최대 높이를 조절하여 이미지 크기 제한 */
             
         }
-    </style>
+</style>
 </head>
 <body>
-	<h1>공간 공유하기 </h1>
-	<form action="./bwrite" method="post" enctype="multipart/form-data">
-	
-	 <label for="images">이미지 업로드</label>
-	<div >
-    <input type="file" name="upFile" id="upFile" multiple="multiple" >
-    <br><span id="resultF"></span>
-    </div>
-     <div id="imagePreviews"></div>
-	제목
-	<div>
-	<input type="text" name="title" id="titleInput" >
-	<br><span id="resultMSG"></span>
-	</div>
-	공간 유형
-	<div>
-	<select name="bcate">
-	<c:forEach items="${catelist }" var="n">
-	<option value ="${n.cate}" >${n.cname }</option>
-	</c:forEach>
-	</select>
-	</div>
-	사용 가능 시간
-	<div>
-	<input type="number"  min="0" max="24" name="startTime" id="startTimeInput"> 시
-	~
-	<input type="number"  min="0" max="24" name="endTime"id="endTimeInput" > 시 
-	<br><span id="resultTime"></span>
-	</div>
-	
-	가격
-	<div>
-	<input type="number" name="price" id="priceInput"> 원
-	 <br><span id="resultP"></span>
-	</div>
-	
-	면적
-	<div>
-	<input type="number" name="size" id="sizeInput"> ㎡
-	<br><span id="resultS"></span>
-	</div>
-	보유 시설
-	<div>
-	<c:forEach items="${equiplist }" var="n">
-	<input type="checkbox" name="equipment" value="${n.eid }"> ${n.ename }
-	</c:forEach>
-	</div>
-	상세 설명
-	<div>
-	<textarea name="content" id="contentInput"></textarea>
-	<br><span id="resultCON"></span>
-	</div>
-	주소
-	<div>
-	<input type="text" id="sample2_postcode" name="addNum" placeholder="우편번호" >
-	<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample2_address" name="add" placeholder="주소"><br>
-	<input type="text" id="sample2_detailAddress"  name ="addD" placeholder="상세주소">
-	<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
-	</div>
-	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-	<br><span id="resultPC"></span>
-	<br><span id="resultAD"></span>
-	</div>
-	<button type="button" class="writeB" >완료</button>
+	<!-- 전체 div -->
+	<div class="body__container section">
+	<!-- 헤더부분 -->
+	<!-- 모바일 버전 헤더  -->
+	<header class="header__topnav_type2">
+		  <div class="header_topnav_inner_n">
+			<div class="first_row">
+			  <div class="left-side">
+				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
+				<h1 class="logo"><a href="/">로고</a></h1>
+			  </div>
+			</div>
+
+		  </div>
+		</header>
+	<!-- 타이틀 부분  -->
+	 <section class="signup_wrap">
+	 <div class="sign_inner">
+	 <div class="signup_list_wrap">
+	 <div class="signup_title">
+	 <div class="sign_text">공간 공유하기 </div>
+	 <div class="sign_text_list">새 게시글을 작성하여 공간을 공유하세요 </div>
+	 </div>
+	 </div>
+	 <!-- 내용 -->
+	<form id="mf" name="mf" action="./bwrite" target=_hidden_frame  method="post" autocomplete="off" enctype="multipart/form-data">
+		<div class="input_sign_w">
+			<table>
+				<colgroup>
+				<col style="width:180px">
+				</colgroup>
+				<tbody>
+					<tr class="border_bottom">
+						<th><label for="image">이미지 </label><span aria-hidden="true">*</span></th>
+						<td>
+						<div class="id_mo f_ex">
+						<input type="file" name="upFile" id="upFile" multiple="multiple" class="required input_border" aria-required="true" />
+						</div>
+						 <div id="imagePreviews"></div>	
+						 <br><span class="warningTxt2" id="resultF"></span>
+						</td>
+					</tr>
+					<tr class="border_bottom">
+						<th><label for="title">제목</label><span aria-hidden="true">*</span></th>
+						<td>
+						<input type="text" name="title" id="titleInput" class="required input_border" value="" placeholder="제목을 입력해주세요." aria-required="true"/>
+						<br><span  class="warningTxt2" id="resultMSG"></span>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+						<th><label for="category">유형</label></th>
+						<td>
+						<select class="input_border" name="bcate"  aria-labelledby="user_category_label">
+						<c:forEach items="${catelist }" var="n">
+							<option value ="${n.cate}" >${n.cname }</option>
+						</c:forEach>
+						</select>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+						<th><label for="time">사용가능 시간</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number"  min="0" max="24" name="startTime" id="startTimeInput" placeholder="시작 (24시간 기준 0~24 )"  aria-required="true"/>
+							<br>
+							<input class="required input_border" type="number"  min="0" max="24" name="endTime"id="endTimeInput"  placeholder="끝 (24시간 기준  0~24 )"  aria-required="true"/>
+							<br><span class="warningTxt2" id="resultTime"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="price">가격</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number" name="price" id="priceInput" placeholder="최대 100만원"  aria-required="true"/>
+							<br><span class="warningTxt2" id="resultP"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="size">공간 면적</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number" name="size" id="sizeInput" placeholder="㎡" aria-required="true"/>
+							<br><span class="warningTxt2" id="resultS"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="equip">보유 시설</label></th>
+							<td>
+							<c:forEach items="${equiplist }" var="n">
+							<input class="required input_border" type="checkbox" name="equipment" value="${n.eid }" />${n.ename }
+							</c:forEach>
+							</td>
+							</tr>	
+					<tr class="border_bottom">
+						<th><label for="content">상세 내용</label><span aria-hidden="true">*</span></th>
+						<td>
+						<textarea name="content" id="contentInput" placeholder="내용을 입력해주세요. (최소 10자 )"></textarea>
+						<br><span  class="warningTxt2" id="resultCON"></span>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+					<th><label for="address">주소</label>
+					<td>
+					<div>
+					<input type="text" id="sample2_postcode" name="addNum" placeholder="우편번호" >
+					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="text" id="sample2_address" name="add" placeholder="주소"><br>
+					<input type="text" id="sample2_detailAddress"  name ="addD" placeholder="상세주소">
+					<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
+					</div>
+					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+					<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+					<br><span id="resultPC"></span>
+					<br><span id="resultAD"></span>
+					</div>
+					</td>
+					</tr>										
+				</tbody>
+			</table>
+		</div>
+		<!-- 버튼 -->
+		<div class="sign_btn_w">
+			<button type="button" class="btn_clear_black" onclick="history.back();">취소</button>
+			<button type="button" class="btn_black writeB" >작성완료</button>
+		</div>
 	</form>
+	 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
     // 우편번호 찾기 화면을 넣을 element
@@ -273,6 +362,85 @@ $(function(){
 			return false;
 		}
 		
+	/* 	폼태그내에 받은 자료를 넘기기   모피어스사용할거면 
+	
+	$.ajax({
+			url : "./bwrite",
+			type : "post",
+			data : {
+				"title": title,
+				"content": content,
+				"postcode": postcode,
+				"address" : address,
+				"price" : price,
+				"startTime" : startTime,
+				"endTime" : endTime,
+				"size" : size
+			},
+			dataType : "json",
+			success : function(data){
+				if(data.success ==1){
+					파일업로드
+				}
+			},
+			error : function(error){
+				
+			}
+		}); */
+		/*  모피어스 적용하기 
+		  $(function () {
+
+			    $.imagePicker = function () {
+			      return new Promise((resolve) => {
+			        M.media.picker({
+			          mode: "MULTI",
+			          media: "PHOTO",
+			          // path: "/media", // 값을 넘기지않아야 기본 앨범 경로를 바라본다.
+			          column: 3,
+			          callback: (status, result) => {
+			            resolve({ status, result })
+			          }
+			        });
+			      })
+			    }
+
+			    $.convertBase64ByPath = function (imagePath) {
+			      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
+			      return new Promise((resolve) => {
+			        M.file.read({
+			          path: imagePath,
+			          encoding: 'BASE64',
+			          indicator: true,
+			          callback: function (status, result) {
+			            resolve({ status, result })
+			          }
+			        });
+			      })
+			    }
+
+			    $.uploadImageByPath = function (targetImgPath, progress) {
+			      return new Promise((resolve) => {
+			        const _options = {
+			          url: `${location.origin}/file/upload`,
+			          header: {},
+			          params: {},
+			          body: [
+			            // multipart/form-data 바디 데이터
+			            { name: "file", content: targetImgPath, type: "FILE" },
+			          ],
+			          encoding: "UTF-8",
+			          finish: (status, header, body, setting) => {
+			            resolve({ status, header, body })
+			          },
+			          progress: function (total, current) {
+			            progress(total, current);
+			          }
+			        }
+			        M.net.http.upload(_options);
+			      })
+			    }
+
+			  }) */
 		 document.querySelector('form').submit();
     });
     });    

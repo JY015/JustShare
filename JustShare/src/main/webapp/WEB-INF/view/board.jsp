@@ -135,7 +135,7 @@
         z-index: 1; /* 다른 요소들보다 위에 표시되도록 z-index 값을 설정합니다. */
     }
 .cccc .imageContainer .main {
-		width: 360px;
+		width: 372px;
 		height: 240px;
 
 }
