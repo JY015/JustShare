@@ -2,6 +2,7 @@ package com.js.web.chat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class SocketController {
 	    
 
 	    json.put("result", result);
-	    System.out.println(json.toString());
+	    //System.out.println(json.toString());
 
 	    return json.toString();
 	}
@@ -207,7 +208,7 @@ public class SocketController {
 			//System.out.println("1번"+result);
 		  
 	
-		 System.out.println("json"+json.toString());
+		 //System.out.println("json"+json.toString());
 		 
 		return json.toString();
 	}
@@ -249,7 +250,7 @@ public class SocketController {
 			//System.out.println("1번"+result);
 			 json.put("result", result);
 	
-		 System.out.println("결과체크"+result);
+		 //System.out.println("결과체크"+result);
 		return json.toString();
 	}
 
@@ -279,7 +280,7 @@ public class SocketController {
 		if(result ==1) {
 			
 			int result1 = socketService.tradecopy(map);
-			System.out.println("result1" + result1);
+			//System.out.println("result1" + result1);
 		}
 	
 		//System.out.println("msgcount"+result);
@@ -293,4 +294,56 @@ public class SocketController {
 		return "chat1";
 	}
 	
+	@ResponseBody
+	@GetMapping("/roomserch")
+	public String roomserch(@RequestParam Map<String,Object> map) {
+		
+		System.out.println(map.toString());
+		JSONObject json = new JSONObject();
+		
+		if (map.get("input")==null || Objects.equals(map.get("input"),"")||Objects.equals(map.get("input")," ")) {
+			
+			 json.put("error", "에러");
+		} else {
+			List<Map<String, Object>> result = socketService.roomserch(map);
+		
+			  try {
+		if (result != null && !result.isEmpty()) {
+			
+			
+		 for (Map<String, Object> item : result) {
+	            String toId = item.get("to_user_id").toString();
+	          
+	            String mid = item.get("from_user_id").toString();
+	            
+	            Map<String, Object> paramMap = new HashMap<>();
+	            paramMap.put("toId", toId);
+	            paramMap.put("mid", mid);
+	            int bno = socketService.bnoload(paramMap);
+
+	            //System.out.println("bno값은?"+bno);
+	            // 결과에 bno 추가
+	            if(bno!=0) {
+	            item.put("bno", bno);
+	            } else {
+	            	item.put("bno",0);
+	            }
+	        }
+		 	json.put("result", result);
+		} else {
+			
+		}
+			  } catch (Exception e) {
+				  e.printStackTrace(); 
+//		            System.out.println("오류발생");
+		            json.put("error1", "오류 발생");
+		         }
+		
+	}
+
+	 
+	    System.out.println(json.toString());
+
+	    return json.toString();
+	}
 }

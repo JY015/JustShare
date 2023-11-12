@@ -138,6 +138,10 @@ public interface SocketDAO {
 
 
 
+	List<Map<String, Object>> roomserch(Map<String, Object> map);
+
+
+
 	
 
 }

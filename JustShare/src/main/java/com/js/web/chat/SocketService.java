@@ -224,6 +224,12 @@ public class SocketService {
 		return socketDAO.tradestatus(map);
 
 	}
+
+
+	public List<Map<String, Object>> roomserch(Map<String, Object> map) {
+		
+		return socketDAO.roomserch(map);
+	}
 	
 
 }

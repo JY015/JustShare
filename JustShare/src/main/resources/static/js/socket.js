@@ -37,7 +37,7 @@ socket.onopen = function(event) {
  //
     // 웹소켓이 연결되었을 때 실행할 공통 코드
  var mid = sessionStorage.getItem("mid");
-//const noteNumElement = document.querySelector('.note-num');
+const noteNumElement = document.querySelector('.note-num');
 
 if (mid === null || mid == "null") {
        console.log("세션이 없어 웹소켓 연결을 수행하지 않습니다.");
@@ -45,7 +45,7 @@ if (mid === null || mid == "null") {
     } else {
 	 console.log("커넥션이 만들어졌습니다.js");
         socket.send(JSON.stringify({ "mid": mid }));
-	/*	
+	
 	getmsgcount(function(msgcount) {
   
    
@@ -57,12 +57,9 @@ if (mid === null || mid == "null") {
       	  }else{
       	noteNumElement.style.display = 'block';
 		noteNumElement.textContent = msgcount;
-	
-	
-	
 }
 });
-*/
+
     }
 
 
@@ -82,8 +79,8 @@ if (mid === null || mid == "null") {
 
   
 
-		if(currentScreen) {
-	
+		if(currentScreen =="1"||currentScreen =="contacts_card" ||currentScreen=="msgload" ) {
+	getmsgcount(function(msgcount) {
 		
 	
 if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {  //일반메시지전송
@@ -109,9 +106,9 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
                 var jsonData = JSON.parse(data); 
                 var json = jsonData.result;
                 
-            
+
              
-                if(json==0 || json==1 ||json==2 ) {
+                if(json==0 || json==1) {
 					
 		alert(socketdata.sender+"님과 첫 대화가 시작 되었습니다.");
 				}
@@ -123,13 +120,50 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
     	}
         
 });
-	
-	}
-  
+
+	var noteNumElement = document.querySelector('.note-num');
+
+
+      	  if (msgcount == 0) {
+      		noteNumElement.style.display = 'block';
+      		noteNumElement.textContent = 1;
+      	  }else{
+      	noteNumElement.style.display = 'block';
+		if(msgcount<99) {
+  			msgcount +=1;
+			noteNumElement.textContent = msgcount;
+		}
+      		  
       	  }	
 
 
-	 }
+	} else if("mid" in socketdata && "sender" in socketdata && "firstmsg" in socketdata){
+		
+		
+		var noteNumElement = document.querySelector('.note-num');
+
+
+      	  if (msgcount == 0) {
+      		noteNumElement.style.display = 'block';
+      		noteNumElement.textContent = 1;
+      	  }else{
+      	noteNumElement.style.display = 'block';
+		if(msgcount<99) {
+  			msgcount +=1;
+			noteNumElement.textContent = msgcount;
+		}
+      		  
+      	  }	
+			
+  		
+		
+	}
+			});	
+	}
+	}
+	
+
+	
 	
 	
 
@@ -162,6 +196,43 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
  	}
   
 
+function getmsgcount(callback) {  //mid에 저장된 새 메시지 총개수 가져오기
+	
+	
+
+ var mid = sessionStorage.getItem("mid");
+ 
+
+
+			$.ajax({
+                    type: "GET",
+                    url: "./msgcount", 
+                    data: {
+                    	"mid" : mid
+                    
+                    	},
+                   	
+                    success: function(data) {
+                    	
+                    
+                    	
+                    	const jsonData = JSON.parse(data); 
+                    	
+                    	
+                    	if(jsonData.result != null){
+                     msgcount= jsonData.result;
+                    
+						callback(msgcount);
+						}
+			
+},
+            error: function() {
+        		
+        	}
+
+});
+
+};
 
 
 

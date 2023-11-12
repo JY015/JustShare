@@ -26,7 +26,33 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<style>
+.b_nav_list {
+   top: 7px;
+}
 
+.xi-document, .xi-gps, .xi-message-o, .xi-user-o {
+   text-align: center;
+   font-size: 162%;
+   position: relative;
+   top: 7px;
+   color: rgba(0, 0, 0, 0.4);
+}
+ .home_btn {
+  width: 60px;
+  height: 60px;
+  border: solid 4px white;
+  border-radius: 200px;
+  /* box-shadow: 0 -2px 8px #ffffff inset; */
+  box-shadow: 0 -2px 8px #4122d3 inset;
+  background-color: #6b4bf5;
+  /* background-color: #7759ff; */
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
+}
+
+
+</style>
 
 	</head>
 
@@ -34,6 +60,22 @@
 	<body>
 	
 		<script type="text/javascript">
+	
+    	    /*
+    	        $(".b_nav_list a").click(function(event) {
+		           if (${sessionScope.mid eq null}) {
+		               // sessionScope.mid가 null일 때 알림 메시지 표시
+		               alert("로그인 후 이용이 가능합니다.");
+		               event.preventDefault(); // 링크 이동을 막음
+		           }
+		       });
+    	     */
+    	 
+    
+		
+		       // "마이페이지" 링크를 클릭했을 때
+		  
+		 
 
 	
 				//## 대화창에서 이미지 클릭시 board디테일로 이동 
@@ -61,8 +103,9 @@
 	    $('.action_menu').toggle();
 	});
 	
-
 	
+	
+
 
 	
 
@@ -162,44 +205,7 @@
 
  	}
  	
- 	// ## 3-2 서버에게 재생성할 데이터 요청 ## 소켓서비스에서 첫 대화인 경우 isFirstConversation함수로 체크 후 공백 메세지 저장 ##
-   	// ## 8-1 이어서 실행##	
-   	/*
- 	function serchidutil(toId,mid) {
- 		
-    		$.ajax({
-                type: "GET",
-                url: "./serchid", // 폼의 action URL
-                data: {
-                	"toId" : toId,
-                	"mid" : mid
-                	},
-                success: function(data) {
-                	
-                	
-                	
-                	var jsonData = JSON.parse(data); 
-                	//alert(jsonData.result[0].toId);
-                	//##만약 불러올 채팅창 내용이 없다면 기본삽입문실행
-                	
-           
-                	$(".msgload").remove();
-                	$(".contacts_card").hide();
-        		    
-                	//## 3-3 대화창 재생성##
-                	//## 8-2 대화창 재생성##
-                	msgload(jsonData);
-                	
-                	
-                },
-                error: function() {
-    		
-    	}
-
-});
- 		
- 	}
- 		*/
+ 
  	function serchidutil1(toId,mid,bno) {
  			
  	
@@ -612,6 +618,7 @@ function updateMessage(sender, time, message,sort,bno) {
 
     var userList = document.querySelectorAll('.user_info');
     var roomlist = document.getElementById("roomlist");
+
    
     
        var timeElement;
@@ -636,19 +643,22 @@ function updateMessage(sender, time, message,sort,bno) {
             // sender가 일치하는 경우에만 time 및 message 업데이트
             timeElement = userList[i].querySelector('.time');
             messageElement = userList[i].querySelector('.roommessage');
-        	noteNumElement = userList[i].querySelector('.note-num');
-        	
+        	noteNumElement = messageElement.querySelector('.note-num');
+        
         	 var currentMsgCount = parseInt(noteNumElement.textContent);
-        	 
+        	
+        		
         	 if(currentMsgCount<99) {
              currentMsgCount += 1; // 1씩 증가
         	 }
-             noteNumElement.textContent = currentMsgCount; // 읽지 않은 메시지 수 업데이트
+            
         	
         	
             timeElement.textContent = time;
-            messageElement.textContent = message;
+            //messageElement.textContent = message+'<span class="note-num" style="display: block;">'+currentMsgCount+'</span>';
+            messageElement.innerHTML = message + '<span class="note-num" style="display: block;">' + currentMsgCount + '</span>';
             msgcount=noteNumElement.textContent;
+            //noteNumElement.textContent = currentMsgCount; // 읽지 않은 메시지 수 업데이트
             noteNumElement.style.display = 'block';
        
             
@@ -658,12 +668,14 @@ function updateMessage(sender, time, message,sort,bno) {
         	
         	 timeElement = userList[i].querySelector('.time');
              messageElement = userList[i].querySelector('.roommessage');
-         	noteNumElement = userList[i].querySelector('.note-num');
+             messageElement.innerHTML = message + '<span class="note-num" style="display: none;">0</span>';
+             
+         	//noteNumElement = messageElement.querySelector('.note-num');
          	
          
          	
              timeElement.textContent = time;
-             messageElement.textContent = message;
+             //messageElement.textContent = message;
            
              
              status=true;
@@ -676,19 +688,18 @@ function updateMessage(sender, time, message,sort,bno) {
     
       if(!status && sort ===1){
     	  
+    	  
     	
-    	  
-    	  
     	  //신규 대화 시작 
     	 var mid = sessionStorage.getItem("mid"); 
     	  
-    	  var chatcreate ='<li><div class="d-flex bd-highlight" type="button"'; 
+    	  var chatcreate ='<li class="delete"><div class="d-flex bd-highlight" type="button"'; 
     	      chatcreate+='onclick="serchid(this)"><div class="img_cont">';
     	  	  chatcreate+='<img src="'+img+'" class="rounded-circle user_img">';
     	      chatcreate+='<span class="status online_icon"></span></div>';
     	      chatcreate+='<div class="user_info"><span class="toId" data-bno="'+bno+'">'+sender+'';
     	      chatcreate+='</span><span class="time">'+time+'</span>';
-    	      
+    	      chatcreate+='<p class="roommessage">'+message+'';
     	      //if (msgcount === 0) {
     	    	 //chatcreate+='<span class="note-num" style="display: none;">'+msgcount+'</span>';
   	      		
@@ -696,9 +707,8 @@ function updateMessage(sender, time, message,sort,bno) {
   	      		 chatcreate+='<span class="note-num" style="display: block;">'+1+'</span>';
   	      		  
   	      	  //}	
-    	      
-    	      chatcreate+='<p class="roommessage">'+message+'</p>';
-    	      chatcreate+='</div></div></li>';
+    	     
+    	      chatcreate+='</p></div></div></li>';
         	
   	    
   	    roomlist.insertAdjacentHTML('afterbegin', chatcreate);
@@ -923,7 +933,7 @@ function sendMessage() {
     	    			 //console.log(img);
     	      		    
     	      	  var conversationHTML='<div class="d-flex justify-content-start mb-4" >';
-    	              conversationHTML+='<div class="img_cont_msg"><img src="'+img+'" class="rounded-circle user_img_msg toimg">';
+    	              conversationHTML+='<div class="img_cont_msg0"><img src="'+img+'" class="rounded-circle user_img_msg toimg">';
     	              conversationHTML+='</div><div class="msg_cotainer">'+message+'</div>';
     	              conversationHTML+='<span class="msg_time">'+formattedTime+'</span></div>';		
     	    		 chat.insertAdjacentHTML('beforeend', conversationHTML);
@@ -1048,9 +1058,147 @@ function sendMessage() {
         	    return time.toLocaleTimeString(undefined, options);
         	}
 
+        
+        	$(document).on('input', '.search', function () {
+        	    var input = $(this).val();
+        	   
+
+        	   
+        
+        	  
+        	        searchAndUpdateResults(input);
+        	      
         	
-         
+        	});
+       
         	
+      
+         //# 대화목록 ajax검색
+        	function searchAndUpdateResults(input) {
+        
+        		var mid =sessionStorage.getItem("mid");
+        	    // Ajax 요청을 보내고 검색 결과를 받아온다.
+        	    $.ajax({
+        	        url: "./roomserch", // 서버의 검색 엔드포인트
+        	        type: "GET",
+        	        data: { 
+        	        	"mid": mid,
+        	        	"input":input
+        	        	},
+        	        success: function (data) {
+        	        	
+        	           	var jsonData = JSON.parse(data); 
+                        //var json= jsonData.result;
+                        
+                       
+                        if("error" in jsonData) {
+            	        
+            	       
+            	        	$('.delete').show();
+            	        	$('.delete1').remove();
+            	    } else if("error1" in jsonData) {
+            	  
+            	    	
+            	    }else {
+            	    	
+            	    	//initialMovieListContainer.hide();
+            	     $('.delete').hide();
+            	 	//$(".delete1").remove();
+        	            // 검색 결과를 처리하여 UI 업데이트 함수를 호출한다.
+        	            	$('.delete1').remove();
+        	            if (typeof jsonData === 'object' && Object.keys(jsonData).length != 0) {
+        	            updateUI(jsonData);
+        	         
+        	            };
+        	            
+        	         	//socket.send(JSON.stringify({"mid": mid}));
+        	        }
+        	        },
+        	        error: function (error) {
+        	            console.error('검색 중 오류 발생:', error);
+        	        }
+        	    });
+        	}
+        	
+        	function updateUI(Data) {
+        	   
+
+
+        	    //if (typeof Data === 'object') {
+        	 
+        	    var mid =sessionStorage.getItem("mid");
+
+        		
+        	
+                var json= Data.result;
+            	
+    			let dbTime = new Date("2023-10-24T10:20:00");
+
+				// 현재 날짜와 시간을 가져옵니다.
+				let currentTime = new Date();
+
+				// 현재 날짜와 불러온 시간 간의 차이를 계산합니다.
+		
+				let formattedTime;
+				var toimg = "";
+        	    // 새로운 결과를 추가한다.
+        	    for (let i = 0; i < json.length; i++) {
+        	    	
+        	       var user = json[i];
+        	   		
+        msgcount=user.read_count;
+        bno=user.bno
+       
+        lastmsgtime =user.latest_timestamp;
+        lastmessage =user.content;
+        formattedTime = formatTimestamp(lastmsgtime);
+       
+        
+        //대화방 목록에서 받는사람이 자기 자신이라면 상대방에 아이디를 저장한다.
+        if(user.to_user_id === mid) {
+        	
+        	toId =user.from_user_id;
+        } else {
+        	
+        	toId =user.to_user_id;
+        
+        }
+        
+    
+        imgserch1(toId, function (img) {
+            toimg=img;
+          
+            });
+        
+	    
+	    
+        var liElement = $('<li class="delete1">').html(
+        	    '<div class="d-flex bd-highlight" type="button" onclick="serchid(this)">' +
+        	    '<div class="img_cont"><img src="' + toimg + '" class="rounded-circle user_img"><span class="status online_icon"></span></div>' +
+        	    '<div class="user_info"><span class="toId" data-bno="' + bno + '">' + toId + '</span>' +
+        	    '<span class="time">' + formattedTime + '</span><p class="roommessage">'+ lastmessage
+        	);
+
+        	if (msgcount === 0) {
+        	    liElement.append('<span class="note-num" style="display: none;">'+msgcount+'</span></p></div></div>');
+        	} else {
+        	    liElement.append('</span><span class="note-num" style="display: block;">'+msgcount+'</span></p></div></div>');
+        	}
+
+        	// liElement를 #roomlist에 추가
+        
+        
+        	
+	  		
+        	    }
+        		$('#roomlist').append(liElement);
+        	
+        	        
+        	    //}
+        	    }
+        
+        	
+        
         	
         	// ## 7.처음 대화방 목록 디폴트 생성 함수 ( 예정)
         function msgroomload(){
@@ -1154,7 +1302,7 @@ function sendMessage() {
                 
                 //여기에 프사불러와서 들어갈 함수가 들어가야됨 
   
-      		roombody ='<li><div class="d-flex bd-highlight" type="button" onclick="serchid(this)">';
+      		roombody ='<li class="delete"><div class="d-flex bd-highlight" type="button" onclick="serchid(this)">';
       		roombody +='<div class="img_cont"><img src="'+toimg+'"class="rounded-circle user_img">';
       		roombody +='<span class="status offline"></span></div><div class="user_info">';
       		roombody +='<span class="toId" data-bno="'+bno+'">'+toId+'</span><span class="time">'+formattedTime+'';
@@ -1199,23 +1347,6 @@ function sendMessage() {
           roomfooter+='<li class="b_nav_list "><a href="/mypage"> <i class="xi-user-o"></i></svg>';   
           roomfooter+='<p class="">마이페이지</p></a></li></ul></nav></div></div></div></div>';
                
-            
-     
-
-      
-
-      
-   
-
-                	
-                	
-                	
-                	
-                	
-                	
-                	
-                	
-                	//
                     var parentContainer = document.body; 
              
                 	var roombody1=roomheader+roomContent+roomfooter;
@@ -1854,6 +1985,8 @@ function sendMessage() {
             				  
             		  }
         			  
+        			
+        			  
         			  //## 차단하기 
         			  if (work =="차단") {
         		            jsonmsg["block"] = toId;
@@ -1862,12 +1995,35 @@ function sendMessage() {
                     		
                 			$("#msgload").remove();
                 			$(".contacts_card").show();
+                			  var element = document.getElementById('chat3'); 
+              				 
+            				    element.classList.remove('d-none'); 
+            				    
+            				    var element1 = document.querySelector('.bottom_nav_menu'); 
+            		        	if (element1) { 
+            				
+            			
+            					  
+            		        		element1.style.cssText = "display: block !important;";
+            		        	}
                 			exitupdate(toId);  
         		        } else if (work =="대화나가기") {
         		        	 socket.send(JSON.stringify(jsonmsg));
         	            		
                  			$("#msgload").remove();
                  			$(".contacts_card").show();
+                 			
+                 			  var element = document.getElementById('chat3'); 
+              				 
+            				    element.classList.remove('d-none'); 
+            				    
+            				    var element1 = document.querySelector('.bottom_nav_menu'); 
+            		        	if (element1) { 
+            				
+            			
+            					  
+            		        		element1.style.cssText = "display: block !important;";
+            		        	}
                  			exitupdate(toId);  
         		        	
         		        } else if (work =="차단해제") {
@@ -1892,6 +2048,9 @@ function sendMessage() {
         
         	//## 대화목록에서 대화나가기 상대 업데이트(삭제)
         	function exitupdate(target) {
+        		
+        		
+        		
         		
        
         	   const toIdElements = document.querySelectorAll('.toId');
@@ -1980,7 +2139,7 @@ function sendMessage() {
 
 		
     </script>
-<%@ include file="gmfooter.jsp"%>
+
 
 	</body>
 </html>

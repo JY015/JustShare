@@ -547,7 +547,7 @@ font-size: 45px;
 }
 
 .mb-4, .my-4 {
-	margin-bottom: 60px !important;
+	margin-bottom: 40px !important;
 	
 	
 }
@@ -636,3 +636,39 @@ img {
 	
 	display: none !important;
 }
+
+@media screen and (max-width: 1058px) {
+  
+  button,input {
+
+
+  }
+  
+  .review1 {
+  background-color: white !important;
+  }
+  
+  body, button, h1, h2, h3, h4, h5, input, select, table, textarea {
+  line-height:normal !important;
+  }
+  
+  }
+
+@media screen and (max-width: 720px) {
+	
+	 .review1 {
+  background-color: white !important;
+  }
+  
+
+  
+  body, button, h1, h2, h3, h4, h5, input, select, table, textarea {
+  line-height:normal !important;
+  }
+
+}
+
+
+
+
+
