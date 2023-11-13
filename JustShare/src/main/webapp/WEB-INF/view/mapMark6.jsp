@@ -2,584 +2,63 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
+    <title>Just Share</title>
+   <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
+    <link rel="stylesheet" href="/css/fullcalendar.css" />
+    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+   <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
+   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
+   <link rel="stylesheet" href="/css/main_page.css" />
+   <link rel="stylesheet" href="/css/map.css" />
+
+   <!-- 폰트어썸 -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+   
+   <meta property="og:locale"       content="ko_KR" />
+   <meta property="og:type"       content="website" />
+   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta property="og:url"          content="https://www.valuevenue.co.kr/" />
+   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
+   <meta property="og:site_name"    content="가치공간" />
+   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
+
+   <meta name="twitter:card"       content="summary" />
+   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
+   <meta name="twitter:domain"       content="가치공간" />
+   
+   <meta name="robots" content="index,follow">
+   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
+   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="/js/valuevenue.js?ver=20000120" defer></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/common.js?ver=20000120" defer></script>
+    <script src="/js/cookie.js?ver=20000120" defer></script>
 
 <meta charset="UTF-8">
 <title>Map</title>
-<style>
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-}
 
-#daumWrap {
-	position: relative;
-	min-width: 320px;
-	height: 100%;
-}
-
-#daumWrap .map_header {
-	position: relative;
-	z-index: 10;
-	height: 44px;
-	background-color: #fff;
-}
-
-.k_head {
-	background: #fff;
-}
-
-.k_head .tit_daum {
-	overflow: hidden;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -19px 0 0 -59px;
-}
-
-.k_head .link_gnb {
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	padding: 10px 14px 9px;
-	vertical-align: top;
-}
-
-.k_head #kakaoLogo {
-	display: block;
-	height: 20px;
-	padding: 10px 10px 10px 14px;
-}
-
-.k_head .wrap_until {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.k_head .img_logo {
-	display: block;
-}
-
-.hide {
-	display: none;
-}
-
-#daumWrap .menu_map {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: -100%;
-	z-index: 1010;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-}
-
-.cont_map {
-	overflow: hidden;
-	width: 100%;
-}
-
-.content_map {
-	position: relative;
-}
-
-.map_area {
-	overflow: hidden;
-	position: relative;
-	width: 100%;
-}
-
-.map_area .wrap_tit {
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 100;
-	width: 100%;
-	height: 0;
-	text-align: center;
-}
-
-.map_area .control_map {
-	left: 2px;
-	top: 20%;
-}
-
-.map_area .set_map {
-	z-index: 10;
-	position: absolute;
-	width: 40px;
-}
-
-.set_map {
-	margin-bottom: 9px;
-	margin: auto;
-}
-
-.control_map {
-	width: 20px;
-	height: 20px;
-	background-position: -20px 0;
-}
-
-.set_map .mylocationblue_img {
-	margin-bottom: 9px;
-}
-
-.custom-infowindow {
- border: 2px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 6px;
-}
-
-.custom-infowindow a {
-	font-weight: bold;
-	color: #333;
-	text-decoration: none;
-}
-
-.custom-infowindow .desc {
-	/* .desc 스타일을 추가하세요 */
-	
-}
-
-.custom-infowindow .close-button {
-	/* .close-button 스타일을 추가하세요 */
-	background-color: #004AAD;
-	color: #fff;
-	border: none;
-	padding: 5px 10px;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-------------2번째
- 
-코드-------------------------
-.custom-overlay-info {
-	/* 여기에 원하는 스타일을 추가하세요 */
-	border-bottom: 2px solid #ddd;
-	background: #fff;
-}
-
-.custom-overlay-info .btitle {
-	/* .btitle 스타일을 추가하세요 */
-	font-weight: bold;
-	font-size: 16px;
-}
-
-.custom-overlay-info .addr {
-	/* .addr 스타일을 추가하세요 */
-	white-space: nowrap;
-	color: #666;
-}
-
-.custom-overlay-info .place-image {
-	/* .place-image 스타일을 추가하세요 */
-	max-width: 100%;
-}
-
-.custom-overlay-info .no-image {
-	/* .no-image 스타일을 추가하세요 */
-	color: #999;
-	font-style: italic;
-}
-
-.custom-overlay-info .reservation-link {
-	/* .reservation-link 스타일을 추가하세요 */
-	color: #00f;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-.mylocationblue_img {
-	right: 10%;
-	width: 35px;
-}
-
-.tit_location {
-	overflow: hidden;
-	display: inline-block;
-	padding: 5px 14px 0;
-	margin: 8px auto 0;
-	height: 19px;
-	border-radius: 13px;
-	font-weight: normal;
-	font-size: 18px;
-	line-height: 14px;
-	color: #555;
-	opacity: .9;
-	background-color: #fff;
-	text-align: center;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .16);
-}
-
-#map {
-	height: 965px;
-}
-
-    :root { 
-        -padding-horizontal: 16px; 
-        -padding-horizontal-negative: calc(-1 * var(- -padding-horizontal))
-    }
-    
-    @media screen and (max-width: 319px) {
-        :root { 
-            -padding-horizontal: 10px
-        }
-    }
-
-    .EEbJ3 {
-        position: fixed;
-        right: 0;
-        bottom: 24px;
-        left: 0;
-        z-index: 5000;
-        text-align: center
-    }
-    
-    .EEbJ3 .LSabB {
-        display: inline-block;
-        vertical-align: top;
-        padding: 13px 26px 10px;
-        border-radius: 27px;
-        background: #0191ff;
-        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .07), 0 2px 0 0 #0c7ed6, 0 -2px
-            4px 0 rgba(0, 0, 0, .08);
-        font-weight: 700;
-        color: #fff;
-        line-height: 2.2rem
-    }
-    
-    .EEbJ3 .LSabB .bOzdO {
-        fill: #fff;
-        width: 13px;
-        height: 12px;
-        margin: 5px 0 0 7px
-    }
-
-    .bTbC9 {
-        margin-top: 4px;
-        font-size: 1.5rem
-    }
-    
-    .bTbC9 .E3JsK::after {
-        display: block;
-        clear: both;
-        content: ""
-    }
-    
-    .bTbC9 .E3JsK+.E3JsK {
-        margin-top: 16px
-    }
-    
-    .bTbC9 .enwXz {
-        position: relative;
-        float: left;
-        margin-right: 8px
-    }
-    
-    .bTbC9 .enwXz .Gelhv {
-        fill: #b6b6b9;
-        fill: rgba(var(- -gray60), 1);
-        width: 18px;
-        height: 18px;
-        margin-top: 1px
-    }
-    
-    .bTbC9 .IaqcP {
-        overflow: hidden;
-        color: #444447;
-        color: rgba(var(- -gray20), 1)
-    }
-    
-    .bTbC9 .aib5d ._1vEbV {
-        margin-right: 4px
-    }
-    
-    .bTbC9 .aib5d .CUaBo {
-        display: inline-block;
-        vertical-align: top
-    }
-    
-    .bTbC9 .aib5d .kA6lR {
-        margin-right: 5px
-    }
-    
-    .bTbC9 .aib5d .CUaBo+.CUaBo::before {
-        display: inline-block;
-        vertical-align: top;
-        width: 3px;
-        height: 3px;
-        margin-top: 9px;
-        margin-right: 5px;
-        margin-left: 5px;
-        border-radius: 50%;
-        background: #b6b6b9;
-        background: rgba(var(- -gray60), 1);
-        content: "";
-        margin: 9px 5px 0 0
-    }
-    
-    .bTbC9 .MxJwz {
-        margin-top: 4px
-    }
-    
-    .bTbC9 .MxJwz .Pk6NG {
-        display: inline-block;
-        vertical-align: top;
-        min-width: 18px;
-        height: 18px;
-        margin: 1px 4px 0 0;
-        padding: 0 5px;
-        border-radius: 9px;
-        box-sizing: border-box;
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #fff;
-        line-height: 1.8rem;
-        text-align: center
-    }
-    
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ {
-        overflow: hidden;
-        overflow-y: auto;
-        max-height: 85px;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid;
-        border-top-color: #f0f0f3;
-        border-top-color: rgba(var(- -gray90), 1)
-    }
-    
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px
-    }
-    
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background: #c4c6c8
-    }
-    
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar-track-piece {
-        background: #f0f0f3;
-        background: rgba(var(- -gray90), 1)
-    }
-    
-    .place_on_mobileweb .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar,
-        .place_on_nmap .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ::-webkit-scrollbar
-        {
-        display: none
-    }
-    
-    .bTbC9:not(.LPCef, .Ke5RZ) .E3JsK.OC9XQ .IaqcP {
-        color: #555558;
-        color: rgba(var(- -gray30), 1)
-    }
-    
-    .bTbC9.Ke5RZ {
-        margin-top: 16px
-    }
-    
-    .bTbC9.Ke5RZ .aib5d .Sdv8I+.Sdv8I {
-        margin-top: 4px
-    }
-    
-    .bTbC9.Ke5RZ .aib5d .erbnZ {
-        margin-right: 4px;
-        color: #939396;
-        color: rgba(var(- -gray50), 1)
-    }
-    
-    .bTbC9.LPCef:not(.Ke5RZ) {
-        margin-top: 16px
-    }
-
-    .AhhJ9 {
-        display: flex;
-        height: 40px;
-        margin-top: 16px;
-        border: 1px solid;
-        border-color: #e9e9ec;
-        border-color: rgba(var(- -gray80), 1);
-        border-radius: 8px;
-        box-sizing: border-box
-    }
-    
-    .AhhJ9 .qUp9v {
-        display: flex;
-        flex: 1;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        font-size: 1.4rem;
-        color: #444447;
-        color: rgba(var(- -gray20), 1);
-        line-height: 1.9rem
-    }
-    
-    .AhhJ9 .qUp9v .uF189 {
-        fill: #555558;
-        fill: rgba(var(- -gray30), 1);
-        width: 15px;
-        height: 15px;
-        margin: 0 5px 0 0
-    }
-    
-    .AhhJ9 .qUp9v+.qUp9v {
-        border-left: 1px solid;
-        border-left-color: #f0f0f3;
-        border-left-color: rgba(var(- -gray90), 1)
-    }
-    
-    .AhhJ9.J6Sua:not(.zkAHQ) {
-        height: 80px;
-        margin-top: 0;
-        border-top-width: 0;
-        border-radius: 0 0 12px 12px
-    }
-    
-    .AhhJ9.J6Sua:not(.zkAHQ) .qUp9v {
-        flex-direction: column
-    }
-    
-    .AhhJ9.J6Sua:not(.zkAHQ) .qUp9v .uF189 {
-        width: 24px;
-        height: 24px;
-        margin: 0 auto 3px
-    }
-
-    .YbMH5 {
-        padding: 0 12px
-    }
-    
-    .o6AYQ {
-        padding: 16px;
-        border: 1px solid rgba(0, 0, 0, .1);
-        border-bottom: 0;
-        border-radius: 18px 18px 0 0;
-        background-clip: padding-box;
-        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .1);
-        background: #fff;
-        background: rgba(var(- -bgSurface), 1)
-    }
-    
-    .o6AYQ.IgtKb .BaVYi {
-        display: inline-block;
-        vertical-align: top
-    }
-    
-    .o6AYQ.IgtKb .BaVYi .MsbJT {
-        display: inline-block;
-        vertical-align: top;
-        padding: 8px
-    }
-    
-    .o6AYQ.IgtKb+.o6AYQ.IgtKb {
-        border-top: 1px solid;
-        border-top-color: #f0f0f3;
-        border-top-color: rgba(var(- -gray90), 1)
-    }
-    
-    .D6DtM {
-        overflow: hidden
-    }
-    
-    .HuWKL .vWRnd {
-        display: block;
-        display: -webkit-box;
-        overflow: hidden;
-        max-height: 4.8rem;
-        line-height: 2.4rem;
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        white-space: normal
-    }
-    
-    .HuWKL .AIPix {
-        margin-right: 4px;
-        font-size: 1.8rem;
-        font-weight: 600
-    }
-    
-    .HuWKL .AIPix.XGcQO {
-        color: #222225;
-        color: rgba(var(- -gray10), 1)
-    }
-    
-    .HuWKL .KjO_m {
-        flex: none;
-        position: relative
-    }
-    
-    .HuWKL .KjO_m .CCq3i {
-        margin: 4px 6px 0 0
-    }
-    
-    .HuWKL .KjO_m.ptaGv .CCq3i {
-        fill: #03aa5a;
-        fill: rgba(var(- -searchGreen), 1);
-        width: 14px;
-        height: 14px
-    }
-    
-    .HuWKL .oxuwB {
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-        margin-right: 8px;
-        font-size: 1.4rem;
-        color: #939396;
-        color: rgba(var(- -gray50), 1)
-    }
-    
-    .HuWKL .oxuwB+.oxuwB {
-        margin-left: 8px
-    }
-    
-    .HuWKL .oxuwB+.oxuwB::before {
-        position: absolute;
-        top: 6px;
-        left: -8px;
-        width: 1px;
-        height: 11px;
-        background: #e9e9ec;
-        background: rgba(var(- -gray80), 1);
-        content: ""
-    }
-    
-    .G5wJ8 {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 5000
-    }
-#app-root {
-  display: none;
-}
-</style>
 
 </head>
+<%@ include file="header.jsp"%>
 <body>
-	<div id="daumWrap">
-		<header id="daumHead" class="map_header">
-			<div id="webHeader" class="k_head">
-				<h1 class="tit_daum">
-					<a href="/" id="kakaoLogo" class="img_comm"> <img
-						src="../img/JustShare_map.png"
-						style="max-width: 100%; height: auto;" class="img_logo" alt="logo">
-					</a>
-				</h1>
-			</div>
-		</header>
-
-		<hr class="hide">
 		<hr class="hide">
 
 		<article id="daumContent" role="main" class="cont_map">
@@ -589,22 +68,26 @@ body {
 					<div class="wrap_tit">
 						<strong class="tit_location"></strong>
 					</div>
+					<div class="map_wrap">
 					<div id="map">
 						<div style="cursor: auto; z-index: 2;"></div>
 					</div>
-					<div class="set_map control_map">
-						<!-- <a href="javascript:;" onclick="panTo()" >
-						   <img class="mylocationblue_img" src="../img/mylocationblue.png" >
-	        			</a> -->
-						<button type="button" onclick="panTo()"
-							style="border: 0; background: none; cursor: pointer; float: right; margin-left: 10px;">
-							<img class="mylocationblue_img" src="../img/mylocationblue.png">
+
+					<div class="custom_zoomcontrol radius_border">
+						<button type="button" onclick="panTo()"class="mylocationblue_btn">
+							<img class="mylocationblue_img" src="../img/mylocationblue.png" >
+						</button>
+					    <button id="zoomInButton">
+					    	<img src="../img/plus.png" alt="확대">
+					    </button>
+						<button id="zoomOutButton">
+							<img src="../img/minus.png" alt="축소">
 						</button>
 					</div>
 				</div>
 			</div>
-		</article>
 	</div>
+		</article>
 <div id="app-root" class="place_didmount">
     <div>
         <div class="BXtr_">
@@ -612,31 +95,22 @@ body {
                 <div style="min-height:auto">
                     <div class="rAcDm">
                         <div class="G5wJ8">
-                            <div class="YbMH5">
-                                <div class="o6AYQ">
-                                    <div class="D6DtM">
-                                        <div class="HuWKL">
-                                        	<div class="map_img"><span class="place-image"></span></div>
-                                            <div class="vWRnd"><span class="btitle"></span></div>
-                                        </div>
-                                        <div class="bTbC9">
-                                            <div class="E3JsK">
-                                                <div class="enwXz"><span class="baddr"></span></div>
-                                                <!-- <div class="IaqcP">
-                                                    <div class="aib5d"><span class="_1vEbV"></span></div>
-                                                </div> -->
-                                            </div>
-                                        </div>
+                            <div class="YbMH5"></div> 
+                                        <div class="map_viewer_txt map_viewer_txt_shopping _linkSiteview">
+							                    <div class="item_thumb"><span class="place-image" ></span></div>
+							                    <div class="item_name"><strong class="btitle"></strong></div>
+							                    <p class="item_addr"><span class="wrap_addr"></span></p><br>
+							                    <div class="map_bno"><span class="bno"></span></div>
+							                </div>
+							            </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+  
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
@@ -669,6 +143,8 @@ function createMarker(latitude, longitude) {
         zIndex: 5,
         image: markerImage
     });
+    
+    
 }
 
 function panTo() {
@@ -685,10 +161,32 @@ function panTo() {
                 return;
             } else {
                 createMarker(latitude, longitude); // 새로운 위치로 마커 생성
+                updateMapCenter(latitude, longitude); // 지도 중심 위치 업데이트
             }
         });
     }
 }
+//맵 중심을 업데이트하는 함수
+function updateMapCenter(latitude, longitude) {
+    var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
+    map.panTo(moveLatLon);
+
+    // 위치 업데이트
+    var geocoder = new kakao.maps.services.Geocoder();
+    var latlng = new kakao.maps.LatLng(latitude, longitude);
+
+    // 위도와 경도를 주소로 변환
+    geocoder.coord2Address(latlng.getLng(), latlng.getLat(), function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            var address = result[0].address.address_name;
+            document.querySelector(".tit_location").innerHTML = address;
+            alert(address);
+        } else {
+            alert("주소를 찾을 수 없습니다.");
+        }
+    });
+}
+
 var currentCustomOverlay = null;
 // 라디안으로 변환하는 함수
 function toRadians(degrees) {
@@ -704,6 +202,7 @@ function closeCustomOverlay() {
 }
 
 navigator.geolocation.getCurrentPosition(function(position) {
+	
 
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
@@ -719,10 +218,23 @@ navigator.geolocation.getCurrentPosition(function(position) {
     };
 
     map = new kakao.maps.Map(mapContainer, mapOption);
-
- 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
-    var zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
+    
+   // HTML 버튼 요소를 가져옵니다
+	var zoomInButton = document.getElementById("zoomInButton");
+	var zoomOutButton = document.getElementById("zoomOutButton");
+	
+	// 확대 버튼 클릭 이벤트 처리
+	zoomInButton.addEventListener("click", function() {
+	    var level = map.getLevel();
+	    map.setLevel(level - 1);
+	});
+	
+	// 축소 버튼 클릭 이벤트 처리
+	zoomOutButton.addEventListener("click", function() {
+	    var level = map.getLevel();
+	    map.setLevel(level + 1);
+	});
+     
     
     kakao.maps.load(function() {
         var geocoder = new kakao.maps.services.Geocoder();
@@ -794,12 +306,15 @@ navigator.geolocation.getCurrentPosition(function(position) {
         	 if (currentCustomOverlay) {
                  currentCustomOverlay.setMap(null); // 이전의 커스텀 오버레이 닫기
              };
-             var content = '<div class="custom-infowindow">'
+             
+             
+             var content = '<div style="display:none"><a><strong>' + item.content + '</strong></a></div>'
+            	/*  '<div class="custom-infowindow" style="display:none";>'
      	        + '<a><strong>' + item.content + '</strong></a>'
      	        + '<div class="desc">'
      	        + '</div>'
      	        + '<button class="close-button" onclick="closeCustomOverlay()">닫기</button>' 
-     	        + '</div>';
+     	        + '</div>' */;
 
             var customOverlay  = new kakao.maps.CustomOverlay({
             	clickable: true,
@@ -814,35 +329,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
            
             var appRoot = document.getElementById("app-root");
 
-            function applyStylesForMobile() {
-                appRoot.style.position = "relative";
-                appRoot.style.width = "100%";
-                appRoot.style.textAlign = "center";
-            }
-
             function applyStylesForDesktop() {
                 appRoot.style.display = "block";
                 appRoot.style.position = "absolute";
                 appRoot.style.bottom = "25%";
                 appRoot.style.left = "0";
             }
-
-            // 미디어 쿼리 시뮬레이션
-            if (window.innerWidth <= 600) { // 화면 폭이 600px 이하인 경우 (모바일 화면)
-                applyStylesForMobile();
-            } else {
-                applyStylesForDesktop();
-            }
-
-            // 브라우저 창 크기가 변경될 때 스타일 업데이트
-            window.addEventListener("resize", function() {
-                if (window.innerWidth <= 600) {
-                    applyStylesForMobile();
-                } else {
-                    applyStylesForDesktop();
-                }
-            });
-            
+            applyStylesForDesktop();
             
          // 모든 요소를 선택
             var btitleElements = document.querySelectorAll('.btitle');
@@ -856,7 +349,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             });
             
             // 가져온 데이터로 HTML 업데이트
-            var btitleElement = document.querySelector('.vWRnd .btitle');
+            var btitleElement = document.querySelector('.item_name .btitle');
             btitleElement.textContent = btitleValues[0]
             
             
@@ -870,25 +363,28 @@ navigator.geolocation.getCurrentPosition(function(position) {
             console.log("addr 값:", addrValue);
             
          // 값을 넣을 요소를 선택
-            var enwXzElement = document.querySelector('.enwXz');
+            var enwXzElement = document.querySelector('.item_addr');
 
             // 해당 요소 내부의 span 요소를 선택
             var spanElement = enwXzElement.querySelector('span');
 
             // 값을 설정
             spanElement.textContent =  addrElement.textContent;
+            console.log(spanElement.textContent )
             
             //======================================================
 
          // map_img 클래스가 있는 div 요소를 선택
-            var mapImageContainer = document.querySelector('.map_img');
+            var mapImageContainer = document.querySelector('.item_thumb');
 
             // 이미지를 나타내는 img 요소를 선택
             var imageElement = document.querySelector('.place-image');
 
             // 이미지의 경로를 가져옴
             var imagePath = imageElement.src;
-            imagesrc = imagePath.substring(22, imagePath.length);
+            imagesrc = imagePath.substring(25, imagePath.length);
+            console.log(imagePath)
+            console.log(imagesrc)
 
             // map_img 요소 안에 이미지가 이미 있는지 확인
             var existingImage = mapImageContainer.querySelector('img');
@@ -901,16 +397,65 @@ navigator.geolocation.getCurrentPosition(function(position) {
             // 새로운 img 요소를 생성
             var imageTag = document.createElement('img');
             imageTag.src = imagesrc; // 이미지 경로 설정
-            imageTag.width = 200; // 가로 크기 설정 (픽셀)
-            imageTag.height = 150; // 세로 크기 설정 (픽셀)
+            imageTag.width = 70; // 가로 크기 설정 (픽셀)
+            imageTag.height = 70; // 세로 크기 설정 (픽셀)
 
             // map_img 요소 안에 새로운 img 요소를 추가
             mapImageContainer.appendChild(imageTag);
 
+            // 요소를 선택
+            var bnoElement = document.querySelector('.reservation-link');
+
+        	 // href 속성 값을 가져옴
+            var hrefValue = bnoElement.getAttribute('href');
+
+	         
+	      // .bno 요소를 선택
+	         var bnoSpan = document.querySelector('.bno');
+
+	         // hrefValue 값을 .bno 요소의 내부 텍스트로 설정
+	         bnoSpan.textContent = hrefValue;
+	         
+	         // 결과를 출력하거나 다른 작업을 수행
+	         console.log("href 값:",  bnoSpan.textContent);
+	         
+	      // .map_bno 요소를 선택
+	         var mapBnoElement = document.querySelector('.map_bno');
+	      
+	      // "/bdetail?bno=" 부분을 빈 문자열로 대체하여 원하는 값으로 설정
+	         var cleanedHrefValue = hrefValue.replace(bnoSpan.textContent, "");
+
+	         // .bno 요소의 내부 텍스트를 수정
+	         bnoSpan.textContent = cleanedHrefValue;
+
+	         // 결과를 출력
+	         console.log("변경된 href 값:", bnoSpan.textContent);
+
+	         // 새로운 링크 엘리먼트를 생성
+	         var linkElement = document.createElement('a');
+	     		// href 속성을 설정
+	     		linkElement.href = hrefValue;
+
+	     		// 내부 텍스트를 추가
+	     		linkElement.textContent = " 상세보기";
+
+	     		// 링크 엘리먼트를 .map_bno 요소에 추가
+	     		mapBnoElement.appendChild(linkElement);
+	     		
+	     		var existingLinkElement = appRoot.querySelector('.map_bno a');
+
+	     		if (existingLinkElement) {
+	     		    // 부모 요소에서 자식 요소 제거
+	     		    existingLinkElement.parentNode.removeChild(existingLinkElement);
+	     		}
+	     		mapBnoElement.appendChild(linkElement);
+
+
         });
     });
-    
 });
 
 </script>
+<%@ include file="footer.jsp"%>
+</body>
 </html>

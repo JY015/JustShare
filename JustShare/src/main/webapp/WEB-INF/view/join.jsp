@@ -11,7 +11,8 @@
 </head>
     <link rel="stylesheet" href="./css/join.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-		<script src="./js/jquery-3.7.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 	<script type="text/javascript">
 	
 	  $(function() {
@@ -88,9 +89,7 @@
 	       if (mbirth.length < 10 ) {
 	            Swal.fire("생년월일을 정확히 입력해주세요.");
 	            return false; 
-	         
-	       
-	       
+
 	       }
 	       
 	       
@@ -138,125 +137,7 @@
 	  	});
 	       
 	 });
-	  
-	  
-	  
-	  $('#send').click(function() {
-			
-			const to = $('#to').val();
-			
-			$.ajax ({
-				url: '/check/sendSMS',
-				type: 'GET',
-				data: {
-					"to" : to
-				},
-				success: function(data) {
-					const checkNum = data;
-					alert('checkNum:'+ checkNum);
-					
-					$('#enterBtn').click(function() {	
-						const userNum = $('#userNum').val();
-						
-						if(checkNum === userNum) {
-							alert('인증 성공하였습니다.');
-						}
-						else {
-							alert('인증 실패하였습니다. 다시 입력해주세요.');
-						}
-					});
-					
-				}
-			});
-			
-		});
-	  
-	  
-	  $(function(){
-			window.addEventListener('ssc_wheel', function(event) {
-				event.preventDefault();
-			}, {passive:false}); 
-			   //휴대폰 번호 인증
-			   var isphoneChecked = false; // ID 중복 확인 여부를 저장하는 변수
-			   $(document).on("click", "#phoneChk", function() {
-			   	var phone = $("#phone").val().trim();
-			   	if (!strToInt(phone)) {
-		            return; // 숫자로 변환되지 않으면 함수 종료
-		        }
-			   	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주세요.");
-			   	$.ajax({
-			           type:"post",
-			           url:"phoneCheck",// "phoneCheck?phone=" + phone하려면 밑에 data를 빼야함
-			           data:{phone:phone},
-			           success:function(data){
-			        	    alert(data);
-			           	    update();
-			           		var clickCnt = 0;
-			           	 $(document).on("click", "#phoneChk2", function() {
-			           		if(data == $("#phone2").val().trim()){
-			           			alert("본인 인증이 확인되었습니다.");
-			           			$("#phoneChk2").attr("disabled",true);
-			           			$("#phoneChk2").css("background-color",'green');
-			           			isphoneChecked = true;
-			           			/*$.ajax({
-			           			   type:"post",
-			     		           url:"phoneSave",
-			     		           data:{phone:phone},
-			     		           success:function(data){
-			     		        	   location.href="./info";
-			     		           }, error:function(error){
-			     		        	   alert('에러');
-			     		           }
-			           			});*/
-			           		} else if (clickCnt < 5){
-			           			alert("인증 번호가 틀렸습니다. 다시 시도하세요.");
-			           		} else if(clickCnt >= 5){
-			           			alert("인증 번호를 다시 받으세요.");
-			           			location.href = "./info";
-			           		}
-			           		clickCnt++;
-			           	 });
-		           		},
-		           		error:function(error){
-		           			alert("에러");
-		           		}
-			       });
-			  });
-		});
 		
-		function strToInt(str) {
-			if(str.length > 11 || str.length < 10){
-				alert("다시 입력하세요...");
-				return false;
-			}
-			
-		    for (let i = 0; i < str.length; i++) {
-		        if (isNaN(parseInt(str[i]))) {
-		            // 숫자가 아닌 문자가 중간에 포함된 경우
-		            alert("숫자만 입력하세요...");
-		            return false;
-		        }
-		    }
-		    // 숫자로만 이루어진 문자열을 정수로 변환하여 반환
-		    return parseInt(str);
-		}
-		
-		function update(){
-			$("#phone2").attr("disabled",false);
-	   		$("#phone2").attr("placeholder","인증번호를 입력하세요...");
-	   		$("#phoneChk").attr("disabled",true);
-	   		$("#phoneChk2").attr("disabled",false);
-	   		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-	   		$(".successPhoneChk").css("color","green");
-	   		$("#phone").attr("readonly",true);
-		}
-		$(function(){
-			window.addEventListener('ssc_wheel', function(event) {
-				event.preventDefault();
-			}, {passive:false});
-		});
-	  
-	  
 	
 	</script>
 	
@@ -336,26 +217,22 @@
            
            
          
-              
-      <div class="form-group"> 전화번호 (숫자만 입력하세요.)
-                      <div class="detail">
-                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="전화번호">
-						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
-						<br><br>
-						<input class="menu-title" id="phone2" type="text" disabled required/>
-						<input class="btn" type="button" id="phoneChk2" value = "본인인증" disabled="disabled">
-						<div><span style="color: red;" class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span></div>
-						<input type="hidden" id="phoneDoubleChk"/>
-					</div>
-                  </div>
-                  
-                  
-               
-               <div>
-                  <div class="phoneBox">
-                     <input class="input" type="text" name="mphone" id="mphone" placeholder="전화번호를 입력해 주세요"/><br><br>
-                  </div>
-               </div>
+      	 <div class="container">
+	<div class="wrapper">
+		<input class="input" type="text" id="phone" name="phone" placeholder="핸드폰번호"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+			<button type="button" id="send" class="get__number" onclick="takeTarget()">인증번호받기</button> <!-- 문자보내는 전송버튼 -->
+		 <div class="wrapper__bottom">
+		<input class="input__target" id="userNum" type="text" maxlength="6" placeholder="인증번호입력"  />
+          <span class="target__time">
+            <span id="remaining__min">0</span> :
+            <span id="remaining__sec">00</span><br>
+          	<span id="input__target_msg"></span>
+          </span>
+          <br>
+		<button type="button" class="complete__target" id="complete" disabled="disabled">확인</button>  <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->		
+    </div>
+    </div>
+    </div>
                <div class="emailBox">
 					<input class="input" type="text" id="memail" placeholder="이메일을 입력해 주세요" /><br> <br> 
 					<select class="selectMail" id="selectBox" name="selectBox">
@@ -377,14 +254,102 @@
   </form>
 
 
+<script type="text/javascript">
+$('.target__time').hide()
+$('#send').click(function() {
+	$('.target__time').css('color','red');
+	let phone = $('#phone').val();
+	
+	$.ajax ({
+		url: '/checkSms',
+		type: 'GET',
+		data: {
+			"phone" : phone
+		},
+		success: function(data) {
+			const checkNum = data;
+			alert('checkNum:'+ checkNum);
+			
+
+			$('#complete').click(function() {	
+				const userNum = $('#userNum').val();
+				
+				if(checkNum === userNum) {
+					alert('인증이 완료되었습니다.')
+					$('#phone').attr('disabled', true);
+					$('#userNum').attr('disabled', true);
+					$('#send').attr('disabled', true);
+					$('.target__time').empty();
+					//$('.target__time').text('인증 완료');
+					$('#complete').hide();
+					$('#input__target_msg').empty();
+					$('.target__time').css('color','green');
+					clearInterval(timerInterval)
+				}
+				else {
+					alert('인증번호가 틀립니다. 다시 입력해주세요.')
+					//$('#input__target_msg').text('인증번호가 틀립니다. 다시 입력해주세요.');
+					$('#input__target_msg').css('color','red');
+
+				}
+			});
+			
+		}
+	});
+	
+	$('#send').click(function() {
+		$('#remaining__min').text('0');
+	    $('#remaining__sec').text('03');
+	    resetTimer()
+	    takeTarget();
+	});
+	
+});
+
+//타이머 초기화 함수
+function resetTimer() {
+    $('#send').attr('disabled', false);
+    $('#send').text("인증번호 다시받기");
+    $('#phone').attr('disabled', false);
+    clearInterval(timerInterval); // 기존 타이머를 초기화합니다.
+    time = 20; // 3분으로 다시 설정합니다.
+}
+
+let timerInterval; // 타이머 setInterval의 참조를 저장하기 위한 변수
 
 
+const remainingMin = document.getElementById("remaining__min");
+const remainingSec = document.getElementById("remaining__sec");
+const completeBtn = document.getElementById("userNum");
+var get__number = document.getElementById("send");
 
+let time = 20;
 
+const takeTarget = () => {
+	$('.target__time').show();
+	 timerInterval = setInterval(function () {
+	  if(time == 0){
+		  $('#userNum').attr('disabled', true);
+		  $('#complete').attr('disabled', true);
+		  resetTimer();
+	    }
+	  else if (time > 0) { // >= 0 으로하면 -1까지 출력된다.
+		  $('#send').attr('disabled', true);
+		  $('#phone').attr('disabled', true);
+		  $('#userNum').attr('disabled', false);
+		  $('#complete').attr('disabled', false);
+	      time = time - 1; // 여기서 빼줘야 3분에서 3분 또 출력되지 않고, 바로 2분 59초로 넘어간다.
+	      let min = Math.floor(time / 60);
+	      let sec = String(time % 60).padStart(2, "0");
+	      remainingMin.innerText = min;
+	      remainingSec.innerText = sec;
+    } else {
+		$('#userNum').attr('disabled', true);
+    }
 
-
-
-
+  }, 1000);
+};
+</script>
 
 </body>
 </html>

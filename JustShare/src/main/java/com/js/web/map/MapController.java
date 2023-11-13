@@ -313,4 +313,65 @@ public class MapController {
 
 		return "mapMark6";
 	}
+	
+	@GetMapping("/mapMark7")
+	public String mapMark7(Model model) {
+		
+		BoardDTO boardDto= new BoardDTO();
+		List<Map<String, Object>> ListAll = mapService.gpsListOne(boardDto);
+		
+		BoardDTO boardDto2= new BoardDTO();
+		List<Map<String, Object>> ListOne = mapService.gpsListAll(boardDto2);
+		
+		ImgDTO imageDto = new ImgDTO();
+		List<Map<String, Object>> imageAll = mapService.imageD(imageDto);
+
+		model.addAttribute("imageAll",imageAll);
+		
+
+		/*
+		 * System.out.println("ListAll:"+ListAll);
+		 * System.out.println("ListOne:"+ListOne);
+		 * System.out.println("imageAll:"+imageAll);
+		 */
+
+		if (!ListAll.isEmpty()) {
+		    Map<String, Object> map = ListAll.get(0);
+		    Object bno = map.get("bno");
+		    Object latitude = map.get("latitude");
+		    Object longitude = map.get("longitude");
+		    Object btitle = map.get("btitle");
+		    Object addr = map.get("addr");
+		    //System.out.println(bno);
+		    //System.out.println(latitude);
+		    //System.out.println(longitude);
+		    //System.out.println(btitle);
+		    //System.out.println(addr);
+		 
+		    model.addAttribute("ListAll",ListAll);
+		}
+		
+		if (!ListOne.isEmpty()) {
+		    Map<String, Object> map = ListOne.get(0);
+		    Object bno = map.get("bno");
+		    Object latitude = map.get("latitude");
+		    Object longitude = map.get("longitude");
+		    Object btitle = map.get("btitle");
+		    Object addr = map.get("addr");
+			/*
+			 * System.out.println(bno); System.out.println(latitude);
+			 * System.out.println(longitude); System.out.println(btitle);
+			 * System.out.println(addr);
+			 */
+		 
+		    model.addAttribute("ListOne",ListOne);
+		}
+
+		return "mapMark7";
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
 }
