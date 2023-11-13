@@ -264,7 +264,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
     ];
-
     
     // 새로운 마커 이미지 생성
     var markerImage = new kakao.maps.MarkerImage('img/blue192.png', new kakao.maps.Size(40, 40));

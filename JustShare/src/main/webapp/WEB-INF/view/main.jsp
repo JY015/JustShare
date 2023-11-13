@@ -23,7 +23,7 @@
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
+ 	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>  
    
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
@@ -240,16 +240,15 @@ var _ss_user_id   = "";
    });
    
    </script>
-
+<br><br>
 <div class="all-container">
 <div class="all-category-container">
-    <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
-    <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
-   <div class="category-item"><img class="studio" alt="studio" src="./img/category/studio.png"><p>스튜디오</p></div>
-    <div class="category-item"><img class="culture" alt="culture" src="./img/category/culture.png"><p>문화</p></div>    
-    <div class="category-item"><img class="business" alt="business" src="./img/category/business.png"><p>업무</p></div>
+    <div class="category-item"><p class="all" style="cursor:pointer;">전체</p></div>
+    <div class="category-item"><p class="commercial" style="cursor:pointer">상업</p></div>
+    <div class="category-item"><p class="studio" style="cursor:pointer">스튜디오</p></div>
+    <div class="category-item"><p class="culture" style="cursor:pointer">문화</p></div>    
+    <div class="category-item"><p class="business" style="cursor:pointer">업무</p></div>
     </div>
-    <hr>
     <br>
 <div class="entire-cate">
 <div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
@@ -263,7 +262,7 @@ var _ss_user_id   = "";
 <div class="category studio"><img alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
 <div class="category business"><img alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
 <div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
-<div class="category culture"><img alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
 <div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
 </div>
 </div>
@@ -271,6 +270,7 @@ var _ss_user_id   = "";
   $(".commercial, .business, .studio, .culture").click(function () {
        var category = $(this).attr("class");
        showCategory(category);
+       
      });
 
      $(".all").click(function() {
@@ -289,6 +289,16 @@ var _ss_user_id   = "";
      function showAllItems() {
        $(".category").show();
      }
+     
+     $(".category-item").click(function () {
+    	 
+    	    $(".category-item").css('border-bottom', 'none');
+
+    	    $(this).css('border-bottom', '2px solid red');
+    	});
+
+
+     
   </script>
   <!-- jy 메인 css한 부분--> 
     <div class="partition-line"></div>
