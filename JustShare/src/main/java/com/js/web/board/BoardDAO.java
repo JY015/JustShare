@@ -40,8 +40,6 @@ public interface BoardDAO {
 
 	int report(Map<String, Object> map);
 
-	void breport(Map<String, Object> map);
-
 	int dp(Map<String, Object> imap);
 
 	List<Map<String, Object>> areaList();
@@ -69,6 +67,14 @@ public interface BoardDAO {
 	List<Map<String, Object>> equipDetail(Map<String, Object> map);
 
 	List<Map<String, Object>> place(Map<String, Object> map);
+
+	int freviewCheck(Map<String, Object> map);
+
+	int treviewCheck(Map<String, Object> map);
+
+	int postreview(Map<String, Object> map);
+
+	int tradeFin(Map<String, Object> map);
 
 
 	

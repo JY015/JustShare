@@ -134,7 +134,7 @@
                  </div>
 			   <hr class="detail-divline">
 			   <div class="spaceDetailInfo_summary">
-			   <div class="host" style="display: flex; align-items:baseline;"><p class="txt__tit">호스트 &nbsp;${detail.mid } &nbsp;<i class="fa-solid fa-star" style="color: #e2d86a;"></i> 5 
+			   <div class="host" style="display: flex; align-items:baseline;"><p class="txt__tit">호스트 &nbsp;${detail.mid } &nbsp;<i class="fa-solid fa-star" style="color: #e2d86a;"></i> ${detail.averageS }
 			   <i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i></p></div>
 			   <div style="display: flex; align-items:baseline;"><p class="txt__tit">공간 소개</p></div>
 			   		<div class="detailContext">

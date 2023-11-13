@@ -61,7 +61,7 @@
     width: 5%;
     margin-bottom: 10px; /* 버튼 간의 간격을 조절할 수 있는 마진 값을 설정합니다. */
 }
-.txt__subtit__event .addrp{
+.txt__wrap2 .txt__subtit__event {
 	color: #819FF7;
 	
 }
@@ -241,7 +241,7 @@
              </p>
              <hr class="card-line">
               <p class="txt__card__tit price"> <span class="read_count">${row.fdate }</span>
-             ${row.bprice }원
+             ${row.price }원
              </p>
              </div>
              </div>

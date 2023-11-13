@@ -109,7 +109,7 @@ public class BoardService {
 
 	public int report(Map<String, Object> map) {
 		// 신고 접수하면서 board에 게시글 신고 횟수 올리기
-		boardDAO.breport(map);
+		
 		
 		return boardDAO.report(map);
 	}
@@ -203,5 +203,28 @@ public class BoardService {
 		
 		return boardDAO.place(map);
 	}
+
+	public int freviewCheck(Map<String, Object> map) {
+		
+		return boardDAO.freviewCheck(map);
+	}
+
+	public int treviewCheck(Map<String, Object> map) {
+		
+		return boardDAO.treviewCheck(map);
+	}
+
+	public int postreview(Map<String, Object> map) {
+		
+		return boardDAO.postreview(map);
+	}
+
+	public int tradeFin(Map<String, Object> map) {
+		
+		return boardDAO.tradeFin(map);
+	}
+
+
+
 
 }

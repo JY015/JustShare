@@ -22,23 +22,23 @@
 	</div>
 	상세내용
 	<div>
-	<textarea name="rcontent"></textarea>
+	<textarea name="rcontent" id="rcontent"></textarea>
 	</div>
-	<button type="submit">신고하기</button>
+	<button type="button" onclick="reportSubmit()">신고하기</button>
 	</form>
 
 
 <!--  여기스크립트 지금 비상비상  -->
 
 	<script>
-    document.getElementById("reportForm").onsubmit = function() {
+    function reportSubmit() {
         const dpValue = ${map.dp}; // dp 값 가져오기
         const rmidValue = "${map.rmid}"; // rmid 값 가져오기
         const midValue = "${map.mid}"; // mid 값 가져오기
         const rcateValue = document.querySelector('input[name="rcate"]:checked');
-        const rcontentInput = document.getElementsByName("rcontent")[0].value;
+        const rcontentInput =document.getElementById('rcontent');
         const rcontent = rcontentInput.value.trim();
-
+		console.log(rcateValue);
         if (dpValue != 0) {
            
             alert("이미 신고한 게시물의 중복신고는 불가능합니다.");
@@ -51,15 +51,15 @@
             return false;
         }
         if (!rcateValue) {
-            document.getElementById("rcate-error").innerText = "신고 사유를 선택해주세요.";
+            alert("신고 사유를 선택해주세요.");
             return false;
         }
         if (rcontent ==="" || rcontent.length < 10 || rcontent.length > 100) {
-            document.getElementById("rcontent-error").innerText = "상세내용을 입력해주세요.";
+           alert("신고 상세내용을 10자 이상 입력해주세요.");
             return false;
         }
        
-        return true;
+        document.querySelector('form').submit();
     };
 </script>
 </body>

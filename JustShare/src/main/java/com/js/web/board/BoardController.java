@@ -26,6 +26,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import retrofit2.http.POST;
+
 @Controller
 public class BoardController {
 	@Autowired
@@ -376,5 +378,61 @@ public class BoardController {
 		  
 	  }
 	 
-
+	  @GetMapping("/review")
+	  public String review(@RequestParam Map<String,Object>map, HttpSession session,Model model) {
+		  // 로그인 확인  
+		  if(session.getAttribute("mid") != null) {
+		// 거래 내역 확인 > 거래가 없을시 어디로 보냄? 보드 ?
+			  int tradeFin = boardService.tradeFin(map);
+			  if(tradeFin == 1) {
+		 // 리뷰를 작성할 사람이 거래한 사람이 맞는지 확인 
+			  String sid = String.valueOf( session.getAttribute("mid")) ;
+			  String fid = String.valueOf(map.get("fid"));  
+			  String tid = String.valueOf(map.get("tid"));
+			  map.put("fid", fid);
+			  map.put("tid", tid);
+		 // 리뷰 작성자가 구매자일 경우 	  
+			  if(sid.equals(fid)) {
+		 //리뷰를 이미 작성했을시 막아버리기 
+				  int freviewCheck = boardService.freviewCheck(map);
+				  if(freviewCheck == 0) {
+					  model.addAttribute("map", map);
+					  return "review"; 
+					  
+				  }else{
+					  
+				  return "redirect:/board";
+				  }
+		
+			// 리뷰 작성자가 판매자일 경우 
+		  	 }else if(sid.equals(tid)) {
+		  		 int treviewCheck = boardService.treviewCheck(map);
+		  		//리뷰를 이미 작성했을시 막아버리기  
+		  		 if(treviewCheck == 0) {
+		  			 model.addAttribute("map", map);
+					 return "review"; 
+		  		 }else {
+		  			 return "redirect:/board";
+		  		 }
+		  		 
+		  	 	 }else {
+		  		return "login";
+		  	 	}
+			  
+			  }else{
+				return "redirect:/board";
+			  }
+			  }else
+			  {
+				  
+	  		  return "login";
+	  		}
+	  	}
+	  
+	  @PostMapping("/review")
+	  public String reviewp(@RequestParam Map<String, Object>map, HttpSession session) {
+		// 쿼리문에서 중복 리뷰작성은 알아서 막히게 설정함 
+		int postreview = boardService.postreview(map); 
+		return "redirect:/board";
+	  }
 }
