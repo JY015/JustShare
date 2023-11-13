@@ -17,22 +17,12 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
 
-   <!-- 회원가입 3가지회원 유형 css new -->
-   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
-   <!-- 고객센터 css -->
-   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-   <!-- 폰트어썸 -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
    
    
    <meta property="og:locale"       content="ko_KR" />
@@ -63,114 +53,6 @@ var _ss_user_id   = "";
 </script>
 
 
-  <style>
-   .top_app_banner{
-      height:30px;
-      width:100%;
-      display:flex;
-   }
-   .app_div {
-      text-align:center;
-      width:100%;
-      font-size:12px;
-      padding:5px;
-      margin-left:15px;
-   }
-   .app_down {
-      color: white;
-      font-weight:bold;
-      background-color: #3CB4FF;
-      border-radius: 20px;
-      padding: 2px 10px 2px 10px;
-      margin-left:10px;
-   }
-   .app_div_close {
-      background: url('/images/close.svg') no-repeat 50% 50%; 
-      width:34px;
-      height:22px; 
-      padding:10px 10px 20px 0px;
-   }
-  /* 기본 스타일 */
-    .all-category-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .all-category-container .category-item {
-        text-align: center;
-        margin-right: 20px;
-        margin-left: 20px; 
-    }
-
-    .all-category-container img,
-    .entire-cate img {
-        max-width: 50px; 
-        height: auto; 
-    }
-
-    .entire-cate {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; 
-    }
-
-    .entire-cate .category {
-        flex-basis: calc(25% - 10px); 
-        text-align: center;
-    }
- .all-container{
- margin: 26%;
-margin-top:1%;
-margin-bottom:1%;
-}
-
-/* 미디어 쿼리 - 화면 크기에 따라 스타일 조정 */
-@media screen and (max-width: 768px) {
-        .all-category-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .all-category-container .category-item {
-        text-align: center;
-        margin-right: 20px;
-        margin-left: 20px; 
-    }
-
-    .all-category-container img,
-    .entire-cate img {
-        max-width: 50px; 
-        height: auto; 
-    }
-
-    .entire-cate {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; 
-    }
-
-    .entire-cate .category {
-        flex-basis: calc(25% - 10px); 
-        text-align: center;
-    }
-   .all-container{
-       margin: 0%; 
- 
-}
-   
-} 
-
-.nav-link2{
-       display: none;
-}
-
-/* 모바일 환경에서는 아이콘을 보이도록 설정 */
-@media screen and (max-width: 413px) {
-    .nav-link2 {
-            display: inline;
-    }
-}
-   </style>
   </head> 
 <body>
 
@@ -213,8 +95,8 @@ margin-bottom:1%;
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
-           <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                     
-            </div>
+<!--            <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                     
+ -->            </div>
           </div>
       </div>
  
@@ -242,7 +124,7 @@ margin-bottom:1%;
         <div class="myInfo__inner">
           <div class="myregInfo">
             <div class="infoarea">
-              <img src="/images/ico_profile.svg" alt="" />
+              <img src="" alt="" />
               <div class="userInfo">
                 <div class="infoBox">
                   <span class="txt__card__tit2"></span>
@@ -534,11 +416,11 @@ navigation: {   // 버튼 사용자 지정
                </div>
                <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
                <div class="location-box">
-                  <img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
+                 <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
                  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
-
+				</a>
             </div>
      <div  class="card__inner2">         
               <div class="txt__wrap2">
@@ -596,7 +478,7 @@ navigation: {   // 버튼 사용자 지정
                </div>
                <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
                <div class="location-box">
-                  <img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
+                  <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
                  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
@@ -658,29 +540,15 @@ navigation: {   // 버튼 사용자 지정
      </div>
      <div class="banner-copy">
       <p class="txt__banner_copy">JustShare은 공간자와 브랜드, 그리고 소비자가 가치공간의 플랫폼 안에서 각자의 가치를 실현하고 한 단계 성장할 수 있는 기회를 제공하는 진화(revolution)의 장입니다.</p>
-      <button class="btn_banner"><a href="/help/pc_guide20230426.pdf" target="_blank">사용자 가이드 보기</a></button>
+      <button class="btn_banner"><a href="" target="_blank">사용자 가이드 보기</a></button>
      </div>
      <div class="banner-img img_adjustment">
-      <img src="../images/subbanner_img1.png" alt="">
+      <img src="" alt="">
      </div>
    </div>
   </div>
 </section>
-<script>
-function search_check_m2()
-{
-   var stx   = $('#stxm').val().trim();
-   var gubun = $('#gubunm').val() ?? '';
-   var datestart = $('#dateStartm').val() ?? '';   
-   var duration = $('#durationm').val() ?? '';
 
-   if(stx == '' && gubun == '' && datestart == '' && duration == ''){
-      alert('하나이상의 검색 조건을 입력 또는 선택해주세요.');
-      return false;
-   }
-}
-
-</script>
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function () {
       
@@ -694,72 +562,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
     </script>
-      <section class="section section--m--search">
-        <div class="container">
-          <header id="header" class="header__type2">
-            <div class="header__wrap">
-              <div><p style="font-weight: 400; font-size: 24px; margin-left: 12px;">검색</p></div>
-              <div class="back btnClose" style="background: url('/images/close.svg') no-repeat 50% 50%; margin: 0;"></div>
-            </div>
-          </header>
-          <form id="search-form" class="inner m_search" method="GET" action="/schedule/search" onsubmit="return search_check_m2();">
-            <ul class="searchForm__inner">
-              <li class="search_location">
-                <img src="/images/ico_search1.png" alt="" />
-                <dl>
-                  <!--dt>검색어</dt-->
-                  <dd>
-                    <input type="text" placeholder="키워드를 입력해주세요.(eq. 현대백화점, 강남등)" name="stx" id="stxm" class="input--text" value="" autocomplete="off" />
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_type">
-                <img src="/images/ico_search2.png" alt="" />
-                <dl>
-                  <dt>검색 유형</dt>
-                  <dd>
-                    <select class="selectBox" name="gubun" id="gubunm">
-                      <option value="" selected>전체</option>
-                      <option value="popup" >팝업 스토어</option>
-                      <option value="space" >리테일 공간 대관</option>
-                 <option value="event" >전국 행사 정보</option>
-                    </select>
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_date datepick has--schedule">
-                <img src="/images/ico_search3.png" alt="" />
-                <dl>
-                  <dt>시작 날짜</dt>
-                  <dd>
-                    <input class="datepick" id="dateStartm" type="text" name="dateStart" value="" placeholder="선택 하세요" readonly="readonly" />
-                    <i></i>
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_period">
-                <img src="/images/ico_search4.png" alt="" />
-                <dl>
-                  <dt>운영 기간</dt>
-                  <dd>
-                    <select class="selectBox" name="duration" id="durationm">
-                      <option value="" selected>전체</option>
-                      <option value="7" >1주일 이하</option>
-                      <option value="14" >2주일 이하</option>
-                      <option value="31" >1달 이하</option>
-                    </select>
-                  </dd>
-                </dl>
-              </li>
-              <script></script>
-            </ul>
-            <button class="search btn--primary">검색</button>
-          </form>
-        </div>
-        <div id="m_search_schedule_list">
-            <!-- 메인/팝업 지정 공간 표시용 -->
-        </div>
-      </section>
 
     <section class="aside-layerpop">
       <div class="aside-wrap">
@@ -768,63 +570,9 @@ document.addEventListener('DOMContentLoaded', function () {
          <!-- 브랜드 stats가 없는경우에만 "non-stat" 추가-->
             <div class="aside-sign-group non-stat">
               <div class="sign-group-profile">
-                <div class="sign-group-profile-left">
-                <span><a href="/login">로그인</a></span>
-                <span><img src="/images/ico_login.svg" alt=""></a></span>
-                </div>
-                <div class="sign-group-profile-right">
-                  <div class="aside-icon-alarm">
-                    <img src="/images/ico_alarm.svg" alt="" onclick="top.location.href='/member/alarm'">
-              </div>
-                </div>
-              </div>
-              <div class="aside-notice">
-                <a href="/schedule/list?dateStart=2023-11-03">
-                  <div class="notice-box">
-                    <div class="notice-txt">
-                      <p class="notice-alarm">&lt;알림&gt;</p>
-                      <p class="notice-title">23년 11월 셀러 모집합니다</p>
-                    </div>
-                      <img src="/images/arrow_right.svg" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-            <!-- 광고배너 -->
-            <div class="ad-banner-group">
-              <div class="card__item" class="row" id="adbanner" onclick="openModal();currentSlide(1)" >
-                <a href="/help/leasing">
-                  <img src="/images/ad_banner.png">
-                </a>
-              </div>
-            </div> 
-            <!-- 광고배너 종료-->
 
-            <div class="aside-menu-group">
-            <p class="txt__aside_maintit">가치공간</p>
-              <ul>
-                <li><a href="/notice/list" class="aside-arrow">공지사항</a><li>
-                <li><a href="/contact/forms" class="aside-arrow">제휴 및 입점문의</a><li>
-                <li><a href="/help/leasing" class="aside-arrow">리징</a><li>
-                <li><a href="/faq" class="aside-arrow">자주 묻는 질문</a><li>
-                <li><a href="/help/pc_guide20230426.pdf" class="aside-arrow" target='_blank'>사용자 가이드</a><li>
-              </ul>
-            </div>
-            <hr class="menu-line">
-            <div class="aside-contact-group">
-            <p class="txt__aside_maintit">고객센터</p>
-              <p class="contact-tit">TEL.  <a href="tel:02-1661-6925">02-1661-6925</a></p>
-              <p class="contact-tit">사업자등록번호.  156-81-00883</p>
-              <p class="contact-tit">E-mail. <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a></p>
-            </div>
-            <hr class="menu-line">
-            <div class="aside-sns-group">
-            <p class="txt__aside_maintit">SNS</p>
-              <div class="social-logo">
-                <div class="roundlogo" ><a href="https://www.instagram.com/valuevenue_official" target="_blank"><img src="/images/insta.svg" alt=""></a></div>
-                <div class="roundlogo" ><a href="https://www.youtube.com/channel/UC_Yp-_yUp6JxwZAVRkzF94A" target="_blank"><img src="/images/youtube.svg" alt=""></a></div>
-                <div class="roundlogo"><a href="https://blog.naver.com/value_venue" target="_blank"><img src="/images/blog.svg" alt=""></a></div>
               </div>
+             
             </div>
           </div>
         </div>
@@ -858,92 +606,10 @@ document.addEventListener('DOMContentLoaded', function () {
             TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
             <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
           </div>
-          <div class="social-list">
-            <!-- <p style="font-size:16px; font-weight: bold;">SNS & Blog</p> <br> -->
-            <div class="social-logo">
-            <div class="roundlogo"><a href="https://www.value-venue.com/" target="_blank"><img src="/images/underbar.svg" alt=""></a></div>
-            <div class="roundlogo"><a href="https://apps.apple.com/app/id1514738613" target="_blank"><img src="/images/apple.svg" alt=""></a></div><!--앱스토어-->
-            <div class="roundlogo"><a href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace" target="_blank"><img src="/images/triangle.svg" alt=""></a></div><!--플레이스토어-->
-            <div class="roundlogo"><a href="https://pf.kakao.com/_useHC" target="_blank"><img src="/images/comma.svg" alt=""></a></div><!--카카오채널-->
-            <div class="roundlogo" ><a href="https://www.facebook.com/valuevenue1" target="_blank"><img src="/images/face.svg" alt=""></a></div><!--페이스북-->
-            <div class="roundlogo" ><a href="https://www.instagram.com/valuevenue_official" target="_blank"><img src="/images/insta.svg" alt=""></a></div><!--인스타그램-->
-            <div class="roundlogo" ><a href="https://www.youtube.com/channel/UC_Yp-_yUp6JxwZAVRkzF94A" target="_blank"><img src="/images/youtube.svg" alt=""></a></div><!--유튜브-->
-            <div class="roundlogo"><a href="https://blog.naver.com/value_venue" target="_blank"><img src="/images/blog.svg" alt=""></a></div><!--블로그-->
-          </div>
-          </div>
         </div>
         </div>
       </footer>
     </div>
-<!-- 내가 만진 부분-->
-   <section class="mobile_pop_section mobile_pop" style="display:none;">
-      <div class="mb-banner">
-         <div class="banner-wrap">
-            <div class="mb-banner-img"><a href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><img src="/images/ico_download_logo.svg" style="width:80px;height:auto;margin-bottom: 10px;
-             margin-top: -10px;" /></a></div>
-            <div class="banner-title" style="width:100%;">
-               <p class="mb-banner_title">모바일 앱으로 더욱 쉽고, 빠르게!</p>
-               <p class="mb-banner_title" style="font-weight:900;">가치공간 팝업스토어 서비스를 만나보세요!</p>
-               <div class="mb-banner-sub">
-                  <p class="mb-banner_title" style="color:#fff; text-align:center; font-weight:700;font-size:16px;" onclick="app_link_move('https://play.google.com/store/apps/details?id=com.valuevenue.gachispace')">가치공간 앱으로 보기 <img src="/images/ico_download_arrow.svg" style="width:20px; height:auto; margin-top:-1px;"/></p>
-               </div>               
-            </div>
-         </div>
-         <div>
-            <p class="mb-banner_title" style="color:#fff; text-align:center; text-decoration:underline;" onclick="mobile_app_func();">괜찮아요, 모바일 웹으로 볼래요!</p>
-         </div>
-      </div>
-   </section>
-   <style>
-   .mb-banner {
-      height:200px;
-      margin: 0 10px 120px 10px;
-      background-color: #fff;
-      border-radius: 10px;
-   }
-   .mb-banner-img{
-      width:100%;
-      height:80px;
-      text-align:center;
-   }
-   .mb-banner-sub {
-      height:30px;
-      color: #fff;
-      background-color: #1F6CFD;
-      border-radius: 5px;
-      padding: 5px;
-      margin-top:5px;      
-   }
-   .mb-banner_title {
-      color:black;
-      text-align:center;
-      font-size:14px;
-   }
-   .mobile_pop_section {
-      display:block;
-      bottom:0;
-      position:fixed;
-      width:100%;
-      z-index:110;
-      left:0;      
-   }
-   .notScroll {overflow: hidden;width: 100%;height: 100vh;}
-   </style>
-
-
-    <!--date layer-->
-    <div class="dateLayer" id="container"></div>
-    <!--Simple Calender-->
-    <link rel="stylesheet" href="/js/animated-event-calendar/dist/simple-calendar.css">
-    <script src="/js/animated-event-calendar/dist/jquery.simple-calendar.js"></script>
-    <script>
-</script>
-  <div id="mask" class="mask"></div>
-  <iframe name="_hidden_frame" id="_hidden_frame" width=0 height=0></iframe>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- 구글 애널리틱스 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-234069340-1"></script>
-
 
   </body>
 </html>

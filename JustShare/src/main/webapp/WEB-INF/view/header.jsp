@@ -29,8 +29,7 @@
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
-           <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                     
-            </div>
+<!--            <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                   -->            </div>
           </div>
       </div>
  
