@@ -312,6 +312,12 @@ $(function () {
       <div class="mypage-lay1-gridC2" id="host_guide_div" style='display:none'>
         <p class="mypage_title_guide">거래 내역<br /></p>
         <div class="btn-group">
+        
+        
+        
+        
+        
+        
         <!--   <button class="btn btn--outlined-primary">호스트 가이드 보기</button>
           <button class="btn btn--primary" onclick="top.location.href='/space/host_register'">공간 호스트 등록</button>
           <button class="btn btn--outlined-red" style="" onclick="disabled_host();">7일동안 보이지 않기</button> -->
