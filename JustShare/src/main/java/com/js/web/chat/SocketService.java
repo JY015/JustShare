@@ -175,7 +175,7 @@ public class SocketService {
 
 	
 
-	public int bnoload(Map<String, Object> paramMap) {
+	public Integer bnoload(Map<String, Object> paramMap) {
 	
 		return socketDAO.bnoload(paramMap);
 	}
@@ -223,6 +223,12 @@ public class SocketService {
 		
 		return socketDAO.tradestatus(map);
 
+	}
+
+
+	public List<Map<String, Object>> roomserch(Map<String, Object> map) {
+		
+		return socketDAO.roomserch(map);
 	}
 	
 

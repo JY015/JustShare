@@ -84,9 +84,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    	JSONObject jsonObject = new JSONObject();
 	    	CloseStatus status = null;
 	    	
+	   
 	    	List<Map<String,Object>> blockedUsers = socketService.blocklist();
 	         //System.out.println(blockedUsers.toString());
-	         
+	     	System.out.println("종료확인"+payload);
 			 //웹소켓 연결후 전역으로 차단목록관리 
 	         if(!blockedUsers.isEmpty()) {
 	         for (Map<String, Object> blockedUser : blockedUsers) {
@@ -107,7 +108,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    	
 	    	if (session.isOpen()) {
 	    		
-	    		
+	    		System.out.println("종료확인2"+payload);
 	    			payload = message.getPayload();
 	    	 	jsonObject = new JSONObject(payload);
 	    	
@@ -176,6 +177,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	        			&& !jsonObject.has("tochk") && !jsonObject.has("fromchk")) {
 	         		
 	         		afterConnectionClosed(session,status);
+	         		System.out.println("연결종료실행?");
 	         	} else if(jsonObject.has("mid") && jsonObject.has("toId") && jsonObject.has("exceptid") 
 	         			&& !jsonObject.has("block") && !jsonObject.has("unblock") && !jsonObject.has("firstmsg")
 	         			&& !jsonObject.has("tochk") && !jsonObject.has("fromchk")) {
@@ -253,6 +255,33 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	         		
 	         		
 	         		
+	         	} else if (jsonObject.has("toId") && !jsonObject.has("mid") && !jsonObject.has("fromchk") && !jsonObject.has("exceptid"))
+	         			{
+	         		 String toId = jsonObject.optString("toId", "");
+	         		JSONObject messageObject = new JSONObject();
+	         	
+	         		 
+	         		if (toId != null && !toId.isEmpty()) {
+	         			
+	         	        WebSocketSession clientSession = clients.get(toId);
+
+	         	        if (clientSession != null && clientSession.isOpen()) {
+	         	            
+	         	            messageObject.put("toId", toId);
+	         	            messageObject.put("message", "연결");
+
+	         	            TextMessage message2 = new TextMessage(messageObject.toString());
+	         	            
+	         	            clientSession.sendMessage(message2);
+	         	           //System.out.println("테스트12"+toId);
+	         	        } else {
+	         	          // offline인거는 디폴트값이니 생략 
+	         	        	
+	         	        }
+	         	    }
+	         	
+	    			
+	    
 	         	}
 	    	 }else {  // 세션이 오프라인인 경우
 	    	

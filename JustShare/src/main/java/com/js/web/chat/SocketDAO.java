@@ -102,7 +102,7 @@ public interface SocketDAO {
 
 
 
-	int bnoload(Map<String, Object> paramMap);
+	Integer bnoload(Map<String, Object> paramMap);
 
 
 
@@ -135,6 +135,10 @@ public interface SocketDAO {
 
 
 	int tradestatus(Map<String, Object> map);
+
+
+
+	List<Map<String, Object>> roomserch(Map<String, Object> map);
 
 
 

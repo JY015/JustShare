@@ -5,20 +5,21 @@
  * make sure you copy the url from the website since the url may change between versions.
  * */
 .toast-title {
-    font-weight: 600;
-    height: 70px;
-    font-size: 35px;
+    font-weight: 400;
+    height: 32px;
+    font-size: 18px;
     padding-left:270;
       text-align: center;
+      padding-top: 2px;
 }
 
 .toast-message {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
-    height: 70px;
-  font-size: 32px;
-padding-left:56px;
-  text-align: center;
+    height: 40px;
+  font-size: 16px;
+
+ padding-left: 10px;
 }
 
 .toast-message a,.toast-message label {
@@ -67,8 +68,8 @@ button.toast-close-button {
     background: 0 0;
     border: 0;
     -webkit-appearance: none;
-    font-size: 70px;
-    padding-right: 30px;
+    font-size: 25px;
+    padding-right: 12px;
 }
 
 .toast-top-center {
@@ -180,7 +181,7 @@ button.toast-close-button {
 #toast-container>.toast-success {
 	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=)!important;
  
-    background-size: 60px;
+    background-size: 26px;
     
 }
 
@@ -190,14 +191,14 @@ button.toast-close-button {
 
 #toast-container.toast-bottom-center>div,#toast-container.toast-top-center>div {
     width: 80%;
-    height:170px;
+    height:78px;
     margin-left: auto;
     margin-right: auto
 }
 
 #toast-container.toast-bottom-full-width>div,#toast-container.toast-top-full-width>div {
     width: 80%;
-    height:100px;
+    height:10px;
     margin-left: auto;
     margin-right: auto
 }
