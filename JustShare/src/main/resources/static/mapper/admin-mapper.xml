@@ -22,8 +22,10 @@ WHERE mno=#{mno}
 </update>
 
 <select id="reportList" resultType="map">	
-	SELECT rno, rmid, mid, bno, rcontent, rcate
-	FROM report
+	SELECT r.*, rc.rcateName
+FROM report r
+JOIN reportCate rc ON r.rcate = rc.rcate;
+
 </select>
 
 <select id="reportListMember" parameterType="Map" resultType="Map">
@@ -55,4 +57,28 @@ FROM tradehistory;
 </select>
 
 
+<select id="dateList" resultType="Map">
+SELECT 
+  DISTINCT DATE(timestamp) AS dateOnly,
+  (SELECT COUNT(*) FROM tradehistory th WHERE DATE(th.timestamp) = dateOnly) AS count
+FROM 
+  tradehistory;
+</select>
+
+<select id="memberCount" resultType="Integer">
+SELECT COUNT(*) FROM members
+</select>
+
+<select id="boardCount" resultType="Integer">
+SELECT COUNT(*) FROM board
+</select>
+
+
+<select id="reportCount" resultType="Integer">
+SELECT COUNT(*) FROM report
+</select>
+
+<select id="tradeCount" resultType="Integer">
+SELECT COUNT(*) FROM tradehistory
+</select>
 </mapper>

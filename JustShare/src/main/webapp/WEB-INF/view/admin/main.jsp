@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-    <link rel="stylesheet" href="/css/main_page.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     <link rel="stylesheet" href="/css/register.css?ver=20000120" />
     <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -27,99 +27,132 @@
     <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
-    <style>
-    body {
-        font-family: 'Pretendard', sans-serif;
-        background-color: #f7f7f7;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    h1 {
-        color: #333;
-    }
-
-    a {
-        color: #007BFF;
-        text-decoration: none;
-        font-weight: bold;
-        margin-right: 20px;
-    }
-
-    a:hover {
-        color: #0056b3;
-    }
-
-    .container {
-        max-width: 80%;
-        margin: 0 auto;
-    }
-
-    .menu {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
-        color: white;
-      
-    }
-
-    .menu-logo img {
-        cursor: pointer;
-    }
-
-    .menu-item {
-        margin-top: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-    }
-
-    .menu-item i {
-        margin-right: 10px;
-    }
-
-    .menu-item:hover {
-        border-radius: 4px;
-    }
-
-    .warning-message {
-        color: red;
-        font-weight: bold;
-        margin-top: 20px;
-    }
+    <style> 
 </style>
-
 </head>
-		<div class="menu">
-			<div class="menu-item" onclick="url('')"><i class="xi-user-o xi-2x"></i>관리자 메인</div>
-			<div class="menu-item" onclick="url('../')"><i class="xi-user-o xi-2x"></i>일반 메인</div>
-			<div class="menu-item" onclick="url('member')"><i class="xi-user-o xi-2x"></i>회원 관리</div>
-			<div class="menu-item" onclick="url('reportList')"><i class="xi-user-o xi-2x"></i>신고관리</div>
-			<div class="menu-item" onclick="url('../logout')"><i class="xi-flag-o xi-2x"></i>로그아웃</div>
-		</div>
-		<script>function url(url){location.href="./"+url;}</script>
-		
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Share - Admin Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .admin-info {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .admin-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .admin-actions a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .admin-actions a:hover {
+            background-color: #0056b3;
+        }
+
+        .warning-message {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+       .data-table {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: !important;
+    
+}
+
+th {
+    background-color: #f2f2f2;
+}   
+
+td{
+	padding: 30px 0 34px !important;
+	text-align: center !important;
+} 
+</style>
+</head>
+ <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br><br><br><br><br><br><br><br>
 <body class="container">
-    <h1>Just Share - 관리자 화면</h1>
-
+    <h1>Just Share - Admin Page</h1>
+    ${sessionScope.mgrade}
     <div class="admin-info">
-        관리자 아이디: ${sessionScope.mid}님 등급: ${sessionScope.mgrade}
+        관리자 아이디 : ${sessionScope.mid} 관리자님 안녕하세요.
     </div>
-
     <div class="admin-actions">
-        <a href="./member">멤버 관리</a>
-        <a href="./reportList">신고 관리</a>
+        <a href="../logout">로그아웃</a>
     </div>
-
+   	<div class="data-table" style="text-align: center">
+    <table>
+        <tr>
+            <th>종류</th>
+            <th>개수</th>
+        </tr>
+        <tr>
+            <td>총 멤버</td>
+            <td><a href="./member">${memberCount}개</a></td>
+        </tr>
+        <tr>
+            <td>상품 등록 수</td>
+            <td><a href="../board">${boardCount}개</a></td>
+        </tr>
+        <tr>
+            <td>신고 갯수</td>
+            <td><a href="./reportList">${reportCount}개</a></td>
+        </tr>
+        <tr>
+            <td>거래 횟수</td>
+            <td><a href="./tradeList">${tradeCount}개</a></td>
+        </tr>
+    </table>
+</div>
     <c:if test="${sessionScope.mgrade < 4}">
         <div class="warning-message">
             <script>
@@ -130,5 +163,5 @@
     </c:if>
 <%@ include file="adminfooter.jsp"%>
 </body>
-
 </html>
+

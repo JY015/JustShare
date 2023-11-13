@@ -17,8 +17,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
-   <link rel="stylesheet" href="/css/main_page.css" />
+   <link rel="stylesheet" href="/css/footer.css" />
 
    <!-- 회원가입 3가지회원 유형 css new -->
    <link rel="stylesheet" href="/css/register.css?ver=20000120" />
@@ -31,10 +30,8 @@
    <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 </head>
+<img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
 <body> 
-
-<a href="./member">멤버 관리</a><br>
-<a href="./main">admin main</a><br>
 <style>
 .div-table {
 	display: table;
@@ -51,30 +48,7 @@
 	border: 1px solid #f0f0f0;
 }
 </style>
-
-<a href="./member">-멤버 관리-</a> 
-	<div class="div-table">
-		<div class="div-row">
-			<div class="div-cell">신고번호</div>
-			<div class="div-cell">신고한 사람</div>
-			<div class="div-cell">신고 당한 사람</div>
-			<div class="div-cell">신고 내용</div>
-			<div class="div-cell">신고 카테고리</div>
-			<div class="div-cell">글 확인</div>
-		</div>
-		<c:forEach items="${reportList}" var="row">
-			<div class="div-row">
-				<div class="div-cell">${row.rno}</div>
-				<div class="div-cell">${row.rmid}</div>
-				<div class="div-cell">${row.mid}</div>
-				<div class="div-cell">${row.rcontent}</div>
-				<div class="div-cell">${row.rcate}</div>
-				<div class="div-cell"><button onclick="location.href='/bdetail?bno=${row.bno}'">글 확인</button></div>
-</div>
-</c:forEach>
-</div>
-
-<br><br><br>
+<div style="text-align: center">
 <div class="div-table">
 		<div class="div-row">
 			<div class="div-cell">신고 아이디</div>
@@ -85,15 +59,32 @@
 			<div class="div-row">
 				<div class="div-cell">${m.mid}</div>
 				<div class="div-cell">${m.count}회
-				<c:if test="${m.count >= 5}">&nbsp&nbsp&nbsp<span style="color: red">신고 누적횟수가 5회 이상이라 계정이 일시정지 되었습니다.</span></c:if>
+				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
 			</div>
 		</div>
 </c:forEach>
-</div>			
+</div>	
+<br>
+
+	<div class="div-table">
+		<div class="div-row">
+			<div class="div-cell">신고한 사람</div>
+			<div class="div-cell">신고 당한 사람</div>
+			<div class="div-cell">신고 내용</div>
+			<div class="div-cell">신고 카테고리</div>
+		</div>
+		<c:forEach items="${reportList}" var="row">
+			<div class="div-row" onclick="location.href='/bdetail?bno=${row.bno}'">
+				<div class="div-cell">${row.rmid}</div>
+				<div class="div-cell">${row.mid}</div>
+				<div class="div-cell">${row.rcontent}</div>
+				<div class="div-cell">${row.rcateName}</div>
+</div>
+</c:forEach>
+</div>
+</div>
 <%@ include file="adminfooter.jsp"%>
 		
 				
-<script type="text/javascript">
-</script>
 </body>
 </html>

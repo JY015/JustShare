@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +19,7 @@
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
-   <link rel="stylesheet" href="/css/main_page.css" />
+   <link rel="stylesheet" href="/css/footer.css" />
 
    <!-- 회원가입 3가지회원 유형 css new -->
    <link rel="stylesheet" href="/css/register.css?ver=20000120" />
@@ -30,11 +31,13 @@
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
 <body> 
-
-<a href="./member">멤버 관리</a><br>
-<a href="./main">admin main</a><br>
+<div style="text-align: center">
+<h1>날짜별 거래내역</h1>
+<br>
 <style>
 .div-table {
 	display: table;
@@ -42,6 +45,9 @@
 }
 
 .div-row {
+	display: table-row;
+}
+.div-rowrow{
 	display: table-row;
 }
 
@@ -52,32 +58,100 @@
 }
 </style>
 	<div class="div-table">
-		<div class="div-row">
-			<div class="div-cell">구매자</div>
-			<div class="div-cell">판매자</div>
-			<div class="div-cell">거래시간</div>
-			<div class="div-cell">글번호</div>
-			<div class="div-cell">글 확인</div>
-			<div class="div-cell">카운트</div>
+		<div class="div-rowrow">
+			<div class="div-cell">거래 날짜</div>
+			<div class="div-cell">거래 횟수</div>
 		</div>
-		<c:forEach items="${tradeList}" var="row">
+		<c:forEach items="${dateList}" var="row">
 			<div class="div-row">
-				<div class="div-cell">${row.from_user_id}</div>
-				<div class="div-cell">${row.to_user_id}</div>
-				<div class="div-cell">${row.timestamp}</div>
-				<div class="div-cell">${row.bno}</div>
-				<div class="div-cell"><button onclick="location.href='/bdetail?bno=${row.bno}'">글 확인</button></div>
-				<div class="div-cell">${row.total_count}</div>
+				<div class="div-cell">${row.dateOnly}</div>
+				<div class="div-cell">${row.count}</div>
 </div>
 </c:forEach>
 </div>
-				총 결제 횟수: ${totalTradeList[0].total_count}
 
-<br><br><br>
+<div id="barchart_values" style="width: 100%; height: 100%;"></div>
+
+ <button class="btn btn-primary" id="showAllTransactions">전체 거래내역 보기</button>
+            <div class="div-table" id="allTransactionsTable" style="display:none;">
+                <!-- 전체 거래내역을 표시할 테이블 -->
+                <div class="div-rowrow">
+                    <div class="div-cell">구매자</div>
+                    <div class="div-cell">판매자</div>
+                    <div class="div-cell">거래시간</div>
+                    <div class="div-cell">글번호</div>
+                </div>
+                <c:forEach items="${tradeList}" var="row">
+                    <div class="div-row" onclick="location.href='/bdetail?bno=${row.bno}'">
+                        <div class="div-cell">${row.from_user_id}</div>
+                        <div class="div-cell">${row.to_user_id}</div>
+                        <div class="div-cell">${row.timestamp}</div>
+                        <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.bno}</div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
 <%@ include file="adminfooter.jsp"%>
-		
+
+<br><br>
 				
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ["Element", "횟수", { role: "style" }],
+      <c:forEach items="${dateList}" var="row">
+        ["${row.dateOnly}", ${row.count}, "#3366cc"],
+      </c:forEach>
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+      {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+      },
+      2]);
+
+    var options = {
+    	    title: "JustShare 거래내역 차트",
+    	    width: '100%', 
+    	    height: 300,
+    	    bar: { groupWidth: "85%" },
+    	    legend: { position: "none" },
+    	    hAxis: {
+    	      title: '거래 수',
+    	    },
+    	  };
+
+    	  var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+
+    	  // 창 크기가 변경될 때마다 drawChart 함수를 호출하여 차트를 그립니다.
+    	  google.visualization.events.addListener(chart, 'ready', function () {
+    	    window.onresize = function () {
+    	      drawChart();
+    	    };
+    	  });
+
+    	  chart.draw(view, options);
+    	}
+  $(document).ready(function () {
+      $("#showAllTransactions").click(function () {
+          $("#allTransactionsTable").toggle();
+      });        
+  });
+  
+
+  
+  
 </script>
+
+
+
 </body>
 </html>

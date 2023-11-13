@@ -24,4 +24,14 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> totalTradeList();
 
+	List<Map<String, Object>> dateList();
+
+	int memberCount();
+
+	int boardCount();
+
+	int reportCount();
+
+	int tradeCount();
+
 }

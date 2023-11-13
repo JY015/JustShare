@@ -17,7 +17,7 @@
 <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 
-<link rel="stylesheet" href="/css/main_page.css" />
+<link rel="stylesheet" href="/css/footer.css" />
 <link rel="stylesheet" href="./css/login.css">
 <!-- 회원가입 3가지회원 유형 css new -->
 <link rel="stylesheet" href="/css/register.css?ver=20000120" />
@@ -31,7 +31,6 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
-
 
 <meta name="robots" content="index,follow">
 <meta name="naver-site-verification"
@@ -50,7 +49,7 @@
 	top: 7px;
 }
 
-.xi-document, .xi-gps, .xi-message-o, .xi-user-o {
+.xi-home, .xi-home-o, .xi-group, .xi-emoticon-devil-o, .xi-exchange {
 	text-align: center;
 	font-size: 162%;
 	position: relative;
@@ -58,17 +57,37 @@
 	color: rgba(0, 0, 0, 0.4);
 }
 
+.bottom_nav_menu {
+    position: fixed;
+    left: 0;
+    bottom: -11px !important; /* 수정된 부분 */
+    width: 100%;
+    height: 56px;
+    color: #262626;
+    text-align: center;
+    z-index: 10;
+    background: #fcfcfc;
+    -webkit-transition: bottom 0.2s;
+    transition: bottom 0.2s;
+    -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+}
+@media screen /*  and /* (max-width:550px) */ {
+  .banner_back_img .mo_banner{
+    display: block ;
+  }
+
 
 
 </style>
 
 <nav class="bottom_nav_menu">
 	<ul>
-		<li class="b_nav_listb "><a href='/'> <i class="xi-document"></i> </svg><p class="">관리자메인</p></a></li>
-		<li class="b_nav_listb "><a href='../'> <i	class="xi-gps"></i> </svg><p class="">일반 메인</p></a></li>
-		<li class="b_nav_list "><a href='./member'> <i class="xi-message-o"></i></svg><p class="">회원관리</p></a></li>
-		<li class="b_nav_list "><a href='./reportList'> <i class="xi-message-o"></i></svg><p class="">신고관리</p></a></li>
-		<li class="b_nav_list "><a href='./tradeList'> <i class="xi-user-o"></i></svg><p class="">거래내역</p></a></li>
+		<li class="b_nav_listb "><a href='./'> <i class="xi-home"></i> </svg><p class="">관리자메인</p></a></li>
+		<li class="b_nav_listb "><a href='../'> <i	class="xi-home-o"></i> </svg><p class="">일반 메인</p></a></li>
+		<li class="b_nav_list "><a href='./member'> <i class="xi-group"></i></svg><p class="">회원관리</p></a></li>
+		<li class="b_nav_list "><a href='./reportList'> <i class="xi-emoticon-devil-o"></i></svg><p class="">신고관리</p></a></li>
+		<li class="b_nav_list "><a href='./tradeList'> <i class="xi-exchange"></i></svg><p class="">거래내역</p></a></li>
 	</ul>
 </nav>
 </body>

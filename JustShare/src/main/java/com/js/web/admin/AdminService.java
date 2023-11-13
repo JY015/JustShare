@@ -52,6 +52,31 @@ public class AdminService {
 		return adminDAO.totalTradeList();
 	}
 
+	public List<Map<String, Object>> dateList() {
+		
+		return adminDAO.dateList();
+	}
+
+	public int memberCount() {
+		
+		return adminDAO.memberCount();
+	}
+
+	public int boardCount() {
+		
+		return adminDAO.boardCount();
+	}
+
+	public int reportCount() {
+	
+		return adminDAO.reportCount();
+	}
+
+	public int tradeCount() {
+		
+		return adminDAO.tradeCount();
+	}
+
 
 
 

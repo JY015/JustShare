@@ -570,7 +570,7 @@
 
 
       
-@media screen  and (max-width:550px) {
+@media screen  /* and (max-width:550px) 여기 수정*/ {
   .banner_back_img .mo_banner{
     display: block;
   }

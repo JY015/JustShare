@@ -20,7 +20,15 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@GetMapping("/admin")
-	public String main(HttpSession session) {		
+	public String main(HttpSession session, Model model) {
+		int memberCount = adminService.memberCount();
+		int boardCount = adminService.boardCount();
+		int reportCount = adminService.reportCount();
+		int tradeCount = adminService.tradeCount();
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("boardCount", boardCount);
+		model.addAttribute("reportCount", reportCount);
+		model.addAttribute("tradeCount", tradeCount);
 			return "admin/main";
 	}
 		
@@ -62,11 +70,23 @@ public class AdminController {
 		
 		List<Map<String, Object>> tradeList = adminService.tradeList();
 		List<Map<String, Object>> totalTradeList = adminService.totalTradeList();
-		model.addAttribute("tradeList", tradeList);
-		model.addAttribute("totalTradeList", totalTradeList);
+		List<Map<String, Object>> dateList = adminService.dateList();
+		model.addAttribute("tradeList", tradeList); // 결제 내역 출력
+		model.addAttribute("totalTradeList", totalTradeList); //총 결제된 내역 수 뽑기
+		model.addAttribute("dateList", dateList); //날짜랑 날짜에 맞는 카운트 뽑기
 		System.out.println(tradeList);
 		return "admin/tradeList";
 	}
+	
+	@GetMapping("/admin/chart")
+	public String chart() {
+		
+		return "admin/chart";
+	}
+	
+	
+	
+	
 	
 }
 
