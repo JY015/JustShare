@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -16,32 +16,8 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-<<<<<<< HEAD
-   
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 창</title>
-<link rel="stylesheet" href="./css/login.css">
-<script src="./js/jquery-3.7.0.min.js"></script>
-</head>
-
-
-
-
-   <link rel="stylesheet" href="/css/main_page.css" />
-   <link rel="stylesheet" href="./css/login.css">
-   <!-- 회원가입 3가지회원 유형 css new -->
-   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
-   <!-- 고객센터 css -->
-   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-   <!-- 폰트어썸 -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-=======
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
->>>>>>> main
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <meta property="og:locale"       content="ko_KR" />

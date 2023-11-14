@@ -21,21 +21,11 @@ import com.js.web.util.Util;
 @Controller
 public class LoginController {
 
-<<<<<<< HEAD
-	
-	
-	@Autowired
-	private LoginService mainService;
-	
-	@Autowired
-	private Util util;
-=======
    @Autowired
    private LoginService mainService;
    
    @Autowired
    private Util util;
->>>>>>> main
 
    @GetMapping("/login")
    public String login() {
@@ -66,20 +56,6 @@ public class LoginController {
       }
    }
 
-<<<<<<< HEAD
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		if (session.getAttribute("mid") != null) {
-			session.removeAttribute("mid");
-		}
-		if (session.getAttribute("mname") != null) {
-			session.removeAttribute("mname");
-		}
-		session.invalidate();
-		
-		return "redirect:/";
-	}
-=======
    @GetMapping("/logout")
    public String logout(HttpSession session) {
       if (session.getAttribute("mid") != null) {
@@ -91,7 +67,7 @@ public class LoginController {
       session.invalidate();
       return "redirect:/";
    }
->>>>>>> main
+
 
    @GetMapping("/findId")
    public String findId() {

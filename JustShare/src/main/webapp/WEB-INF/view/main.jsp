@@ -11,7 +11,6 @@
    <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
    <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
     <link rel="stylesheet" href="/css/import.css?ver=20000120" />
     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -48,51 +47,6 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
- 
-      
-    <script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function () {
-		
-		//세션에 저장된 count를 storage에 저장
-		sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
-		
-		
-		const mid = sessionStorage.getItem("mid"); 	
-		
-		
-  });
-  /*
-function logoutAndCloseSocket() {
-    // 여기서 WebSocket 연결을 닫는 코드를 추가
-    
-     var confirmLogout = confirm('로그아웃 하시겠습니까?');
-
-     if (socket) {
-         socket.close(); // WebSocket 연결을 닫습니다
-     }
-    
-    
-if (confirmLogout) {
-    var mid = sessionStorage.getItem("mid"); 
-    
-    if(mid!=null) { 
-
-	var jsonmsg={
-		
-		"mid":mid,
-		"close":"연결해제"
-		
-	}
-
- socket.send(JSON.stringify(jsonmsg));
-	 //window.location.href = './logout';
-    }
- 
-}
-}
-*/
-
-    </script>
 <script>
 var _ss_user_id   = "";
 </script>
@@ -117,13 +71,8 @@ var _ss_user_id   = "";
         <div class="header__first_row">
            <div class="sign-area">
            <c:choose>
-<<<<<<< HEAD
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
-=======
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
->>>>>>> main
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -316,8 +265,6 @@ var _ss_user_id   = "";
 </div>
 </div>
  <script>
- 
-
   $(".commercial, .business, .studio, .culture").click(function () {
        var category = $(this).attr("class");
        showCategory(category);
@@ -370,7 +317,7 @@ var _ss_user_id   = "";
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="/images/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -426,7 +373,7 @@ navigation: {   // 버튼 사용자 지정
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="/images/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -464,28 +411,6 @@ navigation: {   // 버튼 사용자 지정
 </script>
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-<<<<<<< HEAD
-	  <h4 class="txt__tit">찜 높은순</h4>
-	  <span class="txt__subtit">찜이 높아요</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
-
-				</div>
-  	<div  class="card__inner2">         
-=======
      <h4 class="txt__tit">찜 높은순</h4>
      <span class="txt__subtit">찜이 높아요</span>
      <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
@@ -506,7 +431,6 @@ navigation: {   // 버튼 사용자 지정
             </a>
             </div>
      <div  class="card__inner2">         
->>>>>>> main
               <div class="txt__wrap2">
                <p class="txt__card__tit">${row.btitle}</p>
                <p class="txt__subtit__sm">${row.addDetail}</p>
@@ -549,25 +473,6 @@ navigation: {   // 버튼 사용자 지정
 
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-<<<<<<< HEAD
-	  <h4 class="txt__tit">더미1</h4>
-	  <span class="txt__subtit">더미1</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
-=======
      <h4 class="txt__tit">더미1</h4>
      <span class="txt__subtit">더미1</span>
      <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
@@ -585,7 +490,6 @@ navigation: {   // 버튼 사용자 지정
                </div>
                 <a href="./bdetail?bno=${row.bno}">
                  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
->>>>>>> main
 
             </div>
      <div  class="card__inner2">         
