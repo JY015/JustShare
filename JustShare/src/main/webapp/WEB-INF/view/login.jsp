@@ -17,15 +17,11 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-	  <link rel="stylesheet" href="/css/main_page.css" />
-   <!-- 회원가입 3가지회원 유형 css new -->
-   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
-   <!-- 고객센터 css -->
-   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+     <link rel="stylesheet" href="/css/main_page.css" />
+
    <!-- 폰트어썸 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />   
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
    <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
@@ -64,7 +60,7 @@ var _ss_user_id   = "";
         <div class="header_topnav_inner_n">
          <div class="first_row">
           <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
-			<img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
+         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
             <div class="logo"><img alt="logo" src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
               <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
@@ -122,11 +118,11 @@ var _ss_user_id   = "";
          <input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br><br><br>
       <h3 style="text-align: left;"><label for="name">비밀번호</label></h3>
          <input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br><br>
- 	  <div style="text-align:center;">
-	<c:if test="${loginCheckCount eq 1}">
-	<p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
-	</c:if>
-	</div>   
+      <div style="text-align:center;">
+   <c:if test="${loginCheckCount eq 1}">
+   <p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
+   </c:if>
+   </div>   
          <button class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
@@ -161,23 +157,10 @@ var _ss_user_id   = "";
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
-            <img style="width: 96px;margin-left: 4px;" src="/images/mo/logo_m_active2.svg" alt="">
+            <img style="width: 96px;margin-left: 4px;" src="" alt="">
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
             TEL : <a href="tel:02-1111-2222">02-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
             <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a> </p>
-          </div>
-          <div class="social-list">
-            <!-- <p style="font-size:16px; font-weight: bold;">SNS & Blog</p> <br> -->
-            <div class="social-logo">
-            <div class="roundlogo"><a href="https://www.value-venue.com/" target="_blank"><img src="/images/underbar.svg" alt=""></a></div>
-            <div class="roundlogo"><a href="https://apps.apple.com/app/id1514738613" target="_blank"><img src="/images/apple.svg" alt=""></a></div><!--앱스토어-->
-            <div class="roundlogo"><a href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace" target="_blank"><img src="/images/triangle.svg" alt=""></a></div><!--플레이스토어-->
-            <div class="roundlogo"><a href="https://pf.kakao.com/_useHC" target="_blank"><img src="/images/comma.svg" alt=""></a></div><!--카카오채널-->
-            <div class="roundlogo" ><a href="https://www.facebook.com/valuevenue1" target="_blank"><img src="/images/face.svg" alt=""></a></div><!--페이스북-->
-            <div class="roundlogo" ><a href="https://www.instagram.com/valuevenue_official" target="_blank"><img src="/images/insta.svg" alt=""></a></div><!--인스타그램-->
-            <div class="roundlogo" ><a href="https://www.youtube.com/channel/UC_Yp-_yUp6JxwZAVRkzF94A" target="_blank"><img src="/images/youtube.svg" alt=""></a></div><!--유튜브-->
-            <div class="roundlogo"><a href="https://blog.naver.com/value_venue" target="_blank"><img src="/images/blog.svg" alt=""></a></div><!--블로그-->
-          </div>
           </div>
         </div>
         </div>
@@ -248,9 +231,6 @@ var _ss_user_id   = "";
         }
 
    </style>
-<!-- Meta Pixel Code -->
-<script>
 
-</script>
   </body>
 </html>
