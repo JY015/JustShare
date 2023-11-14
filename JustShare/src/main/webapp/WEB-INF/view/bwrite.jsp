@@ -16,6 +16,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="../js/mcore.extends.js"></script>
+<script src="../js/mcore.min.js"></script>
+<script src="../js/wnInterface.min.js"></script>
+
 <!-- 추가한거 -->
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
@@ -94,6 +98,23 @@
 						</td>
 					</tr>
 					<tr class="border_bottom">
+						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
+						<td>
+						 <div class="id_mo f_ex">
+						 <button id="picker" type="button">파일 선택</button>
+						 </div>
+						 <div id="box"></div>
+						 <div>
+    					<button id="upload" type="button">Upload Current Image</button>
+  						</div>
+  						<div id="progress"></div>
+  						<div id="upload-box"></div>	
+						 <br><span class="warningTxt2" id="resultF"></span>
+						</td>
+					</tr>
+					
+					
+					<tr class="border_bottom">
 						<th><label for="title">제목</label><span aria-hidden="true">*</span></th>
 						<td>
 						<input type="text" name="title" id="titleInput" class="required input_border" value="" placeholder="제목을 입력해주세요." aria-required="true"/>
@@ -103,7 +124,7 @@
 					<tr class="border_bottom">
 						<th><label for="category">유형</label></th>
 						<td>
-						<select class="input_border" name="bcate"  aria-labelledby="user_category_label">
+						<select class="input_border" name="bcate"  id="cateInput" aria-labelledby="user_category_label">
 						<c:forEach items="${catelist }" var="n">
 							<option value ="${n.cate}" >${n.cname }</option>
 						</c:forEach>
@@ -119,6 +140,17 @@
 							<br><span class="warningTxt2" id="resultTime"></span>
 							</td>
 							</tr>
+					<tr class="border_bottom">
+						<th><label for="timecategory">임대 기간</label></th>
+						<td>
+						<select class="input_border" name="rentTime" id="rentTimeInput" aria-labelledby="user_category_label">
+							<option value ="시간" >시간단위</option>
+							<option value ="일" >일단위</option>
+							<option value ="주" >주단위</option>
+							<option value ="월" >월단위</option>
+						</select>
+						</td>
+						</tr>		
 					<tr class="border_bottom">
 						<th><label for="price">가격</label><span aria-hidden="true">*</span></th>
 							<td>
@@ -137,7 +169,7 @@
 						<th><label for="equip">보유 시설</label></th>
 							<td>
 							<c:forEach items="${equiplist }" var="n">
-							<input class="required input_border" type="checkbox" name="equipment" value="${n.eid }" />${n.ename }
+							<input class="required input_border" type="checkbox" name="equipment"  id="equipmetInput" value="${n.eid }" />${n.ename }
 							</c:forEach>
 							</td>
 							</tr>	
@@ -174,7 +206,7 @@
 			<button type="button" class="btn_black writeB" >작성완료</button>
 		</div>
 	</form>
-	 
+	 <%@ include file="footer.jsp" %> 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
     // 우편번호 찾기 화면을 넣을 element
@@ -286,11 +318,136 @@
         }
 </script>
 <script type="text/javascript">
+$(function () {
+	let selectImagePath = '';
+    let $previewImg = null;
+    let $uploadImg = null;
+    const $box = $('#box');
+    const $uploadBox = $('#upload-box');
+    const $progress = $('#progress');
+    const $picker = $('#picker');
+    const $upload = $('#upload');
+    
+    $picker.on('click', () => {
+        if ($previewImg !== null) {
+          $previewImg.remove();
+          $previewImg = null;
+        }
+        selectImagePath = '';
+        $.imagePicker()
+          .then(({ status, result }) => {
+            if (status === 'SUCCESS') {
+              selectImagePath = result.path;
+              return $.convertBase64ByPath(selectImagePath)
+            } else {
+              return Promise.reject('이미지 가져오기 실패')
+            }
+          })
+          .then(({ status, result }) => {
+            if (status === 'SUCCESS') {
+              $previewImg = $(document.createElement('img'))
+              $previewImg.attr('height', '200px')
+              $previewImg.attr('src', "data:image/png;base64," + result.data)
+              $box.append($previewImg);
+            } else {
+              return Promise.reject('BASE64 변환 실패')
+            }
+          })
+          .catch((err) => {
+            if (typeof err === 'string') alert(err)
+            console.error(err)
+          })
+      })
+      
+    $upload.on('click', () => {
+    	
+    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
+    if ($uploadImg) {
+      $uploadImg.remove();
+      $uploadImg = null;
+    }
+    $progress.text('')
+    $.uploadImageByPath(selectImagePath, (total, current) => {
+      console.log(`total: ${total} , current: ${current}`)
+      $progress.text(`${current}/${total}`)
+    })
+      .then(({
+        status, header, body
+      }) => {
+        // status code
+        if (status === '200') {
+          $progress.text('업로드 완료')
+          const bodyJson = JSON.parse(body)
+          $uploadImg = $(document.createElement('img'))
+          $uploadImg.attr('height', '200px')
+          $uploadImg.attr('src', bodyJson.fullpath)
+          $uploadBox.append($uploadImg)
+        } else {
+          return Promise.reject('업로드를 실패하였습니다.')
+        }
+      })
+      .catch((err) => {
+        if (typeof err === 'string') alert(err)
+        console.error(err)
+      })
+  })
+     
+      
+	$.imagePicker = function () {
+      return new Promise((resolve) => {
+        M.media.picker({
+          mode: "SINGLE",
+          media: "PHOTO",
+          column: 3,
+          callback: (status, result) => {
+            resolve({ status, result })
+          }
+        });
+      })
+    }
+    $.convertBase64ByPath = function (imagePath) {
+	      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
+	      return new Promise((resolve) => {
+	        M.file.read({
+	          path: imagePath,
+	          encoding: 'BASE64',
+	          indicator: true,
+	          callback: function (status, result) {
+	            resolve({ status, result })
+	          }
+	        });
+	      })
+	    }
+    
+    $.uploadImageByPath = function (targetImgPath, progress) {
+    	
+	      return new Promise((resolve) => {
+	        const _options = {
+	          url: "http://172.30.1.30/uploadFile",
+	          header: {},
+	          params: {},
+	          body: [
+	            { name: "file", content: targetImgPath, type: "FILE" },
+	          ],
+	          encoding: "UTF-8",
+	          finish: (status, header, body, setting) => {
+	            resolve({ status, header, body })
+	          },
+	          progress: function (total, current) {
+	            progress(total, current);
+	          }
+	        }
+	        M.net.http.upload(_options);
+	      })
+	    }
+    
+  });
+
 
 
 $(function(){
     $(".writeB").click(function(){
-        const fileInput = document.getElementById('upFile');
+       /*  const fileInput = document.getElementById('upFile'); */
         const titleInput = document.getElementById('titleInput');
         const contentInput = document.getElementById('contentInput');
         const postcodeInput = document.getElementById('sample2_postcode');
@@ -299,24 +456,33 @@ $(function(){
         const startTimeInput = document.getElementById('startTimeInput');
         const endTimeInput = document.getElementById('endTimeInput');
         const sizeInput =  document.getElementById('sizeInput');
+        const cateInput = document.getElementById('cateInput');
+        const rentTimeInput = document.getElementById('rentTimeInput');
+        const equipmetInputs = document.getElementsByName('equipment');
+        const detailAddressInput = document.getElementById('sample2_detailAddress');
        
-
+        
+			
         const title = titleInput.value.trim();
         const content = contentInput.value.trim();
         const postcode = postcodeInput.value.trim();
         const address = addressInput.value.trim();
-        const price = parseInt(priceInput.value); // 가격을 정수로 변환
+   		const detailAddress = detailAddressInput.value.trim();
+        const price = parseInt(priceInput.value);
         const startTime =parseInt(startTimeInput.value);
         const endTime =parseInt(endTimeInput.value);
         const size = parseInt(sizeInput.value);
+        const cate = cateInput.value;
+        const rentTime = rentTimeInput.value;
+        const equipment = Array.from(equipmetInputs).filter(input => input.checked).map(input => input.value);
        
-        if(fileInput.files.length === 0){
+        /* if(fileInput.files.length === 0){
         	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
              $("#resultF").css("font-weight", "bold");
              $("#resultF").css("font-size", "10pt");
 			return false;
         	
-        }
+        } */
 
 		if(title === "" || title.length < 3 || title.length > 31){
 			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
@@ -324,12 +490,18 @@ $(function(){
              $("#resultMSG").css("font-size", "10pt");
 			return false;
 		}
-		if (isNaN(startTime) ||startTime < 0 || isNaN(endTime) ||endTime >= 25) {
+		if (isNaN(startTime) ||startTime < 0 || startTime >24 || startTime > endTime) {
 			 $("#resultTime").text("올바른 시간을 입력하세요");
              $("#resultTime").css("font-weight", "bold");
              $("#resultTime").css("font-size", "10pt");
             return false;
         }
+		if (isNaN(endTime) ||endTime < 0 || endTime >24 || startTime > endTime) {
+			 $("#resultTime").text("올바른 시간을 입력하세요");
+            $("#resultTime").css("font-weight", "bold");
+            $("#resultTime").css("font-size", "10pt");
+           return false;
+       }
 		if (isNaN(price) || price <= 1000) {
 			 $("#resultP").text("올바른 가격을 입력하세요");
              $("#resultP").css("font-weight", "bold");
@@ -361,91 +533,75 @@ $(function(){
             $("#resultAD").css("font-size", "10pt");
 			return false;
 		}
-		
-	/* 	폼태그내에 받은 자료를 넘기기   모피어스사용할거면 
 	
 	$.ajax({
-			url : "./bwrite",
+			url : "./bmwrite",
 			type : "post",
 			data : {
 				"title": title,
 				"content": content,
-				"postcode": postcode,
-				"address" : address,
+				"addNum": postcode,
+				"add" : address,
 				"price" : price,
 				"startTime" : startTime,
 				"endTime" : endTime,
-				"size" : size
+				"size" : size,
+				"bcate" : cate,
+				"rentTime" : rentTime,
+				"equipment" : JSON.stringify(equipment),
+				"addD":detailAddress
 			},
 			dataType : "json",
-			success : function(data){
-				if(data.success ==1){
-					파일업로드
-				}
-			},
-			error : function(error){
-				
-			}
-		}); */
-		/*  모피어스 적용하기 
-		  $(function () {
-
-			    $.imagePicker = function () {
-			      return new Promise((resolve) => {
-			        M.media.picker({
-			          mode: "MULTI",
-			          media: "PHOTO",
-			          // path: "/media", // 값을 넘기지않아야 기본 앨범 경로를 바라본다.
-			          column: 3,
-			          callback: (status, result) => {
-			            resolve({ status, result })
-			          }
-			        });
-			      })
-			    }
-
-			    $.convertBase64ByPath = function (imagePath) {
-			      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
-			      return new Promise((resolve) => {
-			        M.file.read({
-			          path: imagePath,
-			          encoding: 'BASE64',
-			          indicator: true,
-			          callback: function (status, result) {
-			            resolve({ status, result })
-			          }
-			        });
-			      })
-			    }
-
-			    $.uploadImageByPath = function (targetImgPath, progress) {
-			      return new Promise((resolve) => {
-			        const _options = {
-			          url: `${location.origin}/file/upload`,
-			          header: {},
-			          params: {},
-			          body: [
-			            // multipart/form-data 바디 데이터
-			            { name: "file", content: targetImgPath, type: "FILE" },
-			          ],
-			          encoding: "UTF-8",
-			          finish: (status, header, body, setting) => {
-			            resolve({ status, header, body })
-			          },
-			          progress: function (total, current) {
-			            progress(total, current);
-			          }
-			        }
-			        M.net.http.upload(_options);
-			      })
-			    }
-
-			  }) */
-		 document.querySelector('form').submit();
+			success: function (data) {
+		        if (data > 0) {
+		            var bno = data;
+		            alert(bno)
+		            alert(selectImagePath)
+		            alert($uploadImg)
+		            if (selectImagePath === '') return alert('이미지를 선택해주세요.');
+		            if ($uploadImg) {
+		              $uploadImg.remove();
+		              $uploadImg = null;
+		            }
+		            $progress.text('')
+		            $.uploadImageByPath(selectImagePath, bno, (total, current) => {
+		              console.log(`total: ${total} , current: ${current}`)
+		              $progress.text(`${current}/${total}`)
+		            })
+		              .then(({
+		                status, header, body
+		              }) => {
+		                // status code
+		                if (status === '200') {
+		                  $progress.text('업로드 완료')
+		                  const bodyJson = JSON.parse(body)
+		                  $uploadImg = $(document.createElement('img'))
+		                  $uploadImg.attr('height', '200px')
+		                  $uploadImg.attr('src', bodyJson.fullpath)
+		                  $uploadBox.append($uploadImg)
+		                } else {
+		                  return Promise.reject('업로드를 실패하였습니다.')
+		                }
+		              })
+		              .catch((err) => {
+		                if (typeof err === 'string') alert(err)
+		                console.error(err)
+		              })
+		       
+		        } else {
+		            console.log("글 작성 중 오류가 발생했습니다.");
+		        }
+		    },
+		    error: function (error) {
+		        console.error("Ajax 요청 중 에러 발생:", error);
+		    }
+		}); 
+	 
     });
     });    
 
- </script>       
+</script>
+    
   
 </body>
 </html>

@@ -26,6 +26,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import retrofit2.http.POST;
 
 @Controller
@@ -245,7 +248,9 @@ public class BoardController {
 		Map<String, Object> detail = boardService.detail(map);
 		String rid = String.valueOf(detail.get("mid"));
 		String sid = String.valueOf( session.getAttribute("mid")) ;
-		if(rid.equals(sid)) {
+		Integer mgrade = (Integer) session.getAttribute("mgrade");
+		
+		if(rid.equals(sid) || mgrade == 4) {
 		int a = boardService.del(map);
 		return "redirect:board";
 		}else {
@@ -434,5 +439,49 @@ public class BoardController {
 		// 쿼리문에서 중복 리뷰작성은 알아서 막히게 설정함 
 		int postreview = boardService.postreview(map); 
 		return "redirect:/board";
+	  }
+	  
+	  @ResponseBody
+	  @PostMapping("/bmwrite")
+	  public int bmwrite(@RequestParam Map<String, Object>map,HttpSession session) {
+		  //작성 글 insert 
+		  	map.put("mid", session.getAttribute("mid"));
+			System.out.println(map);
+			Integer adr = boardService.adr(map); 
+		  // 방금 작성된 글의 번호를 가져옴
+		  int a = boardService.bno();
+		  
+	        // JSON 문자열을 List<String>으로 변환
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        List<String> equipmentList;
+	        try {
+	            equipmentList = objectMapper.readValue((String) map.get("equipment"), List.class);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            // 필요에 따라 예외 처리
+	            return -1;
+	        }
+	        // 체크 박스로 여러개 받은 시설 테이블에 저장
+			 Map<String, Object> equip = new HashMap<String, Object>(); 
+			 int i = 0;
+			  equip.put("bno", a); 
+			  for (String equipment : equipmentList) {
+				  	
+				  	equip.put("i", equipment);
+		            boardService.equip(equip);
+		      }
+		
+	        
+		 
+		  
+			  return a;
+	  }
+	  
+	  @ResponseBody
+	  @PostMapping("/uploadFile")
+	  public String uploadFile(@RequestParam("file") MultipartFile file) {
+		  System.out.println(file);
+		  
+		  return "";
 	  }
 }

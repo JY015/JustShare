@@ -44,17 +44,23 @@
 	}
 
 .fixed-button {
-    color:#819FF7;
+    color:white;
     position: fixed;
     bottom: 80px;
-    right: 40px;
+    right: 30px;
     z-index: 999;
+    background-color: #004AAD;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    
 }
 #scrollToTopBtn{
  position: fixed;
-    bottom: 20px;
-    right: 40px;
+    bottom: 150px;
+    right: 25px;
     z-index: 998;
+    font-size: 70px;
     }
 .selectBoxList button {
     display: block;
@@ -241,7 +247,7 @@
              </p>
              <hr class="card-line">
               <p class="txt__card__tit price"> <span class="read_count">${row.fdate }</span>
-             ${row.price }원
+             ${row.price }원 /${row.rentTime }
              </p>
              </div>
              </div>
@@ -254,33 +260,12 @@
 		</section>
 		
 	</div>
-		
+			<!-- 페이지 최상단으로 스크롤 이동 버튼   +  글쓰기 버튼 -->
+		<button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up" style="color:#004AAD;"></i></button>
+		<button type="button" class="fixed-button" id="writeButton">글쓰기</button>
 		
 	<%@ include file="footer.jsp" %> 
-		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
-		<button id="scrollToTopBtn">^</button>
-	<!-- 필터 버튼 -->
-	<button type="button" id="myBtn">필터</button>
-	<!-- 필터 버튼 -->
-
-	<form action="./board" method="get" class="search"  id="searchForm">
-		<input type="text" name="searchV" required="required" class="searchV">
-		<input type="hidden" name="areas" value="${param.areas }"> 
-		<input type="hidden" name="categories" value="${param.categories }">
-		<input type="hidden" name="equipments" value="${param.equipments }">
-		<input type="hidden" name="minPrice" value="${param.minPrice }">
-		<input type="hidden" name="maxPrice" value="${param.maxPrice }">
-		<input type="hidden" name="sort" value="${param.sort }">
-		<button type="submit" class="buttonf btn btn-border-d btn-round">검색</button>
-    	<button type="button" class="buttonf btn btn-border-d btn-round" id="resetButton">검색 초기화</button>
-	</form>
-	<!--   검색창  -->
 	
-	
-	
-
-
-	<button type="button" class="fixed-button" id="writeButton">글쓰기</button>
 
 	<!-- 모달창 -->
 	<div class="modal fade" id="test_modal" tabindex="-1" role="dialog"
@@ -412,15 +397,15 @@
 						    if (data && data.length > 0) {
 						        data.forEach(function(item) {
 						            // 새로운 카드 아이템 생성
-						            var newCardItem = "<div class='card_item2 pop-up' data-bno='" + item.bno + "'>";
-						            newCardItem += "<div class='cccc'><img src='/img/places/" + item.realFile + "'></div>";
+						            var newCardItem = "<div class='card_item2 pop-up'>";
+						            newCardItem += "<div class='cccc'><div class-='imageContainer'><img class='main' src='/img/places/" + item.realFile + "'><div class='like' data-bno='"+item.bno +"'</div><c:choose><c:when test='"+item.isLiked eq 1+"'><img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/></c:when><c:otherwise><img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png' /></c:otherwise></c:choose></div></div></div>";
 						            newCardItem += "<a class='card-surface' href='./bdetail?bno=" + item.bno + "'>";
 						            newCardItem += "<div class='card_inner2'>";
 						            newCardItem += "<div class='txt__wrap2'>";
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
 						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
 						            newCardItem += "<hr class='card-line'>";
-						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.bprice + "원</p>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.bprice + "원 /"+item.rentTime+"</p>";
 						            newCardItem += "</div></div></a></div>";
 
 						            // 새로운 카드 아이템을 기존의 div에 추가

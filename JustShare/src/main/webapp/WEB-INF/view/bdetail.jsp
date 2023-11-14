@@ -81,11 +81,12 @@
 .spDetail_topinfo .spaceDetailInfo_summary  .txt__tit26 {margin-bottom : 17px;}
 .spDetail_topinfo .tag__wrap {width: 100%;}
 .spDetail_topinfo .tag__wrap button {background-color : #3C7CF5; color:white; padding: 0 0.5rem; border-radius: 1.5rem; margin-right: 0.375rem; font:inherit;}
-.detailContext {margin-top:18px;  margin-bottom: 18px; }
+.detailContext {margin-top:20px;  margin-bottom: 20px; }
 .detailContext .detailp {margin-top : 18px; margin-bottom: 18px;}
 .detailContext .detailc {margin-top : 18px; margin-bottom: 18px; font-size: 18px; line-height: 2;}
 .cate{height: 40px; width: 40px;}
 .swiper-slide .frontImage{height:300px; width: 400px;}
+.detailmap {margin-top: 15px; font-size: 18px;}
 </style>
 </head>
 <body>
@@ -122,9 +123,9 @@
 			  <div class="spDetail_topinfo pd0">
 			     <div class="tag__wrap txt__tag" style="display: flex; justify-content: space-between;">
                  <ul class="tag" style="margin-right: auto;">
-                 <li class="on">판매중</li>
+                 <c:choose><c:when test="${detail.tradeFin eq 0 }"><li class="on">판매중</li></c:when><c:otherwise><li class="off">판매완료</c:otherwise></c:choose>
                  </ul>
-                  <c:if test="${sessionScope.mid eq detail.mid }">
+                  <c:if test="${sessionScope.mid eq detail.mid || sessionScope.mgrade eq 4 }">
                  <button class="edit" onclick="edit()">수정</button>
                  <button class="del"  onclick="del()" >삭제</button>
                  </c:if> 
@@ -185,7 +186,8 @@
 	위치 
 	</p>
 	<div id="map" style='height:auto; width: 100%; aspect-ratio: auto 4 / 2.5;'></div>
-	<div> <i class="fa-solid fa-location-dot"></i> 상세 주소 -  ${detail.addNum }   / ${detail.addr }  ${detail.addDetail } </div>
+	<div class="detailmap"><i class="fa-solid fa-house"></i>우편번호 &nbsp; ${detail.addNum }</div>
+	<div class="detailmap"><i class="fa-solid fa-location-dot"></i> 상세주소 &nbsp; ${detail.addr }  ${detail.addDetail } </div>
 	</div>
 	<hr class="detail-divline2">
 	<section class="section--story inner pdb0 m--pdt110" id="similar-space">
@@ -211,6 +213,7 @@
 	</div>
 	</section>
 </div>
+		
  		<div class="inf2" data-bno=${param.bno }>  
        	<c:choose>
 		<c:when test="${isLike eq 1  }">     
@@ -230,12 +233,15 @@
 <script type="text/javascript">
 	let sid = "${sessionScope.mid}";
 	let mid = "${detail.mid}";
+	let tradeFin=${detail.tradeFin};
+	var mgrade = ${sessionScope.mgrade};
+	console.log(tradeFin);
 
 function del() {
 	let chk = confirm("삭제하시겠습니까?"); //참  거짓으로 나옵니다.
 	
 	if(chk) {
-		if(sid == mid ){
+		if(sid == mid || mgrade == 4  ){
 		location.href ="/bdelete?bno=${detail.bno }";
 		}else{
 			alert("해당 게시물 작성자만 삭제 가능합니다.")
@@ -244,9 +250,8 @@ function del() {
 }
 function edit(){
 	let chk2 = confirm("수정하시겠습니까?");
-
 	if(chk2){
-		if(sid == mid ){
+		if(sid == mid || mgrade == 4 ){
 			location.href="/bedit?bno=${detail.bno }";
 			
 		}else{
@@ -283,7 +288,12 @@ function chat(){
 	if(sid == mid){
 		alert("작성자가 본인의 게시물을 거래할 수 없습니다")
 		return false;
-	}	
+	}
+	if(tradeFin != 0 ){
+		alert("거래 완료된 게시물은 거래할 수 없습니다")
+		return false;
+	}
+	
 	location.href="/chat1?toId=${detail.mid}&bno=${detail.bno}";
 }
 </script>

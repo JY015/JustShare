@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h1>신고하기</h1>
+	신고자 : ${map.rmid}
+	신고 게시물 : ${map.bno }
+	
 	<form id="reportForm" action="./report" method="post" >
 	<input type="hidden" name="bno" value="${map.bno }">
 	<input type="hidden" name="rmid" value="${map.rmid }">

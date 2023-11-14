@@ -843,50 +843,9 @@ function search_check_m2()
         </ul>
       </nav>
       
-      
+      	<%@ include file="footer.jsp" %> 
  <!-- 내가 만진 부분-->     
- <footer class="footer1400">
-        <div id="footer__box" class="footer__inner txt__subtit">
-          <div class="flex">
-            <ul>
-              <li><a href="/notice/list">공지사항</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/qna/list">문의하기</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/faq">자주 묻는 질문</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/help/policy">이용약관</a></li>
-              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
-              <li><a href="/help/privacy">개인정보처리방침</a></li>
-             
-            </ul>
-          </div>
-          <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
-          <div class="contact-social">
-          <div>
-            <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
-            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
-            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
-            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
-          </div>
-          <div class="social-list">
-            <!-- <p style="font-size:16px; font-weight: bold;">SNS & Blog</p> <br> -->
-            <div class="social-logo">
-            <div class="roundlogo"><a href="https://www.value-venue.com/" target="_blank"><img src="/images/underbar.svg" alt=""></a></div>
-            <div class="roundlogo"><a href="https://apps.apple.com/app/id1514738613" target="_blank"><img src="/images/apple.svg" alt=""></a></div><!--앱스토어-->
-            <div class="roundlogo"><a href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace" target="_blank"><img src="/images/triangle.svg" alt=""></a></div><!--플레이스토어-->
-            <div class="roundlogo"><a href="https://pf.kakao.com/_useHC" target="_blank"><img src="/images/comma.svg" alt=""></a></div><!--카카오채널-->
-            <div class="roundlogo" ><a href="https://www.facebook.com/valuevenue1" target="_blank"><img src="/images/face.svg" alt=""></a></div><!--페이스북-->
-            <div class="roundlogo" ><a href="https://www.instagram.com/valuevenue_official" target="_blank"><img src="/images/insta.svg" alt=""></a></div><!--인스타그램-->
-            <div class="roundlogo" ><a href="https://www.youtube.com/channel/UC_Yp-_yUp6JxwZAVRkzF94A" target="_blank"><img src="/images/youtube.svg" alt=""></a></div><!--유튜브-->
-            <div class="roundlogo"><a href="https://blog.naver.com/value_venue" target="_blank"><img src="/images/blog.svg" alt=""></a></div><!--블로그-->
-          </div>
-          </div>
-        </div>
-        </div>
-      </footer>
+ 
     </div>
 <!-- 내가 만진 부분-->
 
