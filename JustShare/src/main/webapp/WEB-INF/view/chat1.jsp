@@ -72,16 +72,11 @@
 		const imageElement = document.querySelector('.boarddetail');
 		const dataBno = imageElement.getAttribute('data-bno');
 		
-		
-		
-				
-				
 
-			    // 클릭한 이미지의 data-bno 값을 사용하여 새로운 URL로 이동합니다.
-			    const newURL = '/bdetail?bno=' + dataBno; // 여기서 'your_base_url/'은 새로운 URL의 기본 부분을 나타냅니다.
-
-			    // 실제로 새로운 URL로 이동하는 방법은 여러 가지가 있을 수 있습니다.
-			    // 예를 들어, 다음과 같이 사용자를 해당 URL로 리다이렉트할 수 있습니다.
+			 
+			    const newURL = '/bdetail?bno=' + dataBno; 
+			
+			
 			    window.location.href = newURL;
 				});
 			
@@ -357,12 +352,17 @@ for (var key in data) {
     
 		if (currentScreen === 'contacts_card') {
         	
-		
-        
+			if(fromchk==1) { 
+			jstradefromupdate(mid,toId,bno);
+			}
 
         } else if (currentScreen === 'msgload') {
         	
-        	tradefromupdate();
+        	tradefromupdate(mid,toId);
+        	
+        } else {
+        	
+        
         }
     	
     
@@ -378,14 +378,17 @@ for (var key in data) {
 	 
 	 if (currentScreen === 'contacts_card') {
      	//여기부터
-     
-			
-     	
-
+     if(tochk==1) { 
+		 jstradetoupdate(mid,toId,bno);
+     	}
 
      } else if (currentScreen === 'msgload') {
     	 
-    	 	tradetoupdate();
+    	 	tradetoupdate(mid,toId,bno);
+    	 
+     } else {
+    	 
+    	
      }
 	 
 	 
@@ -419,9 +422,90 @@ for (var key in data) {
 
 };
 
+//다른화면 
+function jstradefromupdate(mid,toId,bno) {
+    // 모든 user_info1 엘리먼트를 찾기
+    
+		
+			
+			
+			toastr.options = {
+				    closeButton: true,
+		
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 1000,
+				    onShown: function() {
+				       	
+				    },
+				    
+				    onclick: function() {
+					 	
+		   				
+				 		
+						  var result = confirm("거래 화면으로 이동 하시겠습니까?");
+					 		
+						  if(result) {
+				 location.href='/chat1?toId='+toId+'&bno='+bno+'';
+				 
+						  }
+							 
+				}
+				    
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
+		
+
+		}
+       
+	
+
+
+//다른화면
+function jstradetoupdate(mid,toId,bno){
+		
+	 
+			  
+		
+			toastr.options = {
+				    closeButton: true,
+				
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 1000,
+				    onShown: function() {
+				
+				        
+				       		
+				    },
+				    
+				    onclick: function() {
+					 	
+		   				
+				 		
+						  var result = confirm("거래 화면으로 이동 하시겠습니까?");
+					 		
+						  if(result) {
+				 location.href='/chat1?toId='+mid+'&bno='+bno+'';
+				 
+
+						  }
+							 
+				}
+				    
+				    
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
+			
+		}
+	
 
 //##우선 toto일때 from업데이트
-function tradefromupdate() {
+function tradefromupdate(mid,toId) {
     // 모든 user_info1 엘리먼트를 찾기
       var userchk = document.querySelector(".msgdetail");
 	  var fromchk = userchk.getAttribute("data-fromuserchk");
@@ -448,10 +532,58 @@ function tradefromupdate() {
 			msgdetail.querySelector('.trading').classList.replace('trading', 'traded');
 			
 			
+			
+			
+			toastr.options = {
+				    closeButton: true,
+				    progressBar: true,
+				    showMethod: 'slideDown',
+				    //preventDuplicates:true,
+				    positionClass: 'toast-top-center',
+				    timeOut: 5000,
+				    onShown: function() {
+				        // Toastr 알림이 표시된 후에 실행할 함수 호출
+				        //setTimeout(function() {
+           					 //reviewgo(bno,mid, toId);
+       						 //}, 2000); // 2000 is the timeOut duration, adjust as needed
+				    
+				    },
+			
+					 onclick: function() {
+				 	
+	   				
+			 		
+					  var result = confirm("리뷰 작성하러 가실까요?");
+				 		
+					  if(result) {
+						  
+	   				 	 reviewgo(bno,mid,toId);
+
+					  }
+						 
+			}
+			};
+
+				toastr.success("" + mid + '님과 거래가 완료 되셨습니다.', "알림");
+			
 		} else if (fromchk==0 && tochk==0) {
 			userchk.setAttribute('data-fromuserchk',1);
 			msgdetail.querySelector('.trade').textContent = '확인요청';
 			msgdetail.querySelector('.trade').classList.replace('trade', 'trading');
+			
+			toastr.options = {
+				    closeButton: true,
+		
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 1000,
+				    onShown: function() {
+				       	
+				    }
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
 		
 
 		}
@@ -460,7 +592,7 @@ function tradefromupdate() {
 }
 
 //##to가from일떄 to업하기 
-function tradetoupdate(){
+function tradetoupdate(mid,toId){
 		
 	   var userchk = document.querySelector(".msgdetail");
 	  var fromchk = userchk.getAttribute("data-fromuserchk");
@@ -478,7 +610,38 @@ function tradetoupdate(){
 			userchk.setAttribute('data-touserchk',1);
 			msgdetail.querySelector('.trading').textContent = '거래완료';
 			msgdetail.querySelector('.trading').classList.replace('trading', 'traded');
-		
+			//reviewgo(bno,mid,toId);
+			
+			
+			toastr.options = {
+				    closeButton: true,
+				    progressBar: true,
+				    showMethod: 'slideDown',
+				    //preventDuplicates:true,
+				    positionClass: 'toast-top-center',
+				    timeOut: 2000,
+				    onShown: function() {
+				     
+				      
+				    },
+				    
+					 onclick: function() {
+						 	
+			   				
+					 		
+						  var result = confirm("리뷰 작성하러 가실까요?");
+					 		
+						  if(result) {
+							  
+		   				 	 reviewgo(bno,toId,mid);
+
+						  }
+							 
+				}
+				    
+				};
+
+				toastr.success("" + toId + '님과 거래가 완료 되셨습니다.', "알림");
 			  
 		} else if (fromchk==0 && tochk==1){
 			userchk.setAttribute('data-touserchk',0);
@@ -491,6 +654,22 @@ function tradetoupdate(){
 			userchk.setAttribute('data-touserchk',1);
 			msgdetail.querySelector('.trade').textContent = '확인요청';
 			msgdetail.querySelector('.trade').classList.replace('trade', 'trading');
+			
+			toastr.options = {
+				    closeButton: true,
+				
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 1000,
+				    onShown: function() {
+				
+				        
+				       		
+				    }
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
 			
 		}
 	}
@@ -1527,7 +1706,8 @@ function sendMessage() {
 						userchk.querySelector('.trading').classList.replace('trading', 'traded');
 						
 						fromup(mid,toId,bno, function() {
-						tradecopy(mid,toId,bno);
+						tradecopy(bno,mid,toId);
+					
 						});  
 						}
 						    
@@ -1561,7 +1741,7 @@ function sendMessage() {
 						  userchk.querySelector('.trading').classList.replace('trading', 'traded');
 						  
 						toup(mid,toId,bno, function() {
-						tradecopy(toId,mid,bno); // mid,toId 순서 바꿔서 보내야됨 
+						tradecopy(bno,toId,mid); // mid,toId 순서 바꿔서 보내야됨  >다시수정해봄 11.13
 						
 						 
 						}); }
@@ -1592,7 +1772,7 @@ function sendMessage() {
 	});
     
 	//# 거래완료시 거래상태값 변경후 거래완료테이블에 복사해서 넣기 
-	function tradecopy(mid,toId,bno) {
+	function tradecopy(bno,mid,toId) {
 		
 		$.ajax({
 	           type: "post",
@@ -1607,11 +1787,46 @@ function sendMessage() {
 	           	},
 	          	
 	           success: function(data) {
-	           	
-	   			alert(1);
-	     
+	        	  
+	        	   toastr.options = {
+	   				    closeButton: true,
+	   				    progressBar: true,
+	   				    showMethod: 'slideDown',
+	   				    //preventDuplicates:true,
+	   				    positionClass: 'toast-top-center',
+	   				    timeOut: 5000,
+	   				    onShown: function() {
+	   				        // Toastr 알림이 표시된 후에 실행할 함수 호출
+	   				        //reviewgo(bno, mid, toId);
+	   				        
+	   				   },   
+	   				      onclick: function() {
+	   				 	
+	   				
+		   				 		
+	  	   					  var result = confirm("리뷰 작성하러 가실까요?");
+	  	   				 		
+	  	   					  if(result) {
+	  	   						  
+	  	 	   				 	 reviewgo(bno,mid,toId);
+
+	  	   					  }
+	        						 
+	   				}
+	        	   };
+	   				toastr.success("" + toId + '님과 거래가 완료 되셨습니다.', "알림");
+	        	   
+	              
+	        	   //const newURL = '/review?bno='+bno+'&fid='+mid+'&tid='+toId+''; 
+
+			
+				    //window.location.href = newURL;
+				
+	   		
+		
 	          
-			  },
+			
+	           },
 			  error: function() {
 			
 		}
@@ -1621,6 +1836,76 @@ function sendMessage() {
 		
 	}
 	
+	function reviewgo(bno,mid,toId) {
+		
+	
+
+	
+	   const newURL = '/review?bno='+bno+'&fid='+mid+'&tid='+toId+''; 
+
+		
+	    window.location.href = newURL;
+	
+	}
+	
+	function chkreviewgo(bno,mid,toId) {
+		
+	
+		toIdbnochk(mid,toId,bno, function(json) {	
+		
+			if(json ==1) { //to가to다
+				
+			
+				   const newURL = '/review?bno='+bno+'&fid='+mid+'&tid='+toId+''; 
+
+					
+				    window.location.href = newURL;
+			
+			}else {
+				
+				 const newURL = '/review?bno='+bno+'&fid='+toId+'&tid='+mid+''; 
+
+					
+				    window.location.href = newURL;
+				
+			}
+
+		
+		  
+		});
+		
+	}
+	
+	/*
+	function fromreviewgo(bno,mid,toId) {
+		
+		
+		
+		   const newURL = '/review?bno='+bno+'&fid='+mid+'&tid='+toId+''; 
+
+			
+		    window.location.href = newURL;
+		
+		}
+		
+	*/
+	
+	$(document).on('click', '.review1',function(){
+		
+		var mid = sessionStorage.getItem("mid"); 
+		var toId = document.querySelector(".toId1").textContent;
+
+
+		var bnoid = document.querySelector(".boarddetail");
+		var bno = bnoid.getAttribute("data-bno");
+
+
+		
+		chkreviewgo(bno,mid,toId);
+		
+		
+	});
+		
 	
 	function toIdbnochk(mid,toId,bno,callback){ 
 		 $.ajax({

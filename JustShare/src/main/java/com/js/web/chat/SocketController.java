@@ -83,6 +83,7 @@ public class SocketController {
 	            String toId = item.get("to_user_id").toString();
 	          
 	            String mid = item.get("from_user_id").toString();
+	            String bno1 = item.get("bno").toString();
 	            
 	            Map<String, Object> paramMap = new HashMap<>();
 	            paramMap.put("toId", toId);
@@ -95,6 +96,7 @@ public class SocketController {
 		            item.put("bno", bno);
 	           } else {
 	        	   
+	        	   //item.put("bno", bno1);
 	        	   
 	           }
 	          
@@ -160,7 +162,7 @@ public class SocketController {
 			//System.out.println("1번"+result);
 			 json.put("result", result);
 	
-		 //System.out.println("결과체크"+result);
+		 System.out.println("결과체크"+result);
 		return json.toString();
 	}
 
@@ -202,6 +204,8 @@ public class SocketController {
 				  tradeclass ="trade";
 				  
 			 }
+		
+			 
 	
 			 paramMap.put("trademsg",trademsg);
 	         paramMap.put("tradeclass",tradeclass);
@@ -209,6 +213,14 @@ public class SocketController {
 	         paramMap.put("from_user_chk",from_user_chk);
 	         json.put("result", paramMap);
 	         //System.out.println("결과체크"+paramMap.toString());
+		 } else { 
+			 trademsg = "거래완료";
+			 tradeclass ="traded";
+			 paramMap.put("trademsg",trademsg);
+	         paramMap.put("tradeclass",tradeclass);
+			 paramMap.put("to_user_chk",0);
+	         paramMap.put("from_user_chk",0);
+	         json.put("result", paramMap);
 		 }
 		
 			//System.out.println("1번"+result);
@@ -278,6 +290,7 @@ public class SocketController {
 		return json.toString();
 	}
 	
+	@ResponseBody
 	@PostMapping("/tradecopy")
 	public String tradecopy(@RequestParam Map<String,Object> map) {
 	
@@ -289,7 +302,7 @@ public class SocketController {
 		
 		int result = socketService.tradestatus(map);
 		//System.out.println("result" + result);
-		if(result ==1) {
+		if(result >=1) {
 			
 			int result1 = socketService.tradecopy(map);
 		
@@ -297,11 +310,11 @@ public class SocketController {
 				//System.out.println("result1" + result1);
 				 json.put("result", result);
 				
-				
+				 
 			}
 			
 		}
-		System.out.println("트레이드카피"+json.toString());
+		//System.out.println("트레이드카피"+json.toString());
 		
 		return json.toString();
 	}

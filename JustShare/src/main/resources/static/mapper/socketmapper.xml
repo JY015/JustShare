@@ -11,8 +11,7 @@
          tradestatus = 1
          
       
-    WHERE from_user_id = #{mid} AND to_user_id = #{toId} 
-    AND tradestatus=0 AND from_user_chk=1 AND to_user_chk=1
+    WHERE bno=#{bno} AND tradestatus=0
   	 
 
 
@@ -88,19 +87,28 @@ WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
 
 SELECT to_user_chk,from_user_chk
 FROM trade
-WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
-OR to_user_id=#{mid} AND from_user_id=#{toId} AND bno=#{bno}
+WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno} AND tradestatus=0
+OR to_user_id=#{mid} AND from_user_id=#{toId} AND bno=#{bno} AND tradestatus=0
 
 </select>
 
 <select id="bnoload" parameterType="Map" resultType="Integer">
 
-SELECT bno
+(SELECT bno
 FROM trade
 WHERE (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus=0)
-   OR (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus = 1)
+   OR (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus=1)
 ORDER BY CASE WHEN tradestatus = 0 THEN 0 ELSE 1 END, tno DESC
-LIMIT 1;
+LIMIT 1)
+
+UNION
+
+(SELECT bno
+FROM trade
+WHERE (to_user_id = #{mid} AND from_user_id = #{toId} AND tradestatus=0)
+   OR (to_user_id = #{mid} AND from_user_id = #{toId} AND tradestatus=1)
+ORDER BY CASE WHEN tradestatus = 0 THEN 0 ELSE 1 END, tno DESC
+LIMIT 1);
 </select>
 
 <insert id="bnosave" parameterType="Map">
@@ -211,7 +219,8 @@ WHERE mid = #{mid}
         SELECT COUNT(*)
         FROM UserMessages 
         WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 
-    ) AS read_count
+    ) AS read_count,
+    m1.bno
   
 FROM UserMessages m1
 WHERE m1.message_id IN (
@@ -335,20 +344,15 @@ WHERE NOT EXISTS (
 
 <select id="firstmsgchk" parameterType="Map" resultType="Integer">
  
-SELECT COUNT(*) as COUNT
-FROM UserMessages
-WHERE 
-(
-  (from_user_id=#{mid} AND to_user_id=#{sender})
-  AND (exceptid ='0' )
-  
-  OR
-  
-  (from_user_id=#{sender} AND to_user_id=#{mid})
-  AND (exceptid ='0')
- 
-)
-	
+ SELECT COUNT(*) as COUNT
+  FROM UserMessages
+  WHERE 
+  (
+    (from_user_id=#{mid} AND to_user_id=#{sender} AND exceptid ='0')
+    OR
+    (from_user_id=#{sender} AND to_user_id=#{mid} AND exceptid ='0')
+  )
+
 	</select>
 
 	<select id="roomserch" parameterType="Map" resultType="Map">

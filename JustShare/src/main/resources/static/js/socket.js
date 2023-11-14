@@ -94,10 +94,11 @@ if (mid === null || mid == "null") {
 	getmsgcount(function(msgcount) {
 		
 	
-if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {  //일반메시지전송
-    	
-   
-    
+if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) {  //일반메시지전송
+
+    	 var mid = sessionStorage.getItem("mid");
+   		var sender = socketdata.sender;
+    var bno = socketdata.bno;
     	$.ajax({
                 type: "GET",
                 url: "./firstmsgchk", 
@@ -118,11 +119,11 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
                 var json = jsonData.result;
                 
 
-             
+       
                 if(json==0 || json==1) {
 					
 					
-					if(currentScreen =="contacts_card" ||currentScreen=="msgload" ) {
+	if(currentScreen =="contacts_card" ||currentScreen=="msgload" ||currentScreen=="1" ) {
 						
 
 					  toastr.options = {
@@ -131,26 +132,34 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
                 showMethod: 'slideDown',
                 //preventDuplicates:true,
                 positionClass: 'toast-top-center',
-              
-                timeOut: 2000
-            };
-            toastr.success("관모님과 첫 대화가 시작 되었습니다.","알림" );
-            } else {
-	   
-		//alert(socketdata.sender+"님과 첫 대화가 시작 되었습니다.");
+                timeOut: 2000,
+                onShown: function() {
+				       	
+				  },
+				    
+				 onclick: function() {
+				 	
+	   				
+			 		
+			  var result = confirm("채팅창으로 이동 하시겠습니까?");
+				 		
+					  if(result) {
+			 location.href='/chat1?';
+			 
+
+					  }
+						 
+			}
+                
+            },
+            
+            
+            
+            
+            toastr.success(""+socketdata.sender+'님과 첫 대화가 시작 되었습니다.',"알림" );
+            } 
 		
-					  toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                //preventDuplicates:true,
-                positionClass: 'toast-top-center',
-              
-                timeOut: 2000
-            };
-            toastr.success("관모님과 첫 대화가 시작 되었습니다.","알림" );
 		
-		}
 				}
 			 
              
@@ -160,6 +169,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
     	}
         
 });
+
 
 	var noteNumElement = document.querySelector('.note-num');
 
@@ -177,9 +187,10 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
       	  }	
 
 
-	} else if("mid" in socketdata && "sender" in socketdata && "firstmsg" in socketdata){
+	} else if("mid" in socketdata && "sender" in socketdata && "firstmsg" in socketdata
+				&& !("toId" in socketdata)){
 		
-		
+		    	
 		var noteNumElement = document.querySelector('.note-num');
 
 
@@ -197,30 +208,134 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata) {
 			
   		
 		
-	}
+	} else if("toId" in socketdata && "mid" in socketdata && "bno" in socketdata
+    		 &&"fromchk" in socketdata && !("tochk" in socketdata)
+    		 && !("time" in socketdata)) { //거래창업데이트
+    
+    	var toId = socketdata.toId;
+    	var mid = socketdata.mid;
+    	var bno = socketdata.bno;
+    	var fromchk = socketdata.fromchk;
+    
+		 
+        	if(fromchk) {
+        	jstradefromupdate(mid,toId,bno);
+        	
+      }
+    
+    
+ 	}else if("toId" in socketdata && "mid" in socketdata && "bno" in socketdata
+		 && "tochk" in socketdata && !("fromchk" in socketdata)
+		 && !("time" in socketdata)) {
+ 		
+ 		var toId = socketdata.toId;
+    	var mid = socketdata.mid;
+    	var bno = socketdata.bno;
+    	var tochk = socketdata.tochk;
+	 
+	
+     	//여기부터
+     		if(tochk==1) { 
+				 	jstradetoupdate(mid,toId,bno);
+
+	 }
+	 
+ } 
+	
+	
 			});	
 	}
 	}
 	
 
+function jstradefromupdate(mid,toId,bno) {
+    // 모든 user_info1 엘리먼트를 찾기
+    
+		 //alert(toId);
+			
+			
+			toastr.options = {
+				    closeButton: true,
+		 		    progressBar: true,
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 2000,
+				    onShown: function() {
+				       	
+				    },
+				    
+				     onclick: function() {
+				 	
+	   				
+			 		
+					  var result = confirm("거래 화면으로 이동 하시겠습니까?");
+				 		
+					  if(result) {
+			 location.href='/chat1?toId='+toId+'&bno='+bno+'';
+			 
+	   	
+
+		
 	
+
+					  }
+						 
+			}
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
+		
+
+		}
+       
 	
+
+
+//##to가from일떄 to업하기 
+function jstradetoupdate(mid,toId,bno){
+		
+	
+		
+			toastr.options = {
+				    closeButton: true,
+				    progressBar: true,
+				    showMethod: 'slideDown',
+				   
+				    positionClass: 'toast-top-center',
+				    timeOut: 2000,
+				    onShown: function() {
+				
+				        
+				       		
+				    },
+				    onclick: function() {
+				 	
+	   				
+			 		
+					  var result = confirm("거래 화면으로 이동 하시겠습니까?");
+				 		
+					  if(result) {
+			 location.href='/chat1?toId='+mid+'&bno='+bno+'';
+			 
+
+					  }
+						 
+			}
+				    
+				    
+				    
+				};
+
+				toastr.success("" + mid + '님이 거래를 요청 하셨습니다.', "알림");
+			
+		}
 	
 
 
 
-/*
-	//##현재화면을 확인후 메시지 전달 할지 체크
-	function getCurrentScreen() {
-	    if (document.querySelector('.contacts_card')) {
-	        return 'contacts_card';
-	    } else if (document.getElementById('msgload')) {
-	        return 'msgload';
-	    }
-	    // 다른 상태에 따른 처리 추가 가능
-	    return '1';
-	} //겟스크린끝
-*/
+
+
 //##현재화면을 확인후 메시지 전달 할지 체크 ( 숨겨짐여부까지 확인가능)
  	function getCurrentScreen() {
  	    var contactsCard = document.querySelector('.contacts_card');
