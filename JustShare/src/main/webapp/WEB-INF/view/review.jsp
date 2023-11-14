@@ -62,6 +62,7 @@
 </style>
 </head>
 <body>
+<%@ include file="header.jsp"%>
 거래 게시글 번호 : ${map.bno }
 판매자 : ${map.tid }
 구매자 : ${map.fid }
@@ -89,6 +90,7 @@
 	</div>
 	<button>취소하기</button><button type="button" onclick="submitReview()">리뷰 남기기 </button>
 </form>	
+<%@ include file="footer.jsp"%>
 <script>
 //유효성 검사 
 

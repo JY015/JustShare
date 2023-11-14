@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<<<<<<< HEAD
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -28,15 +27,7 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <link rel="stylesheet" href="/css/spacedetail.css" />
-<!-- 회원가입 3가지회원 유형 css new -->
-	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
-	<!-- 고객센터 css -->
-	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-	<!-- 폰트어썸 -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-	<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
 <!-- fancybox -->
 	<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
@@ -44,9 +35,6 @@
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
-=======
-
->>>>>>> main
  <style>
 .fancybox__container *, .fancybox__container *::before, .fancybox__container *::after { color: white;}
 .fancybox__counter{display:none;}
@@ -94,6 +82,7 @@
 </style>
 </head>
 <body>
+<%@ include file="header.jsp"%>
 <div class="body__container section">
 	<!-- 모바일 버전 헤더  -->
 	<header class="header__topnav_type2">

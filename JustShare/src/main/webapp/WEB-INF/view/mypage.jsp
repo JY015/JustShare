@@ -55,30 +55,6 @@ var _ss_user_id   = "";
   </head>
   <%@ include file="header.jsp"%>
 <body>
-<<<<<<< HEAD
-	<%@ include file="menu.jsp"%>
-	<br>
-	<c:forEach items="${mypageList}" var="m">
-		<div class="form-input">
-			<label>아이디</label><br>
-			 <input type="text" name="mid" readonly="readonly" value="${m.mid}" class="mid"><br> 
-			<label>이름</label><br>
-			 <input type="text" name="mname" readonly="readonly" value="${m.mname}" class="mname"><br> 
-			 <label>주소</label><br> 
-			 <input type="text" name="maddr" readonly="readonly" value="${m.maddr}" class="maddr"><br>
-			 <label>생년월일</label><br> 
-			 <input type="text" name="mbirth" readonly="readonly" value="${m.mbirth}" class="mbirth"><br>
-			 <label>핸드폰 번호</label><br> 
-			 <input type="text" name="mphone" readonly="readonly" value="${m.mphone}" class="mphone"><br>
-			  <label>이메일</label><br> 
-			 <input type="text" name="memail" readonly="readonly" value="${m.memail}" class="memail"><br>
-		</div>
-	</c:forEach>
-	<script type="text/javascript">		
-	</script>
-	<%@ include file="footer.jsp" %> 
-</body>
-=======
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/mypage.php">
   <input type="hidden" class="is_app_banner" value="">
@@ -645,5 +621,4 @@ function search_check_m2()
     </div>
     
   </body>
->>>>>>> main
 </html>

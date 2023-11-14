@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="header.jsp"%>
 	<h1>신고하기</h1>
 	신고자 : ${map.rmid}
 	신고 게시물 : ${map.bno }
@@ -29,7 +30,40 @@
 	</div>
 	<button type="button" onclick="reportSubmit()">신고하기</button>
 	</form>
+	    <%@ include file="footer.jsp"%>
+      
+      
+ <!-- 내가 만진 부분-->     
+ <footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+            <ul>
+              <li><a href="/notice/list">공지사항</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/qna/list">문의하기</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/faq">자주 묻는 질문</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/help/policy">이용약관</a></li>
+                   <c:if test="${sessionScope.mgrade eq 4}"><a href="./admin/main">관리자페이지</a></c:if>             
+            </ul>
+          </div>
+          <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
+    </div>
 
+ 
 
 <!--  여기스크립트 지금 비상비상  -->
 
