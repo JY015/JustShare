@@ -52,9 +52,19 @@
 	display: table-row;
 }
 
+.report-table-header{
+	display: table;
+	width: 100%;
+}
+
+.report-row-header{
+	display: table-row;
+}
+
+
 
 </style>
-<button id="toggleButton">숨기기</button>
+
 <div style="text-align: center">
 <div class="div-table">
 		<div class="div-row">
@@ -64,39 +74,53 @@
 		
 		<c:forEach items="${reportListMember}" var="m">
 			<div class="div-row">
-				<div class="div-cell">${m.mid}</div>
+				 <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
 				<div class="div-cell">${m.count}회
 				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
 			</div>
 		</div>
 </c:forEach>
-</div>	
+</div>
+<button id="toggleButton">펼치기/숨기기</button>	
 <br>
-
-	<div class="report-table">
-		<div class="report-row">
-			<div class="div-cell">신고한 사람</div>
-			<div class="div-cell">신고 당한 사람</div>
-			<div class="div-cell">신고 내용</div>
-			<div class="div-cell">신고 카테고리</div>
-		</div>
-		<c:forEach items="${reportList}" var="row">
-			<div class="report-row" onclick="location.href='/bdetail?bno=${row.bno}'">
-				<div class="div-cell">${row.rmid}</div>
-				<div class="div-cell">${row.mid}</div>
-				<div class="div-cell">${row.rcontent}</div>
-				<div class="div-cell">${row.rcateName}</div>
+	<div class="report-table-header">
+    <div class="report-row-header">
+        <div class="div-cell">신고한 사람</div>
+        <div class="div-cell">신고 당한 사람</div>
+        <div class="div-cell">신고 내용</div>
+        <div class="div-cell">신고 카테고리</div>
+    </div>
+    </div>
+    <div class="report-table">
+    <c:forEach items="${reportList}" var="row">
+        <div class="report-row" onclick="location.href='/bdetail?bno=${row.bno}'">
+            <div class="div-cell">${row.rmid}</div>
+            <div class="div-cell-a">${row.mid}</div>
+            <div class="div-cell">${row.rcontent}</div>
+            <div class="div-cell">${row.rcateName}</div>
+        </div>
+    </c:forEach>
 </div>
-</c:forEach>
 </div>
-</div>
+<br><br><br><br>
 
 <script>
-    $(document).ready(function () {
+     $(document).ready(function () {
         $('#toggleButton').click(function () {
-            $('.report-table .report-row').toggle();
+            $('.report-table').toggle();
         });
-    });
+    }); 
+    function showReports(userId) {
+    	  $('.report-table .report-row').hide();
+        if (userId) {
+            $('.div-cell-a').each(function () {
+                if ($(this).text() === userId) {
+                    console.log(userId);
+                    $(this).closest('.report-table .report-row').show();
+                }
+            });
+        }
+    }
 </script>
 
 <%@ include file="adminfooter.jsp"%>

@@ -69,12 +69,13 @@
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
+            
         }
 
         .admin-actions a {
             text-decoration: none;
             color: #fff;
-            background-color: #007bff;
+            background-color: #f64d61 !important;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;

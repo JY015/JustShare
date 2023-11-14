@@ -51,12 +51,14 @@ location.href="./gradeChange?mno="+mno+"&grade="+value;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
 	background-color: #f5f5f5;
+	colo
 }
 
 .div-cell{
 	display: table-cell;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
+	color: currentColor;
 
 }
 
@@ -66,8 +68,8 @@ select {
 </style>
 </head>
 <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
-<body>	
-	<div class="div-table">
+<body style="font-size: 13px;">	
+	<div style="text-align: center;" class="div-table">
 		<div class="div-row">
 			<div class="div-cell-head">아이디</div>
 			<div class="div-cell-head">이름</div>
@@ -77,7 +79,7 @@ select {
 
 		</div>
 		<c:forEach items="${memberList}" var="row">
-				<div class="div-row"> <%-- style="${row.mgrade <= 2 ? 'background-color: #007bff;!important;' : (row.mgrade == 4 ? 'background-color: #0056b3!important;' : '')}" --%>
+				<div class="div-row" style="${row.mgrade <= 2 ? 'color: red;!important;' : (row.mgrade == 4 ? 'color: #0056b3!important;' : '')}" >
 				<div class="div-cell">${row.mid}</div>
 				<div class="div-cell">${row.mname}</div>
 				<div class="div-cell">${row.memail}</div>
