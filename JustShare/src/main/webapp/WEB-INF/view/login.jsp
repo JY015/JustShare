@@ -43,7 +43,6 @@
    <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="/js/valuevenue.js?ver=20000120" defer></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
@@ -245,8 +244,7 @@ var _ss_user_id   = "";
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
-            border-radius: 8px;
-          
+            border-radius: 8px;        
         }
 
    </style>

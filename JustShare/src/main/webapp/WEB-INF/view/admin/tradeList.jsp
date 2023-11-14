@@ -103,8 +103,8 @@
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
       ["Element", "횟수", { role: "style" }],
-      <c:forEach items="${dateList}" var="row">
-        ["${row.dateOnly}", ${row.count}, "#3366cc"],
+      <c:forEach items="${monthDay}" var="row">
+        ["${row.monthDay}", ${row.count}, "#3366cc"],
       </c:forEach>
     ]);
 

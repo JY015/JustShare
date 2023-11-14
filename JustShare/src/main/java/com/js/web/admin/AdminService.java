@@ -77,6 +77,11 @@ public class AdminService {
 		return adminDAO.tradeCount();
 	}
 
+	public List<Map<String, Object>> monthDay() {
+		
+		return adminDAO.monthDay();
+	}
+
 
 
 
