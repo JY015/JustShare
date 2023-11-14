@@ -48,11 +48,15 @@ public class MypageController {
 			 List<Map<String,Object>> likelist = mypageService.likelist(mid);
 			 model.addAttribute("likelist", likelist);
 			 
-				/*
-				 * List<Map<String,Object>> trade = mypageService.trade(mid);
-				 * model.addAttribute("list", trade);
-				 * 
-				 */
+				
+				 List<Map<String,Object>> trade = mypageService.trade(mid);
+				 model.addAttribute("trade", trade);
+				 
+				 List<Map<String,Object>> review = mypageService.review(mid);
+				 model.addAttribute("review", review);
+				 
+				 
+				 
 			return "/member/mypage";
 			
 		} else {

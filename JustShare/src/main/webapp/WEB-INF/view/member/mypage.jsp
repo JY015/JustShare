@@ -313,7 +313,7 @@ $(function () {
         <p class="mypage_title_guide">거래 내역<br /></p>
         <div class="btn-group">
         
-     <%--  <table class="table table-dark table-hover table-striped">
+       <table class="table table-dark table-hover table-striped">
                		<thead>
                		<tr class="row">
                			<th class="col-1">거래번호</th>
@@ -323,8 +323,8 @@ $(function () {
                			<th class="col-1">bno</th>
                		</tr>
                		</thead>
-               		<tbody><c:forEach items="${list }" var="row">
-               		<tr class="row" onclick="detail(${row.bno })">
+               		<tbody><c:forEach items="${trade }" var="row">
+               		<tr class="row">
                			<td class="col-1">${row.hno}</td>
                			<td class="col-6 title">${row.timestamp}</td>
                			<td class="col-2">${row.from_user_id}</td>
@@ -332,14 +332,12 @@ $(function () {
                			<td class="col-1">${row.bno}</td>
                		</tr></c:forEach>
                		</tbody>
-               </table> --%>
+               </table> 
         
         
         
         
-        <!--   <button class="btn btn--outlined-primary">호스트 가이드 보기</button>
-          <button class="btn btn--primary" onclick="top.location.href='/space/host_register'">공간 호스트 등록</button>
-          <button class="btn btn--outlined-red" style="" onclick="disabled_host();">7일동안 보이지 않기</button> -->
+     
         </div>
       </div>
           <div class="mypage-lay1-gridR3">
@@ -357,20 +355,29 @@ $(function () {
       <div class="mypage-lay1-gridNormal">
         <p class="txt__card__tit2" onclick="location.href='/member/payment_list'" style='cursor:pointer'>거래 내역</p>
         <span class="txt__subtit__sm">개인 결제내역을 확인하세요.</span>
-        <img class="cursor__pointer" src="" alt="" onclick="location.href='/member/payment_list'"/>
-        <ul class="mystatus">
-          <li class="cursor__pointer" onclick="location.href='/member/payment_list'">결제 <span>0 원</span></li>
-        </ul>
+       <table class="table table-dark table-hover table-striped">
+               		<thead>
+               		<tr class="row">
+               			<th class="col-1">리뷰번호</th>
+               			<th class="col-6">리뷰를 쓴사람</th>
+               			<th class="col-2">별점</th>
+               			<th class="col-2">리뷰내용</th>
+               			<th class="col-1">bno</th>
+               		</tr>
+               		</thead>
+               		<tbody><c:forEach items="${review }" var="row">
+               		<tr class="row">
+               			<td class="col-1">${row.reviewNo}</td>
+               			<td class="col-6 title">${row.rtid}</td>
+               			<td class="col-2">${row.star}</td>
+               			<td class="col-2">${row.reviewContent}</td>
+               			<td class="col-1">${row.bno}</td>
+               		</tr></c:forEach>
+               		</tbody>
+               </table> 
+      
       </div>
-      <!-- 쿠폰함 - START -->
-      <!--div class="mypage-lay1-gridNormal">
-        <p class="txt__card__tit2">쿠폰함</p>
-        <span class="txt__subtit__sm">쿠폰함 관련 안내 메세지</span>
-        <img class="cursor__pointer" src="/images/mark_mymenu6.svg" alt="" onclick="location.href='/member/coupon'"/>
-        <ul class="mystatus">
-          <li class="cursor__pointer" onclick="location.href='/member/coupon'">발급된 쿠폰<span></span></li>
-        </ul>
-      </div-->
+      
       <div class="mypage-lay1-gridNormal">
         <p class="mypage_title_guide">고객센터<br /><a href='tel:0216616925' style='font-size:14px'>Tel 02 1661 6925</a></p>
         <span class="txt__subtit__sm">운영시간 9시 ~ 18시(평일)</span>

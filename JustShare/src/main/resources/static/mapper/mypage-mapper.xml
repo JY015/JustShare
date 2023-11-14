@@ -58,15 +58,28 @@ WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};
 		</where>
 	</update>
 	
-<!-- 	<select id="trade" parameterType="String" resultType="Map">
+ 	<select id="trade" parameterType="String" resultType="Map">
 	select *
 	from tradehistory h
 	JOIN board b on h.bno = b.bno
 	where b.mid=#{mid} 
+	order by hno DESC
+	limit 10;
 	
 	
 	
-	</select> -->
+	</select> 
+	
+	<select id="review" parameterType="String" resultType="Map">
+	select *
+	from reviewList r
+	JOIN board b on r.bno = b.bno
+	WHERE b.mid=#{mid} 
+	order by reviewNo DESC
+	limit 5;
+	
+	
+	</select> 
 
   
 </mapper>

@@ -76,7 +76,7 @@ var _ss_user_id   = "";
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
-            <a href="/mypage"> 마이페이지</a> 
+            <a href="/member/mypage"> 마이페이지</a> 
             
          <div class="half-line"></div>
             <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>

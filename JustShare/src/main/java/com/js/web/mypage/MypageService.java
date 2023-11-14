@@ -51,11 +51,17 @@ public class MypageService {
 		mypageDAO.infoChange(map);
 	}
 
-	/*
-	 * public List<Map<String, Object>> trade(String mid) {
-	 * 
-	 * return mypageDAO.trade(mid); }
-	 */
+	
+	  public List<Map<String, Object>> trade(String mid) {
+	  
+	  return mypageDAO.trade(mid); 
+	  }
+
+	public List<Map<String, Object>> review(String mid) {
+		
+		return mypageDAO.review(mid);
+	}
+	 
 	
 	
 }
