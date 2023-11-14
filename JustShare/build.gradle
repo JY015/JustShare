@@ -53,7 +53,9 @@ dependencies {
    
     implementation 'org.apache.commons:commons-email:1.5'
     implementation 'org.json:json:20230227'
-
+    
+    // 문자인증
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 
 tasks.named('test') {

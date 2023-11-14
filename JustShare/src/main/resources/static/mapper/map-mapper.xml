@@ -15,6 +15,19 @@
     	SELECT board.btitle, board.latitude, board.longitude, board.addr, board.bno
 		FROM map
 		JOIN board ON map.bno = board.bno
-		WHERE map.bno = 30
     </select>
+    
+    <select id="imageD" resultType="map" >
+	SELECT image.realFile, image.bno, image.main, board.bno, board.latitude, board.longitude, board.btitle, board.addr
+	FROM image
+	JOIN board ON image.bno = board.bno
+	WHERE main = 1
+	</select>
+	
+	<select id="cateAll" resultType="map">
+	SELECT cate.cate, cate.cname, board.bno, board.latitude, board.longitude, board.btitle, board.addr, (Select i.realFile from image i where board.bno=i.bno and i.main = 1 )as realFile
+	FROM cate
+	JOIN board ON cate.cate = board.cate
+	</select>
+	
 </mapper>

@@ -1,8 +1,8 @@
 package com.js.web.join;
 
+
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 @Controller
 public class JoinController {
 	
 	@Autowired
 	private JoinService joinService;
-
 
 	/*
 	 * @Autowired private SmsUtil smsUtil;
@@ -63,6 +64,7 @@ public class JoinController {
 	 */
 	
 	
+
 	
 	@ResponseBody
 	@PostMapping("/emailcheck")
@@ -78,6 +80,7 @@ public class JoinController {
 	
 	
 	
+
 	//아이디 중복검사
 	@ResponseBody
 	@PostMapping("/checkID")
@@ -86,6 +89,7 @@ public class JoinController {
 		int result = joinService.checkID(id);
 			return result + "";
 	}
+
 	
 	
 	@ResponseBody
@@ -100,5 +104,17 @@ public class JoinController {
 	}
 	
 	
-	
+	  
+	// coolSMS 테스트 화면
+	@GetMapping("/sms")
+	public String mySms() {
+		return "/phone";
+	}
+	    
+	// coolSMS 구현 로직 연결  
+	@GetMapping("/checkSms")
+	public @ResponseBody String sendSMS(@RequestParam(value="phone") String phone) throws CoolsmsException {  	
+		return joinService.PhoneNumberCheck(phone);
+	}
+
 }

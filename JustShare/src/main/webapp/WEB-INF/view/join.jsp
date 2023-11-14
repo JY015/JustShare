@@ -583,9 +583,9 @@ function form_check(){
 </head>
 	
 <body>
-<%@ include file="menu.jsp" %>  
  
-         
+ 
+
    
 <script src="/js/member.js?ver=500" defer></script>
      <section class="signup_wrap">
@@ -831,7 +831,7 @@ const takeTarget = () => {
 };
 </script>
 
-
+<%@ include file="footer.jsp"%>
 
 
 </body>

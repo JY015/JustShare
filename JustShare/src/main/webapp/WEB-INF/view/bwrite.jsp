@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
        .image-preview {
             display: inline-block; /* 이미지를 가로로 나열하기 위해 인라인-블록 요소로 설정 */
@@ -25,11 +25,13 @@
 	 <label for="images">이미지 업로드</label>
 	<div >
     <input type="file" name="upFile" id="upFile" multiple="multiple" >
+    <br><span id="resultF"></span>
     </div>
      <div id="imagePreviews"></div>
 	제목
 	<div>
-	<input type="text" name="title" >
+	<input type="text" name="title" id="titleInput" >
+	<br><span id="resultMSG"></span>
 	</div>
 	공간 유형
 	<div>
@@ -41,7 +43,8 @@
 	</div>
 	가격
 	<div>
-	<input type="number" name="price">
+	<input type="number" name="price" id="priceInput">
+	 <br><span id="resultP"></span>
 	</div>
 	시설
 	<div>
@@ -51,7 +54,8 @@
 	</div>
 	상세 설명
 	<div>
-	<textarea name="content"></textarea>
+	<textarea name="content" id="contentInput"></textarea>
+	<br><span id="resultCON"></span>
 	</div>
 	주소
 	<div>
@@ -63,11 +67,13 @@
 	</div>
 	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+	<br><span id="resultPC"></span>
+	<br><span id="resultAD"></span>
 	</div>
-	
-	
-	
-	<script>
+	<button type="button" class="writeB" >완료</button>
+	</form>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
 
@@ -175,12 +181,72 @@
                 imagePreviews.appendChild(imagePreview);
             }
         }
-    </script>
+</script>
+<script type="text/javascript">
 
-    
+
+$(function(){
+    $(".writeB").click(function(){
+        const fileInput = document.getElementById('upFile');
+        const titleInput = document.getElementById('titleInput');
+        const contentInput = document.getElementById('contentInput');
+        const postcodeInput = document.getElementById('sample2_postcode');
+        const addressInput = document.getElementById('sample2_address');
+        const priceInput = document.getElementById('priceInput');
+       
+       
+
+        const title = titleInput.value.trim();
+        const content = contentInput.value.trim();
+        const postcode = postcodeInput.value.trim();
+        const address = addressInput.value.trim();
+        const price = parseInt(priceInput.value); // 가격을 정수로 변환
+       
+        if(fileInput.files.length === 0){
+        	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
+             $("#resultF").css("font-weight", "bold");
+             $("#resultF").css("font-size", "10pt");
+			return false;
+        	
+        }
+
+		if(title === "" || title.length < 3 || title.length > 31){
+			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
+             $("#resultMSG").css("font-weight", "bold");
+             $("#resultMSG").css("font-size", "10pt");
+			return false;
+		}
+		if (isNaN(price) || price <= 1000) {
+			 $("#resultP").text("올바른 가격을 입력하세요");
+             $("#resultP").css("font-weight", "bold");
+             $("#resultP").css("font-size", "10pt");
+            return false;
+        }
 	
-	<button type="submit" class="writeB" >완료</button>
-	</form>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		if(content ==="" || content.length < 10 || content.length > 1000){
+			$("#resultCON").text("상세 내용은 10글자 이상, 1000자 이하여야 합니다.")
+			$("#resultCON").css("font-weight", "bold");
+            $("#resultCON").css("font-size", "10pt");
+			return false;
+		}
+		if(postcode ===''){
+			$("#resultPC").text("우편번호를 입력해야합니다.")
+			$("#resultPC").css("font-weight", "bold");
+            $("#resultPC").css("font-size", "10pt");
+			return false;
+		}
+		if(address ===''){
+			$("#resultAD").text("주소를 입력해야합니다.")
+			$("#resultAD").css("font-weight", "bold");
+            $("#resultAD").css("font-size", "10pt");
+			return false;
+		}
+		
+		 document.querySelector('form').submit();
+    });
+    });    
+
+ </script>       
+  
 </body>
 </html>

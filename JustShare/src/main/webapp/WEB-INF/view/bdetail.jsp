@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <style>
       html,
       body {
         position: relative;
         height: 100%;
+        text-align: center;
       }
 
       body {
@@ -54,16 +58,40 @@
         height: 50%;
         object-fit: cover;
       }
+      
+     #map {
+    width: 350px;
+    height: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 atuo ;
+}
 
     </style>
 </head>
 <body>
-	<h1>디테일</h1>
+	<h1>Share</h1>
 <button type="submit" onclick="edit()">수정</button>
 <button type="submit" onclick="del()">삭제</button>
 <button type="submit" onclick="report()">신고</button>
 
+		
 
+ 		<div class="inf2" data-bno=${param.bno }>  
+       	<c:choose>
+		<c:when test="${isLike eq 1  }">     
+		<span><i class="fas fa-heart" style='color:red'></i> 찜 </span>
+		</c:when>
+		<c:otherwise>
+		<span><i class="far fa-heart" ></i> 찜 </span>
+		</c:otherwise>
+		</c:choose>  	
+		<span class="likes_count" data-count=${likesCount } >${likesCount }</span>
+        </div>
+
+
+	
     <!--스와이퍼 -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -77,47 +105,72 @@
     </div>
       <!--스와이퍼 -->
 
-
-<c:forEach items="${imageD }" var="n">
-	<img src="/img/places/${n }">
-</c:forEach>
 <br>
 <c:forEach items="${equipD }" var="n">
 	${n }
 </c:forEach>		
 <br>
 <button type="submit" onclick="chat()">거래하기</button>
-
-
 ${detail.bcontent }
-
 <div id="map" style="width:350px;height:350px;"></div>
 
 <script type="text/javascript">
+	let sid = "${sessionScope.mid}";
+	let mid = "${detail.mid}";
+
 function del() {
 	let chk = confirm("삭제하시겠습니까?"); //참  거짓으로 나옵니다.
-
+	
 	if(chk) {
+		if(sid == mid ){
 		location.href ="/bdelete?bno=${detail.bno }";
+		}else{
+			alert("해당 게시물 작성자만 삭제 가능합니다.")
+		}
 	}
 }
 function edit(){
 	let chk2 = confirm("수정하시겠습니까?");
-	
+
 	if(chk2){
-		location.href="/bedit?bno=${detail.bno }";
+		if(sid == mid ){
+			location.href="/bedit?bno=${detail.bno }";
+			
+		}else{
+			alert("해당 게시물 작성자만 수정 가능합니다.")
+		}
 	}
 }
 function report(){
 	let chk3 = confirm("신고하시겠습니까?");
-		
+	
 	if(chk3){
-			location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
+		if(sid == null || sid == ""){
+			alert("신고하려면 로그인이 필요합니다")
+			return false;
+		}
+		if(sid == mid){
+			alert("작성자가 본인의 게시물을 신고할 수 없습니다")
+			return false;
+		}	
+		
+		location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
+			
+		
 	}
 	
 }
 
 function chat(){
+	
+	if(sid == null || sid == ""){
+		alert("거래를하려면 로그인이 필요합니다")
+		return false;
+	}
+	if(sid == mid){
+		alert("작성자가 본인의 게시물을 거래할 수 없습니다")
+		return false;
+	}	
 	location.href="/chat1?toId=${detail.mid}&bno=${detail.bno}";
 }
 </script>
@@ -162,7 +215,7 @@ infowindow.open(map, marker);
         spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
-          delay: 2500,
+          delay: 5000,
           disableOnInteraction: false,
         },
         pagination: {
@@ -177,5 +230,54 @@ infowindow.open(map, marker);
 
     </script>
  <!-- 스와이퍼 사용  -->   
+
+<!-- 좋아요 스크립트 -->
+ <script type="text/javascript">
+ $(".inf2 i").click(function(){
+		const mid = "${sessionScope.mid}";
+		  // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+	    if (!mid) {
+	        alert("로그인이 필요합니다.");
+	        return;
+	    }
+		// 로그인 확인 후 좋아요 스크립트 진행  
+		  
+		let likes ="";
+		const bno = $(".inf2").data("bno");
+		if($(this).hasClass("far")) {
+			likes = "on";
+		} else {
+			likes = "off";
+		}
+		const data = {
+			mid : mid,
+			likes : likes,
+			bno : bno
+		}
+		$.ajax({
+			url: "/like",
+			type: "POST",
+			data: data
+		})
+		.done(function(result){
+				console.log(result.body);
+				let likesCount = $(".likes_count").data("count");
+				
+				if(likes == "on") {
+					$(".inf2 i").removeClass("far").addClass("fas");
+					$(".likes_count").text(likesCount+1);
+					$(".likes_count").data("count", likesCount+1 );
+				} else {
+					$(".inf2 i").removeClass("fas").addClass("far");
+					$(".likes_count").text(likesCount-1);
+					$(".likes_count").data("count", likesCount-1 );
+				}
+			})
+		.fail(function(error){
+			alert(error.responseText);
+		})
+	})
+ </script>
+ 
 </body>
 </html>

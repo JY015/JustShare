@@ -27,7 +27,7 @@ public class LoginController {
 	private Util util;
 
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login() {
 		return "login";
 	}
 
@@ -38,7 +38,16 @@ public class LoginController {
 		if (String.valueOf(res.get("count")).equals("1")) {
 			session.setAttribute("mid", map.get("mid"));
 			session.setAttribute("mname", res.get("mname"));
-			System.out.println(session);
+			session.setAttribute("mgrade", res.get("mgrade"));
+			
+			  if ((int)res.get("mgrade") == 4) { 				  
+							  
+				  return "redirect:/admin/";				  
+			  }
+			  if ((int)res.get("mgrade") == 2 || (int)res.get("mgrade") == 1) { 				  
+				  session.invalidate(); 
+				  return "redirect:/reportLogin";				  
+			  }
 			return "redirect:/";
 		} else {
 			model.addAttribute("loginCheckCount", 1);
@@ -111,7 +120,7 @@ public class LoginController {
 	@PostMapping("/findPw") 
 	public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
 	 
-		//util.htmlMailSender(map);
+		/* util.htmlMailSender(map); */
 		System.out.println("findPw 여기" + map);
 		String uuidPw = (String) map.get("uuid");
 		System.out.println("uuidPw" + uuidPw);
@@ -127,10 +136,5 @@ public class LoginController {
 		return "login";
 	}
 	
-	@GetMapping("/cafe")
-	public String cafe() {
-		
-		return "cafe";	
-	}
 
 }

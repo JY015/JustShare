@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -34,14 +35,14 @@ public class BoardController {
 	public String board(@RequestParam Map<String, Object> map, Model model, PageCriteria cri,
 			@RequestParam(name = "areas", required = false) String areas,
 			@RequestParam(name = "categories", required = false) String categories,
-			@RequestParam(name = "equipments", required = false) String equipments) {
-		
-		
+			@RequestParam(name = "equipments", required = false) String equipments, HttpSession session) {
+	
+		map.put("sid", session.getAttribute("mid"));
 		map.put("areas", areas);
 		map.put("categories", categories);
 		map.put("equipments", equipments);
 		
-
+		// 리스트 총개수 뽑기 
 		int listNum = boardService.listNum(map);
 
 		// 지역구 / 시설 / 카테고리 전부 꺼내기 << 모달로 띄울 필터창에 보여줄 목록을 가져오기 위해서
@@ -54,9 +55,14 @@ public class BoardController {
 		paging.setCri(cri);
 		paging.setTotalCount(listNum);
 		map.put("cri", cri);
-
+		
+		// 로그인 한 사람의 좋아요 확인하기   >  그 리스트에 글을 어캐 확인해야하지? 이것도 리스트로 같이 찍어주기 ? bno를 뭘 보내줘야함?
+		// 이거 리스트를 뽑아서 같이 뿌리기 ?
+	
+		
 		// 리스트 뽑기 + 검색시 + 필터
 		List<Map<String, Object>> boardList = boardService.list(map);
+		
 		model.addAttribute("list", boardList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("areaList", areaList);
@@ -68,25 +74,27 @@ public class BoardController {
 	// 인피니트 페이지 두번째 페이지 부터 계속 ajax로 생성해서 붙이기
 	@ResponseBody
 	@PostMapping("/board")
-	public String boardp(@RequestParam Map<String, Object> map) {
-
+	public String boardp(@RequestParam Map<String, Object> map,HttpSession session) {
+		System.out.println(map);
 		// 전체 글 숫자 + 검색
 		int listNum = boardService.listNum(map);
 
 		// map 에서 꺼내서 형 변환
 		int limitI = Integer.parseInt(map.get("limit").toString());
 		int nextPageLimitI = Integer.parseInt(map.get("nextPageLimit").toString());
-
+		
 		map.put("limitI", limitI);
 		map.put("nextPageLimitI", nextPageLimitI);
+		map.put("sid", session.getAttribute("mid"));
 
 		// 최대보다 많으면 더이상 뽑지 않으면
 		if (nextPageLimitI < (listNum + 10)) {
 			List<Map<String, Object>> listp = boardService.listp(map);
+			
 			// JSON 배열을 생성하고 데이터 추가
 			JSONArray jsonArray = new JSONArray();
 			for (Map<String, Object> item : listp) {
-				JSONObject jsonObject = new JSONObject(item);
+				JSONObject jsonObject = new JSONObject(item);;
 				jsonArray.put(jsonObject);
 			}
 
@@ -128,7 +136,7 @@ public class BoardController {
 		model.addAttribute("equiplist", el);
 		return "bwrite";
 		}else {
-		return "redirec:/board";
+		return "redirect:/board";
 		}
 		}
 
@@ -171,7 +179,7 @@ public class BoardController {
 			String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
 			// 이미지 파일만 처리
 			if ("jpg".equalsIgnoreCase(fileExtension) || "png".equalsIgnoreCase(fileExtension)
-					|| "bmp".equalsIgnoreCase(fileExtension)) {
+					|| "bmp".equalsIgnoreCase(fileExtension) ||"jpeg".equalsIgnoreCase(fileExtension)) {
 				// 파일 이름 가공 >> 올린 이미지의 이름이 같을 수 있어서
 				LocalDateTime ldt = LocalDateTime.now();
 				String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
@@ -216,10 +224,17 @@ public class BoardController {
 		// 해당 게시글 번호 받아와서 게시글 띄우기
 		Map<String, Object> detail = boardService.detail(map);
 		// 게시글에 연관된 시설명 / 사진 모두 가져오기
-
 		List<String> imageD = boardService.imageD(map);
 		List<String> equipD = boardService.equipD(map);
-
+		// 해당글의 좋아요 수 가져오기 
+		Integer likesCount = boardService.likesCount(map); 
+		// 로그인 한 사람의 좋아요 가져오기
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		map.put("sid",sid);
+		Integer isLike = boardService.isLike(map);
+		
+		model.addAttribute("likesCount", likesCount);
+		model.addAttribute("isLike", isLike);
 		model.addAttribute("imageD", imageD);
 		model.addAttribute("equipD", equipD);
 		model.addAttribute("detail", detail);
@@ -282,7 +297,9 @@ public class BoardController {
 		// map 으로 새로받은 데이터는 업데이트 
 		
 		// 로그인 확인 + id 일치 확인 해야함 아직안함 
-		System.out.println(map);
+		// 수정하는 사람의 mid 넣어주기 
+		String sid = String.valueOf( session.getAttribute("mid")) ;
+		map.put("mid", sid);
 		int result = boardService.bedit(map);
 		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰는 이유- 갯수가 달라질수 있어서 // 겹치는거 체크 ?
 		boardService.deleteEquip(map);
@@ -314,6 +331,9 @@ public class BoardController {
 			List<Map<String, Object>> reportCateList = boardService.reportCateList();
 			// 신고하는 사람 넣기 
 			map.put("rmid", session.getAttribute("mid"));
+			// 중복 신고 확인하기 
+			int dp = boardService.dp(map);
+			map.put("dp",dp);
 			model.addAttribute("reportCateList",reportCateList);
 			model.addAttribute("map", map);
 			return "report";
@@ -344,7 +364,23 @@ public class BoardController {
 		return "redirect:/bdetail?bno=" + map.get("bno");
 		}
 	}
-
-
+	
+	
+	  @ResponseBody
+	  @PostMapping("/like") 
+	  public  ResponseEntity<String> like(@RequestParam Map<String, Object> map) {
+		 // 좋아요가 찍혀있으면 삭제/ 없으면 추가 
+		 // 작성 글이 본인 글이라면 좋아요 할 수 없게 ? 걸어야하나 말아야하나 ?
+		  String likes = String.valueOf(map.get("likes"));
+		  if(likes.equalsIgnoreCase("off")) {
+			  boardService.deleteLike(map);
+		  }else {
+			  boardService.insertLike(map);
+		  }
+		  
+		  return ResponseEntity.ok().build(); 
+		  
+	  }
+	 
 
 }
