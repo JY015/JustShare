@@ -29,7 +29,7 @@ public class AdminController {
 		model.addAttribute("boardCount", boardCount);
 		model.addAttribute("reportCount", reportCount);
 		model.addAttribute("tradeCount", tradeCount);
-			return "admin/main";
+		return "admin/main";
 	}
 		
 	@GetMapping("/admin/member")
@@ -53,7 +53,6 @@ public class AdminController {
 		return"redirect:/admin/member";
 	}
 	
-
 	@GetMapping("/admin/reportList")
 	public String report(Model model) {
 		List<Map<String, Object>> reportList = adminService.reportList();
@@ -85,11 +84,7 @@ public class AdminController {
 		
 		return "admin/chart";
 	}
-	
-	
-	
-	
-	
+
 }
 
 	

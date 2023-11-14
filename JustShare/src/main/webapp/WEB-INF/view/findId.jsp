@@ -54,33 +54,34 @@ var _ss_user_id   = "";
   <%@ include file="header.jsp"%>
 <body>
 </head>
-
- <div class="image-container">
-        <!-- <img alt="login" src="./img/JustShare.png"> -->
-    </div><br>
+    
 <c:if test="${findId eq null}">
 <div class="findId-form">
     <form action="./findId" method="post" class="container">
     <div class="text_find_id">
-				<h4>FIND ID</h4>
-				<span>가입하신 정보를 입력해주시면 등록된 휴대폰 번호로 전송 해드립니다.</span>
+				 <h1 style="font-size: 30px;">FIND ID</h1><br>
+				<span style="color: #8A8A8A">가입하신 정보를 입력해주시면 등록된 <br>휴대폰 번호로 전송 해드립니다.</span>
 			</div>  
-    	 <label for="mname">이름</label><br>
+    	 <label style="text-align: left;" for="mname">이름</label>
         <input type="text" name="mname" placeholder="ex) 홍길동" required="required" maxlength="8"><br><br>
-        <label for="mphone">핸드폰 번호</label><br>
+        <label style="text-align: left;">핸드폰 번호</label>
         <input type="text" name="mphone" placeholder="ex) 01012345678" required="required" maxlength="11"><br><br><br>
-        <button type="submit">아이디 찾기</button>
+         <div class="button-container">
+         <button type="button" style=" border: solid 1px #020202 !important; margin-right: 10px!important; color:black !important; background-color: white !important;" onclick="window.location.href = './login';">취소</button>
+        <button type="submit">아이디 찾기</button> 
+        </div>
     </form>
 </div>
 </c:if>
 
 <c:if test="${findId ne null}">
-<br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
     당신의 아이디는 <span style="color: red">'${findId}'</span>입니다.
-    <br><br><br><br><br><br>
-    <button type="button" onclick="location.href='./login'">로그인 하러 가기</button><br>
+    <br><br><br><br><br><br><br><br><br><br>
+    <button style="width: 50%;" type="button" onclick="location.href='./login'">로그인 하러 가기</button><br>
 </c:if>
 <c:if test="${count eq 0}">
+<br><br>
     <p style="color: red; font-weight: bold;">가입된 아이디가 없습니다.</p>
 </c:if>
 <br><br><br>
@@ -104,7 +105,7 @@ var _ss_user_id   = "";
           </div>
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
-          <div>
+          <div style="text-align: left;">
             <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
             TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>

@@ -72,27 +72,9 @@ var _ss_user_id   = "";
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/login.php">
   <input type="hidden" class="is_app_banner" value="">
-   <header id="header" class="header_bg_new">
-      <div class="header__inner">
-        <div class="header__first_row">
-           <div class="sign-area">
-         <a href="./login">로그인</a>
-         <div class="half-line"></div> 
-         <a href="./join">회원가입</a>           
-         <div class="half-line"></div>
-            <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>
-            <div class="half-line"></div>
-         <a href="/contact/forms">제휴 및 입점문의</a>
-            <div class="half-line"></div>
-         <a href="/faq">자주 묻는 질문</a>
-           </div>
-        </div>
-        <div class="full-line"></div>
-        
-      </div>
-    </header>    
+  
 
-<%@ include file="header.jsp"%>
+
     
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
