@@ -4,12 +4,61 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
   
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
+   <link rel="canonical"  href="https://www.valuevenue.co.kr/login"/>
+    <link rel="stylesheet" href="/css/fullcalendar.css" />
+    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+    <link rel="stylesheet" href="/css/main_page.css" />
+    <link rel="stylesheet" href="./css/login.css">
+
+   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   <meta property="og:locale"       content="ko_KR" />
+   <meta property="og:type"       content="website" />
+   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta property="og:url"          content="https://www.valuevenue.co.kr/login" />
+   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
+   <meta property="og:site_name"    content="가치공간" />
+   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
+   <meta name="twitter:card"       content="summary" />
+   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
+   <meta name="twitter:domain"       content="가치공간" /> 
+   <meta name="robots" content="index,follow">
+   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
+   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="/js/valuevenue.js?ver=20000120" defer></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/common.js?ver=20000120" defer></script>
+    <script src="/js/cookie.js?ver=20000120" defer></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인 창</title>
+
+<script src="./js/jquery-3.7.0.min.js"></script>
 </head>
-    <link rel="stylesheet" href="./css/join.css">
+
+<script>
+var _ss_user_id   = "";
+
+</script>
+  </head>
+<body>
+<%@ include file="header.jsp"%>
+   <link rel="stylesheet" href="/css/import.css?ver=20000120" />
+     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/register.css?ver=20000120" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 		<script src="./js/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript">
@@ -37,7 +86,7 @@
 	                           $("#resultMSG").css("color", "red").text("이미 등록된 아이디입니다.");
 	                           isIdChecked = false;
 	                        } else {
-	                           $("#resultMSG").css("color", "greed").text("가입할 수 있습니다.");
+	                           $("#resultMSG").css("color", "green").text("가입할 수 있습니다.");
 	                           isIdChecked = true;
 	                        }
 	                     },
@@ -48,219 +97,300 @@
 	               }
 	               return false;
 	            });
-	
-	      $("#pw2").on('input', function() {
-	         let pw1 = $("#pw1").val();
-	         let pw2 = $(this).val();
-	
-	         if (pw1 == pw2) {
-	            $("#pwresultForm").css("color","green").text("비밀번호가 일치합니다.");
-	            return;
-	         } else {
-	            $("#pwresultForm").css("color","red").text("비밀번호가 일치하지 않습니다.");
-	         }
-	      });
-	      
-	      $("#joinjoin").click(function(){
-	         let mid = $("#mid").val();
-	         let pw1 = $("#pw1").val();
-	         let pw2 = $("#pw2").val();
-	         let mname = $("#mname").val();
-	         let mphone = $("#mphone").val();
-	         let mbirth = $("#mbirth").val();
-	         
-	          if (!isIdChecked) {
-	             Swal.fire("아이디 중복 검사를 실행하세요.");
-	              return false; // 회원가입 종료
-	           }
-	         if (pw1 != pw2) {
-	            Swal.fire("비밀번호를 확인하세요.");
-	            return false;
-	         }
-	         if (mname.length > 4 || mname.length == "" || mname.length <= 1) {
-	            Swal.fire("이름을 정확히 입력해주세요.");
-	            return false;
-	         }
-	         if (mphone.length != 11) {
-	            Swal.fire("핸드폰 번호 11자리를 정확히 입력해주세요.");
-	            return false;
-	         }
-	       if (mbirth.length < 10 ) {
-	            Swal.fire("생년월일을 정확히 입력해주세요.");
-	            return false; 
-	         
-	       
-	       
-	       }
-	       
-	       
-	       // 메일주소검사
-	     	let option = $("#selectBox option:selected").val();      // 선택한 메일주소값 뽑아내기
-	     	
-	     	if(option != "-선택-"){
-	     		
-		     // gogus228
-				let Fmail = $(this).parent('div').siblings(".emailBox").children("#memail").val();
-				//alert(Fmail);   
-				
-				if(Fmail != null && Fmail != ""){
-					// hanmail   net
-					let items = option.slice(1).split(".");	
-					let first = items[0];	// hanmail
-					let second = items[1];	// net
-					
-					// 메일주소 앞부분 입력값검사
-					let replaceKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
-					let replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
-				
-					if(Fmail.match(replaceKorean) || Fmail.match(replaceChar)){
-						Fmail = Fmail.replace(replaceKorean, "").replace(replaceChar, "");
-						Swal.fire("올바른 메일주소를 입력해주세요")
-						$("#memail").val("");
-						$("#Opt").prop("selected", true);
-						return false; 
-					}
-					
-					let Final = Fmail + "@" + first + "." + second;
-					console.log(Final);	// gogus228@gmail.com
-					let memail = $("#memailF").val(Final);
-				} else {
-					Swal.fire("올바른 메일주소를 입력해주세요");
-					return false; 
-				} 
-			
-	     	} else {
-				Swal.fire("올바른 메일주소를 입력해주세요");
-				return false; 
-	     }	
-	     	 document.getElementById("myForm").submit();	
-	     	
-	  	});
-	       
 	 });
-	  
-	  
-	  
-	  $('#send').click(function() {
-			
-			const to = $('#to').val();
-			
-			$.ajax ({
-				url: '/check/sendSMS',
-				type: 'GET',
-				data: {
-					"to" : to
-				},
-				success: function(data) {
-					const checkNum = data;
-					alert('checkNum:'+ checkNum);
-					
-					$('#enterBtn').click(function() {	
-						const userNum = $('#userNum').val();
-						
-						if(checkNum === userNum) {
-							alert('인증 성공하였습니다.');
-						}
-						else {
-							alert('인증 실패하였습니다. 다시 입력해주세요.');
-						}
-					});
-					
-				}
-			});
-			
-		});
-	  
-	  
-	  $(function(){
-			window.addEventListener('ssc_wheel', function(event) {
-				event.preventDefault();
-			}, {passive:false}); 
-			   //휴대폰 번호 인증
-			   var isphoneChecked = false; // ID 중복 확인 여부를 저장하는 변수
-			   $(document).on("click", "#phoneChk", function() {
-			   	var phone = $("#phone").val().trim();
-			   	if (!strToInt(phone)) {
-		            return; // 숫자로 변환되지 않으면 함수 종료
-		        }
-			   	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주세요.");
-			   	$.ajax({
-			           type:"post",
-			           url:"phoneCheck",// "phoneCheck?phone=" + phone하려면 밑에 data를 빼야함
-			           data:{phone:phone},
-			           success:function(data){
-			        	    alert(data);
-			           	    update();
-			           		var clickCnt = 0;
-			           	 $(document).on("click", "#phoneChk2", function() {
-			           		if(data == $("#phone2").val().trim()){
-			           			alert("본인 인증이 확인되었습니다.");
-			           			$("#phoneChk2").attr("disabled",true);
-			           			$("#phoneChk2").css("background-color",'green');
-			           			isphoneChecked = true;
-			           			/*$.ajax({
-			           			   type:"post",
-			     		           url:"phoneSave",
-			     		           data:{phone:phone},
-			     		           success:function(data){
-			     		        	   location.href="./info";
-			     		           }, error:function(error){
-			     		        	   alert('에러');
-			     		           }
-			           			});*/
-			           		} else if (clickCnt < 5){
-			           			alert("인증 번호가 틀렸습니다. 다시 시도하세요.");
-			           		} else if(clickCnt >= 5){
-			           			alert("인증 번호를 다시 받으세요.");
-			           			location.href = "./info";
-			           		}
-			           		clickCnt++;
-			           	 });
-		           		},
-		           		error:function(error){
-		           			alert("에러");
-		           		}
-			       });
-			  });
-		});
-		
-		function strToInt(str) {
-			if(str.length > 11 || str.length < 10){
-				alert("다시 입력하세요...");
-				return false;
-			}
-			
-		    for (let i = 0; i < str.length; i++) {
-		        if (isNaN(parseInt(str[i]))) {
-		            // 숫자가 아닌 문자가 중간에 포함된 경우
-		            alert("숫자만 입력하세요...");
-		            return false;
-		        }
-		    }
-		    // 숫자로만 이루어진 문자열을 정수로 변환하여 반환
-		    return parseInt(str);
-		}
-		
-		function update(){
-			$("#phone2").attr("disabled",false);
-	   		$("#phone2").attr("placeholder","인증번호를 입력하세요...");
-	   		$("#phoneChk").attr("disabled",true);
-	   		$("#phoneChk2").attr("disabled",false);
-	   		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-	   		$(".successPhoneChk").css("color","green");
-	   		$("#phone").attr("readonly",true);
-		}
-		$(function(){
-			window.addEventListener('ssc_wheel', function(event) {
-				event.preventDefault();
-			}, {passive:false});
-		});
-	  
-	  
 	
 	</script>
 	
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script>
+
+
+	
+ let user_email = $('#user_email').val();
+
+let id_confirm = false;
+let id_validation = false;
+let email_confirm = false;
+let email_validation = false;
+let pw_confirm = false;
+let pw_validation = false;
+let phone_confirm = false;
+let phone_validation = false;
+
+function id_chk(){
+	//소문자 알파벳 또는 숫자(0-9)로 6에서 20자 사이
+	let id = $("#user_id").val();
+	let id_regex = /^[a-z]+[a-z0-9]{5,19}$/g;
+	
+	if(id_regex.test(id) === false){
+		alert("입력하신 아이디를 확인해주세요.");
+		email_confirm = false;
+        return false;
+}else{ 
+	$.ajax({
+    url : "./checkID",
+    type : "post",
+    data : {
+       "id" : id
+    },
+    dataType : "json",
+    success : function(data) {
+       if (data == 1) {
+    	   alert("중복되는 이메일이 존재합니다.\n다른 이메일을 사용해주세요.");
+			document.querySelector('#user_id').readOnly = false;
+           $("#user_id").focus();
+			$("#user_id").val('');
+			$("#user_id_notice").html('이메일(아이디)를 다시 입력해주세요.');
+           id_confirm = false;
+       } else {
+    	   if(confirm("사용할 수 있는 아이디입니다.\n입력하신 아이디를 사용하시겠습니까?")){
+			id_confirm = true;
+            const email_input = document.querySelector('#user_id')
+			$("#user_id_notice").html('');
+            id_input.readOnly = true;
+       }
+    }
+    }
+ });
+	
+	
+}
+}
+
+
+function email_chk(){
+	
+	let email = $("#user_email").val();
+	let email_regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+	
+	
+	
+	
+	
+	if(email_regex.test(email) === false){
+        alert("입력하신 이메일을 확인해주세요.");
+		email_confirm = false;
+        return false;
+    }else{
+
+		$.ajax({
+			url:'./emailcheck',
+			type: 'post',
+			data: {"email":email},
+			dataType :"json",
+			success: function(data){
+		
+			if(data == 1){
+				alert("중복되는 이메일이 존재합니다.\n다른 이메일을 사용해주세요.");
+				document.querySelector('#user_email').readOnly = false;
+                $("#user_email").focus();
+				$("#user_email").val('');
+				$("#user_email_notice").html('이메일(아이디)를 다시 입력해주세요.');
+                email_confirm = false;
+			}else{
+				if(confirm("사용할 수 있는 이메일입니다.\n입력하신 이메일을 사용하시겠습니까?")){
+					email_confirm = true;
+                    const email_input = document.querySelector('#user_email')
+					$("#user_email_notice").html('');
+                    email_input.readOnly = true;
+                    //email_input.nextSibling.nextSibling.remove();
+                }
+			}
+        }
+	})
+}
+}
+
+$(function() {
+
+function check_pw_compare(){
+	return ($("#user_pw").val() === $("#user_pw2").val()) ? true : false;
+}
+
+// 비밀번호 - 비밀번호 확인 값 비교
+function pw_compare_notice(){
+	if(check_pw_compare()){
+        $('#user_pw2_notice').html('');
+        pw_confirm = true;
+    } else {		
+        $('#user_pw2_notice').html('비밀번호가 일치하지 않습니다');
+        pw_confirm = false;
+    }
+}
+
+//비밀번호 유효성 검사
+function check_pw_validation(){
+	const check_num = /[0-9]/; // 숫자
+    const check_eng = /[a-zA-Z]/; // 문자
+    const pw_length = $("#user_pw").val().toString().length;
+	
+    if(!check_num.test($("#user_pw").val()) || !check_eng.test($("#user_pw").val()) || (pw_length < 8) || (pw_length > 15 )) {
+        pw_validation = false;
+        $('#user_pw_notice').html('사용할 수 없는 비밀번호입니다. (영문, 숫자 필수 / 8~15자리)');
+    } else {
+        pw_validation = true;
+        $('#user_pw_notice').html('');
+    }
+}
+
+$("#user_pw").keyup(function(){
+    check_pw_validation();
+    pw_compare_notice();
+});
+
+
+$("#user_pw2").keyup(function(){
+    pw_compare_notice();
+});
+});
+
+
+
+//휴대폰 번호 유효성 검사
+ $("#user_phone").on('blur', function(){
+
+	var trans_num = $(this).val().replace(/-/gi,'');
+
+	let phoneNumberRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+
+	if(!phoneNumberRegex.test(trans_num)){
+		phone_validation = false;
+		$("#user_phone_notice").html('올바른 번호를 입력해주세요.');
+	}else{
+		$("#user_phone_nohypen").val($(this).val());	
+		phone_validation = true;
+		$("#user_phone_notice").html('');
+		let change_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");
+		$("#user_phone").val(change_num);	
+	}
+}); 
+
+
+//휴대폰 번호 중복검사
+function phone_chk(){
+	
+	
+let user_phone = $('#user_phone').val()
+let phoneNumberRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+	
+	if(phoneNumberRegex.test(user_phone) === false){
+		
+        alert("입력하신 휴대폰 번호를 확인해주세요.");
+        return false;
+    }else{
+    	
+    	$.ajax({
+			url:'./phonecheck',
+			type: 'post',
+			data: {"user_phone":user_phone},
+			dataType :"json",
+			success: function(data){
+   
+			if(data == 1){
+				alert("중복되는 휴대폰번호가 존재합니다.\n다른 휴대폰번호를 사용해주세요.");
+				document.querySelector('#user_phone').readOnly = false;
+                $("#user_phone").focus();
+				$("#user_phone").val('');
+				
+				$("#user_phone_notice").html('휴대폰 번호를 다시 입력해주세요.');
+                phone_confirm = false;
+			}else{
+				if(confirm("사용할 수 있는 휴대폰번호입니다.\n입력하신 휴대폰번호를 사용하시겠습니까?")){
+					phone_confirm = true;
+                    const phone_input = document.querySelector('#user_phone')
+                    phone_input.readOnly = true;
+					$("#user_phone_notice").html('');
+                }
+			}
+        }
+	});
+
+    	
+    }
+	}	
+    	
+ 
+$(function () {
+
+$("#user_birthday").on("keyup",function(key){
+
+	  // 사용자 입력값은 모두 숫자만 받는다.(나머지는 ""처리)
+	    let	user_birthday = $(this).val().replace(/\D/g, "");
+		let leng = user_birthday.length;
+	  
+		// 출력할 결과 변수
+		let result = '';
+
+		// 5개일때 - 20221 : 바로 출력
+		if(leng < 6) 
+			result = user_birthday;
+		else if(leng < 8){
+			result += user_birthday.substring(0,4);
+			result += "-";
+			result += user_birthday.substring(4);
+		} else{
+			result += user_birthday.substring(0,4);
+			result += "-";
+			result += user_birthday.substring(4,6);
+			result += "-";
+			result += user_birthday.substring(6);
+		}
+
+		$("#user_birthday").val(result);
+	})
+
+eventInit();
+});
+
+function form_check(){	
+
+	if(id_confirm ===true && email_confirm === true && pw_confirm === true && phone_confirm === true){
+
+		if(confirm("입력하신 정보로 회원가입을 진행합니다.")){
+			$("#myForm").submit();
+			
+		}else{
+			return false;
+		}
+	}else{
+		if(id_confirm === false){
+			alert("아이디를 다시 입력해주세요.");
+			$("#user_id").focus();
+			return false;
+		}
+		
+
+		if(email_confirm === false){
+			alert('이메일 중복확인이 필요합니다.\n입력하신 이메일을 확인해주세요.');
+			$("#user_email").focus();
+			return false;
+		}
+
+		if($("#user_name").val() == ''){
+			alert('이름을 입력해주세요.');
+			$("#user_name").focus();
+			return false;
+		}
+
+		if(pw_confirm === false){
+			alert('비밀번호가 일치하지 않습니다.\n입력하신 비밀번호를 확인해주세요.');
+			$("#user_pw").focus();
+			return false;
+		}
+
+		if(phone_confirm === false){
+			alert('휴대폰번호 중복확인이 필요합니다.\n입력하신 휴대폰번호를 확인해주세요.');
+			$("#user_phone").focus();
+			return false;
+		}
+
+		
+	}
+	
+}
+</script>
+	
 	<script>
 	window.onload = function(){
 	    document.getElementById("maddr").addEventListener("click", function(){ //주소입력칸을 클릭하면
@@ -278,112 +408,223 @@
 </head>
 	
 <body>
-  <form id="myForm" action="./join" method="post"> 
-      <div class="join-div" align="center">
-         <div>
-            <h1>회원가입<br></h1>
-         </div>
-         <div>
-            <div class="idBox">
-               <input class="input" type="text" name="mid" id="mid" placeholder="아이디를 3글자 이상 입력해 주세요"/>
-               <button id="idCheck" type="button" class="idbutton">중복검사</button>
-               <br> <span id="resultMSG"></span>
-            </div>
-            <div class="label-row" style="height:20px" id="resultForm">
-               <div class="label-name"></div>
-               <div class="label-in">
-                  <span id="resultMSG"></span>
-               </div>
-            </div>
-         </div>
-         <div>
-            <div class="pwBox1">
-               <input class="input" type="password" name="mpw1" id="pw1" placeholder="비밀번호를 입력해 주세요"/><br><br>
-            </div>
-            <div>
-               <div class="poBox2">
-                  <input class="input" type="password" name="mpw" id="pw2" placeholder="비밀번호를 다시 입력해 주세요"/>
-                  <br>
-                  <div class="label-row" style="height: 25px" id="pwresultForm">
-                     <div class="label-name"></div>
-                     <div class="label-in">
-                        <span id="pwresultMSG"></span><br>
-                     </div>
-                  </div>
-               </div>
-               </div>
-         </div>
-               <div>
-                  <div class="nameBox">
-                     <input class="input" type="text" name="mname" id="mname" placeholder="이름을 입력해 주세요"/><br><br>
-                  </div>
-               </div>
-               <div>
-                  <div class="addrBox">
-                     <input class="input" type="text" name="maddr" id="maddr" placeholder="주소를 입력해 주세요"/><br><br>
-                  </div>
-               </div>
-               <div>
-                  <div class="addrBox1">
-                     <input class="input" type="text" name="maddr" id="maddr1" placeholder="상세주소를 입력해 주세요"/><br><br>
-                  </div>
-               </div>
-               <div>
-                  <div class="birthBox">
-                     <input class="input"  type="date" name="mbirth" id="mbirth"/><br><br>
-                  </div>
-               </div>
-           
-           
-         
-              
-      <div class="form-group"> 전화번호 (숫자만 입력하세요.)
-                      <div class="detail">
-                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="전화번호">
-						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
-						<br><br>
-						<input class="menu-title" id="phone2" type="text" disabled required/>
-						<input class="btn" type="button" id="phoneChk2" value = "본인인증" disabled="disabled">
-						<div><span style="color: red;" class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span></div>
-						<input type="hidden" id="phoneDoubleChk"/>
+ 
+<script src="/js/member.js?ver=500" defer></script>
+     <section class="signup_wrap">
+			<div class="sign_inner">
+				<div class="signup_list_wrap">
+					<div class="signup_title">
+						<div class="sign_text">일반 회원가입</div>
+						<div class="sign_text_list">신규 가입하고 다양한 서비스를 이용하세요!</div>
 					</div>
-                  </div>
-                  
-                  
-               
-               <div>
-                  <div class="phoneBox">
-                     <input class="input" type="text" name="mphone" id="mphone" placeholder="전화번호를 입력해 주세요"/><br><br>
-                  </div>
-               </div>
-               <div class="emailBox">
-					<input class="input" type="text" id="memail" placeholder="이메일을 입력해 주세요" /><br> <br> 
-					<select class="selectMail" id="selectBox" name="selectBox">
-						<option id="Opt">-선택-</option>
-						<option id="naver" value="@naver.com">@naver.com</option>
-						<option id="gmail" value="@gmail.com">@gmail.com</option>
-						<option id="hanmail" value="@hanmail.net">@hanmail.net</option>
-						<option id="kakao" value="@kakao.com">@kakao.com</option>
-					</select>
-					<input type="hidden" name="memail" id="memailF"/>
 				</div>
-               	<div>
-	               <br>
-	               <button class="Jbutton" type="reset">취소</button>
-	               <button class="Jbutton" type="button" id="joinjoin">가입</button>
-               	</div>
+				
+				<!-- 내용 -->
+			<form id="myForm" action="./join" method="post">
+					<div class="input_sign_w">
+						<table>
+							<colgroup>
+								<col style="width:180px">
+							</colgroup>
 
-      </div>
-  </form>
+							<tbody>
+							<tr class="border_bottom">
+									<th><label for="user_id">아이디</label><span aria-hidden="true">*</span></th>
+									<td>
+										<div class="id_mo f_ex">
+											 <input type="text" name="user_id" id="user_id" placeholder="아이디를 소문자 알파벳이나 숫자로 이루어진 6글자 이상 입력해 주세요"/>
+											<button type="button" id="idCheck" class="btn_black id_mo_ma" onclick="id_chk()">중복확인</button>
+											 
+										</div>
+										<span class="warningTxt2" id="user_id_notice"></span>
+	
+									</td>
+								</tr>
+							
+								<tr class="border_bottom">
+									<th><label for="user_email">이메일</label><span aria-hidden="true">*</span></th>
+									<td>
+										<div class="id_mo f_ex">
+											<input type="text" name="user_email" id="user_email" class="required input_border" placeholder="이메일을 입력해주세요." aria-required="true" data-name="이메일은"/>
+											<button type="button" class="btn_black id_mo_ma" onclick="email_chk()">중복확인</button>
+										</div>
+										<span class="warningTxt2" id="user_email_notice"></span>
+									</td>
+								</tr>
+								
+								<tr class="border_bottom">
+									<th><label for="user_name">이름</label><span aria-hidden="true">*</span></th>
+									<td>
+											<input type="text" name="user_name" id="user_name" class="required input_border" value="" placeholder="이름을 입력해주세요." aria-required="true" data-name="이름은"/>
+											<!--span class="warningTxt2" id="user_name_text">이름을 입력해주세요.</span-->
+									</td>
+								</tr>
+
+								<tr class="border_bottom">
+									<th><label for="name">비밀번호</label><span aria-hidden="true">*</span></th>
+									<td>
+										<input type="password" name="user_pw" id="user_pw" class="required input_border" placeholder="비밀번호를 입력해주세요. (영문+숫자 8자 이상)" aria-required="true" autocomplete="new-password" data-name="비밀번호는"/>
+										<span class="warningTxt2" id="user_pw_notice"></span>
+									</td>
+								</tr>
+
+								<tr class="border_bottom">
+									<th><label for="name">비밀번호 확인</label><span aria-hidden="true">*</span></th>
+									<td>
+										<input class="required input_border" type="password" name="user_pw2" id="user_pw2" placeholder="비밀번호를 확인해주세요." aria-required="true"/>
+										<span class="warningTxt2" id="user_pw2_notice" data-name="비밀번호 확인은"></span>
+									</td>
+								</tr>
+
+								<tr class="border_bottom">
+									<th><label for="">휴대폰번호</label><span aria-hidden="true">*</span></th>
+									<td>
+										<div class="id_mo f_ex">
+											<input class="required input_border" type="tel" name="user_phone" id="user_phone" placeholder="'-'없이 입력해주세요." aria-required="true" data-name="휴대폰번호는"/>
+											<button type="button" class="btn_black id_mo_ma" onclick="phone_chk()">중복확인</button>
+										</div>
+										<span class="warningTxt2" id="user_phone_notice"></span>
+										<!-- <input type="hidden" id="user_phone_nohypen" name="user_phone_nohypen" value=""> -->
+									</td>
+								</tr>
+
+								<tr class="border_bottom">
+									<th><label for="user_birth">생년월일</label></th>
+									<td>
+										<input type="tel" name="user_birthday" id="user_birthday" class="input_border" placeholder="생년월일 8자리를 입력해주세요." maxlength="10"/>
+									</td>
+								</tr>
+							
+								<tr class="border_bottom">
+									<th><label for="user_address">주소</label></th>
+									<td>			
+									   <input class="input" type="text" name="maddr" id="maddr" placeholder="주소를 입력해 주세요"/><br><br>
+										
+									</td>
+								</tr>
+
+								<tr class="border_bottom">
+									<th><label for="user_address">상세주소</label></th>
+									<td>
+									 <input class="input" type="text" name="maddr1" id="maddr1" placeholder="상세주소를 입력해 주세요"/><br><br>
+									
+									</td>
+								
+									
+								</tr>
+
+							</tbody>
+
+						</table>
+					</div>
+					<div class="sign_btn_w">
+						<button type="button" class="btn_clear_black" onclick="history.back();">취소</button>
+						<button type="button" class="btn_black" onclick="form_check();">회원가입</button>
+					</div>
+
+					
+					</form>
+					</div>
+</section>
+<br><br>
+<script type="text/javascript">
+$('.target__time').hide()
+$('#send').click(function() {
+   $('.target__time').css('color','red');
+   let phone = $('#phone').val();
+   
+   $.ajax ({
+      url: '/checkSms',
+      type: 'GET',
+      data: {
+         "phone" : phone
+      },
+      success: function(data) {
+         const checkNum = data;
+         alert('checkNum:'+ checkNum);
+         
+
+         $('#complete').click(function() {   
+            const userNum = $('#userNum').val();
+            
+            if(checkNum === userNum) {
+               alert('인증이 완료되었습니다.')
+               $('#phone').attr('disabled', true);
+               $('#userNum').attr('disabled', true);
+               $('#send').attr('disabled', true);
+               $('.target__time').empty();
+               //$('.target__time').text('인증 완료');
+               $('#complete').hide();
+               $('#input__target_msg').empty();
+               $('.target__time').css('color','green');
+               clearInterval(timerInterval)
+            }
+            else {
+               alert('인증번호가 틀립니다. 다시 입력해주세요.')
+               //$('#input__target_msg').text('인증번호가 틀립니다. 다시 입력해주세요.');
+               $('#input__target_msg').css('color','red');
+
+            }
+         });
+         
+      }
+   });
+   
+   $('#send').click(function() {
+      $('#remaining__min').text('0');
+       $('#remaining__sec').text('03');
+       resetTimer()
+       takeTarget();
+   });
+   
+});
+
+//타이머 초기화 함수
+function resetTimer() {
+    $('#send').attr('disabled', false);
+    $('#send').text("인증번호 다시받기");
+    $('#phone').attr('disabled', false);
+    clearInterval(timerInterval); // 기존 타이머를 초기화합니다.
+    time = 20; // 3분으로 다시 설정합니다.
+}
+
+let timerInterval; // 타이머 setInterval의 참조를 저장하기 위한 변수
 
 
+const remainingMin = document.getElementById("remaining__min");
+const remainingSec = document.getElementById("remaining__sec");
+const completeBtn = document.getElementById("userNum");
+var get__number = document.getElementById("send");
 
+let time = 20;
 
+const takeTarget = () => {
+   $('.target__time').show();
+    timerInterval = setInterval(function () {
+     if(time == 0){
+        $('#userNum').attr('disabled', true);
+        $('#complete').attr('disabled', true);
+        resetTimer();
+       }
+     else if (time > 0) { // >= 0 으로하면 -1까지 출력된다.
+        $('#send').attr('disabled', true);
+        $('#phone').attr('disabled', true);
+        $('#userNum').attr('disabled', false);
+        $('#complete').attr('disabled', false);
+         time = time - 1; // 여기서 빼줘야 3분에서 3분 또 출력되지 않고, 바로 2분 59초로 넘어간다.
+         let min = Math.floor(time / 60);
+         let sec = String(time % 60).padStart(2, "0");
+         remainingMin.innerText = min;
+         remainingSec.innerText = sec;
+    } else {
+      $('#userNum').attr('disabled', true);
+    }
 
+  }, 1000);
+};
+</script>
 
-
-
-
+<%@ include file="footer.jsp"%>
 
 
 </body>

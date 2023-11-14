@@ -9,6 +9,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>메인 페이지 </title>
+     
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -149,11 +150,12 @@
 		
 		
 		const mid = sessionStorage.getItem("mid"); 	
+		  alert(mid);
 		
   });
 
   let mid = "${sessionScope.mid}"
-  alert(mid);
+
 
   showCategory("all");
   
@@ -232,7 +234,7 @@
 </div>
     <!-- </section> -->
            <!-- Footer-->
-<%@ include file="footer2.jsp" %>        
+<%@ include file="footer.jsp" %>        
         <!-- Bootstrap core JS-->    
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->     

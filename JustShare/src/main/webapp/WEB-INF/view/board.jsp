@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -45,6 +46,7 @@ img {
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
+<%@ include file="header.jsp"%>
 <body>
 	<h1>board</h1>
 		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
@@ -205,6 +207,7 @@ img {
 
 	<!-- 페이지 덧붙이기 스크립트 -->
 	<script type="text/javascript">
+
 		//현재 스크롤 위치 저장
 		let lastScroll = 0;
 		let page = 0;
@@ -823,6 +826,6 @@ $(document).ready(function() {
 
 </script>
 
-
+<%@ include file="footer.jsp"%>
 </body>
 </html>
