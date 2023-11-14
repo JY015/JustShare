@@ -131,6 +131,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
                 progressBar: true,
                 showMethod: 'slideDown',
                 preventDuplicates:true,
+                
                 positionClass: 'toast-top-center',
                 timeOut: 2000,
                 onShown: function() {
@@ -259,6 +260,7 @@ function jstradefromupdate(mid,toId,bno) {
 		 		    progressBar: true,
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {
@@ -272,7 +274,7 @@ function jstradefromupdate(mid,toId,bno) {
 					  var result = confirm("거래 화면으로 이동 하시겠습니까?");
 				 		
 					  if(result) {
-			 location.href='/chat1?toId='+toId+'&bno='+bno+'';
+			 location.href='/chat1?toId='+mid+'&bno='+bno+'';
 			 
 	   	
 
@@ -302,6 +304,7 @@ function jstradetoupdate(mid,toId,bno){
 				    progressBar: true,
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {

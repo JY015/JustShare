@@ -430,10 +430,11 @@ function jstradefromupdate(mid,toId,bno) {
 			
 			
 			toastr.options = {
+					progressBar: true,
 				    closeButton: true,
-		
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
@@ -447,7 +448,7 @@ function jstradefromupdate(mid,toId,bno) {
 						  var result = confirm("거래 화면으로 이동 하시겠습니까?");
 					 		
 						  if(result) {
-				 location.href='/chat1?toId='+toId+'&bno='+bno+'';
+				 location.href='/chat1?toId='+mid+'&bno='+bno+'';
 				 
 						  }
 							 
@@ -470,10 +471,11 @@ function jstradetoupdate(mid,toId,bno){
 			  
 		
 			toastr.options = {
+					 progressBar: true,
 				    closeButton: true,
-				
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
@@ -539,6 +541,7 @@ function tradefromupdate(mid,toId) {
 				    progressBar: true,
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 5000,
 				    onShown: function() {
@@ -573,9 +576,10 @@ function tradefromupdate(mid,toId) {
 			
 			toastr.options = {
 				    closeButton: true,
-		
+				    progressBar: true,
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
@@ -618,6 +622,7 @@ function tradetoupdate(mid,toId){
 				    progressBar: true,
 				    showMethod: 'slideDown',
 				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {
@@ -657,9 +662,10 @@ function tradetoupdate(mid,toId){
 			
 			toastr.options = {
 				    closeButton: true,
-				
+				    progressBar: true,
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
+				    
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
