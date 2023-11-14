@@ -9,7 +9,6 @@
 <link href="css/index.css" rel="stylesheet" />
 </head>
 <body>
-	<%@ include file="menu.jsp"%>
 	<br>
 	<c:forEach items="${mypageList}" var="m">
 		<div class="form-input">
