@@ -24,7 +24,7 @@ public class MypageController {
 	private MypageService mypageService;
 	
 
-	@GetMapping("/member/mypage")
+	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
 		String mid = (String) session.getAttribute("mid");
 		
@@ -53,7 +53,7 @@ public class MypageController {
 				 * model.addAttribute("list", trade);
 				 * 
 				 */
-			return "/member/mypage";
+			return "/mypage";
 			
 		} else {
 			return "redirect:/";
@@ -61,14 +61,14 @@ public class MypageController {
 	}
 		
 		
-		@GetMapping("/member/modify")
+		@GetMapping("/modify")
 		public String modify(HttpSession session, Model model, @RequestParam Map<String, Object> map) {
 			
 			if(session.getAttribute("mid") != null) {
 				map.put("mname", session.getAttribute("mname"));
 				Map<String, Object> info = mypageService.info(map);
 				model.addAttribute("info", info);
-				return "/member/modify";
+				return "modify";
 			} else {
 				return "redirect:/login";
 			}	
@@ -106,12 +106,7 @@ public class MypageController {
 				return "redirect:/login";
 			}
 	}
-		
-		
-		
+
 		
 	}
-
-
-
 

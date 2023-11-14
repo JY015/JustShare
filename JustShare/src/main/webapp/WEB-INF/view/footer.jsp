@@ -12,26 +12,13 @@
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
 <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-<link rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-
 <link rel="stylesheet" href="/css/main_page.css" />
-<link rel="stylesheet" href="./css/login.css">
-
-
-<!-- 폰트어썸 -->
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<link rel="stylesheet" type="text/css"
-   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
 <meta name="robots" content="index,follow">
-<meta name="naver-site-verification"
-   content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
+<meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script src="/js/valuevenue.js?ver=20000120" defer></script>
 <script src="/js/jquery-3.3.1.min.js"></script>

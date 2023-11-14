@@ -12,25 +12,18 @@
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
 <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-<!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 
 <link rel="stylesheet" href="/css/footer.css" />
-<link rel="stylesheet" href="./css/login.css">
-<!-- 회원가입 3가지회원 유형 css new -->
-<link rel="stylesheet" href="/css/register.css?ver=20000120" />
-<!-- 고객센터 css -->
-<link rel="stylesheet"
-	href="/css/customer_service_center.css?ver=20000120" />
+<link rel="stylesheet" href="/css/login.css"/>
+
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
 
 <meta name="robots" content="index,follow">
 <meta name="naver-site-verification"

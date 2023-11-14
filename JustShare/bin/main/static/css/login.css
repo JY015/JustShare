@@ -1,92 +1,163 @@
-
-
-.login_click{
-  border-radius: 4px;
-  background: #f64d61;
-  width: 100%;
-  margin: 18px 0px 46px;
-  padding: 14px 11px;
-  color: white;
-  font-size: 1.0625rem;
-  font-weight: 500;
+.login_click {
+	border-radius: 4px;
+	background: #f64d61;
+	width: 100%;
+	margin: 18px 0px 46px;
+	padding: 14px 11px;
+	color: white;
+	font-size: 1.0625rem;
+	font-weight: 500;
 }
 
-.login_t{
-  color: #161616;
-  font-size: 2.5rem;
-  font-weight: 200;
-  padding-bottom: 52px;
+.login_t {
+	color: #161616;
+	font-size: 2.5rem;
+	font-weight: 200;
+	padding-bottom: 52px;
 }
 
-
-.sign_movement{
-  padding-top: 45px;
-}
- .sign_movement p{
-  color: #000;
-  text-align: center;
-  font-size: 1.1875rem;
-  font-weight: 300;
-  padding-bottom: 23px;
-  word-break: keep-all;
-}
- .sign_movement p span{
-  font-weight: 500;
-}
-.sign_movement{
-  width: 100%;
-  font-size: 1.0625rem;
-  font-weight: 400;
+.sign_movement {
+	padding-top: 45px;
 }
 
-
-.sign_movement p{
-    font-size: 16px;
-    transition: 0.3s ease;
-  }
-
-
- .sign_btn_w{
-  display: flex;
-  justify-content: center;
-  padding-top: 50px;
-
- }
- .sign_btn_w button{
-  margin-right: 15px;
-  width: 170px;
- }
- .sign_btn_w button:last-child{
-  margin-right: 0px;
- }
- .social_group{
-  padding-top: 60px;
- }
-
-.sign_movement .sign_btn{
-  width: 90%;
-  font-size: 1.0625rem;
-  font-weight: 400;
+.sign_movement p {
+	color: #000;
+	text-align: center;
+	font-size: 1.1875rem;
+	font-weight: 300;
+	padding-bottom: 23px;
+	word-break: keep-all;
 }
 
+.sign_movement p span {
+	font-weight: 500;
+}
+
+.sign_movement {
+	width: 100%;
+	font-size: 1.0625rem;
+	font-weight: 400;
+}
+
+.sign_movement p {
+	font-size: 16px;
+	transition: 0.3s ease;
+}
+
+.sign_btn_w {
+	display: flex;
+	justify-content: center;
+	padding-top: 50px;
+}
+
+.sign_btn_w button {
+	margin-right: 15px;
+	width: 170px;
+}
+
+.sign_btn_w button:last-child {
+	margin-right: 0px;
+}
+
+.social_group {
+	padding-top: 60px;
+}
+
+.sign_movement .sign_btn {
+	width: 90%;
+	font-size: 1.0625rem;
+	font-weight: 400;
+}
 
 .btn_clear_black {
-    border-radius: 5px;
-    background: #ffffff;
-    border: solid 1px #020202;
-    color: #020202;
-    font-size: 0.938rem;
-    font-weight: 500;
-    text-align: center;
-    padding: 15px 25px;
-    line-height: 17px;
-    width: fit-content;
+	border-radius: 5px;
+	background: #ffffff;
+	border: solid 1px #020202;
+	color: #020202;
+	font-size: 0.938rem;
+	font-weight: 500;
+	text-align: center;
+	padding: 15px 25px;
+	line-height: 17px;
+	width: fit-content;
 }
 
-.login_inner{
-   width: 100%;
-    margin: 0px auto;
-    padding: 37px 16px;
-    position: relative;
-    background-color: rgb(255, 255, 255);
+.login_inner {
+	width: 100%;
+	margin: 0px auto;
+	padding: 37px 16px;
+	position: relative;
+	background-color: rgb(255, 255, 255);
+}
+
+.mb-banner {
+	height: 200px;
+	margin: 0 10px 120px 10px;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.mb-banner-img {
+	width: 100%;
+	height: 80px;
+	text-align: center;
+}
+
+.mb-banner-sub {
+	height: 30px;
+	color: #fff;
+	background-color: #1F6CFD;
+	border-radius: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+.mb-banner_title {
+	color: black;
+	text-align: center;
+	font-size: 14px;
+}
+
+.mobile_pop_section {
+	display: block;
+	bottom: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 110;
+	left: 0;
+}
+
+.notScroll {
+	overflow: hidden;
+	width: 100%;
+	height: 100vh;
+}
+
+button {
+	background-color: #f64d61 !important;
+	color: white !important;
+	padding: 10px 20px !important;
+	border: none !important;
+	cursor: pointer !important;
+	border-radius: 4px !important;
+	font-size: 16px !important;
+	width: 100%;
+	max-width: 600px;
+}
+
+input[type="text"], input[type="password"] {
+	width: 100%;
+	padding: 8px;
+	margin: 5px 0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	max-width: 600px;
+}
+
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
 }

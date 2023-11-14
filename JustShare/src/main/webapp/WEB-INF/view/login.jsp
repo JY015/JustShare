@@ -15,12 +15,10 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-     <link rel="stylesheet" href="/css/main_page.css" />
+    <link rel="stylesheet" href="/css/main_page.css" />
+    <link rel="stylesheet" href="./css/login.css">
 
-   <!-- 폰트어썸 -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
@@ -55,55 +53,7 @@ var _ss_user_id   = "";
 </script>
   </head>
 <body>
-<!--헤더 시작-->
-<header class="header_topnav_new">
-        <div class="header_topnav_inner_n">
-         <div class="first_row">
-          <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
-         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
-            <div class="logo"><img alt="logo" src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
-              <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
-                        </c:choose>     
-         </div>
-</div>
-</header>
-<!--헤더 끝-->
-  <div class="body__container section">
-  <input type="hidden" class="is_phpself" value="/login.php">
-  <input type="hidden" class="is_app_banner" value="">
-   <header id="header" class="header_bg_new">
-      <div class="header__inner">
-        <div class="header__first_row">
-           <div class="sign-area">
-         <a href="./login">로그인</a>
-         <div class="half-line"></div> 
-         <a href="./join">회원가입</a>
-            
-         <div class="half-line"></div>
-            <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>
-            <div class="half-line"></div>
-         <a href="/contact/forms">제휴 및 입점문의</a>
-            <div class="half-line"></div>
-         <a href="/faq">자주 묻는 질문</a>
-           </div>
-        </div>
-        <div class="full-line"></div>
-        <div class="header__second_row"> 
-         <div class="left-side">   
-            <div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./'">
-         </div>
-        <div class="right-side">
-            <div class="sign-group">
-         
-            </div>
-          </div>
-      </div>
-
-      </div>
-    </header>
+<%@ include file="header.jsp"%>
     
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
@@ -141,31 +91,37 @@ var _ss_user_id   = "";
 
       <%@ include file="footer.jsp"%>
  
-      <footer class="footer1400">
+<footer class="footer1400">
         <div id="footer__box" class="footer__inner txt__subtit">
-          <div class="flex" style="text-align: center">
+          <div class="flex">
             <ul>
               <li><a href="/notice/list">공지사항</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
               <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
               <li><a href="/qna/list">문의하기</a></li>
               <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
               <li><a href="/faq">자주 묻는 질문</a></li>
               <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
               <li><a href="/help/policy">이용약관</a></li>
+                   <c:if test="${sessionScope.mgrade eq 4}"><a href="./admin/main">관리자페이지</a></c:if>             
             </ul>
           </div>
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
-            <img style="width: 96px;margin-left: 4px;" src="" alt="">
+            <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
-            TEL : <a href="tel:02-1111-2222">02-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
-            <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a> </p>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
           </div>
         </div>
         </div>
       </footer>
     </div>
+
+  </body>
+</html>
 
    <style>
 
