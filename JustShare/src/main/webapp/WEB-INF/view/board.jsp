@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -39,6 +40,14 @@
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
  <style type="text/css">
+=======
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+>>>>>>> main
 .row detail{
 	width: 100%;
 	}
@@ -148,6 +157,7 @@
 </style>
  
 </head>
+<%@ include file="header.jsp"%>
 <body>
 	<div class="body__container section">
 	<!-- 모바일 버전 헤더  -->
@@ -359,6 +369,7 @@
 
 	<!-- 페이지 덧붙이기 스크립트 -->
 	<script type="text/javascript">
+
 		//현재 스크롤 위치 저장
 		let lastScroll = 0;
 		let page = 0;
@@ -1230,6 +1241,6 @@ $(document).on("click", ".like", function() {
 
 </script>
 
-
+<%@ include file="footer.jsp"%>
 </body>
 </html>

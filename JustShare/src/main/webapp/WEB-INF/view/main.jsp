@@ -11,28 +11,17 @@
    <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
    <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
     <link rel="stylesheet" href="/css/import.css?ver=20000120" />
     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
 
-   <!-- 회원가입 3가지회원 유형 css new -->
-   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
-   <!-- 고객센터 css -->
-   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-   <!-- 폰트어썸 -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
    
    
    <meta property="og:locale"       content="ko_KR" />
@@ -61,83 +50,29 @@
 <script>
 var _ss_user_id   = "";
 </script>
-  </head>
+
+
+  </head> 
 <body>
+
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/index.php">
   <input type="hidden" class="is_app_banner" value="">
    
    <div class="top_app_banner" style="display:none;background-color: #fff7e1">
-      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
+      <div class="app_div">JustShare 앱으로 더욱 편리하게 이용해 보세요, 
          <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
       </div>
       <div class="app_div_close"></div>
    </div>
-
-   <style>
-   .top_app_banner{
-      height:30px;
-      width:100%;
-      display:flex;
-   }
-   .app_div {
-      text-align:center;
-      width:100%;
-      font-size:12px;
-      padding:5px;
-      margin-left:15px;
-   }
-   .app_down {
-      color: white;
-      font-weight:bold;
-      background-color: #3CB4FF;
-      border-radius: 20px;
-      padding: 2px 10px 2px 10px;
-      margin-left:10px;
-   }
-   .app_div_close {
-      background: url('/images/close.svg') no-repeat 50% 50%; 
-      width:34px;
-      height:22px; 
-      padding:10px 10px 20px 0px;
-   }
-      .all-category-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .all-category-container .category-item {
-        text-align: center;
-        margin-right: 20px;
-        margin-left: 20px; 
-    }
-
-    .all-category-container img,
-    .entire-cate img {
-        max-width: 50px; 
-        height: auto; 
-    }
-
-    .entire-cate {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; 
-    }
-
-    .entire-cate .category {
-        flex-basis: calc(25% - 10px); 
-        text-align: center;
-    }
-   
-   
-   </style>
+   <!--헤더-->
    <header id="header" class="header_bg_new">
       <div class="header__inner">
         <div class="header__first_row">
            <div class="sign-area">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -153,60 +88,41 @@ var _ss_user_id   = "";
         <div class="full-line"></div>
         <div class="header__second_row"> 
          <div class="left-side">   
-            <h1 class="logo"><a href="/">로고</a></h1>
+<!--          <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">-->
+            <h1 class="logo"><a href="/"></a></h1>
          </div>
-          <div class="search-area">
-            <form class="searchbar searchbar-length" action="/schedule/search">
-              <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="" style="padding-right: 50px;">
-              <button type="submit"> <img src="/images/ic_search.svg" alt=""></button> 
-            </form>
-          </div>
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
-           <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>            
-         
-            </div>
+          </div>
           </div>
       </div>
-
-        <div class="header__third_row">
-          <div class="main-menu-area">
-            <div><a class="" href="/schedule/search?gubun=popup">팝업 스토어</a></div>
-            <div><a class="" href="/schedule/search?gubun=space">리테일 공간 대관</a></div>
-            <div><a class="" href="/schedule/search?gubun=event">전국 행사 정보</a></div>
-            <div><a class="" href="/help/leasing?gubun=leasing">LEASING</a></div>
-          </div>
-          <div class="btn-com">
-            <a href="https://www.value-venue.com/index.html" target='_blank'>About VALUEVENUE<i></i></a>
-          </div>
-        </div>  
+ 
       </div>
     </header>
-
-      <header class="header_topnav_new">
+          
+    
+  <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">
-             <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main2'">
-              <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user">로그인</i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out">로그아웃</i></a></li></c:otherwise>
-                        </c:choose>     
+        <!--  <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();"> -->
+
+           <h1 class="logo"><a href="/"></a></h1>
+           <div class="blue_btn">
+           <c:choose>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></c:otherwise>
+                        </c:choose>    
+              </div>
          </div>
 
-         <div class="topnav_searchbar_new">
-           <form action="/schedule/search" method="get">
-            <input type="text" placeholder="전체 둘러보기" name="stx" id="stx" value="">
-            <button type="submit"> <img src="/images/ico_topnav_search_mo.svg" alt=""></button> 
-           </form>
-         </div>
         </div>
       </header>
       <section class="myinfo__pop">
         <div class="myInfo__inner">
           <div class="myregInfo">
             <div class="infoarea">
-              <img src="/images/ico_profile.svg" alt="" />
+              <img src="" alt="" />
               <div class="userInfo">
                 <div class="infoBox">
                   <span class="txt__card__tit2"></span>
@@ -302,38 +218,36 @@ var _ss_user_id   = "";
    <script>
   var swiper = new Swiper(".mySwiper", {
   slidesPerView: 2,
-	  navigation: {
-		nextEl: ".swiper-button-next.main",
-		prevEl: ".swiper-button-prev.main" 
-		},
-			
-	  effect: "fade",
-	  loop: "infinite",
-		autoHeight: false, // 슬라이드 높이 자동 조절 비활성화
-	  pagination: {   //페이징 사용자 설정
-			el: ".pagination_bullet",   //페이징 태그 클래스 설정 
-			type : 'bullets'
-		},
-		
-	  });
+     navigation: {
+      nextEl: ".swiper-button-next.main",
+      prevEl: ".swiper-button-prev.main" 
+      },
+         
+     effect: "fade",
+     loop: "infinite",
+      autoHeight: false, // 슬라이드 높이 자동 조절 비활성화
+     pagination: {   //페이징 사용자 설정
+         el: ".pagination_bullet",   //페이징 태그 클래스 설정 
+         type : 'bullets'
+      },
+      
+     });
 
-	swiper.on('slideChange', function (sld) {
-	  document.body.setAttribute('data-sld', sld.realIndex);
-	});
-	
-	</script>
+   swiper.on('slideChange', function (sld) {
+     document.body.setAttribute('data-sld', sld.realIndex);
+   });
+   
+   </script>
 
-
+<div class="all-container">
 <div class="all-category-container">
-    <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
-    <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
-   <div class="category-item"><img class="studio" alt="studio" src="./img/category/studio.png"><p>스튜디오</p></div>
-    <div class="category-item"><img class="culture" alt="culture" src="./img/category/culture.png"><p>문화</p></div>    
-    <div class="category-item"><img class="business" alt="business" src="./img/category/business.png"><p>업무</p></div>
+    <div class="category-item"><p class="all" style="cursor:pointer;">전체</p></div>
+    <div class="category-item"><p class="commercial" style="cursor:pointer">상업</p></div>
+    <div class="category-item"><p class="studio" style="cursor:pointer">스튜디오</p></div>
+    <div class="category-item"><p class="culture" style="cursor:pointer">문화</p></div>    
+    <div class="category-item"><p class="business" style="cursor:pointer">업무</p></div>
     </div>
-    <hr>
     <br>
-
 <div class="entire-cate">
 <div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
 <div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
@@ -346,13 +260,15 @@ var _ss_user_id   = "";
 <div class="category studio"><img alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
 <div class="category business"><img alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
 <div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
-<div class="category culture"><img alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
 <div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+</div>
 </div>
  <script>
   $(".commercial, .business, .studio, .culture").click(function () {
        var category = $(this).attr("class");
        showCategory(category);
+       
      });
 
      $(".all").click(function() {
@@ -371,6 +287,16 @@ var _ss_user_id   = "";
      function showAllItems() {
        $(".category").show();
      }
+     
+     $(".category-item").click(function () {
+        
+           $(".category-item").css('border-bottom', 'none');
+
+           $(this).css('border-bottom', '2px solid red');
+       });
+
+
+     
   </script>
   <!-- jy 메인 css한 부분--> 
     <div class="partition-line"></div>
@@ -422,8 +348,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -477,34 +403,34 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
 </script>
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-	  <h4 class="txt__tit">찜 높은순</h4>
-	  <span class="txt__subtit">찜이 높아요</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
-
-				</div>
-  	<div  class="card__inner2">         
+     <h4 class="txt__tit">찜 높은순</h4>
+     <span class="txt__subtit">찜이 높아요</span>
+     <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
+     <div>
+      <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
+   <c:forEach items="${imgsubst }" var="row" varStatus="loop">
+         <div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">           
+            <div class="cccc">
+               <div class="card-sign-group">
+               </div>
+               <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
+               <div class="location-box">
+                 <span>${row.addr }</span>
+               </div>
+                <a href="./bdetail?bno=${row.bno}">
+                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+            </a>
+            </div>
+     <div  class="card__inner2">         
               <div class="txt__wrap2">
                <p class="txt__card__tit">${row.btitle}</p>
                <p class="txt__subtit__sm">${row.addDetail}</p>
@@ -513,18 +439,18 @@ navigation: {   // 버튼 사용자 지정
                <span class="term">${row.bdate}</span></div>
                
               </div>
-            </div>			
-			</div>
-			</a>
-			 </c:forEach> 
-			</div>
-		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-	  </div>
-	  <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
-	  <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
+            </div>         
+         </div>
+         </a>
+          </c:forEach> 
+         </div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+     </div>
+     <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
+     <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
 
 
-	</section>
+   </section>
    
    <script>
    var mySwiper = new Swiper('.swiper', {
@@ -538,8 +464,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -547,26 +473,26 @@ navigation: {   // 버튼 사용자 지정
 
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-	  <h4 class="txt__tit">더미1</h4>
-	  <span class="txt__subtit">더미1</span>
-	  <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
-	  <div>
-		<div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
-		  <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">	
-	<c:forEach items="${imgsubst }" var="row" varStatus="loop">
-			<div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">			  
-				<div class="cccc">
-					<div class="card-sign-group">
-					</div>
-					<button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
-					<div class="location-box">
-						<img src="../images/ico_card_location.svg" alt=""><span>${row.addr }</span>
-					</div>
-					 <a href="./bdetail?bno=${row.bno}">
-					  <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+     <h4 class="txt__tit">더미1</h4>
+     <span class="txt__subtit">더미1</span>
+     <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
+     <div>
+      <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
+        <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
+   <c:forEach items="${imgsubst }" var="row" varStatus="loop">
+         <div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">           
+            <div class="cccc">
+               <div class="card-sign-group">
+               </div>
+               <button class="schedule_2568 btn_like-16 " data-id="2568" data-gubun="schedule"></button>
+               <div class="location-box">
+                  <span>${row.addr }</span>
+               </div>
+                <a href="./bdetail?bno=${row.bno}">
+                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
-				</div>
-  	<div  class="card__inner2">         
+            </div>
+     <div  class="card__inner2">         
               <div class="txt__wrap2">
                <p class="txt__card__tit">${row.btitle}</p>
                <p class="txt__subtit__sm">${row.addDetail}</p>
@@ -575,18 +501,18 @@ navigation: {   // 버튼 사용자 지정
                <span class="term">${row.bdate}</span></div>
                
               </div>
-            </div>			
-			</div>
-			</a>
-			 </c:forEach> 
-			</div>
-		<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-	  </div>
-	  <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
-	  <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
+            </div>         
+         </div>
+         </a>
+          </c:forEach> 
+         </div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+     </div>
+     <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
+     <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
 
 
-	</section>
+   </section>
 
    <div class="partition-line"></div>
    <script>
@@ -601,8 +527,8 @@ autoplay : {  // 자동 슬라이드 설정 , 비 활성화 시 false
   disableOnInteraction : false,  // false로 설정하면 스와이프 후 자동 재생이 비활성화 되지 않음
 },
 navigation: {   // 버튼 사용자 지정
-	nextEl: '.swiper-button-next',
-	prevEl: '.swiper-button-prev',
+   nextEl: '.swiper-button-next',
+   prevEl: '.swiper-button-prev',
 },
 });
 
@@ -622,314 +548,80 @@ navigation: {   // 버튼 사용자 지정
      </div>
      <div class="banner-copy">
       <p class="txt__banner_copy">JustShare은 공간자와 브랜드, 그리고 소비자가 가치공간의 플랫폼 안에서 각자의 가치를 실현하고 한 단계 성장할 수 있는 기회를 제공하는 진화(revolution)의 장입니다.</p>
-      <button class="btn_banner"><a href="/help/pc_guide20230426.pdf" target="_blank">사용자 가이드 보기</a></button>
+      <button class="btn_banner"><a href="" target="_blank">사용자 가이드 보기</a></button>
      </div>
      <div class="banner-img img_adjustment">
-      <img src="../images/subbanner_img1.png" alt="">
+      <img src="" alt="">
      </div>
    </div>
   </div>
 </section>
-<script>
-function search_check_m2()
-{
-   var stx   = $('#stxm').val().trim();
-   var gubun = $('#gubunm').val() ?? '';
-   var datestart = $('#dateStartm').val() ?? '';   
-   var duration = $('#durationm').val() ?? '';
 
-   if(stx == '' && gubun == '' && datestart == '' && duration == ''){
-      alert('하나이상의 검색 조건을 입력 또는 선택해주세요.');
-      return false;
-   }
-}
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+      
+      //세션에 저장된 count를 storage에 저장
+      sessionStorage.setItem("mid",  "<%=session.getAttribute("mid")%>" );
+      
+      
+      const mid = sessionStorage.getItem("mid");    
+      
+      
+  });
 
-</script>
-      <section class="section section--m--search">
-        <div class="container">
-          <header id="header" class="header__type2">
-            <div class="header__wrap">
-              <div><p style="font-weight: 400; font-size: 24px; margin-left: 12px;">검색</p></div>
-              <div class="back btnClose" style="background: url('/images/close.svg') no-repeat 50% 50%; margin: 0;"></div>
-            </div>
-          </header>
-          <form id="search-form" class="inner m_search" method="GET" action="/schedule/search" onsubmit="return search_check_m2();">
-            <ul class="searchForm__inner">
-              <li class="search_location">
-                <img src="/images/ico_search1.png" alt="" />
-                <dl>
-                  <!--dt>검색어</dt-->
-                  <dd>
-                    <input type="text" placeholder="키워드를 입력해주세요.(eq. 현대백화점, 강남등)" name="stx" id="stxm" class="input--text" value="" autocomplete="off" />
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_type">
-                <img src="/images/ico_search2.png" alt="" />
-                <dl>
-                  <dt>검색 유형</dt>
-                  <dd>
-                    <select class="selectBox" name="gubun" id="gubunm">
-                      <option value="" selected>전체</option>
-                      <option value="popup" >팝업 스토어</option>
-                      <option value="space" >리테일 공간 대관</option>
-                 <option value="event" >전국 행사 정보</option>
-                    </select>
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_date datepick has--schedule">
-                <img src="/images/ico_search3.png" alt="" />
-                <dl>
-                  <dt>시작 날짜</dt>
-                  <dd>
-                    <input class="datepick" id="dateStartm" type="text" name="dateStart" value="" placeholder="선택 하세요" readonly="readonly" />
-                    <i></i>
-                  </dd>
-                </dl>
-              </li>
-              <li class="search_period">
-                <img src="/images/ico_search4.png" alt="" />
-                <dl>
-                  <dt>운영 기간</dt>
-                  <dd>
-                    <select class="selectBox" name="duration" id="durationm">
-                      <option value="" selected>전체</option>
-                      <option value="7" >1주일 이하</option>
-                      <option value="14" >2주일 이하</option>
-                      <option value="31" >1달 이하</option>
-                    </select>
-                  </dd>
-                </dl>
-              </li>
-              <script></script>
-            </ul>
-            <button class="search btn--primary">검색</button>
-          </form>
-        </div>
-        <div id="m_search_schedule_list">
-            <!-- 메인/팝업 지정 공간 표시용 -->
-        </div>
-      </section>
+    </script>
 
     <section class="aside-layerpop">
       <div class="aside-wrap">
         <div class="aside-content">
-          <div class="aside-header">
-            <a href="/"><img style="width: 100px;" src="/images/mo/logo_m_active2.svg" alt=""></a>
-           <form class="searchbar searchbar-length" action="/schedule/search">
-            <input type="text" placeholder="전체 둘러보기" name="stx" class="gnb_stx" value="">
-            <button type="submit"> <img src="/images/ico_search.svg" alt=""></button> 
-           </form>
-              <div class="btn-aside-layerpop-close">닫기버튼</div>
-          </div>
           <div class="aside-body">
          <!-- 브랜드 stats가 없는경우에만 "non-stat" 추가-->
             <div class="aside-sign-group non-stat">
               <div class="sign-group-profile">
-                <div class="sign-group-profile-left">
-                <span><a href="/login">로그인</a></span>
-                <span><img src="/images/ico_login.svg" alt=""></a></span>
-                </div>
-                <div class="sign-group-profile-right">
-                  <div class="aside-icon-alarm">
-                    <img src="/images/ico_alarm.svg" alt="" onclick="top.location.href='/member/alarm'">
-              </div>
-                </div>
-              </div>
-              <div class="aside-notice">
-                <a href="/schedule/list?dateStart=2023-11-03">
-                  <div class="notice-box">
-                    <div class="notice-txt">
-                      <p class="notice-alarm">&lt;알림&gt;</p>
-                      <p class="notice-title">23년 11월 셀러 모집합니다</p>
-                    </div>
-                      <img src="/images/arrow_right.svg" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-            <!-- 광고배너 -->
-            <div class="ad-banner-group">
-              <div class="card__item" class="row" id="adbanner" onclick="openModal();currentSlide(1)" >
-                <a href="/help/leasing">
-                  <img src="/images/ad_banner.png">
-                </a>
-              </div>
-            </div> 
-            <!-- 광고배너 종료-->
 
-            <div class="aside-menu-group">
-            <p class="txt__aside_maintit">가치공간</p>
-              <ul>
-                <li><a href="/notice/list" class="aside-arrow">공지사항</a><li>
-                <li><a href="/contact/forms" class="aside-arrow">제휴 및 입점문의</a><li>
-                <li><a href="/help/leasing" class="aside-arrow">리징</a><li>
-                <li><a href="/faq" class="aside-arrow">자주 묻는 질문</a><li>
-                <li><a href="/help/pc_guide20230426.pdf" class="aside-arrow" target='_blank'>사용자 가이드</a><li>
-              </ul>
-            </div>
-            <hr class="menu-line">
-            <div class="aside-contact-group">
-            <p class="txt__aside_maintit">고객센터</p>
-              <p class="contact-tit">TEL.  <a href="tel:02-1661-6925">02-1661-6925</a></p>
-              <p class="contact-tit">사업자등록번호.  156-81-00883</p>
-              <p class="contact-tit">E-mail. <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a></p>
-            </div>
-            <hr class="menu-line">
-            <div class="aside-sns-group">
-            <p class="txt__aside_maintit">SNS</p>
-              <div class="social-logo">
-                <div class="roundlogo" ><a href="https://www.instagram.com/valuevenue_official" target="_blank"><img src="/images/insta.svg" alt=""></a></div>
-                <div class="roundlogo" ><a href="https://www.youtube.com/channel/UC_Yp-_yUp6JxwZAVRkzF94A" target="_blank"><img src="/images/youtube.svg" alt=""></a></div>
-                <div class="roundlogo"><a href="https://blog.naver.com/value_venue" target="_blank"><img src="/images/blog.svg" alt=""></a></div>
               </div>
+             
             </div>
           </div>
         </div>
       </div>
     </section>
-      <nav class="bottom_nav_menu">
-        <ul>
-          <li class="input--search m_search_input b_nav_list">
-            <a href="#">
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M21.5 20.0585L16.4719 15.0304C18.9818 12.0171 18.6777 7.56252 15.7815 4.91827C12.8854 2.27402 8.42161 2.37546 5.64853 5.14853C2.87546 7.92161 2.77402 12.3854 5.41827 15.2815C8.06252 18.1777 12.5171 18.4818 15.5304 15.9719L20.5585 21L21.5 20.0585ZM5.08015 10.3504C5.08015 7.16356 7.66356 4.58015 10.8504 4.58015C14.0372 4.58015 16.6206 7.16356 16.6206 10.3504C16.6206 13.5372 14.0372 16.1206 10.8504 16.1206C7.66503 16.117 5.08368 13.5357 5.08015 10.3504Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">검색</p>
-            </a>
-          </li>
-
-          <li class="b_nav_list">
-            <a href="javascript:alert('로그인 후 이용이 가능합니다.');location.href='/login.php?s_url=%2Fschedule%2Fmy_schedule'">
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.6 12H9.4V13.8H7.6V12M20.2 6.6V19.2C20.2 20.1941 19.3941 21 18.4 21H5.8C4.801 21 4 20.19 4 19.2V6.6C4 5.60589 4.80589 4.8 5.8 4.8H6.7V3H8.5V4.8H15.7V3H17.5V4.8H18.4C19.3941 4.8 20.2 5.60589 20.2 6.6M5.8 8.4H18.4V6.6H5.8V8.4M18.4 19.2V10.2H5.8V19.2H18.4M14.8 13.8H16.6V12H14.8V13.8M11.2 13.8H13V12H11.2V13.8Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">내 일정</p>
-            </a>
-          </li>
-        
-          <li class="">
-            <a href="/main2">
-              <div class="home_btn">
-            <div class="container_w">
-               <div class="svgm">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
-                     <path fill-rule="evenodd" clip-rule="evenodd" d="M24 10L11.5 0L0 10H2.66602V22.5H8.49935V14.3333H15.4993V22.5H21.3327V10H24Z" fill="white" />
-                  </svg>
-               </div>
-            </div>
-           </div>
-            </a>
-          </li>
-
-          <li class="b_nav_list ">
-            <a href='/mypage'>
-              <svg class="black_c " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 5C14.2091 5 16 6.79086 16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5M12 7C10.8954 7 10 7.89543 10 9C10 10.1046 10.8954 11 12 11C13.1046 11 14 10.1046 14 9C14 7.89543 13.1046 7 12 7M12 14C14.67 14 20 15.33 20 18V21H4V18C4 15.33 9.33 14 12 14M12 15.9C9.03 15.9 5.9 17.36 5.9 18V19.1H18.1V18C18.1 17.36 14.97 15.9 12 15.9Z" fill="#98A8AF"/>
-           </svg>
-           <p class="">마이페이지</p>
-            </a>
-          </li>
-
-          <li class="b_nav_list">
-            <a class="btn-aside-open">
-              <svg class="black_c" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M5 5V7H18V5H5M5 11V13H18V11H5M5 17V19H18V17H5" fill="#98A8AF"/>
-           </svg>
-           <p>더보기</p>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <%@ include file="footer.jsp"%>
       
       	<%@ include file="footer.jsp" %> 
  <!-- 내가 만진 부분-->     
+<<<<<<< HEAD
  
+=======
+ <footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+            <ul>
+              <li><a href="/notice/list">공지사항</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/qna/list">문의하기</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/faq">자주 묻는 질문</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/help/policy">이용약관</a></li>
+                   <c:if test="${sessionScope.mgrade eq 4}"><a href="./admin/main">관리자페이지</a></c:if>             
+            </ul>
+          </div>
+          <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
+>>>>>>> main
     </div>
-<!-- 내가 만진 부분-->
-
-   <section class="mobile_pop_section mobile_pop" style="display:none;">
-      <div class="mb-banner">
-         <div class="banner-wrap">
-            <div class="mb-banner-img"><a href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><img src="/images/ico_download_logo.svg" style="width:80px;height:auto;margin-bottom: 10px;
-             margin-top: -10px;" /></a></div>
-            <div class="banner-title" style="width:100%;">
-               <p class="mb-banner_title">모바일 앱으로 더욱 쉽고, 빠르게!</p>
-               <p class="mb-banner_title" style="font-weight:900;">가치공간 팝업스토어 서비스를 만나보세요!</p>
-               <div class="mb-banner-sub">
-                  <p class="mb-banner_title" style="color:#fff; text-align:center; font-weight:700;font-size:16px;" onclick="app_link_move('https://play.google.com/store/apps/details?id=com.valuevenue.gachispace')">가치공간 앱으로 보기 <img src="/images/ico_download_arrow.svg" style="width:20px; height:auto; margin-top:-1px;"/></p>
-               </div>               
-            </div>
-         </div>
-         <div>
-            <p class="mb-banner_title" style="color:#fff; text-align:center; text-decoration:underline;" onclick="mobile_app_func();">괜찮아요, 모바일 웹으로 볼래요!</p>
-         </div>
-      </div>
-   </section>
-   <style>
-   .mb-banner {
-      height:200px;
-      margin: 0 10px 120px 10px;
-      background-color: #fff;
-      border-radius: 10px;
-   }
-   .mb-banner-img{
-      width:100%;
-      height:80px;
-      text-align:center;
-   }
-   .mb-banner-sub {
-      height:30px;
-      color: #fff;
-      background-color: #1F6CFD;
-      border-radius: 5px;
-      padding: 5px;
-      margin-top:5px;      
-   }
-   .mb-banner_title {
-      color:black;
-      text-align:center;
-      font-size:14px;
-   }
-   .mobile_pop_section {
-      display:block;
-      bottom:0;
-      position:fixed;
-      width:100%;
-      z-index:110;
-      left:0;      
-   }
-   .notScroll {overflow: hidden;width: 100%;height: 100vh;}
-   </style>
-   <!-- 내가 만진 부분-->
-   <script>
-   $(document).ready(function() {
-       // "마이페이지" 링크를 클릭했을 때
-       $(".b_nav_list a").click(function(event) {
-           if (${sessionScope.mid eq null}) {
-               // sessionScope.mid가 null일 때 알림 메시지 표시
-               alert("로그인 후 이용이 가능합니다.");
-               event.preventDefault(); // 링크 이동을 막음
-           }
-       });
-   });
-   <!-- 내가 만진 부분-->
-   </script>
-
-    <!--date layer-->
-    <div class="dateLayer" id="container"></div>
-    <!--Simple Calender-->
-    <link rel="stylesheet" href="/js/animated-event-calendar/dist/simple-calendar.css">
-    <script src="/js/animated-event-calendar/dist/jquery.simple-calendar.js"></script>
-    <script>
-</script>
-  <div id="mask" class="mask"></div>
-  <iframe name="_hidden_frame" id="_hidden_frame" width=0 height=0></iframe>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- 구글 애널리틱스 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-234069340-1"></script>
-
 
   </body>
 </html>
