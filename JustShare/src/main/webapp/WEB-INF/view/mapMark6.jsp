@@ -83,6 +83,8 @@
 						<button id="zoomOutButton">
 							<img src="../img/minus.png" alt="축소">
 						</button>
+	<button class="category-button" data-category="restaurant">음식점</button>
+<button class="category-button" data-category="cafe">카페</button>
 					</div>
 				</div>
 			</div>
@@ -250,7 +252,16 @@ navigator.geolocation.getCurrentPosition(function(position) {
             }
           });
       });
-    var data = [
+    var data = [ {
+        category: 'restaurant',
+        content: '맛있는 음식점',
+        latlng: new kakao.maps.LatLng(37.4923615,127.0292881)
+    },
+    {
+        category: 'cafe',
+        content: '아늑한 카페',
+        latlng: new kakao.maps.LatLng(37.4923615,127.0292881)
+    },
         <c:forEach items="${imageAll}" var="all" varStatus="loop">
         {
             content: '<div class="custom-overlay-info">'
@@ -264,6 +275,41 @@ navigator.geolocation.getCurrentPosition(function(position) {
         }<c:if test="${!loop.last}">,</c:if>
         </c:forEach>
     ];
+ // 각 카테고리 버튼에 대한 클릭 이벤트 처리
+    $('.category-button').click(function () {
+        var category = $(this).data('category');
+        
+        // 해당 카테고리의 마커만 보이도록 설정
+        showMarkersByCategory(category);
+    });
+
+    // 모든 마커를 지도에서 제거하는 함수
+    function clearMarkers() {
+        markers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+    }
+
+    // 특정 카테고리의 마커만 지도에 표시하는 함수
+    function showMarkersByCategory(category) {
+        clearMarkers(); // 모든 마커 제거
+        
+        data.forEach(function (item) {
+            if (item.category === category) {
+                var marker = new kakao.maps.Marker({
+                    position: item.latlng,
+                    map: map,
+                    // 다른 마커 설정...
+                });
+                markers.push(marker);
+            }
+        });
+    }
+
+
+
+
+
     
     // 새로운 마커 이미지 생성
     var markerImage = new kakao.maps.MarkerImage('img/blue192.png', new kakao.maps.Size(40, 40));

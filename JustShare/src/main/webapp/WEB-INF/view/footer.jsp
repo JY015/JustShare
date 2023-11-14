@@ -49,7 +49,7 @@
    <ul><!-- 여기 수정함 b로-->
       <li class="b_nav_listb "><a href='/board'> <i class="xi-document"></i> </svg><p class="">게시판</p></a></li>
 
-      <li class="b_nav_listb "><a href='/mapMark6'> <i   class="xi-gps"></i> </svg><p class="">내위치</p></a></li>
+      <li class="b_nav_listb "><a href='/mapMark7'> <i   class="xi-gps"></i> </svg><p class="">내위치</p></a></li>
 
       <li class=""><a href="/">
             <div class="home_btn">

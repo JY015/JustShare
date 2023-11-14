@@ -328,6 +328,10 @@ public class MapController {
 
 		model.addAttribute("imageAll",imageAll);
 		
+		CateDTO cateDto = new CateDTO();
+		List<Map<String, Object>> cateAll = mapService.cateAll(cateDto);
+		System.out.println(cateAll);
+		model.addAttribute("cateAll",cateAll);
 
 		/*
 		 * System.out.println("ListAll:"+ListAll);
@@ -366,12 +370,37 @@ public class MapController {
 		 
 		    model.addAttribute("ListOne",ListOne);
 		}
+		
+		if (!cateAll.isEmpty()) {
+		    for (int i = 0; i < cateAll.size(); i++) {
+
+		        Object cate = cateAll.get(i).get("cate");
+		        //Object cname = String.valueOf(cateAll.get(i).get("cname"));
+		        
+		        if (cate.equals(1) | cate.equals(2) | cate.equals(3) | cate.equals(4)) {
+		        	cateAll.get(i).put("cname", "commercial");
+		        }
+		        
+		        if (cate.equals(5) | cate.equals(6) | cate.equals(7) | cate.equals(8) | cate.equals(9)) {
+		        	cateAll.get(i).put("cname", "studio");
+		        }
+		        
+		        if (cate.equals(10) | cate.equals(11) ) {
+		        	cateAll.get(i).put("cname", "culture");
+		        }
+		        
+		        if (cate.equals(12) | cate.equals(13)) {
+		        	cateAll.get(i).put("cname", "business");
+		        }
+		        
+		        System.out.println("=============");
+		        System.out.println(cateAll);
+		        model.addAttribute("cateAll", cateAll);
+		    }
+		}
 
 		return "mapMark7";
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		return "test";
-	}
+
 }
