@@ -71,9 +71,11 @@ public class AdminController {
 		List<Map<String, Object>> tradeList = adminService.tradeList();
 		List<Map<String, Object>> totalTradeList = adminService.totalTradeList();
 		List<Map<String, Object>> dateList = adminService.dateList();
+		List<Map<String, Object>> monthDay = adminService.monthDay();
 		model.addAttribute("tradeList", tradeList); // 결제 내역 출력
 		model.addAttribute("totalTradeList", totalTradeList); //총 결제된 내역 수 뽑기
 		model.addAttribute("dateList", dateList); //날짜랑 날짜에 맞는 카운트 뽑기
+		model.addAttribute("monthDay", monthDay);//달과 일자만 출력
 		System.out.println(tradeList);
 		return "admin/tradeList";
 	}

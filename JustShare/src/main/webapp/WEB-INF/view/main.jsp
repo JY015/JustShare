@@ -61,7 +61,7 @@ var _ss_user_id   = "";
   <input type="hidden" class="is_app_banner" value="">
    
    <div class="top_app_banner" style="display:none;background-color: #fff7e1">
-      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
+      <div class="app_div">JustShare 앱으로 더욱 편리하게 이용해 보세요, 
          <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
       </div>
       <div class="app_div_close"></div>
@@ -102,7 +102,7 @@ var _ss_user_id   = "";
       </div>
     </header>
           
-          <!--  모바일  -->
+    
   <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">

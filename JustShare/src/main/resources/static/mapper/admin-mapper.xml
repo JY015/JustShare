@@ -22,7 +22,7 @@ WHERE mno=#{mno}
 </update>
 
 <select id="reportList" resultType="map">	
-	SELECT r.*, rc.rcateName
+SELECT r.*, rc.rcateName
 FROM report r
 JOIN reportCate rc ON r.rcate = rc.rcate;
 
@@ -64,6 +64,15 @@ SELECT
 FROM 
   tradehistory;
 </select>
+
+<select id="monthDay" resultType="Map">
+SELECT
+  DATE_FORMAT(timestamp, '%m-%d') AS monthDay,
+  COUNT(*) AS count
+FROM tradehistory
+GROUP BY monthDay;
+</select>
+
 
 <select id="memberCount" resultType="Integer">
 SELECT COUNT(*) FROM members
