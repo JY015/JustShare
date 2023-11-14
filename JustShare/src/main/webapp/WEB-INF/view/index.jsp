@@ -9,8 +9,10 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>메인 페이지 </title>
+     
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
       <!-- Swiper -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
@@ -43,15 +45,15 @@
         </nav>
         <!-- Header-->
      <header class="bg-dark py-5">
-            <div class="swiper mySwiper1">
-               <ul class="swiper-wrapper">
-                   <c:forEach items="${bannerlist }" var="row">
-                  <div class="swiper-slide">                  
-                              <img src="./img/banner/${row.baimg }" style= "width: 50%" alt="배너이미지"/>      
-                  </div>
-                     </c:forEach> 
-               </ul>
-            </div>
+				<div class="swiper mySwiper1">
+					<ul class="swiper-wrapper">
+						 <c:forEach items="${bannerlist }" var="row">
+						<div class="swiper-slide">						
+										<img src="./img/banner/${row.baimg }" style= "width: 50%" alt="배너이미지"/>		
+						</div>
+							</c:forEach> 
+					</ul>
+				</div>
         </header>
         <br>
                  
@@ -79,31 +81,31 @@
         cursor: pointer; 
     }
 
-   .category {
+	.category {
         display: inline-block;
         margin-right: 10px; 
         text-align: center;
     }
     
-   .entire-cate{
-   text-align: center;
-   font: 600 15px/1.3 "NanumBarunGothic"
-   }    
+	.entire-cate{
+	text-align: center;
+	font: 600 15px/1.3 "NanumBarunGothic"
+	}    
 
 .banner_title{
-   color: black;
-   font: 600 35px/1.3 "NanumBarunGothic"
+	color: black;
+	font: 600 35px/1.3 "NanumBarunGothic"
 }
 
 .swiper-slide {
-   text-align:center;
-   display:flex; 
-   align-items:center; 
-   justify-content:center; 
+	text-align:center;
+	display:flex; 
+	align-items:center; 
+	justify-content:center; 
 }
 .swiper-slide img {
-   box-shadow:0 0 5px #555;
-   max-width:100%; 
+	box-shadow:0 0 5px #555;
+	max-width:100%; 
 }
   </style>
 </head>
@@ -112,7 +114,7 @@
 <div class="all-category-container">
     <div class="category-item"><img class="all" alt="all" src="./img/category/all.png"><p>전체</p></div>
     <div class="category-item"><img class="commercial" alt="commercial" src="./img/category/commercial.png"><p>상업</p></div>
-   <div class="category-item"><img class="studio" alt="studio" src="./img/category/studio.png"><p>스튜디오</p></div>
+	<div class="category-item"><img class="studio" alt="studio" src="./img/category/studio.png"><p>스튜디오</p></div>
     <div class="category-item"><img class="culture" alt="culture" src="./img/category/culture.png"><p>문화</p></div>    
     <div class="category-item"><img class="business" alt="business" src="./img/category/business.png"><p>업무</p></div>
     </div>
@@ -148,11 +150,12 @@
 		
 		
 		const mid = sessionStorage.getItem("mid"); 	
+		  alert(mid);
 		
   });
 
   let mid = "${sessionScope.mid}"
-  alert(mid);
+
 
   showCategory("all");
   
@@ -179,41 +182,29 @@
  <hr>
  <script>
   $(".commercial, .business, .studio, .culture").click(function () {
-       var category = $(this).attr("class");
-       showCategory(category);
-     });
+	    var category = $(this).attr("class");
+	    showCategory(category);
+	  });
 
-<<<<<<< HEAD
-     $(".all").click(function() {
-       showCategory('all');
-     });
-=======
 
 	  $(".all").click(function() {
 	    showCategory('all');
 	  });
->>>>>>> refs/remotes/origin/main
 
-     function showCategory(category) {
-       $(".category").hide();
-       if (category === 'all') {
-         showAllItems();
-       } else {
-         $(".category." + category).show();
-       }
-     }
+	  function showCategory(category) {
+	    $(".category").hide();
+	    if (category === 'all') {
+	      showAllItems();
+	    } else {
+	      $(".category." + category).show();
+	    }
+	  }
 
-<<<<<<< HEAD
-     function showAllItems() {
-       $(".category").show();
-     }
-=======
 	  function showAllItems() {
 	    $(".category").show();
 	  }
 
 
->>>>>>> refs/remotes/origin/main
   </script>
         <script src="js/swipeScript1.js"></script>
 <br>
