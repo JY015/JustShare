@@ -28,6 +28,10 @@ public class MapService {
 		return mapDao.imageD(imageDto);
 	}
 
+	public List<Map<String, Object>> cateAll(CateDTO cateDto) {
+		return mapDao.cateAll(cateDto);
+	}
+
 
 
 

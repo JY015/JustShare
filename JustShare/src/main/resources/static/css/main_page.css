@@ -568,8 +568,6 @@
    }
 }
 
-
-      
 @media screen  and (max-width:550px) {
   .banner_back_img .mo_banner{
     display: block;
@@ -771,4 +769,3 @@ margin-bottom:1%;
     .nav-link2 {
             display: inline;
     }
-}
