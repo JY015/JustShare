@@ -17,11 +17,15 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-     <link rel="stylesheet" href="/css/main_page.css" />
+	  <link rel="stylesheet" href="/css/main_page.css" />
+   <!-- 회원가입 3가지회원 유형 css new -->
 
+   <!-- 고객센터 css -->
+   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
    <!-- 폰트어썸 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />   
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
    <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
@@ -39,6 +43,7 @@
    <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="/js/valuevenue.js?ver=20000120" defer></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
@@ -56,19 +61,7 @@ var _ss_user_id   = "";
   </head>
 <body>
 <!--헤더 시작-->
-<header class="header_topnav_new">
-        <div class="header_topnav_inner_n">
-         <div class="first_row">
-          <!--    <img alt="logo" src="./img/JustShare.png" width="25%;" onclick="location.href='./main'">  -->
-         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
-            <div class="logo"><img alt="logo" src="./img/JustSharelogo.png" width="60%;" height="40%;" onclick="location.href='./'"></div>
-              <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
-                        </c:choose>     
-         </div>
-</div>
-</header>
+<%@ include file="header.jsp"%>
 <!--헤더 끝-->
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/login.php">
@@ -79,8 +72,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
          <a href="./login">로그인</a>
          <div class="half-line"></div> 
-         <a href="./join">회원가입</a>
-            
+         <a href="./join">회원가입</a>           
          <div class="half-line"></div>
             <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>
             <div class="half-line"></div>
@@ -90,21 +82,9 @@ var _ss_user_id   = "";
            </div>
         </div>
         <div class="full-line"></div>
-        <div class="header__second_row"> 
-         <div class="left-side">   
-            <div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-            <img alt="logo" src="./img/JustSharelogo.png" width="25%;" onclick="location.href='./'">
-         </div>
-        <div class="right-side">
-            <div class="sign-group">
-         
-            </div>
-          </div>
+        
       </div>
-
-      </div>
-    </header>
-    
+    </header>    
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
 
@@ -118,11 +98,11 @@ var _ss_user_id   = "";
          <input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br><br><br>
       <h3 style="text-align: left;"><label for="name">비밀번호</label></h3>
          <input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br><br>
-      <div style="text-align:center;">
-   <c:if test="${loginCheckCount eq 1}">
-   <p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
-   </c:if>
-   </div>   
+ 	  <div style="text-align:center;">
+	<c:if test="${loginCheckCount eq 1}">
+	<p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
+	</c:if>
+	</div>   
          <button class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
@@ -157,7 +137,7 @@ var _ss_user_id   = "";
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
-            <img style="width: 96px;margin-left: 4px;" src="" alt="">
+            <img style="width: 96px;margin-left: 4px;" src="/images/mo/logo_m_active2.svg" alt="">
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
             TEL : <a href="tel:02-1111-2222">02-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
             <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a> </p>
@@ -166,71 +146,5 @@ var _ss_user_id   = "";
         </div>
       </footer>
     </div>
-
-   <style>
-
-   .mb-banner {
-      height:200px;
-      margin: 0 10px 120px 10px;
-      background-color: #fff;
-      border-radius: 10px;
-   }
-   .mb-banner-img{
-      width:100%;
-      height:80px;
-      text-align:center;
-   }
-   .mb-banner-sub {
-      height:30px;
-      color: #fff;
-      background-color: #1F6CFD;
-      border-radius: 5px;
-      padding: 5px;
-      margin-top:5px;      
-   }
-   .mb-banner_title {
-      color:black;
-      text-align:center;
-      font-size:14px;
-   }
-   .mobile_pop_section {
-      display:block;
-      bottom:0;
-      position:fixed;
-      width:100%;
-      z-index:110;
-      left:0;      
-   }
-   .notScroll {overflow: hidden;width: 100%;height: 100vh;}
-       button {
-            background-color: #f64d61 !important;
-            color: white !important;
-            padding: 10px 20px !important;
-            border: none !important;
-            cursor: pointer !important;
-            border-radius: 4px !important;
-            font-size: 16px !important;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-         input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            max-width: 600px;
-        }
-           .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;        
-        }
-
-   </style>
-
   </body>
 </html>

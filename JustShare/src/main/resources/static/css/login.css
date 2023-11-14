@@ -90,3 +90,70 @@
     position: relative;
     background-color: rgb(255, 255, 255);
 }
+
+
+
+.mb-banner {
+      height:200px;
+      margin: 0 10px 120px 10px;
+      background-color: #fff;
+      border-radius: 10px;
+   }
+   .mb-banner-img{
+      width:100%;
+      height:80px;
+      text-align:center;
+   }
+   .mb-banner-sub {
+      height:30px;
+      color: #fff;
+      background-color: #1F6CFD;
+      border-radius: 5px;
+      padding: 5px;
+      margin-top:5px;      
+   }
+   .mb-banner_title {
+      color:black;
+      text-align:center;
+      font-size:14px;
+   }
+   .mobile_pop_section {
+      display:block;
+      bottom:0;
+      position:fixed;
+      width:100%;
+      z-index:110;
+      left:0;      
+   }
+   .notScroll {overflow: hidden;width: 100%;height: 100vh;}
+       button {
+            background-color: #f64d61 !important;
+            color: white !important;
+            padding: 10px 20px !important;
+            border: none !important;
+            cursor: pointer !important;
+            border-radius: 4px !important;
+            font-size: 16px !important;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+         input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-width: 600px;
+        }
+           .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+          
+        }
+
+
+
