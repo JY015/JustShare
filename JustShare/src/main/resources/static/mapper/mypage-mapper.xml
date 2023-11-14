@@ -3,11 +3,70 @@
 
 <mapper namespace="com.js.web.mypage.MypageDAO">
 
-<select id="list" parameterType="String" resultType="com.js.web.mypage.MypageDTO">
-		SELECT
-		mid, mname, maddr, mbirth, mphone, memail
+<select id="list" parameterType="String" resultType="Map">
+		SELECT *
 		FROM members
 		WHERE mid =#{mid}
 	</select>
+	
+	<select id="listdetail" parameterType="String" resultType="Map">
+		SELECT i.realFile as realFile, i.bno as bno, COUNT(i.bno) as bnoCount FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 AND mid =#{mid}; 
+	</select>
+<select id="listdetail2" parameterType="String" resultType="Map">
+		SELECT i.realFile as realFile, i.bno as bno, b.btitle as btitle FROM image i JOIN board b ON i.bno = b.bno WHERE i.main = 1 AND mid =#{mid}; 
+	</select>
 
+  <select id="likelist" parameterType="String" resultType="Map">
+
+SELECT i.realFile as realFile, i.bno as bno, b.btitle as btitle
+FROM image i
+JOIN likeList l ON l.bno = i.bno
+JOIN board b ON b.bno = i.bno
+WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};  
+</select>
+
+<select id="info" parameterType="Map" resultType="Map">
+		select mid, mname, maddr, mbirth, mphone, memail
+		from members
+		where mname = #{mname}
+		</select>
+
+	<select id="idchk" parameterType="String" resultType="Map">
+		select mid, count(*) as count
+		from members
+		where mno = #{mno}
+	</select>
+	
+	<select id="emailchk" parameterType="String" resultType="Map">
+		select count(*) as count
+		from members
+		where memail = #{arg0} and mid = #{arg1} 
+	</select>
+
+	<update id="infoChange" parameterType="Map">
+		update members set
+			<choose>
+				<when test="id != null and id != ''">mid = #{id}</when>
+				<when test="pw != null and pw != ''">mpw = #{pw}</when>
+				<when test="birth != null and birth != ''">mbirth = #{birth}</when>
+				<when test="addr != null and addr != ''">maddr = #{addr}</when>
+				<when test="email != null and email != ''">memail = #{email}</when>
+				<when test="phone != null and phone != ''">mphone = #{phone}</when>
+			</choose>
+		<where>
+			mno = #{mno}
+		</where>
+	</update>
+	
+<!-- 	<select id="trade" parameterType="String" resultType="Map">
+	select *
+	from tradehistory h
+	JOIN board b on h.bno = b.bno
+	where b.mid=#{mid} 
+	
+	
+	
+	</select> -->
+
+  
 </mapper>

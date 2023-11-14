@@ -1,6 +1,8 @@
 package com.js.web.join;
 
+
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,22 @@ public class JoinService {
 	@Autowired
 	private JoinDAO joinDAO;
 	
-	public int join(JoinDTO joinDTO) {
-		return joinDAO.join(joinDTO);
+	public int join(Map<String, Object> map) {
+		return joinDAO.join(map);
 	}
 
-	public int checkID(String mid) {
-		return joinDAO.checkID(mid);
+	public int checkID(String id) {
+		return joinDAO.checkID(id);
+	}
+
+	public int emailchk(String email) {
+		
+		return joinDAO.emailchk(email);
+	}
+
+	public int phonechk(int user_phone) {
+		
+		return joinDAO.phonechk(user_phone);
 	}
 
 	public String PhoneNumberCheck(String to)  {

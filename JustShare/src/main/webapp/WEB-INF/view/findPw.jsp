@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,16 +79,16 @@
             font-weight: bold;
             color: #ff5c5c;
         }
-		.text_find_pw{	
-			color: #8A8A8A;
-    		font-size: 1rem;
-   			font-weight: 400;
-    		word-break: keep-all;
-   			line-height: 1.4;
-    		text-align: center;
-    		padding: 26px 0 42px;
+      .text_find_pw{   
+         color: #8A8A8A;
+          font-size: 1rem;
+            font-weight: 400;
+          word-break: keep-all;
+            line-height: 1.4;
+          text-align: center;
+          padding: 26px 0 42px;
     
-		}	
+      }   
     </style>
 </head>
 <body>
@@ -99,9 +99,9 @@
     <c:if test="${findPwCheck eq null && findPwEmail ne 1}">
         <form action="./findPwCheck" method="post" class="container">
           <div class="text_find_pw">
-				<h4>FIND PASSWORD</h4>
-				<span>가입하신 정보를 입력해주시면 등록된 휴대폰 번호로 전송 해드립니다.</span>
-			</div>  
+            <h4>FIND PASSWORD</h4>
+            <span>가입하신 정보를 입력해주시면 등록된 휴대폰 번호로 전송 해드립니다.</span>
+         </div>  
             <label for="mid">아이디</label><br>
             <input type="text" id="mid" name="mid" placeholder="ex) five" required="required" maxlength="15"><br><br>
             <label for="mphone">핸드폰 번호</label><br>
