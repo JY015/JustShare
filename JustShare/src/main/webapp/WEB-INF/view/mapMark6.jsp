@@ -20,14 +20,21 @@
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
+
+
+   <!-- 회원가입 3가지회원 유형 css new -->
+   <link rel="stylesheet" href="/css/register.css?ver=20000120" />
+   <!-- 고객센터 css -->
+   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+
    <link rel="stylesheet" href="/css/map.css" />
+
 
    <!-- 폰트어썸 -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
+
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
    <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
@@ -51,6 +58,7 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
+
 
 <meta charset="UTF-8">
 <title>Map</title>
@@ -111,7 +119,15 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<%@ include file="footer.jsp"%>
+
   
+
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>

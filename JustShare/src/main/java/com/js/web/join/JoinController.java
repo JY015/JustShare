@@ -1,5 +1,8 @@
 package com.js.web.join;
 
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,14 +34,16 @@ public class JoinController {
 		}
 	
 	@PostMapping("/join")
-	public String join(JoinDTO joinDTO) {
-		//System.out.println("jsp에서 오는 값 : " + joinDTO);
+	public String join(@RequestParam Map<String, Object> map, @RequestParam("maddr1") String subAddress) {
+		 String combinedAddress =(String) map.get("maddr")+','+subAddress;
 		
-		int result = joinService.join(joinDTO);
+		 map.put("maddr2", combinedAddress);
+		 System.out.println(map);
+		int result = joinService.join(map);
 		
 		if(result == 1) {
 		
-		return "redirect:/index";
+		return "redirect:/login";
 	}else {
 	return "redirect:/join";
 }
@@ -59,15 +64,46 @@ public class JoinController {
 	 */
 	
 	
+
+	
+	@ResponseBody
+	@PostMapping("/emailcheck")
+	public String emailchk(@RequestParam("email") String email ) {
+		/* JSONObject json = new JSONObject(); */
+		System.out.println(email);
+		int result = joinService.emailchk(email);
+		System.out.println(result);
+		
+		return result + "";
+	}
+	
+	
+	
+	
+
 	//아이디 중복검사
 	@ResponseBody
 	@PostMapping("/checkID")
-	public String checkID(@RequestParam("mid") String mid) {
-		System.out.println("id : " + mid);
-		int result = joinService.checkID(mid);
+	public String checkID(@RequestParam("id") String id) {
+		//System.out.println("id : " + mid);
+		int result = joinService.checkID(id);
 			return result + "";
 	}
 
+	
+	
+	@ResponseBody
+	@PostMapping("/phonecheck")
+	public String phonechk(@RequestParam("user_phone") int user_phone ) {
+		/* JSONObject json = new JSONObject(); */
+		System.out.println(user_phone);
+		int result = joinService.phonechk(user_phone);
+		System.out.println(result);
+		
+		return result + "";
+	}
+	
+	
 	  
 	// coolSMS 테스트 화면
 	@GetMapping("/sms")
@@ -80,4 +116,5 @@ public class JoinController {
 	public @ResponseBody String sendSMS(@RequestParam(value="phone") String phone) throws CoolsmsException {  	
 		return joinService.PhoneNumberCheck(phone);
 	}
+
 }

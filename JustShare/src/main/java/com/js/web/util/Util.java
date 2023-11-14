@@ -23,11 +23,10 @@ public class Util {
 	      return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
 	   }
 	   
-	   //세션 얻어오기
 	   public HttpSession getSession() {
 		      return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
 		   }
-	   //업로드 폴더까지의 경로 얻어오기
+
 	   public String uploadPath() {
 		      return getCurrentRequest().getServletContext().getRealPath("/upload");
 		   }
@@ -36,7 +35,7 @@ public class Util {
 	   public boolean htmlMailSender(Map<String, Object> map) throws EmailException {
 		   
 			String emailAddr = "eorb1527@outlook.com";// 보내는사람
-		    String passwd = "";// 메일의 암호를 넣어주세요.
+		    String passwd = "";
 			String name = "Just Share 비밀번호 찾기"; // 보내는 사람 이름
 			String hostname = "smtp.office365.com";// smtp주소
 			int port = 587;
