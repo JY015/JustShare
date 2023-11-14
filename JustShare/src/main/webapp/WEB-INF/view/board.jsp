@@ -46,6 +46,7 @@ img {
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
+<%@ include file="header.jsp"%>
 <body>
 	<h1>board</h1>
 		<!-- 페이지 최상단으로 스크롤 이동 버튼 -->
@@ -825,6 +826,6 @@ $(document).ready(function() {
 
 </script>
 
-
+<%@ include file="footer.jsp"%>
 </body>
 </html>
