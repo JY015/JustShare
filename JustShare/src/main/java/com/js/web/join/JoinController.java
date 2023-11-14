@@ -17,16 +17,6 @@ public class JoinController {
 	
 	@Autowired
 	private JoinService joinService;
-
-	/*
-	 * @Autowired private SmsUtil smsUtil;
-	 */
-	@GetMapping("/index")
-	public String index() {
-		
-		return "index";
-	}
-	
 	
 	@GetMapping("/join")
 	public String join() {
@@ -49,6 +39,7 @@ public class JoinController {
 }
 	
 	}
+
 	
 	@ResponseBody
 	@PostMapping("/emailcheck")

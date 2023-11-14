@@ -4,58 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
   
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
-   <link rel="canonical"  href="https://www.valuevenue.co.kr/login"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-    <link rel="stylesheet" href="/css/main_page.css" />
-    <link rel="stylesheet" href="./css/login.css">
-
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <meta property="og:locale"       content="ko_KR" />
-   <meta property="og:type"       content="website" />
-   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta property="og:url"          content="https://www.valuevenue.co.kr/login" />
-   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
-   <meta property="og:site_name"    content="가치공간" />
-   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
-   <meta name="twitter:card"       content="summary" />
-   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
-   <meta name="twitter:domain"       content="가치공간" /> 
-   <meta name="robots" content="index,follow">
-   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
-   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="/js/valuevenue.js?ver=20000120" defer></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/common.js?ver=20000120" defer></script>
-    <script src="/js/cookie.js?ver=20000120" defer></script>
+<html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 창</title>
-
-<script src="./js/jquery-3.7.0.min.js"></script>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Insert title here</title>
 </head>
-
-<script>
-var _ss_user_id   = "";
-
-</script>
-  </head>
-<body>
-<%@ include file="header.jsp"%>
+   <!--  <link rel="stylesheet" href="./css/join.css"> -->
    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
      <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/register.css?ver=20000120" />
@@ -99,6 +54,132 @@ var _ss_user_id   = "";
 	            });
 	 });
 	
+	     /*  $("#pw2").on('input', function() {
+	         let pw1 = $("#pw1").val();
+	         let pw2 = $(this).val();
+	
+	         if (pw1 == pw2) {
+	            $("#pwresultForm").css("color","green").text("비밀번호가 일치합니다.");
+	            return;
+	         } else {
+	            $("#pwresultForm").css("color","red").text("비밀번호가 일치하지 않습니다.");
+	         }
+	      });
+	      
+	      $("#joinjoin").click(function(){
+	         let mid = $("#mid").val();
+	         let pw1 = $("#pw1").val();
+	         let pw2 = $("#pw2").val();
+	         let mname = $("#mname").val();
+	         let mphone = $("#mphone").val();
+	         let mbirth = $("#mbirth").val();
+	         
+	          if (!isIdChecked) {
+	             Swal.fire("아이디 중복 검사를 실행하세요.");
+	              return false; // 회원가입 종료
+	           }
+	         if (pw1 != pw2) {
+	            Swal.fire("비밀번호를 확인하세요.");
+	            return false;
+	         }
+	         if (mname.length > 4 || mname.length == "" || mname.length <= 1) {
+	            Swal.fire("이름을 정확히 입력해주세요.");
+	            return false;
+	         }
+	         if (mphone.length != 11) {
+	            Swal.fire("핸드폰 번호 11자리를 정확히 입력해주세요.");
+	            return false;
+	         }
+	       if (mbirth.length < 10 ) {
+	            Swal.fire("생년월일을 정확히 입력해주세요.");
+	            return false; 
+	         
+	       
+	       
+	       }
+	       
+	       
+	       // 메일주소검사
+	     	let option = $("#selectBox option:selected").val();      // 선택한 메일주소값 뽑아내기
+	     	
+	     	if(option != "-선택-"){
+	     		
+		     // gogus228
+				let Fmail = $(this).parent('div').siblings(".emailBox").children("#memail").val();
+				//alert(Fmail);   
+				
+				if(Fmail != null && Fmail != ""){
+					// hanmail   net
+					let items = option.slice(1).split(".");	
+					let first = items[0];	// hanmail
+					let second = items[1];	// net
+					
+					// 메일주소 앞부분 입력값검사
+					let replaceKorean = /[ㄱ-ㅎㅏ-ㅣ]/gi;
+					let replaceChar = /[~!@\#$%^&*\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
+				
+					if(Fmail.match(replaceKorean) || Fmail.match(replaceChar)){
+						Fmail = Fmail.replace(replaceKorean, "").replace(replaceChar, "");
+						Swal.fire("올바른 메일주소를 입력해주세요")
+						$("#memail").val("");
+						$("#Opt").prop("selected", true);
+						return false; 
+					}
+					
+					let Final = Fmail + "@" + first + "." + second;
+					console.log(Final);	// gogus228@gmail.com
+					let memail = $("#memailF").val(Final);
+				} else {
+					Swal.fire("올바른 메일주소를 입력해주세요");
+					return false; 
+				} 
+			
+	     	} else {
+				Swal.fire("올바른 메일주소를 입력해주세요");
+				return false; 
+	     }	
+	     	 document.getElementById("myForm").submit();	
+	     	
+	  	}); */
+	       
+	  
+	  
+	
+		
+		/* function strToInt(str) {
+			if(str.length > 11 || str.length < 10){
+				alert("다시 입력하세요...");
+				return false;
+			}
+			
+		    for (let i = 0; i < str.length; i++) {
+		        if (isNaN(parseInt(str[i]))) {
+		            // 숫자가 아닌 문자가 중간에 포함된 경우
+		            alert("숫자만 입력하세요...");
+		            return false;
+		        }
+		    }
+		    // 숫자로만 이루어진 문자열을 정수로 변환하여 반환
+		    return parseInt(str);
+		}
+		
+		function update(){
+			$("#phone2").attr("disabled",false);
+	   		$("#phone2").attr("placeholder","인증번호를 입력하세요...");
+	   		$("#phoneChk").attr("disabled",true);
+	   		$("#phoneChk2").attr("disabled",false);
+	   		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+	   		$(".successPhoneChk").css("color","green");
+	   		$("#phone").attr("readonly",true);
+		}
+		$(function(){
+			window.addEventListener('ssc_wheel', function(event) {
+				event.preventDefault();
+			}, {passive:false});
+		});
+	   */ 
+	  
+	
 	</script>
 	
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -117,6 +198,60 @@ let pw_confirm = false;
 let pw_validation = false;
 let phone_confirm = false;
 let phone_validation = false;
+
+/* $("#user_email").keyup(function(){
+	let email = $(this).val();
+	let email_regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+	if(email_regex.test(email) == false){
+		$("#user_email_notice").html('이메일(아이디)를 정확히 입력해 주세요.');
+		email_validation = false;
+	}else{
+		$("#user_email_notice").html('');
+		email_validation = true;
+	}
+
+}); */
+
+/* 
+$(function() {
+
+    let isIdChecked = false; // 아이디 중복 검사 여부를 나타내는 변수
+    $("#idCheck").click(function() {
+             let mid = $("#mid").val();
+
+             if (mid == "" || mid.length < 3) {
+                $("#resultMSG").text("아이디는 3글자 이상이어야 합니다.");
+                $("#resultMSG").css("font-weight", "bold");
+                $("#resultMSG").css("font-size", "15pt");
+             } else {
+                $.ajax({
+                   url : "./checkID",
+                   type : "post",
+                   data : {
+                      "mid" : mid
+                   },
+                   dataType : "json",
+                   success : function(data) {
+                      if (data == 1) {
+                         $("#resultMSG").css("color", "red").text("이미 등록된 아이디입니다.");
+                         isIdChecked = false;
+                      } else {
+                         $("#resultMSG").css("color", "green").text("가입할 수 있습니다.");
+                         isIdChecked = true;
+                      }
+                   },
+                   error : function(request, status, error) {
+                      $("#resultMSG").text("실패시 결과값 : " + error);
+                   }
+                });
+             }
+             return false;
+          });
+});
+ */
+
+
 
 function id_chk(){
 	//소문자 알파벳 또는 숫자(0-9)로 6에서 20자 사이
@@ -274,6 +409,9 @@ function phone_chk(){
 let user_phone = $('#user_phone').val()
 let phoneNumberRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
 	
+/* var phone_validation = phoneNumberRegex.text(user_phone); */
+
+	
 	if(phoneNumberRegex.test(user_phone) === false){
 		
         alert("입력하신 휴대폰 번호를 확인해주세요.");
@@ -301,6 +439,7 @@ let phoneNumberRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{
                     const phone_input = document.querySelector('#user_phone')
                     phone_input.readOnly = true;
 					$("#user_phone_notice").html('');
+                    //phone_input.nextSibling.nextSibling.remove();
                 }
 			}
         }
@@ -310,7 +449,35 @@ let phoneNumberRegex = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{
     }
 	}	
     	
- 
+    	
+    	
+    	
+
+		/* $.post( '/member/join', {
+			act: 'is_phone',
+			user_phone: $('#user_phone').val().trim(),
+			user_phone_nohypen: $('#user_phone_nohypen').val().trim()
+	    }).done(function( data ) {
+			if(data){
+				alert("중복되는 휴대폰번호가 존재합니다.\n다른 휴대폰번호를 사용해주세요.");
+				document.querySelector('#user_phone').readOnly = false;
+                $("#user_phone").focus();
+				$("#user_phone").val('');
+				$("#user_phone_nohypen").val('');
+				$("#user_phone_notice").html('휴대폰 번호를 다시 입력해주세요.');
+                phone_confirm = false;
+			}else{
+				if(confirm("사용할 수 있는 휴대폰번호입니다.\n입력하신 휴대폰번호를 사용하시겠습니까?")){
+					phone_confirm = true;
+                    const phone_input = document.querySelector('#user_phone')
+                    phone_input.readOnly = true;
+					$("#user_phone_notice").html('');
+                    //phone_input.nextSibling.nextSibling.remove();
+                }
+			}
+        }, "json");
+	}
+} */
 $(function () {
 
 $("#user_birthday").on("keyup",function(key){
@@ -342,6 +509,11 @@ $("#user_birthday").on("keyup",function(key){
 
 eventInit();
 });
+
+
+
+
+
 
 function form_check(){	
 
@@ -391,6 +563,9 @@ function form_check(){
 }
 </script>
 	
+	
+	
+	
 	<script>
 	window.onload = function(){
 	    document.getElementById("maddr").addEventListener("click", function(){ //주소입력칸을 클릭하면
@@ -409,6 +584,9 @@ function form_check(){
 	
 <body>
  
+ 
+
+   
 <script src="/js/member.js?ver=500" defer></script>
      <section class="signup_wrap">
 			<div class="sign_inner">
@@ -421,6 +599,11 @@ function form_check(){
 				
 				<!-- 내용 -->
 			<form id="myForm" action="./join" method="post">
+					<!-- <input type="hidden" name="act" value="register">
+					<input type="hidden" name="member_type" id="member_type" value="normal">
+					<input type="hidden" name="agree_sms" id="agree_sms" value="0">
+					<input type="hidden" name="agree_email" id="agree_email" value="0">
+					<input type="hidden" name="user_limit" id="user_limit" value="N"> -->
 					<div class="input_sign_w">
 						<table>
 							<colgroup>
@@ -437,7 +620,13 @@ function form_check(){
 											 
 										</div>
 										<span class="warningTxt2" id="user_id_notice"></span>
-	
+										
+										 <!-- <div class="label-row" style="height:20px" id="resultForm">
+                                         <div class="label-name"></div>
+                                         <div class="label-in">
+                                         <span id="resultMSG"></span>
+                                           </div>
+                                           </div> -->
 									</td>
 								</tr>
 							
@@ -531,7 +720,25 @@ function form_check(){
 					</form>
 					</div>
 </section>
-<br><br>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+           
+
+                  
+                  
+           
+
+
+
+
+
 <script type="text/javascript">
 $('.target__time').hide()
 $('#send').click(function() {

@@ -7,7 +7,6 @@
 <meta charset="UTF-8" />
 <title>푸터</title>
 <link rel="canonical" href="https://www.valuevenue.co.kr/login" />
-<link rel="stylesheet" href="/css/fullcalendar.css" />
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -25,7 +24,11 @@
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/common.js?ver=20000120" defer></script>
 <script src="/js/cookie.js?ver=20000120" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="/css/footertoastr.min.css" />
+<script src="./js/socket.js"></script>
 
 <style>
 .b_nav_list {
@@ -38,6 +41,41 @@
    position: relative;
    top: 7px;
    color: rgba(0, 0, 0, 0.4);
+}
+
+
+ .home_btn {
+  width: 60px;
+  height: 60px;
+  border: solid 4px white;
+  border-radius: 200px;
+  /* box-shadow: 0 -2px 8px #ffffff inset; */
+  box-shadow: 0 -2px 8px #4122d3 inset;
+  background-color: #6b4bf5;
+  /* background-color: #7759ff; */
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
+}
+
+.note-num {
+   position: relative;
+   
+  
+    z-index: 2; /* 숫자 아이콘을 아이콘 위에 겹치게 하려면 z-index를 조절 */
+    height: 16px;
+    width: 19px;
+ 
+    text-align: center;
+    background-color: red;
+    border-radius: 100%;
+    color: white;
+    display: none;
+    bottom: 56px;
+    left:50%;
+    line-height:1.6;
+    
+    font-size: 11px;
+    
 }
 
 
@@ -61,7 +99,7 @@
             </div>
       </a></li>
 
-      <li class="b_nav_list "><a href='/chat1'> <i class="xi-message-o"></i></svg><p class="">채팅</p></a></li>
+      <li class="b_nav_list "><a href='/chat1'> <i class="xi-message-o"></i></svg><p class="">채팅</p></a><span class="note-num" style="display: none;">0</span></li>
 
       <li class="b_nav_list "><a href='/mypage'> <i class="xi-user-o"></i></svg><p class="">마이페이지</p></a></li>
    </ul>
