@@ -29,6 +29,7 @@
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
 <body> 
@@ -47,7 +48,21 @@
 	padding: 10px;
 	border: 1px solid #f0f0f0;
 }
+
+
+
+.report-table {
+	display: table;
+	width: 100%;
+}
+
+.report-row {
+	display: table-row;
+}
+
+
 </style>
+<button id="toggleButton">숨기기</button>
 <div style="text-align: center">
 <div class="div-table">
 		<div class="div-row">
@@ -66,15 +81,15 @@
 </div>	
 <br>
 
-	<div class="div-table">
-		<div class="div-row">
+	<div class="report-table">
+		<div class="report-row">
 			<div class="div-cell">신고한 사람</div>
 			<div class="div-cell">신고 당한 사람</div>
 			<div class="div-cell">신고 내용</div>
 			<div class="div-cell">신고 카테고리</div>
 		</div>
 		<c:forEach items="${reportList}" var="row">
-			<div class="div-row" onclick="location.href='/bdetail?bno=${row.bno}'">
+			<div class="report-row" onclick="location.href='/bdetail?bno=${row.bno}'">
 				<div class="div-cell">${row.rmid}</div>
 				<div class="div-cell">${row.mid}</div>
 				<div class="div-cell">${row.rcontent}</div>
@@ -83,6 +98,15 @@
 </c:forEach>
 </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#toggleButton').click(function () {
+            $('.report-table .report-row').toggle();
+        });
+    });
+</script>
+
 <%@ include file="adminfooter.jsp"%>
 		
 				

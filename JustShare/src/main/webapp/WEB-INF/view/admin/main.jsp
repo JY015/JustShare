@@ -122,7 +122,6 @@ td{
  <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br><br><br><br><br><br><br><br>
 <body class="container">
     <h1>Just Share - Admin Page</h1>
-    ${sessionScope.mgrade}
     <div class="admin-info">
         관리자 아이디 : ${sessionScope.mid} 관리자님 안녕하세요.
     </div>

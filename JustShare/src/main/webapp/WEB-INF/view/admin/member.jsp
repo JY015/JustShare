@@ -80,7 +80,6 @@ select {
 			<div class="div-cell-head">아이디</div>
 			<div class="div-cell-head">이름</div>
 			<div class="div-cell-head">이메일</div>
-			<div class="div-cell-head">핸드폰번호</div>
 			<div class="div-cell-head">등급</div>
 
 
@@ -90,7 +89,6 @@ select {
 				<div class="div-cell">${row.mid}</div>
 				<div class="div-cell">${row.mname}</div>
 				<div class="div-cell">${row.memail}</div>
-				<div class="div-cell">${row.mphone}</div>
 
 				<div class="div-cell">
 					<select id="grade" name="grade"
