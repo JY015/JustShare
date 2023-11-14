@@ -480,11 +480,16 @@ function form_check(){
 									<th><label for="">휴대폰번호</label><span aria-hidden="true">*</span></th>
 									<td>
 										<div class="id_mo f_ex">
-											<input class="required input_border" type="tel" name="user_phone" id="user_phone" placeholder="'-'없이 입력해주세요." aria-required="true" data-name="휴대폰번호는"/>
-											<button type="button" class="btn_black id_mo_ma" onclick="phone_chk()">중복확인</button>
+											<input class="input" type="text" id="phone" name="phone" placeholder="핸드폰번호"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+											<button type="button" id="send" class="get__number" onclick="takeTarget()">인증번호받기</button> <!-- 문자보내는 전송버튼 -->
+										<span class="target__time">
+								            <span id="remaining__min">3</span> :
+								            <span id="remaining__sec">00</span><br>
+								          	<span id="input__target_msg"></span>
+								          </span>
+											<input class="input__target" id="userNum" type="text" maxlength="6" placeholder="인증번호입력"  />
 										</div>
-										<span class="warningTxt2" id="user_phone_notice"></span>
-										<!-- <input type="hidden" id="user_phone_nohypen" name="user_phone_nohypen" value=""> -->
+								          <button type="button" class="complete__target" id="complete" disabled="disabled">확인</button>  <!-- 인증번호와 내가 입력창에 입력한 인증번호 비교하는 창 -->
 									</td>
 								</tr>
 
@@ -571,8 +576,8 @@ $('#send').click(function() {
    });
    
    $('#send').click(function() {
-      $('#remaining__min').text('0');
-       $('#remaining__sec').text('03');
+      $('#remaining__min').text('3');
+       $('#remaining__sec').text('00');
        resetTimer()
        takeTarget();
    });
@@ -596,7 +601,7 @@ const remainingSec = document.getElementById("remaining__sec");
 const completeBtn = document.getElementById("userNum");
 var get__number = document.getElementById("send");
 
-let time = 20;
+let time = 180;
 
 const takeTarget = () => {
    $('.target__time').show();

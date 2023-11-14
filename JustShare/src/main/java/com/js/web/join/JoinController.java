@@ -50,22 +50,6 @@ public class JoinController {
 	
 	}
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/phoneCheck")// 휴대폰 문자보내기 public String
-	 * sendSMS(@RequestParam(name="phone", required = false) String phone,
-	 * HttpSession session) { if(session.getAttribute("mid") != null) {
-	 * System.out.println(phone); int randomNumber = (int)((Math.random()* (9999 -
-	 * 1000 + 1)) + 1000);//난수 생성
-	 * 
-	 * smsUtil.sendOne(phone, randomNumber); return String.valueOf(randomNumber); }
-	 * else { return "redirect:/login"; } }
-	 */
-	
-	
-
-	
 	@ResponseBody
 	@PostMapping("/emailcheck")
 	public String emailchk(@RequestParam("email") String email ) {
@@ -78,9 +62,6 @@ public class JoinController {
 	}
 	
 	
-	
-	
-
 	//아이디 중복검사
 	@ResponseBody
 	@PostMapping("/checkID")
@@ -90,7 +71,6 @@ public class JoinController {
 			return result + "";
 	}
 
-	
 	
 	@ResponseBody
 	@PostMapping("/phonecheck")
@@ -102,7 +82,6 @@ public class JoinController {
 		
 		return result + "";
 	}
-	
 	
 	  
 	// coolSMS 테스트 화면
