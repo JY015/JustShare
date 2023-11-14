@@ -145,8 +145,6 @@ function createMarker(latitude, longitude) {
         zIndex: 5,
         image: markerImage
     });
-    
-    
 }
 
 function panTo() {
@@ -162,12 +160,14 @@ function panTo() {
                 alert("GPS 정보를 수신 할 수 없습니다.\r\n잠시 후 다시 시도해주세요");
                 return;
             } else {
+            	
                 createMarker(latitude, longitude); // 새로운 위치로 마커 생성
                 updateMapCenter(latitude, longitude); // 지도 중심 위치 업데이트
             }
         });
     }
 }
+
 //맵 중심을 업데이트하는 함수
 function updateMapCenter(latitude, longitude) {
     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
@@ -202,7 +202,7 @@ function closeCustomOverlay() {
     }
 }	
 
-function createMarker(item, markerImage) {
+function createMarker2(item, markerImage) {
 	var marker = new kakao.maps.Marker({
 	                    position: item.latlng,
 	                    map: map,
@@ -400,9 +400,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
 	    var level = map.getLevel();
 	    map.setLevel(level + 1);
 	});
-     
+
     
-    kakao.maps.load(function() {
+    kakao.maps.load(function(error) {
         var geocoder = new kakao.maps.services.Geocoder();
         var latlng = new kakao.maps.LatLng(latitude, longitude);
 
@@ -412,6 +412,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             	var address = result[0].address.address_name;
             	document.querySelector(".tit_location").innerHTML = address;
  		} else {
+ 			cosole.error("error")
               alert("주소를 찾을 수 없습니다.");
             }
           });
