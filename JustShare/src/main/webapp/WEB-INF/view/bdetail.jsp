@@ -5,12 +5,78 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper {
+        width: 50%;
+        height:50%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+      }
+
+    </style>
 </head>
 <body>
 	<h1>디테일</h1>
 <button type="submit" onclick="edit()">수정</button>
 <button type="submit" onclick="del()">삭제</button>
 <button type="submit" onclick="report()">신고</button>
+
+
+    <!--스와이퍼 -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <c:forEach items="${imageD }" var="n">
+        <div class="swiper-slide"><img src="/img/places/${n }"></div>
+        </c:forEach>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+      <!--스와이퍼 -->
+
 
 <c:forEach items="${imageD }" var="n">
 	<img src="/img/places/${n }">
@@ -20,6 +86,7 @@
 	${n }
 </c:forEach>		
 <br>
+<button type="submit" onclick="chat()">거래하기</button>
 
 
 ${detail.bcontent }
@@ -45,9 +112,13 @@ function report(){
 	let chk3 = confirm("신고하시겠습니까?");
 		
 	if(chk3){
-			location.href="/report?bno=${detail.bno }&mno=${detail.mno}";
+			location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
 	}
 	
+}
+
+function chat(){
+	location.href="/chat1?toId=${detail.mid}&bno=${detail.bno}";
 }
 </script>
 
@@ -85,5 +156,26 @@ content : iwContent
 //마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 infowindow.open(map, marker); 
 </script>
+<!-- 스와이퍼 사용  -->
+<script>
+      var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
+    </script>
+ <!-- 스와이퍼 사용  -->   
 </body>
 </html>

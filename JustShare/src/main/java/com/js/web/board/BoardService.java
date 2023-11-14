@@ -37,9 +37,7 @@ public class BoardService {
 		map.put("y", y);
 		// 지역 스트링으로 나누기 > 숫자로 변형 후 map 에 넣어주기 
 		Map<String,Object> areaD = areaDivide.areaD(a);
-		System.out.println(areaD);
 		Map<String,Object> areaN = boardDAO.areaN(areaD);
-		System.out.println(areaN);
 		Integer ano = (Integer) areaN.get("ano");
 		Integer rno = (Integer) areaN.get("rno");
 		map.put("ano",ano);
@@ -120,13 +118,12 @@ public class BoardService {
 		// 받아온 값은 object 타입 integer 타입으로 변환해준다 
 		// null 이 들어왔을때 예외처리 안해줬음 
 		// Object 타입을 변환 시키는 클래스를 만들면 편할듯 ? 
-		String rmnoStr = (String) map.get("rmno");
-		String bnoStr = (String) map.get("bno");
-		int rmno = Integer.parseInt(rmnoStr);
-		int bno = Integer.parseInt(bnoStr);
-		Map<String,Integer> imap = new HashMap<String, Integer>();
-		imap.put("rmno", rmno);
-		imap.put("bno", bno);
+		String rmid = (String) map.get("rmid");
+		
+		
+		Map<String,Object> imap = new HashMap<String, Object>();
+		imap.put("rmid", rmid);
+		imap.put("bno", map.get("bno"));
 		
 		return boardDAO.dp(imap);
 	}
@@ -134,6 +131,35 @@ public class BoardService {
 	public List<Map<String, Object>> areaList() {
 		
 		return boardDAO.areaList();
+	}
+
+	public int bedit(Map<String, Object> map) {
+		String a = (String) map.get("add");
+		Coordinates b = addressService.getCoordinate(a);
+		double x = Double.parseDouble(b.getX());
+		double y = Double.parseDouble(b.getY());
+		map.put("x", x);
+		map.put("y", y);
+		// 지역 스트링으로 나누기 > 숫자로 변형 후 map 에 넣어주기 
+		Map<String,Object> areaD = areaDivide.areaD(a);
+		Map<String,Object> areaN = boardDAO.areaN(areaD);
+		Integer ano = (Integer) areaN.get("ano");
+		Integer rno = (Integer) areaN.get("rno");
+		map.put("ano",ano);
+		map.put("rno",rno);
+		boardDAO.bedit(map);
+	
+		return 1;
+	}
+
+	public void deleteEquip(Map<String, Object> map) {
+		boardDAO.deleteEquip(map);
+		
+	}
+
+	public List<Map<String, Object>> reportCateList() {
+		
+		return boardDAO.reportCateList();
 	}
 
 	

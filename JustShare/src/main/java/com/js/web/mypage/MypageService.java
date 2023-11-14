@@ -50,6 +50,12 @@ public class MypageService {
 	public void infoChange(Map<String, Object> map) {
 		mypageDAO.infoChange(map);
 	}
+
+	/*
+	 * public List<Map<String, Object>> trade(String mid) {
+	 * 
+	 * return mypageDAO.trade(mid); }
+	 */
 	
 	
 }

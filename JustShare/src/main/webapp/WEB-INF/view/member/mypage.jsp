@@ -313,7 +313,26 @@ $(function () {
         <p class="mypage_title_guide">거래 내역<br /></p>
         <div class="btn-group">
         
-        
+     <%--  <table class="table table-dark table-hover table-striped">
+               		<thead>
+               		<tr class="row">
+               			<th class="col-1">거래번호</th>
+               			<th class="col-6">거래시간</th>
+               			<th class="col-2">from</th>
+               			<th class="col-2">to</th>
+               			<th class="col-1">bno</th>
+               		</tr>
+               		</thead>
+               		<tbody><c:forEach items="${list }" var="row">
+               		<tr class="row" onclick="detail(${row.bno })">
+               			<td class="col-1">${row.hno}</td>
+               			<td class="col-6 title">${row.timestamp}</td>
+               			<td class="col-2">${row.from_user_id}</td>
+               			<td class="col-2">${row.to_user_id}</td>
+               			<td class="col-1">${row.bno}</td>
+               		</tr></c:forEach>
+               		</tbody>
+               </table> --%>
         
         
         
