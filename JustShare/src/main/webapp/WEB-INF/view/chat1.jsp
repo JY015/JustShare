@@ -433,7 +433,7 @@ function jstradefromupdate(mid,toId,bno) {
 				    closeButton: true,
 		
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
@@ -473,7 +473,7 @@ function jstradetoupdate(mid,toId,bno){
 				    closeButton: true,
 				
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 1000,
 				    onShown: function() {
@@ -538,7 +538,7 @@ function tradefromupdate(mid,toId) {
 				    closeButton: true,
 				    progressBar: true,
 				    showMethod: 'slideDown',
-				    //preventDuplicates:true,
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 5000,
 				    onShown: function() {
@@ -617,7 +617,7 @@ function tradetoupdate(mid,toId){
 				    closeButton: true,
 				    progressBar: true,
 				    showMethod: 'slideDown',
-				    //preventDuplicates:true,
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {

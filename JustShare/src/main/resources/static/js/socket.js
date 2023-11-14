@@ -130,7 +130,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
                 closeButton: true,
                 progressBar: true,
                 showMethod: 'slideDown',
-                //preventDuplicates:true,
+                preventDuplicates:true,
                 positionClass: 'toast-top-center',
                 timeOut: 2000,
                 onShown: function() {
@@ -218,7 +218,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
     	var fromchk = socketdata.fromchk;
     
 		 
-        	if(fromchk) {
+        	if(fromchk=1) {
         	jstradefromupdate(mid,toId,bno);
         	
       }
@@ -258,7 +258,7 @@ function jstradefromupdate(mid,toId,bno) {
 				    closeButton: true,
 		 		    progressBar: true,
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {
@@ -301,7 +301,7 @@ function jstradetoupdate(mid,toId,bno){
 				    closeButton: true,
 				    progressBar: true,
 				    showMethod: 'slideDown',
-				   
+				    preventDuplicates:true,
 				    positionClass: 'toast-top-center',
 				    timeOut: 2000,
 				    onShown: function() {
