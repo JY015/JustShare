@@ -8,5 +8,77 @@
 	and mgrade = 4
 </select>
 
+<select id="memberList" resultType="map">	
+	SELECT mno, mid, mname, maddr, mbirth, mjoindate, memail, mphone, mgrade
+	FROM members
+</select>
 
+
+<update id="gradeChange" parameterType="map" >
+UPDATE members
+SET mgrade=#{grade} 
+WHERE mno=#{mno}
+
+</update>
+
+<select id="reportList" resultType="map">	
+	SELECT r.*, rc.rcateName
+FROM report r
+JOIN reportCate rc ON r.rcate = rc.rcate;
+
+</select>
+
+<select id="reportListMember" parameterType="Map" resultType="Map">
+	SELECT mid, COUNT(*) as count
+	FROM report
+	GROUP BY mid;
+</select>
+
+<update id="gradeDown">
+	UPDATE members
+	SET mgrade = 1 WHERE MID IN (
+  	SELECT MID FROM report
+  	GROUP BY MID
+  	HAVING COUNT(*) >= 5
+);
+</update>
+
+<select id="tradeList" resultType="Map">
+SELECT from_user_id, to_user_id, bno, timestamp,
+       ROW_NUMBER() OVER (PARTITION BY DATE(timestamp) ORDER BY timestamp) as total_count
+FROM tradehistory;
+</select>
+
+
+<select id="totalTradeList" resultType="Map">
+SELECT from_user_id, to_user_id, bno, timestamp, 
+(SELECT COUNT(*) FROM tradehistory) as total_count
+FROM tradehistory;
+</select>
+
+
+<select id="dateList" resultType="Map">
+SELECT 
+  DISTINCT DATE(timestamp) AS dateOnly,
+  (SELECT COUNT(*) FROM tradehistory th WHERE DATE(th.timestamp) = dateOnly) AS count
+FROM 
+  tradehistory;
+</select>
+
+<select id="memberCount" resultType="Integer">
+SELECT COUNT(*) FROM members
+</select>
+
+<select id="boardCount" resultType="Integer">
+SELECT COUNT(*) FROM board
+</select>
+
+
+<select id="reportCount" resultType="Integer">
+SELECT COUNT(*) FROM report
+</select>
+
+<select id="tradeCount" resultType="Integer">
+SELECT COUNT(*) FROM tradehistory
+</select>
 </mapper>
