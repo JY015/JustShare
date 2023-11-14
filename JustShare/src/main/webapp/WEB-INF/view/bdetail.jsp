@@ -19,7 +19,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./js/socket.js"></script>
 <!-- 추가한거 -->
+<link rel="canonical" href="https://www.valuevenue.co.kr/login" />
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -27,10 +29,14 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <link rel="stylesheet" href="/css/spacedetail.css" />
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script src="./js/socket.js"></script>
 <!-- fancybox -->
-	<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
  <script src="/js/valuevenue.js?ver=20000120" defer></script>
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
@@ -79,6 +85,70 @@
 .cate{height: 40px; width: 40px;}
 .swiper-slide .frontImage{height:300px; width: 400px;}
 .detailmap {margin-top: 15px; font-size: 18px;}
+.b_nav_list {top: 7px;}
+.xi-document, .xi-gps, .xi-message-o, .xi-user-o {
+   text-align: center;
+   font-size: 162%;
+   position: relative;
+   top: 7px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+
+ .home_btn {
+  width: 60px;
+  height: 60px;
+  border: solid 4px white;
+  border-radius: 200px;
+  /* box-shadow: 0 -2px 8px #ffffff inset; */
+  box-shadow: 0 -2px 8px #4122d3 inset;
+  background-color: #6b4bf5;
+  /* background-color: #7759ff; */
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
+}
+
+.note-num {
+   position: relative;
+   
+  
+    z-index: 2; /* 숫자 아이콘을 아이콘 위에 겹치게 하려면 z-index를 조절 */
+    height: 16px;
+    width: 19px;
+ 
+    text-align: center;
+    background-color: red;
+    border-radius: 100%;
+    color: white;
+    display: none;
+    bottom: 56px;
+    left:50%;
+    line-height:1.6;
+    
+    font-size: 11px;
+
+
+   
+}
+
+.bottom_nav_menu ul li {
+    width: 33%;
+    height: 100%;
+}
+.bottom_nav_menu .trade {
+	 line-height: 2.5;
+	background-color: #004AAD;
+	border-radius :5px;
+	color : white;
+	font-size: 20px;
+    
+}
+.bottom_nav_menu .placep{
+	font-size: 20px;
+	 line-height: 2.5;
+}
+ .likeon, .likeoff { width: 55px; height: 50px;}
+ 
 </style>
 </head>
 <body>
@@ -220,8 +290,85 @@
         </div>
 
 <button type="submit" onclick="chat()">거래하기</button>
+<nav class="bottom_nav_menu">
+   <ul><!-- 여기 수정함 b로-->
+      <li >
+      <div class="like" data-bno=${param.bno }>  
+       	<c:choose>
+		<c:when test="${isLike eq 1  }">     
+		<img class="likeon" src="../img/icon/zzheart.png" />
+        <img class="likeoff" src="../img/icon/zheart.png" style='display: none'/>
+		</c:when>
+		<c:otherwise>
+		<img class="likeon" src="../img/icon/zzheart.png" style='display: none'/>
+        <img class="likeoff" src="../img/icon/zheart.png" />
+		</c:otherwise>
+		</c:choose>  	
+        </div>
+        </li>
 
+      <li class="placep">${detail.price } 원</li>
 
+      <li class="trade" onclick="chat()">거래하기</li>
+   </ul>
+</nav>
+<script>
+   $(document).ready(function() {
+       // "마이페이지" 링크를 클릭했을 때
+       $(".b_nav_list a").click(function(event) {
+           if (${sessionScope.mid eq null}) {
+               // sessionScope.mid가 null일 때 알림 메시지 표시
+               alert("로그인 후 이용이 가능합니다.");
+               event.preventDefault(); // 링크 이동을 막음
+           }
+       });
+   });
+   //좋아요 
+   $(document).on("click", ".like", function() {
+	    const mid = "${sessionScope.mid}";
+	    // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+	    if (!mid) {
+	        alert("로그인이 필요합니다.");
+	        return;
+	    }
+
+	    const bno = $(this).closest(".like").data("bno");
+	    const $img = $(this).find("img.likeon");
+	    console.log(bno);
+	    let likes = "";
+
+	    if ($img.css("display") === "none") {
+	        likes = "on";
+	        $img.show(); // 이미지를 보이게 함
+	        $img.siblings(".likeoff").hide(); // 형제 엘리먼트를 숨김
+	    } else {
+	        likes = "off";
+	        $img.hide(); // 이미지를 숨김
+	        $img.siblings(".likeoff").show(); // 형제 엘리먼트를 보이게 함
+	    }
+
+	    const data = {
+	        mid: mid,
+	        likes: likes,
+	        bno: bno
+	    };
+
+	    $.ajax({
+	        url: "/like",
+	        type: "POST",
+	        data: data
+	    })
+	    .done(function(result) {
+	        console.log(result.body);
+	        
+	    })
+	    .fail(function(error) {
+	        alert(error.responseText);
+	    });
+	
+	    
+	});
+ </script>
 
 <script type="text/javascript">
 	let sid = "${sessionScope.mid}";
@@ -263,7 +410,11 @@ function report(){
 		if(sid == mid){
 			alert("작성자가 본인의 게시물을 신고할 수 없습니다")
 			return false;
-		}	
+		}
+		if(tradeFin == 1){
+			alert("거래 완료된 글은 신고할 수 없습니다")
+			return false;
+		}
 		
 		location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
 			
@@ -359,53 +510,6 @@ infowindow.open(map, marker);
    
  <!-- 스와이퍼 사용  -->   
 
-<!-- 좋아요 스크립트 -->
- <script type="text/javascript">
- $(".inf2 i").click(function(){
-		const mid = "${sessionScope.mid}";
-		  // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
-	    if (!mid) {
-	        alert("로그인이 필요합니다.");
-	        return;
-	    }
-		// 로그인 확인 후 좋아요 스크립트 진행  
-		  
-		let likes ="";
-		const bno = $(".inf2").data("bno");
-		if($(this).hasClass("far")) {
-			likes = "on";
-		} else {
-			likes = "off";
-		}
-		const data = {
-			mid : mid,
-			likes : likes,
-			bno : bno
-		}
-		$.ajax({
-			url: "/like",
-			type: "POST",
-			data: data
-		})
-		.done(function(result){
-				console.log(result.body);
-				let likesCount = $(".likes_count").data("count");
-				
-				if(likes == "on") {
-					$(".inf2 i").removeClass("far").addClass("fas");
-					$(".likes_count").text(likesCount+1);
-					$(".likes_count").data("count", likesCount+1 );
-				} else {
-					$(".inf2 i").removeClass("fas").addClass("far");
-					$(".likes_count").text(likesCount-1);
-					$(".likes_count").data("count", likesCount-1 );
-				}
-			})
-		.fail(function(error){
-			alert(error.responseText);
-		})
-	})
- </script>
  
 </body>
 </html>

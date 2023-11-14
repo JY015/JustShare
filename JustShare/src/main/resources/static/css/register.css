@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 @charset "UTF-8";
 /* íšŒì›ê°€ìž… ë¶€ë¶„ new*/
 
 /* ê³µí†µcss */
 
 /* ë³´ë” */
-=======
-/* �뚯썝媛��� 遺�遺� new*/
-
-/* 怨듯넻css */
-
-/* 蹂대뜑 */
->>>>>>> main
 .input_border {
   border-radius: 4px !important;
   border: 1px solid #DADADA !important;
@@ -21,11 +13,7 @@
   border-bottom: solid 1px #E2E2E2;
 }
 
-<<<<<<< HEAD
 /* í”Œëž™ìŠ¤ */
-=======
-/* �뚮옓�� */
->>>>>>> main
 .f_ex {
   display: flex;
 }
@@ -38,11 +26,7 @@
   align-items: center;
 }
 
-<<<<<<< HEAD
 /* íŒ¨ë”© */
-=======
-/* �⑤뵫 */
->>>>>>> main
 .pa_13_im{
   padding: 13px !important;
 }
@@ -64,20 +48,12 @@
 }
 
 
-<<<<<<< HEAD
 /* ë§ˆì§„ */
-=======
-/* 留덉쭊 */
->>>>>>> main
 .ma_top35{
   margin-top: 35px;
 }
 
-<<<<<<< HEAD
 /* ë°±ê·¸ë¼ìš´ë“œ */
-=======
-/* 諛깃렇�쇱슫�� */
->>>>>>> main
 .ba_F5586A{
   background: #F5586A;
 }
@@ -85,11 +61,7 @@
   background: white;
 }
 
-<<<<<<< HEAD
 /* í°íŠ¸ì»¬ëŸ¬ */
-=======
-/* �고듃而щ윭 */
->>>>>>> main
 .font_color_w{
 color: white;
 }
@@ -100,11 +72,7 @@ color: #565656;
 color: #ff001c;
 }
 
-<<<<<<< HEAD
 /* í…ìŠ¤íŠ¸í¬ê¸° */
-=======
-/* �띿뒪�명겕湲� */
->>>>>>> main
 .text_14{
   font-size:0.875rem;
 }
@@ -115,11 +83,7 @@ color: #ff001c;
   font-size: 1rem;
 }
 
-<<<<<<< HEAD
 /* í…ìŠ¤íŠ¸ êµµê¸° */
-=======
-/* �띿뒪�� 援듦린 */
->>>>>>> main
 .font_w_600{
   font-weight: 600;
 }
@@ -137,11 +101,7 @@ color: #ff001c;
   word-break: keep-all;
 }
 
-<<<<<<< HEAD
 /* ë²„íŠ¼ */
-=======
-/* 踰꾪듉 */
->>>>>>> main
 .btn_black {
   border-radius: 5px;
   background: #020202;
@@ -184,17 +144,10 @@ color: #ff001c;
   width: fit-content;
 }
 
-<<<<<<< HEAD
 /* ê³µí†µcss--end */
 
 
 /* ë³¸ë¬¸ */
-=======
-/* 怨듯넻css--end */
-
-
-/* 蹂몃Ц */
->>>>>>> main
 .signup_wrap {
   /* height: 100vh; */
   border-top: solid 1px #ddd;
@@ -215,11 +168,7 @@ color: #ff001c;
 }
 
 .signup_wrap .sign_inner .signup_list_wrap .signup_title::after {
-<<<<<<< HEAD
   content: "SIGN UP";
-=======
-  
->>>>>>> main
   position: absolute;
   color: #F9F9F9;
   font-size: 6.5rem;
@@ -292,7 +241,6 @@ color: #ff001c;
 .input_sign_w table tbody tr td input {
   padding: 14px 11px;
   height: auto;
-  width: 58%;
   /* margin-right: 15px; */
   border-radius: 4px;
 }
@@ -320,7 +268,7 @@ color: #ff001c;
 .input_sign_w table tbody tr td select {
   padding: 14px 11px;
   height: auto;
-  width: 58%;
+  width: 100%;
   color: #616161;
   font-size: 0.875rem;
   font-weight: 300;
@@ -378,11 +326,7 @@ color: #ff001c;
 }
 
 
-<<<<<<< HEAD
 /* í‰ìƒíšŒì› ì²´í¬ */
-=======
-/* �됱깮�뚯썝 泥댄겕 */
->>>>>>> main
 
 .agree .checkbox input[type="checkbox"] {
   opacity: 0;
@@ -429,11 +373,7 @@ color: #ff001c;
   transition: transform 0.2s ease;
 }
 
-<<<<<<< HEAD
 /* í‰ìƒíšŒì› ì²´í¬ -end*/
-=======
-/* �됱깮�뚯썝 泥댄겕 -end*/
->>>>>>> main
 
 .agree {
   color: #3C3C3C;
@@ -458,11 +398,7 @@ color: #ff001c;
 
 
 
-<<<<<<< HEAD
 /* ë™ì˜ */
-=======
-/* �숈쓽 */
->>>>>>> main
 .accordion_container {
   position: relative;
   height: auto;
@@ -520,11 +456,7 @@ color: #ff001c;
 }
 
 
-<<<<<<< HEAD
 /* ë™ì˜ ì²´í¬ë°•ìŠ¤ */
-=======
-/* �숈쓽 泥댄겕諛뺤뒪 */
->>>>>>> main
 .container input {
   position: absolute;
   cursor: pointer;
@@ -585,11 +517,7 @@ strong{
 
 
 
-<<<<<<< HEAD
  /* í•˜ë‹¨ë²„íŠ¼(ì·¨ì†Œ/íšŒì›ê°€ìž…) */
-=======
- /* �섎떒踰꾪듉(痍⑥냼/�뚯썝媛���) */
->>>>>>> main
  .sign_btn_w{
   display: flex;
   justify-content: center;
@@ -607,11 +535,7 @@ strong{
   padding-top: 60px;
  }
 
-<<<<<<< HEAD
  /* SNS íšŒì›ê°€ìž…  */
-=======
- /* SNS �뚯썝媛���  */
->>>>>>> main
  
 .social_group .txt_title{
   text-align: center;
@@ -666,11 +590,7 @@ strong{
 
 
 
-<<<<<<< HEAD
 /* 3ê°€ì§€ ìœ í˜• ì„ íƒ */
-=======
-/* 3媛�吏� �좏삎 �좏깮 */
->>>>>>> main
 .signup_wrap .membership_inner{
   width: 1100px;
   margin: 0px auto;
@@ -777,17 +697,10 @@ strong{
   font-size: 1rem;
   padding: 10px 72px;
 }
-<<<<<<< HEAD
 /* 3ê°€ì§€ ìœ í˜• ì„ íƒ end */
 
 
 /* ë¸Œëžœë“œì •ë³´ ìˆ˜ì • */
-=======
-/* 3媛�吏� �좏삎 �좏깮 end */
-
-
-/* 釉뚮옖�쒖젙蹂� �섏젙 */
->>>>>>> main
 .signup_wrap .sign_inner .brand_tilte_wrap .brand_t{
   color: #242424;
   font-size: 1.52rem;
@@ -893,11 +806,7 @@ strong{
   width: 150px;
 }
 
-<<<<<<< HEAD
 /* ë¸Œëžœë“œ view page */
-=======
-/* 釉뚮옖�� view page */
->>>>>>> main
 .signup_wrap .sign_inner .signup_list_wrap .brand_view_t::after {
   content: "Brand";
   position: absolute;
@@ -973,11 +882,7 @@ strong{
 
 
 
-<<<<<<< HEAD
 /* ë¡œê·¸ì¸ */
-=======
-/* 濡쒓렇�� */
->>>>>>> main
 .signup_wrap .login_inner{
   width: 560px;
   margin: 0px auto;
@@ -1074,11 +979,7 @@ strong{
   font-weight: 500;
 }
 
-<<<<<<< HEAD
 /* ë¡œê·¸ì¸ ì²´í¬ */
-=======
-/* 濡쒓렇�� 泥댄겕 */
->>>>>>> main
 .container2 input {
   position: absolute;
   opacity: 0;
@@ -1150,11 +1051,7 @@ strong{
   font-weight: 400;
 }
 
-<<<<<<< HEAD
 /* ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° íŒì—… */
-=======
-/* 鍮꾨�踰덊샇李얘린 �앹뾽 */
->>>>>>> main
 .find_pw_w{
   width: 573px !important;
   margin-top: -45px;
@@ -1209,11 +1106,7 @@ strong{
 }
 
 
-<<<<<<< HEAD
 /* íšŒì›ì •ë³´ ìˆ˜ì • */
-=======
-/* �뚯썝�뺣낫 �섏젙 */
->>>>>>> main
 .secession_wrap{
   text-align: center;
   padding-top: 26px;
@@ -1304,11 +1197,7 @@ strong{
 }
 
 
-<<<<<<< HEAD
 /* ê³µê°„ì •ë³´ë“±ë¡  */
-=======
-/* 怨듦컙�뺣낫�깅줉  */
->>>>>>> main
 .signup_wrap .sign_inner .signup_list_wrap .brand_view_t.space::after{
   content: "Space";
   position: absolute;
@@ -1323,11 +1212,7 @@ strong{
   margin-bottom: 0px;
 }
 
-<<<<<<< HEAD
 /* ì´ë¯¸ì§€ì—…ë¡œë“œë¶€ë¶„ */
-=======
-/* �대�吏��낅줈�쒕�遺� */
->>>>>>> main
  
 
 .img-upload .image-preview .prev_img .coverImage{
@@ -1394,11 +1279,7 @@ strong{
 
 
 
-<<<<<<< HEAD
  /* íŒì—… */
-=======
- /* �앹뾽 */
->>>>>>> main
  .layer-wrap.popup_css .pop_text_css{
   text-align: center;
   padding: 17px;
@@ -1430,17 +1311,10 @@ strong{
 
 
 
-<<<<<<< HEAD
 /* íƒœë¸”ë¦¿/ëª¨ë°”ì¼ */
 
 @media screen and (max-width:1058px){
      /* 3ê°€ì§€ ìœ í˜•ì„ íƒ */
-=======
-/* �쒕툝由�/紐⑤컮�� */
-
-@media screen and (max-width:1058px){
-     /* 3媛�吏� �좏삎�좏깮 */
->>>>>>> main
      .signup_wrap .membership_inner{
       width: 100%;
       padding-left: 16px;
@@ -1490,11 +1364,7 @@ strong{
     }
  
     
-<<<<<<< HEAD
     /* ë¸Œëžœë“œì •ë³´ìˆ˜ì • */
-=======
-    /* 釉뚮옖�쒖젙蹂댁닔�� */
->>>>>>> main
     .signup_wrap .sign_inner .brand_tilte_wrap .brand_t{
       font-size: 1.42rem;
     }
@@ -1552,7 +1422,7 @@ strong{
   .input_sign_w table tbody tr th{
     padding-left: 19px;
   }
-  .input_sign_w table tbody tr td input{
+  .input_sign_w table tbody tr td{
     width: 100%;
   }
   .signup_wrap .sign_inner .signup_list_wrap .signup_title::after{
@@ -1564,11 +1434,7 @@ strong{
     width: 120px;
   }
   .input_sign_w table tbody tr td select{
-<<<<<<< HEAD
     /* width: 100%; */
-=======
-    width: 100%;
->>>>>>> main
   }
 
   .btn_black{
@@ -1617,11 +1483,7 @@ strong{
     padding: 15px;
   }
 
-<<<<<<< HEAD
   /* ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° íŒì—… */
-=======
-  /* 鍮꾨�踰덊샇李얘린 �앹뾽 */
->>>>>>> main
   .find_pw_w{
     width: 90% !important;
   }
@@ -1698,11 +1560,7 @@ strong{
    }
 
 
-<<<<<<< HEAD
    /* ë¡œê·¸ì¸ ë¶€ë¶„  */
-=======
-   /* 濡쒓렇�� 遺�遺�  */
->>>>>>> main
    .signup_wrap .login_inner{
     width: 100%;
    }
@@ -1799,11 +1657,7 @@ strong{
     font-size: 3.6vw;
   }
 
-<<<<<<< HEAD
   /* ë¡œê·¸ì¸ ë¶€ë¶„  */
-=======
-  /* 濡쒓렇�� 遺�遺�  */
->>>>>>> main
   .signup_wrap .login_inner .sign_movement p{
     font-size: 16px;
     transition: 0.3s ease;

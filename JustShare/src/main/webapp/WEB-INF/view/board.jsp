@@ -123,19 +123,26 @@
     }
 
     .likeon, .likeoff {
-        width: 30px; /* 원하는 너비로 조절합니다. */
-        height: 30px; /* 원하는 높이로 조절합니다. */
+        width: 30px; 
+        height: 30px; 
         position: absolute;
         top: 0;
-        left: 95%; /* 가운데 정렬을 위해 left 값을 조정합니다. */
-        transform: translateX(-50%); /* left 값의 50%만큼 왼쪽으로 이동하여 중앙 정렬합니다. */
-        z-index: 1; /* 다른 요소들보다 위에 표시되도록 z-index 값을 설정합니다. */
+        left: 95%; 
+        transform: translateX(-50%); 
+        z-index: 1;
     }
 .cccc .imageContainer .main {
 		width: 372px;
 		height: 240px;
 
 }
+ .main_image_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    color: white;
+  }
 </style>
  
 </head>
@@ -213,7 +220,8 @@
              <div class="card_item2 pop-up" >
              <div class="cccc">
              <div class="imageContainer" >
-             <img class="main" src="/img/places/${row.realFile}">
+             <img class="main" src="/img/places/${row.realFile}" <c:if test="${row.tradeFin eq 1 }">style="filter: blur(5px);"</c:if>>
+             <c:if test="${row.tradeFin eq 1 }"><h1 class="main_image_text" style="font-size:45px">거래 완료</h1></c:if>
              <div class="like" data-bno="${row.bno}">
              <c:choose>
              <c:when test="${row.isLiked eq 1  }">
@@ -398,7 +406,7 @@
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
 						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
 						            newCardItem += "<hr class='card-line'>";
-						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.bprice + "원 /"+item.rentTime+"</p>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.price + "원 /"+item.rentTime+"</p>";
 						            newCardItem += "</div></div></a></div>";
 
 						            // 새로운 카드 아이템을 기존의 div에 추가

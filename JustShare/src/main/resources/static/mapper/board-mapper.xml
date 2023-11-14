@@ -29,7 +29,7 @@
 
 <select id="list" parameterType="Map" resultType="map">
 	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -83,7 +83,7 @@
 </select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
 	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
@@ -159,7 +159,7 @@
 </select>
 
 <select id="detail" parameterType="Map" resultType="Map">
-	SELECT b.bno,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.latitude,b.longitude,b.mid,b.addr,b.addDetail,b.addNum,b.ano,(SELECT c.cname from cate c where b.cate=c.cate)as cateName,(SELECT c.cicon from cate c where b.cate=c.cate)as cateIcon,
+	SELECT b.bno,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,b.bdate,b.cate,b.bread,b.latitude,b.longitude,b.mid,b.addr,b.addDetail,b.addNum,b.ano,(SELECT c.cname from cate c where b.cate=c.cate)as cateName,(SELECT c.cicon from cate c where b.cate=c.cate)as cateIcon,
 	b.size,b.startTime,b.endTime,round((SELECT AVG(rl.star)AS averageStar FROM reviewList rl WHERE rl.rtid=b.mid),1 )as averageS,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
 	FROM board b 
 	WHERE b.bno=#{bno}
@@ -303,5 +303,11 @@ WHERE NOT EXISTS (
 			bno=#{bno} and from_user_id=#{fid} and to_user_id=#{tid}
 		</if>
 	</where>
+</select>
+<select id="bnoI">
+SELECT bno
+FROM board
+ORDER BY bno DESC 
+LIMIT 1 	
 </select>
 </mapper>

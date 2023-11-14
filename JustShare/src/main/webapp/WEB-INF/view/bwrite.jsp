@@ -12,11 +12,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -60,23 +55,9 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+<%@ include file="header.jsp"%>
 	<!-- 전체 div -->
 	<div class="body__container section">
-	<!-- 헤더부분 -->
-	<!-- 모바일 버전 헤더  -->
-	<header class="header__topnav_type2">
-		  <div class="header_topnav_inner_n">
-			<div class="first_row">
-			  <div class="left-side">
-				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-				<h1 class="logo"><a href="/">로고</a></h1>
-			  </div>
-			</div>
-
-		  </div>
-		</header>
-	<!-- 타이틀 부분  -->
 	 <section class="signup_wrap">
 	 <div class="sign_inner">
 	 <div class="signup_list_wrap">
@@ -86,7 +67,7 @@
 	 </div>
 	 </div>
 	 <!-- 내용 -->
-	<form id="mf" name="mf" action="./bwrite" target=_hidden_frame  method="post" autocomplete="off" enctype="multipart/form-data">
+	<form id="mf" name="mf" action="./bwrite" target=_hidden_frame  method="post" autocomplete="off" enctype="multipart/form-data" >
 		<div class="input_sign_w">
 			<table>
 				<colgroup>
@@ -94,31 +75,17 @@
 				</colgroup>
 				<tbody>
 					<tr class="border_bottom">
-						<th><label for="image">이미지 </label><span aria-hidden="true">*</span></th>
-						<td>
-						<div class="id_mo f_ex">
-						<input type="file" name="upFile" id="upFile" multiple="multiple" class="required input_border" aria-required="true" />
-						</div>
-						 <div id="imagePreviews"></div>	
-						 <br><span class="warningTxt2" id="resultF"></span>
-						</td>
-					</tr>
-					<tr class="border_bottom">
 						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
 						<td>
 						 <div class="id_mo f_ex">
 						 <button id="picker" type="button">파일 선택</button>
 						 </div>
 						 <div id="box"></div>
-						 <div>
-    					<button id="upload" type="button">Upload Current Image</button>
-  						</div>
   						<div id="progress"></div>
   						<div id="upload-box"></div>	
 						 <br><span class="warningTxt2" id="resultF"></span>
 						</td>
 					</tr>
-					
 					
 					<tr class="border_bottom">
 						<th><label for="title">제목</label><span aria-hidden="true">*</span></th>
@@ -174,8 +141,8 @@
 					<tr class="border_bottom">
 						<th><label for="equip">보유 시설</label></th>
 							<td>
-							<c:forEach items="${equiplist }" var="n">
-							<input class="required input_border" type="checkbox" name="equipment"  id="equipmetInput" value="${n.eid }" />${n.ename }
+							<c:forEach items="${equiplist }" var="n"><br>
+							<input class="required input_border" type="checkbox" name="equipment"  id="equipmetInput" value="${n.eid }" /><span class="ename">&nbsp&nbsp&nbsp ${n.ename }</span> 
 							</c:forEach>
 							</td>
 							</tr>	
@@ -208,10 +175,12 @@
 		</div>
 		<!-- 버튼 -->
 		<div class="sign_btn_w">
-			<button type="button" class="btn_clear_black" onclick="history.back();">취소</button>
 			<button type="button" class="btn_black writeB" >작성완료</button>
+			<button type="button"  id="upload" class="btn_clear_black">이미지 업로드하기</button>
 		</div>
 	</form>
+	<br><br><br><br>
+	
 	 <%@ include file="footer.jsp" %> 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
@@ -302,30 +271,18 @@
     }
 </script>
 
-<script>
-        document.getElementById('upFile').addEventListener('change', handleFileSelect, false);
-
-        function handleFileSelect(event) {
-            const files = event.target.files;
-            const imagePreviews = document.getElementById('imagePreviews');
-            imagePreviews.innerHTML = '';
-
-            for (const file of files) {
-                const imagePreview = document.createElement('div');
-                imagePreview.className = 'image-preview';
-
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.className = 'preview-image';
-                imagePreview.appendChild(img);
-
-                imagePreviews.appendChild(imagePreview);
-            }
-        }
-</script>
 <script type="text/javascript">
+
+document.addEventListener('DOMContentLoaded', function() {
+    var uploadButton = document.getElementById('upload');
+        uploadButton.disabled = true;
+});
+
+
+
+
 $(function () {
-	let selectImagePath = '';
+    let selectImagePath = '';
     let $previewImg = null;
     let $uploadImg = null;
     const $box = $('#box');
@@ -335,7 +292,7 @@ $(function () {
     const $upload = $('#upload');
     
     $picker.on('click', () => {
-        if ($previewImg !== null) {
+          if ($previewImg !== null) {
           $previewImg.remove();
           $previewImg = null;
         }
@@ -363,10 +320,10 @@ $(function () {
             if (typeof err === 'string') alert(err)
             console.error(err)
           })
-      })
-      
+    });
+    
     $upload.on('click', () => {
-    	
+           	
     if (selectImagePath === '') return alert('이미지를 선택해주세요.')
     if ($uploadImg) {
       $uploadImg.remove();
@@ -389,18 +346,18 @@ $(function () {
           $uploadImg.attr('src', bodyJson.fullpath)
           $uploadBox.append($uploadImg)
         } else {
-          return Promise.reject('업로드를 실패하였습니다.')
+        	window.location.href = 'http://172.30.1.30:8080/board'
+        	
         }
       })
       .catch((err) => {
         if (typeof err === 'string') alert(err)
         console.error(err)
       })
-  })
-     
-      
-	$.imagePicker = function () {
-      return new Promise((resolve) => {
+    });
+
+    $.imagePicker = function () {
+          return new Promise((resolve) => {
         M.media.picker({
           mode: "SINGLE",
           media: "PHOTO",
@@ -410,9 +367,10 @@ $(function () {
           }
         });
       })
-    }
+    };
+
     $.convertBase64ByPath = function (imagePath) {
-	      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
+       	      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
 	      return new Promise((resolve) => {
 	        M.file.read({
 	          path: imagePath,
@@ -423,13 +381,12 @@ $(function () {
 	          }
 	        });
 	      })
-	    }
-    
-    $.uploadImageByPath = function (targetImgPath, progress) {
-    	
-	      return new Promise((resolve) => {
+    };
+
+    $.uploadImageByPath = function (targetImgPath, progress, bno) {
+             return new Promise((resolve) => {
 	        const _options = {
-	          url: "http://172.30.1.30/uploadFile",
+	          url: "http://172.30.1.30:8080/uploadFile",
 	          header: {},
 	          params: {},
 	          body: [
@@ -445,166 +402,124 @@ $(function () {
 	        }
 	        M.net.http.upload(_options);
 	      })
-	    }
-    
-  });
+    };
 
-
-
-$(function(){
     $(".writeB").click(function(){
-       /*  const fileInput = document.getElementById('upFile'); */
-        const titleInput = document.getElementById('titleInput');
-        const contentInput = document.getElementById('contentInput');
-        const postcodeInput = document.getElementById('sample2_postcode');
-        const addressInput = document.getElementById('sample2_address');
-        const priceInput = document.getElementById('priceInput');
-        const startTimeInput = document.getElementById('startTimeInput');
-        const endTimeInput = document.getElementById('endTimeInput');
-        const sizeInput =  document.getElementById('sizeInput');
-        const cateInput = document.getElementById('cateInput');
-        const rentTimeInput = document.getElementById('rentTimeInput');
-        const equipmetInputs = document.getElementsByName('equipment');
-        const detailAddressInput = document.getElementById('sample2_detailAddress');
-       
+         const titleInput = document.getElementById('titleInput');
+         const contentInput = document.getElementById('contentInput');
+         const postcodeInput = document.getElementById('sample2_postcode');
+         const addressInput = document.getElementById('sample2_address');
+         const priceInput = document.getElementById('priceInput');
+         const startTimeInput = document.getElementById('startTimeInput');
+         const endTimeInput = document.getElementById('endTimeInput');
+         const sizeInput =  document.getElementById('sizeInput');
+         const cateInput = document.getElementById('cateInput');
+         const rentTimeInput = document.getElementById('rentTimeInput');
+         const equipmetInputs = document.getElementsByName('equipment');
+         const detailAddressInput = document.getElementById('sample2_detailAddress');
         
-			
-        const title = titleInput.value.trim();
-        const content = contentInput.value.trim();
-        const postcode = postcodeInput.value.trim();
-        const address = addressInput.value.trim();
-   		const detailAddress = detailAddressInput.value.trim();
-        const price = parseInt(priceInput.value);
-        const startTime =parseInt(startTimeInput.value);
-        const endTime =parseInt(endTimeInput.value);
-        const size = parseInt(sizeInput.value);
-        const cate = cateInput.value;
-        const rentTime = rentTimeInput.value;
-        const equipment = Array.from(equipmetInputs).filter(input => input.checked).map(input => input.value);
-       
-        /* if(fileInput.files.length === 0){
-        	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
-             $("#resultF").css("font-weight", "bold");
-             $("#resultF").css("font-size", "10pt");
-			return false;
-        	
-        } */
+         
+ 			
+         const title = titleInput.value.trim();
+         const content = contentInput.value.trim();
+         const postcode = postcodeInput.value.trim();
+         const address = addressInput.value.trim();
+    	const detailAddress = detailAddressInput.value.trim();
+         const price = parseInt(priceInput.value);
+         const startTime =parseInt(startTimeInput.value);
+         const endTime =parseInt(endTimeInput.value);
+         const size = parseInt(sizeInput.value);
+         const cate = cateInput.value;
+         const rentTime = rentTimeInput.value;
+         const equipment = Array.from(equipmetInputs).filter(input => input.checked).map(input => input.value);
+        
+         /* if(fileInput.files.length === 0){
+         	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
+              $("#resultF").css("font-weight", "bold");
+              $("#resultF").css("font-size", "10pt");
+ 			return false;
+         	
+         } */
 
-		if(title === "" || title.length < 3 || title.length > 31){
-			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
-             $("#resultMSG").css("font-weight", "bold");
-             $("#resultMSG").css("font-size", "10pt");
-			return false;
-		}
-		if (isNaN(startTime) ||startTime < 0 || startTime >24 || startTime > endTime) {
-			 $("#resultTime").text("올바른 시간을 입력하세요");
+ 		if(title === "" || title.length < 3 || title.length > 31){
+ 			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
+              $("#resultMSG").css("font-weight", "bold");
+              $("#resultMSG").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if (isNaN(startTime) ||startTime < 0 || startTime >24 || startTime > endTime) {
+ 			 $("#resultTime").text("올바른 시간을 입력하세요");
+              $("#resultTime").css("font-weight", "bold");
+              $("#resultTime").css("font-size", "10pt");
+             return false;
+         }
+ 		if (isNaN(endTime) ||endTime < 0 || endTime >24 || startTime > endTime) {
+ 			 $("#resultTime").text("올바른 시간을 입력하세요");
              $("#resultTime").css("font-weight", "bold");
              $("#resultTime").css("font-size", "10pt");
             return false;
         }
-		if (isNaN(endTime) ||endTime < 0 || endTime >24 || startTime > endTime) {
-			 $("#resultTime").text("올바른 시간을 입력하세요");
-            $("#resultTime").css("font-weight", "bold");
-            $("#resultTime").css("font-size", "10pt");
-           return false;
-       }
-		if (isNaN(price) || price <= 1000) {
-			 $("#resultP").text("올바른 가격을 입력하세요");
-             $("#resultP").css("font-weight", "bold");
-             $("#resultP").css("font-size", "10pt");
+ 		if (isNaN(price) || price <= 10) {
+ 			 $("#resultP").text("올바른 가격을 입력하세요");
+              $("#resultP").css("font-weight", "bold");
+              $("#resultP").css("font-size", "10pt");
+             return false;
+         }
+ 		if (isNaN(size) || size <= 0) {
+ 			 $("#resultS").text("올바른 면적을 입력하세요");
+             $("#resultS").css("font-weight", "bold");
+             $("#resultS").css("font-size", "10pt");
             return false;
         }
-		if (isNaN(size) || size <= 0) {
-			 $("#resultS").text("올바른 면적을 입력하세요");
-            $("#resultS").css("font-weight", "bold");
-            $("#resultS").css("font-size", "10pt");
-           return false;
-       }
-	
-		if(content ==="" || content.length < 10 || content.length > 1000){
-			$("#resultCON").text("상세 내용은 10글자 이상, 1000자 이하여야 합니다.")
-			$("#resultCON").css("font-weight", "bold");
-            $("#resultCON").css("font-size", "10pt");
-			return false;
-		}
-		if(postcode ===''){
-			$("#resultPC").text("우편번호를 입력해야합니다.")
-			$("#resultPC").css("font-weight", "bold");
-            $("#resultPC").css("font-size", "10pt");
-			return false;
-		}
-		if(address ===''){
-			$("#resultAD").text("주소를 입력해야합니다.")
-			$("#resultAD").css("font-weight", "bold");
-            $("#resultAD").css("font-size", "10pt");
-			return false;
-		}
-	
-	$.ajax({
-			url : "./bmwrite",
-			type : "post",
-			data : {
-				"title": title,
-				"content": content,
-				"addNum": postcode,
-				"add" : address,
-				"price" : price,
-				"startTime" : startTime,
-				"endTime" : endTime,
-				"size" : size,
-				"bcate" : cate,
-				"rentTime" : rentTime,
-				"equipment" : JSON.stringify(equipment),
-				"addD":detailAddress
-			},
-			dataType : "json",
-			success: function (data) {
-		        if (data > 0) {
-		            var bno = data;
-		            alert(bno)
-		            alert(selectImagePath)
-		            alert($uploadImg)
-		            if (selectImagePath === '') return alert('이미지를 선택해주세요.');
-		            if ($uploadImg) {
-		              $uploadImg.remove();
-		              $uploadImg = null;
-		            }
-		            $progress.text('')
-		            $.uploadImageByPath(selectImagePath, bno, (total, current) => {
-		              console.log(`total: ${total} , current: ${current}`)
-		              $progress.text(`${current}/${total}`)
-		            })
-		              .then(({
-		                status, header, body
-		              }) => {
-		                // status code
-		                if (status === '200') {
-		                  $progress.text('업로드 완료')
-		                  const bodyJson = JSON.parse(body)
-		                  $uploadImg = $(document.createElement('img'))
-		                  $uploadImg.attr('height', '200px')
-		                  $uploadImg.attr('src', bodyJson.fullpath)
-		                  $uploadBox.append($uploadImg)
-		                } else {
-		                  return Promise.reject('업로드를 실패하였습니다.')
-		                }
-		              })
-		              .catch((err) => {
-		                if (typeof err === 'string') alert(err)
-		                console.error(err)
-		              })
-		       
-		        } else {
-		            console.log("글 작성 중 오류가 발생했습니다.");
-		        }
-		    },
-		    error: function (error) {
-		        console.error("Ajax 요청 중 에러 발생:", error);
-		    }
-		}); 
-	 
+ 	
+ 		if(content ==="" || content.length < 10 || content.length > 1000){
+ 			$("#resultCON").text("상세 내용은 10글자 이상, 1000자 이하여야 합니다.")
+ 			$("#resultCON").css("font-weight", "bold");
+             $("#resultCON").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if(postcode ===''){
+ 			$("#resultPC").text("우편번호를 입력해야합니다.")
+ 			$("#resultPC").css("font-weight", "bold");
+             $("#resultPC").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if(address ===''){
+ 			$("#resultAD").text("주소를 입력해야합니다.")
+ 			$("#resultAD").css("font-weight", "bold");
+             $("#resultAD").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 	
+        $.ajax({
+           url : "./bmwrite",
+ 			type : "post",
+ 			data : {
+ 				"title": title,
+ 				"content": content,
+ 				"addNum": postcode,
+ 				"add" : address,
+ 				"price" : price,
+ 				"startTime" : startTime,
+ 				"endTime" : endTime,
+ 				"size" : size,
+ 				"bcate" : cate,
+ 				"rentTime" : rentTime,
+ 				"equipment" : JSON.stringify(equipment),
+ 				"addD":detailAddress
+ 			},
+ 			dataType : "json",
+            success: function (data) {
+                if (data > 0) {
+                	 $upload.prop('disabled', false);
+                } else {
+                    console.log("글 작성 중 오류가 발생했습니다.");
+                }
+            },
+            // ...
+        }); 
     });
-    });    
+});
 
 </script>
     

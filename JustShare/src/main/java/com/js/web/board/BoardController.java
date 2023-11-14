@@ -477,11 +477,49 @@ public class BoardController {
 			  return a;
 	  }
 	  
-	  @ResponseBody
 	  @PostMapping("/uploadFile")
 	  public String uploadFile(@RequestParam("file") MultipartFile file) {
 		  System.out.println(file);
+		  int a = boardService.bnoI();
+		  System.out.println(a);
 		  
-		  return "";
+		  if (!file.isEmpty()) {
+		        //파일 이름 받아옴 
+		        String fileName = file.getOriginalFilename();
+		        String originFile = fileName.substring(fileName.lastIndexOf("/") + 1);
+		        // 파일 이름 가공 
+		        LocalDateTime ldt = LocalDateTime.now();
+				String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
+				String realFileName = format+originFile;
+				//경로 가져오기 
+				
+				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String path = request.getServletContext().getRealPath("/img/places");
+				
+				// 이미지 업로드 
+				File newFileName = new File(path,realFileName);
+				try {
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					FileCopyUtils.copy(file.getBytes(), newFileName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				// 업로드 된 해당 이미지를 DB에 기록하기
+				// 첫번째로 올린 이미지를 메인이미지로
+				Map<String, Object> image = new HashMap<String, Object>();
+					image.put("bno", a);
+					image.put("main",1);
+		        	image.put("originalFilename", originFile);
+					image.put("realFileName", realFileName);
+					boardService.image(image);
+		   
+		        return "파일 업로드 성공!";
+		    } else {
+		        return "업로드할 파일을 선택해주세요.";
+		    }
 	  }
 }

@@ -76,6 +76,8 @@ public interface BoardDAO {
 
 	int tradeFin(Map<String, Object> map);
 
+	int bnoI();
+
 
 	
 }
