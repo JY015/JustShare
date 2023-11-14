@@ -1,39 +1,55 @@
-/* body {
+body {
 	font-family: Arial, sans-serif;
 	text-align: center;
 }
 
-h3 {
-	margin-top: 20px;
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.findId-form {
-	background-color: white;
-	width: 300px;
-	margin: 0 auto;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+label {
+	font-weight: bold;
+	display: block;
+	margin-top: 10px;
+	font-size: 16px;
 }
 
 input[type="text"] {
-	width: 80%;
-	padding: 10px;
-	margin: 5px 0;
-	border: 1px solid #ccc;
-	border-radius: 3px;
+	padding: 8px !important;
+	margin: 5px 0 !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+	max-width: 360px !important;
 }
 
 button {
+	background-color: #f64d61 !important;
+	color: white !important;
+	padding: 10px 20px !important;
+	border: none !important;
+	cursor: pointer !important;
+	border-radius: 4px !important;
+	font-size: 16px !important;
 	width: 100%;
-	padding: 10px;
-	background-color: #007bff;
-	color: white;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
+	max-width: 360px;
 }
 
-button:hover {
-	background-color: #0056b3;
-} */
+.text_find_id {
+	color: #8A8A8A;
+	font-size: 1rem;
+	font-weight: 400;
+	word-break: keep-all;
+	line-height: 1.4;
+	text-align: center;
+	padding: 26px 0 42px;
+}
+
+.image-container {
+	margin: 20px 0;
+}
+

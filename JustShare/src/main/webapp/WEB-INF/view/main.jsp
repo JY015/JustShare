@@ -87,7 +87,7 @@ var _ss_user_id   = "";
         <div class="full-line"></div>
         <div class="header__second_row"> 
          <div class="left-side">   
-         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
+<!--          <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">-->
             <h1 class="logo"><a href="/"></a></h1>
          </div>
         <div class="right-side">
@@ -105,7 +105,7 @@ var _ss_user_id   = "";
   <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">
-         <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();">
+        <!--  <img alt="back" src="./img/back.png" style="cursor:pointer" onclick="history.back();"> -->
 
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
