@@ -26,6 +26,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+import retrofit2.http.POST;
+
 @Controller
 public class BoardController {
 	@Autowired
@@ -47,6 +52,7 @@ public class BoardController {
 
 		// 지역구 / 시설 / 카테고리 전부 꺼내기 << 모달로 띄울 필터창에 보여줄 목록을 가져오기 위해서
 		List<Map<String, Object>> areaList = boardService.areaList();
+		List<Map<String,Object>> regionList = boardService.regionList();
 		List<Map<String, Object>> cl = boardService.cl();
 		List<Map<String, Object>> el = boardService.el();
 
@@ -62,12 +68,13 @@ public class BoardController {
 		
 		// 리스트 뽑기 + 검색시 + 필터
 		List<Map<String, Object>> boardList = boardService.list(map);
-		
+		model.addAttribute("listNum",listNum);
 		model.addAttribute("list", boardList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("areaList", areaList);
 		model.addAttribute("catelist", cl);
 		model.addAttribute("equiplist", el);
+		model.addAttribute("regionList",regionList);
 		return "board";
 	}
 
@@ -75,7 +82,7 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/board")
 	public String boardp(@RequestParam Map<String, Object> map,HttpSession session) {
-		System.out.println(map);
+		
 		// 전체 글 숫자 + 검색
 		int listNum = boardService.listNum(map);
 
@@ -106,25 +113,6 @@ public class BoardController {
 		}
 	}
 
-	// 필터 적용하기 배열로 받아오기 힘듦 // 지금 보내고 받는게 이상함 배열로 보내고 배열로 받아와야함 << 문제있음
-
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/boardFilter") public String boardf(@RequestBody FilterData
-	 * filterData){ // 배열 받아와서 분리해서 하나하나 찾아주기 > ㄴㄴ > 이거 concat으로 찾아주기 Map<String,
-	 * String> map = new HashMap<String, String>(); String areaArray =
-	 * Arrays.toString(filterData.getAreas()).replaceAll("\\[|\\]", ""); String
-	 * cateArray = Arrays.toString(filterData.getCategories()).replaceAll("\\[|\\]",
-	 * ""); String equipArray =
-	 * Arrays.toString(filterData.getEquipments()).replaceAll("\\[|\\]", "");
-	 * System.out.println(areaArray); map.put("areaArray", areaArray);
-	 * map.put("cateArray", cateArray); map.put("equipArray", equipArray);
-	 * List<Map<String, Object>> listf = boardService.listf(map);
-	 * System.out.println(listf); JSONArray jsonArray = new JSONArray(); for
-	 * (Map<String, Object> item : listf) { JSONObject jsonObject = new
-	 * JSONObject(item); jsonArray.put(jsonObject); } return jsonArray.toString(); }
-	 */
 
 	@GetMapping("/bwrite") // 글 작성
 	public String bwrite(HttpSession session, Model model) {
@@ -139,7 +127,10 @@ public class BoardController {
 		return "redirect:/board";
 		}
 		}
-
+	
+	
+	/* 글쓰기 부분 수정하기 */
+	
 	@PostMapping("/bwrite")
 	public String bwrite(@RequestParam Map<String, Object> map,
 			@RequestParam(value = "equipment", required = false) Integer[] equipment,
@@ -147,6 +138,7 @@ public class BoardController {
 		if(session.getAttribute("mid") != null) {
 		// 로그인 후 글 작성 내용 insert 
 		map.put("mid", session.getAttribute("mid"));
+		System.out.println(map);
 		Integer adr = boardService.adr(map);
 
 		// 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기
@@ -225,19 +217,26 @@ public class BoardController {
 		Map<String, Object> detail = boardService.detail(map);
 		// 게시글에 연관된 시설명 / 사진 모두 가져오기
 		List<String> imageD = boardService.imageD(map);
-		List<String> equipD = boardService.equipD(map);
+		List<Map<String, Object>> equipDetail = boardService.equipDetail(map);
 		// 해당글의 좋아요 수 가져오기 
 		Integer likesCount = boardService.likesCount(map); 
 		// 로그인 한 사람의 좋아요 가져오기
 		String sid = String.valueOf( session.getAttribute("mid")) ;
 		map.put("sid",sid);
 		Integer isLike = boardService.isLike(map);
+		// 비슷한 글 꺼내오기 
+		map.put("cate",detail.get("cate"));
+		map.put("ano", detail.get("ano"));
+		
+		List<Map<String, Object>> place = boardService.place(map);
+		
 		
 		model.addAttribute("likesCount", likesCount);
 		model.addAttribute("isLike", isLike);
 		model.addAttribute("imageD", imageD);
-		model.addAttribute("equipD", equipD);
+		model.addAttribute("equipDetail",equipDetail);
 		model.addAttribute("detail", detail);
+		model.addAttribute("place", place);
 		return "bdetail";
 	}
 
@@ -249,7 +248,9 @@ public class BoardController {
 		Map<String, Object> detail = boardService.detail(map);
 		String rid = String.valueOf(detail.get("mid"));
 		String sid = String.valueOf( session.getAttribute("mid")) ;
-		if(rid.equals(sid)) {
+		Integer mgrade = (Integer) session.getAttribute("mgrade");
+		
+		if(rid.equals(sid) || mgrade == 4) {
 		int a = boardService.del(map);
 		return "redirect:board";
 		}else {
@@ -382,5 +383,105 @@ public class BoardController {
 		  
 	  }
 	 
-
+	  @GetMapping("/review")
+	  public String review(@RequestParam Map<String,Object>map, HttpSession session,Model model) {
+		  // 로그인 확인  
+		  if(session.getAttribute("mid") != null) {
+		// 거래 내역 확인 > 거래가 없을시 어디로 보냄? 보드 ?
+			  int tradeFin = boardService.tradeFin(map);
+			  if(tradeFin == 1) {
+		 // 리뷰를 작성할 사람이 거래한 사람이 맞는지 확인 
+			  String sid = String.valueOf( session.getAttribute("mid")) ;
+			  String fid = String.valueOf(map.get("fid"));  
+			  String tid = String.valueOf(map.get("tid"));
+			  map.put("fid", fid);
+			  map.put("tid", tid);
+		 // 리뷰 작성자가 구매자일 경우 	  
+			  if(sid.equals(fid)) {
+		 //리뷰를 이미 작성했을시 막아버리기 
+				  int freviewCheck = boardService.freviewCheck(map);
+				  if(freviewCheck == 0) {
+					  model.addAttribute("map", map);
+					  return "review"; 
+					  
+				  }else{
+					  
+				  return "redirect:/board";
+				  }
+		
+			// 리뷰 작성자가 판매자일 경우 
+		  	 }else if(sid.equals(tid)) {
+		  		 int treviewCheck = boardService.treviewCheck(map);
+		  		//리뷰를 이미 작성했을시 막아버리기  
+		  		 if(treviewCheck == 0) {
+		  			 model.addAttribute("map", map);
+					 return "review"; 
+		  		 }else {
+		  			 return "redirect:/board";
+		  		 }
+		  		 
+		  	 	 }else {
+		  		return "login";
+		  	 	}
+			  
+			  }else{
+				return "redirect:/board";
+			  }
+			  }else
+			  {
+				  
+	  		  return "login";
+	  		}
+	  	}
+	  
+	  @PostMapping("/review")
+	  public String reviewp(@RequestParam Map<String, Object>map, HttpSession session) {
+		// 쿼리문에서 중복 리뷰작성은 알아서 막히게 설정함 
+		int postreview = boardService.postreview(map); 
+		return "redirect:/board";
+	  }
+	  
+	  @ResponseBody
+	  @PostMapping("/bmwrite")
+	  public int bmwrite(@RequestParam Map<String, Object>map,HttpSession session) {
+		  //작성 글 insert 
+		  	map.put("mid", session.getAttribute("mid"));
+			System.out.println(map);
+			Integer adr = boardService.adr(map); 
+		  // 방금 작성된 글의 번호를 가져옴
+		  int a = boardService.bno();
+		  
+	        // JSON 문자열을 List<String>으로 변환
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        List<String> equipmentList;
+	        try {
+	            equipmentList = objectMapper.readValue((String) map.get("equipment"), List.class);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            // 필요에 따라 예외 처리
+	            return -1;
+	        }
+	        // 체크 박스로 여러개 받은 시설 테이블에 저장
+			 Map<String, Object> equip = new HashMap<String, Object>(); 
+			 int i = 0;
+			  equip.put("bno", a); 
+			  for (String equipment : equipmentList) {
+				  	
+				  	equip.put("i", equipment);
+		            boardService.equip(equip);
+		      }
+		
+	        
+		 
+		  
+			  return a;
+	  }
+	  
+	  @ResponseBody
+	  @PostMapping("/uploadFile")
+	  public String uploadFile(@RequestParam("file") MultipartFile file) {
+		  System.out.println(file);
+		  
+		  return "";
+	  }
 }
