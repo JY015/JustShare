@@ -3,6 +3,30 @@
 
 <mapper namespace="com.js.web.chat.SocketDAO">
 
+<update id="tradestatus" parameterType="Map">
+
+ UPDATE trade
+    	SET
+        
+         tradestatus = 1
+         
+      
+    WHERE bno=#{bno} AND tradestatus=0
+  	 
+
+
+</update>
+
+<insert id="tradecopy" parameterType="Map">
+ 
+    INSERT INTO tradehistory (from_user_id, to_user_id, bno, timestamp) 
+    SELECT from_user_id, to_user_id, bno, now()
+    FROM trade
+    WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
+        AND tradestatus=1
+
+  </insert>
+
 <select id="bnochk" parameterType="Map" resultType="Integer">
 
 SELECT count(*) as count
@@ -63,19 +87,28 @@ WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
 
 SELECT to_user_chk,from_user_chk
 FROM trade
-WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno}
-OR to_user_id=#{mid} AND from_user_id=#{toId} AND bno=#{bno}
+WHERE to_user_id=#{toId} AND from_user_id=#{mid} AND bno=#{bno} AND tradestatus=0
+OR to_user_id=#{mid} AND from_user_id=#{toId} AND bno=#{bno} AND tradestatus=0
 
 </select>
 
 <select id="bnoload" parameterType="Map" resultType="Integer">
 
-SELECT bno
-FROM UserMessages
-WHERE to_user_id = #{toId} AND from_user_id = #{mid}
-ORDER BY timestamp DESC
-LIMIT 1;
+(SELECT bno
+FROM trade
+WHERE (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus=0)
+   OR (to_user_id = #{toId} AND from_user_id = #{mid} AND tradestatus=1)
+ORDER BY CASE WHEN tradestatus = 0 THEN 0 ELSE 1 END, tno DESC
+LIMIT 1)
 
+UNION
+
+(SELECT bno
+FROM trade
+WHERE (to_user_id = #{mid} AND from_user_id = #{toId} AND tradestatus=0)
+   OR (to_user_id = #{mid} AND from_user_id = #{toId} AND tradestatus=1)
+ORDER BY CASE WHEN tradestatus = 0 THEN 0 ELSE 1 END, tno DESC
+LIMIT 1);
 </select>
 
 <insert id="bnosave" parameterType="Map">
@@ -87,7 +120,8 @@ VALUES (#{toId},#{mid},#{bno},0,0,0)
 ON DUPLICATE KEY UPDATE 
 	 bno = #{bno},
     to_user_chk = 0,
-    from_user_chk = 0 
+    from_user_chk = 0,
+    tradestatus=0 
 	
 	
 	</insert>
@@ -103,9 +137,9 @@ SELECT
     (SELECT mimg FROM members WHERE mid = #{mid}) AS myimg,
     u.timestamp,
     (SELECT mid from members WHERE mid=#{toId}) AS toId,
-    (SELECT bimg FROM jboard WHERE bno=#{bno}) AS bimg,
-    (SELECT btitle FROM jboard WHERE bno=#{bno}) AS btitle,
-	(SELECT bno FROM jboard WHERE bno=#{bno}) AS bno
+    (SELECT realFile FROM image WHERE bno=#{bno} AND main=1) AS bimg,
+    (SELECT btitle FROM board WHERE bno=#{bno}) AS btitle,
+	(SELECT bno FROM board WHERE bno=#{bno}) AS bno
     
 
 FROM UserMessages u
@@ -121,8 +155,8 @@ WHERE (u.from_user_id = #{mid} AND u.to_user_id = #{toId}
 	<insert id="msginsert" parameterType="Map">
 
 
-INSERT INTO UserMessages (to_user_id, content, from_user_id, timestamp, read_status,bno)
-VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno})
+INSERT INTO UserMessages (to_user_id, content, from_user_id, timestamp, read_status,bno,tradestatus)
+VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno},0)
 
 
 	</insert>
@@ -141,8 +175,8 @@ VALUES (#{toId}, #{text}, #{mid}, NOW(), 1,#{bno})
 	
 	<insert id="Firstmsg" parameterType="Map">
 	
-	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status,deletemsg,bno)
-	VALUE (#{toId},#{message},#{mid},NOW(),#{read_status},#{deletemsg},#{bno})
+	INSERT INTO UserMessages (to_user_id,content,from_user_id,timestamp,read_status,deletemsg,bno,tradestatus)
+	VALUE (#{toId},#{message},#{mid},NOW(),#{read_status},#{deletemsg},#{bno},0)
 	
 	</insert>
 
@@ -185,7 +219,8 @@ WHERE mid = #{mid}
         SELECT COUNT(*)
         FROM UserMessages 
         WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 
-    ) AS read_count
+    ) AS read_count,
+    m1.bno
   
 FROM UserMessages m1
 WHERE m1.message_id IN (
@@ -203,19 +238,17 @@ ORDER BY latest_timestamp DESC;
 	</select>
 	
 	<update id="readupdate" parameterType="Map">
-	
-	 UPDATE UserMessages um
-	 INNER JOIN members AS m ON um.to_user_id = m.mid
-    SET
-        um.read_status =0,
-          m.mchatcount = m.mchatcount - (
-            SELECT COUNT(*) FROM UserMessages
+
+UPDATE UserMessages AS u
+INNER JOIN members AS m ON u.to_user_id = m.mid
+SET u.read_status = 0,
+    m.mchatcount = m.mchatcount - (
+        SELECT sub_count FROM (
+            SELECT COUNT(*) AS sub_count FROM UserMessages
             WHERE to_user_id = #{mid} AND from_user_id = #{toId} AND read_status = 1
-        )
-      
-    WHERE um.to_user_id = #{mid} AND um.from_user_id = #{toId}
- 
-	
+        ) sub_query
+    )
+WHERE u.to_user_id = #{mid} AND u.from_user_id = #{toId}
 	
 	</update>
 	
@@ -307,52 +340,51 @@ WHERE NOT EXISTS (
 	
 	</select>
 	
-	<update id="excludeId" parameterType="Map">
-  <![CDATA[
-    UPDATE UserMessages
-    SET
-      deletemsg = 1,
-      exceptid = CASE
-        WHEN exceptid IS NULL THEN NULL
-        ELSE
-          TRIM(BOTH ',' FROM
-            REPLACE(
-              REPLACE(CONCAT(',', exceptid, ','), CONCAT(',', #{exceptid}, ','), ','),
-              ',,',
-              ','
-            )
-          )
-      END
-    WHERE (to_user_id = #{toId} AND from_user_id = #{mid})
-    OR (from_user_id = #{toId} AND to_user_id = #{mid})
-  ]]>
-</update>
+
 
 <select id="firstmsgchk" parameterType="Map" resultType="Integer">
  
-SELECT COUNT(*) as COUNT
-FROM UserMessages
-WHERE 
-(
-  (from_user_id=#{mid} AND to_user_id=#{sender}
-  AND (exceptid ='제외' OR exceptid ='0' OR exceptid = #{mid}))
-  
-  OR
-  (from_user_id=#{mid} AND to_user_id=#{sender}
-  AND (exceptid ='제외' OR exceptid ='0' OR exceptid =#{sender}))
-  
-  or
-  (from_user_id=#{sender} AND to_user_id=#{mid}
-  AND (exceptid ='제외' OR exceptid ='0' OR exceptid = #{mid}))
-  
-  or
-    (from_user_id=#{sender} AND to_user_id=#{mid}
-  AND (exceptid ='제외' OR exceptid ='0' OR exceptid =#{sender}))
-)
-	
+ SELECT COUNT(*) as COUNT
+  FROM UserMessages
+  WHERE 
+  (
+    (from_user_id=#{mid} AND to_user_id=#{sender} AND exceptid ='0')
+    OR
+    (from_user_id=#{sender} AND to_user_id=#{mid} AND exceptid ='0')
+  )
+
 	</select>
 
+	<select id="roomserch" parameterType="Map" resultType="Map">
 	
+	SELECT
+    m1.message_id AS latest_message_id,
+    m1.timestamp AS latest_timestamp,
+    m1.to_user_id,
+    m1.from_user_id,
+    m1.content,
+    (
+        SELECT COUNT(*)
+        FROM UserMessages 
+        WHERE to_user_id = #{mid} AND from_user_id = m1.from_user_id AND read_status = 1 
+    ) AS read_count
+  
+FROM UserMessages m1
+WHERE m1.message_id IN (
+    SELECT MAX(m2.message_id)
+    FROM UserMessages m2
+    WHERE (m2.from_user_id = #{mid} OR m2.to_user_id = #{mid}) 
+    AND FIND_IN_SET(#{mid}, m2.exceptid)=0 AND m2.deletemsg != 2
+   	AND (m1.to_user_id LIKE CONCAT('%', REPLACE(#{input}, ' ', ''), '%')
+     OR m1.from_user_id LIKE CONCAT('%', REPLACE(#{input}, ' ', ''), '%'))
+    GROUP BY 
+        CASE 
+            WHEN m2.from_user_id = #{mid} THEN m2.to_user_id
+            WHEN m2.to_user_id = #{mid} THEN m2.from_user_id
+        END
+) 
+ORDER BY latest_timestamp DESC;
+	</select>
 	
 
 	</mapper>
