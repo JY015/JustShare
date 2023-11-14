@@ -407,7 +407,6 @@ navigation: {   // 버튼 사용자 지정
    prevEl: '.swiper-button-prev',
 },
 });
-
 </script>
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
