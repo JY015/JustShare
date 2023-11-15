@@ -110,7 +110,7 @@ var _ss_user_id   = "";
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-key xi-2x"></i></a></c:when>
                          <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
                         </c:choose>    
               </div>
