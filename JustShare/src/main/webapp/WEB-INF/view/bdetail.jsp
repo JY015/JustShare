@@ -152,6 +152,7 @@
  .likeon, .likeoff { width: 55px; height: 50px;}
  .fa-star{rigth:5px;}
  .host .iconright{ font-size :22px !important;}
+ .off {background-color: red !important;  color:white !important;}
 </style>
 </head>
 <body>

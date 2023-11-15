@@ -1,81 +1,191 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-       .image-preview {
-            display: inline-block; /* 이미지를 가로로 나열하기 위해 인라인-블록 요소로 설정 */
-            margin: 10px; /* 이미지 사이의 간격 조정 */
-        }
-        .preview-image {
-            max-width: 300px; /* 최대 너비를 조절하여 이미지 크기 제한 */
-            max-height: 300px; /* 최대 높이를 조절하여 이미지 크기 제한 */
-            
-        }
-    </style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+	<meta name="description" content="공간 공유 플랫폼"/>
+    <title>Just Share</title>
+	<!-- 기존에 사용하던 jquery , bootstrap , 기타등등 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="../js/mcore.extends.js"></script>
+<script src="../js/mcore.min.js"></script>
+<script src="../js/wnInterface.min.js"></script>
+
+<!-- 추가한거 -->
+<link rel="stylesheet" href="/css/import.css?ver=20000120" />
+<link rel="stylesheet" href="/css/style.css?ver=20000120" />
+<link rel="stylesheet" href="/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+<link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+<link rel="stylesheet" href="/css/main_page.css" />
+<!-- 회원가입 3가지회원 유형 css new -->
+<link rel="stylesheet" href="/css/register.css?ver=20000120"/> 
+	<!-- 고객센터 css -->
+<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+	<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="/css/footertoastr.min.css" />
+<script src="./js/socket2.js"></script>
+
+
+ <script src="/js/valuevenue.js?ver=20000120" defer></script>
+ <script src="/js/owl.carousel.min.js"></script>
+ <script src="/js/common.js?ver=20000120" defer></script>
+ <script src="/js/cookie.js?ver=20000120" defer></script>
+ 
+
 </head>
 <body>
-	<h1>공간 공유하기 </h1>
-	<form action="./bedit" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="bno" value="${detail.bno }">
-	 <label for="images">이미지 업로드</label>
-	<div >
-    <input type="file" name="upFile" id="upFile" multiple="multiple" >
-    <br><span id="resultF"></span>
-    </div>
-     <div id="imagePreviews"></div>
-	제목
-	<div>
-	<input type="text" name="title" value="${detail.btitle }" > 
-	<br><span id="resultMSG"></span>
-	</div>
-	공간 유형
-	<div>
-	<select name="bcate">
-	<c:forEach items="${catelist }" var="n">
-	<option value ="${n.cate}" <c:if test="${n.cate eq detail.cate}">selected</c:if>>${n.cname }</option>
-	</c:forEach>
-	</select>
-	</div>
-	가격
-	<div>
-	<input type="number" name="price" value="${detail.bprice }">
-	 <br><span id="resultP"></span>
-	</div>
-	시설
-	<div>
-	<c:forEach items="${equiplist }" var="n">
-	<input type="checkbox" name="equipment" value="${n.eid }" <c:if test="${equipDE.contains(n.eid)}">checked</c:if> > ${n.ename }
-	</c:forEach>
-	</div>
-	상세 설명
-	<div>
-	<textarea name="content">${detail.bcontent }</textarea>
-	<br><span id="resultCON"></span>
-	</div>
-	주소
-	<div>
-	<input type="text" id="sample2_postcode" placeholder="우편번호" name="addNum" value="${detail.addNum }">
-	<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-	<input type="text" id="sample2_address" name="add" placeholder="주소" value="${detail.addr }"><br>
-	<input type="text" id="sample2_detailAddress" name="addD"placeholder="상세주소" value="${detail.addDetail }">
-	<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
-	</div>
-	<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-	<br><span id="resultPC"></span>
-	<br><span id="resultAD"></span>
-	</div>
-	
-	<button type="button" class="writeB" >완료</button>
+<%@ include file="header.jsp"%>
+	<!-- 전체 div -->
+	<div class="body__container section">
+	 <section class="signup_wrap">
+	 <div class="sign_inner">
+	 <div class="signup_list_wrap">
+	 <div class="signup_title">
+	 <div class="sign_text">게시물 수정하기 </div>
+	 <div class="sign_text_list">게시물을 수정하세요 ! </div>
+	 </div>
+	 </div>
+	 <!-- 내용 -->
+	<form id="mf" name="mf" action="./bwrite" target=_hidden_frame  method="post" autocomplete="off" enctype="multipart/form-data" >
+		
+		<div class="input_sign_w">
+			<table>
+				<colgroup>
+				<col style="width:180px">
+				</colgroup>
+				<tbody>
+					<tr class="border_bottom">
+						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
+						<td>
+						 <div class="id_mo f_ex">
+						 <button id="picker" type="button" class="choose">파일 교체하기</button>
+						 </div>
+						 <div id="box"></div>
+						 <div id="imageChange">
+						 <c:forEach items="${imageD}" var="n">
+						 <img src="/img/places/${n}">
+						 </c:forEach>
+						 </div>
+  						<div id="progress"></div>
+  						<div id="upload-box"></div>	
+						 <br><span class="warningTxt2" id="resultF"></span>
+						</td>
+					</tr>
+					
+					<tr class="border_bottom">
+						<th><label for="title">제목</label><span aria-hidden="true">*</span></th>
+						<td>
+						<input type="text" name="title" id="titleInput" class="required input_border" value="${detail.btitle }"  aria-required="true"/>
+						<br><span  class="warningTxt2" id="resultMSG"></span>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+						<th><label for="category">유형</label></th>
+						<td>
+						<select class="input_border" name="bcate"  id="cateInput" aria-labelledby="user_category_label">
+						<c:forEach items="${catelist }" var="n">
+							<option value ="${n.cate}" <c:if test="${n.cate eq detail.cate}">selected</c:if>>${n.cname }</option>
+						</c:forEach>
+						</select>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+						<th><label for="time">사용가능 시간</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number"  min="0" max="24" name="startTime" id="startTimeInput" value="${detail.startTime}"  aria-required="true"/>
+							<br>
+							<input class="required input_border" type="number"  min="0" max="24" name="endTime"id="endTimeInput" value="${detail.endTime}"   aria-required="true"/>
+							<br><span class="warningTxt2" id="resultTime"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="timecategory">임대 기간</label></th>
+						<td>
+						<select class="input_border" name="rentTime" id="rentTimeInput" aria-labelledby="user_category_label">
+							<option value ="시간" >시간단위</option>
+							<option value ="일" >일단위</option>
+							<option value ="주" >주단위</option>
+							<option value ="월" >월단위</option>
+						</select>
+						</td>
+						</tr>		
+					<tr class="border_bottom">
+						<th><label for="price">가격</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number" name="price" id="priceInput" value="${detail.price }"  aria-required="true"/>
+							<br><span class="warningTxt2" id="resultP"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="size">공간 면적</label><span aria-hidden="true">*</span></th>
+							<td>
+							<input class="required input_border" type="number" name="size" id="sizeInput" value="${detail.size }" aria-required="true"/>
+							<br><span class="warningTxt2" id="resultS"></span>
+							</td>
+							</tr>
+					<tr class="border_bottom">
+						<th><label for="equip">보유 시설</label></th>
+							<td>
+							<c:forEach items="${equiplist }" var="n"><br>
+							<input class="required input_border" type="checkbox" name="equipment"  value="${n.eid }" <c:if test="${equipDE.contains(n.eid)}">checked</c:if> ><span class="ename">${n.ename }</span> 
+							</c:forEach>
+							</td>
+							</tr>	
+					<tr class="border_bottom">
+						<th><label for="content">상세 내용</label><span aria-hidden="true">*</span></th>
+						<td>
+						<textarea name="content" id="contentInput" >${detail.bcontent}</textarea>
+						<br><span  class="warningTxt2" id="resultCON"></span>
+						</td>
+						</tr>
+					<tr class="border_bottom">
+					<th><label for="address">주소</label>
+					<td>
+					<div>
+					<input type="text" id="sample2_postcode" name="addNum" placeholder="우편번호" value="${detail.addNum }">
+					<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="text" id="sample2_address" name="add" placeholder="주소" value="${detail.addr }"><br>
+					<input type="text" id="sample2_detailAddress"  name ="addD" placeholder="상세주소" value="${detail.addDetail }">
+					<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
+					</div>
+					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+					<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+					<br><span id="resultPC"></span>
+					<br><span id="resultAD"></span>
+					</div>
+					</td>
+					</tr>										
+				</tbody>
+			</table>
+		</div>
+		<!-- 버튼 -->
+		<div class="sign_btn_w">
+			<button type="button" class="btn_black writeB" >글 수정하기</button>
+			<button type="button"  id="upload" class="btn_clear_black">이미지 변경하기</button>
+		</div>
 	</form>
+
+
+	<br><br><br><br>
 	
-	<script>
+	 <%@ include file="footer.jsp" %> 
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
 
@@ -163,93 +273,266 @@
     }
 </script>
 
-<script>
-        document.getElementById('upFile').addEventListener('change', handleFileSelect, false);
+<script type="text/javascript">
 
-        function handleFileSelect(event) {
-            const files = event.target.files;
-            const imagePreviews = document.getElementById('imagePreviews');
-            imagePreviews.innerHTML = '';
+document.addEventListener('DOMContentLoaded', function() {
+    var uploadButton = document.getElementById('upload');
+        uploadButton.disabled = true; 
+});
 
-            for (const file of files) {
-                const imagePreview = document.createElement('div');
-                imagePreview.className = 'image-preview';
 
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.className = 'preview-image';
-                imagePreview.appendChild(img);
 
-                imagePreviews.appendChild(imagePreview);
-            }
-        }
-    </script>
+
+$(function () {
+    let selectImagePath = '';
+    let $previewImg = null;
+    let $uploadImg = null;
+    const $box = $('#box');
+    const $uploadBox = $('#upload-box');
+    const $progress = $('#progress');
+    const $picker = $('#picker');
+    const $upload = $('#upload');
+    const $imageChange =$('#imageChange');
+    const bno =${detail.bno};
     
-  <script type="text/javascript">
-
-$(function(){
-    $(".writeB").click(function(){
-        const fileInput = document.getElementById('upFile');
-        const titleInput = document.getElementById('titleInput');
-        const contentInput = document.getElementById('contentInput');
-        const postcodeInput = document.getElementById('sample2_postcode');
-        const addressInput = document.getElementById('sample2_address');
-        const priceInput = document.getElementById('priceInput');
-       
-       
-
-        const title = titleInput.value.trim();
-        const content = contentInput.value.trim();
-        const postcode = postcodeInput.value.trim();
-        const address = addressInput.value.trim();
-        const price = parseInt(priceInput.value); // 가격을 정수로 변환
-       
-        if(fileInput.files.length === 0){
-        	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
-             $("#resultF").css("font-weight", "bold");
-             $("#resultF").css("font-size", "10pt");
-			return false;
+    $picker.on('click', () => {
+          if ($previewImg !== null) {
+          $previewImg.remove();
+          $previewImg = null;
+        }
+          $imageChange.remove();
+        selectImagePath = '';
+        $.imagePicker()
+          .then(({ status, result }) => {
+            if (status === 'SUCCESS') {
+              selectImagePath = result.path;
+              return $.convertBase64ByPath(selectImagePath)
+            } else {
+              return Promise.reject('이미지 가져오기 실패')
+            }
+          })
+          .then(({ status, result }) => {
+            if (status === 'SUCCESS') {
+              $previewImg = $(document.createElement('img'))
+              $previewImg.attr('height', '200px')
+              $previewImg.attr('src', "data:image/png;base64," + result.data)
+              $box.append($previewImg);
+            } else {
+              return Promise.reject('BASE64 변환 실패')
+            }
+          })
+          .catch((err) => {
+            if (typeof err === 'string') alert(err)
+            console.error(err)
+          })
+    });
+    
+    $upload.on('click', () => {
+           	
+    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
+    if ($uploadImg) {
+      $uploadImg.remove();
+      $uploadImg = null;
+    }
+    
+    $progress.text('')
+    $.uploadImageByPath(selectImagePath,bno,(total, current) => {
+      console.log(`total: ${total} , current: ${current}`)
+      $progress.text(`${current}/${total}`)
+    })
+      .then(({
+        status, header, body
+      }) => {
+        // status code
+        if (status === '200') {
+          $progress.text('업로드 완료')
+          const bodyJson = JSON.parse(body)
+          $uploadImg = $(document.createElement('img'))
+          $uploadImg.attr('height', '200px')
+          $uploadImg.attr('src', bodyJson.fullpath)
+          $uploadBox.append($uploadImg)
+        } else {
+        	window.location.href = 'http://172.30.1.30:8080/board'
         	
         }
+      })
+      .catch((err) => {
+        if (typeof err === 'string') alert(err)
+        console.error(err)
+      })
+    });
 
-		if(title === "" || title.length < 3 || title.length > 100){
-			 $("#resultMSG").text("제목은 3글자 이상, 100글자 이하이어야 합니다.");
-             $("#resultMSG").css("font-weight", "bold");
-             $("#resultMSG").css("font-size", "10pt");
-			return false;
-		}
-		if (isNaN(price) || price <= 1000) {
-			 $("#resultP").text("올바른 가격을 입력하세요");
-             $("#resultP").css("font-weight", "bold");
-             $("#resultP").css("font-size", "10pt");
+    $.imagePicker = function () {
+          return new Promise((resolve) => {
+        M.media.picker({
+          mode: "SINGLE",
+          media: "PHOTO",
+          column: 3,
+          callback: (status, result) => {
+            resolve({ status, result })
+          }
+        });
+      })
+    };
+
+    $.convertBase64ByPath = function (imagePath) {
+       	      if (typeof imagePath !== 'string') throw new Error('imagePath must be string')
+	      return new Promise((resolve) => {
+	        M.file.read({
+	          path: imagePath,
+	          encoding: 'BASE64',
+	          indicator: true,
+	          callback: function (status, result) {
+	            resolve({ status, result })
+	          }
+	        });
+	      })
+    };
+
+    $.uploadImageByPath = function (targetImgPath, bno, progress) {
+             return new Promise((resolve) => {
+	        const _options = {
+	          url: "http://172.30.1.30:8080/editFile",
+	          header: {},
+	          params: {bno:bno},
+	          body: [
+	            { name: "file", content: targetImgPath, type: "FILE" },
+	          ],
+	          encoding: "UTF-8",
+	          finish: (status, header, body, setting) => {
+	            resolve({ status, header, body })
+	          },
+	          progress: function (total, current) {
+	            progress(total, current);
+	          }
+	        }
+	        M.net.http.upload(_options);
+	      })
+    };
+
+    $(".writeB").click(function(){
+    	 const bno =${detail.bno};
+    	 const $writeButton = $(this);
+         const titleInput = document.getElementById('titleInput');
+         const contentInput = document.getElementById('contentInput');
+         const postcodeInput = document.getElementById('sample2_postcode');
+         const addressInput = document.getElementById('sample2_address');
+         const priceInput = document.getElementById('priceInput');
+         const startTimeInput = document.getElementById('startTimeInput');
+         const endTimeInput = document.getElementById('endTimeInput');
+         const sizeInput =  document.getElementById('sizeInput');
+         const cateInput = document.getElementById('cateInput');
+         const rentTimeInput = document.getElementById('rentTimeInput');
+         const equipmetInputs = document.getElementsByName('equipment');
+         const detailAddressInput = document.getElementById('sample2_detailAddress');
+        
+         
+ 		 
+         const title = titleInput.value.trim();
+         const content = contentInput.value.trim();
+         const postcode = postcodeInput.value.trim();
+         const address = addressInput.value.trim();
+    	const detailAddress = detailAddressInput.value.trim();
+         const price = parseInt(priceInput.value);
+         const startTime =parseInt(startTimeInput.value);
+         const endTime =parseInt(endTimeInput.value);
+         const size = parseInt(sizeInput.value);
+         const cate = cateInput.value;
+         const rentTime = rentTimeInput.value;
+         const equipment = Array.from(equipmetInputs).filter(input => input.checked).map(input => input.value);
+        
+         /* if(fileInput.files.length === 0){
+         	 $("#resultF").text("이미지는 반드시 하나이상 선택해야합니다");
+              $("#resultF").css("font-weight", "bold");
+              $("#resultF").css("font-size", "10pt");
+ 			return false;
+         	
+         } */
+
+ 		if(title === "" || title.length < 3 || title.length > 31){
+ 			 $("#resultMSG").text("제목은 3글자 이상, 30글자 이하이어야 합니다.");
+              $("#resultMSG").css("font-weight", "bold");
+              $("#resultMSG").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if (isNaN(startTime) ||startTime < 0 || startTime >24 || startTime > endTime) {
+ 			 $("#resultTime").text("올바른 시간을 입력하세요");
+              $("#resultTime").css("font-weight", "bold");
+              $("#resultTime").css("font-size", "10pt");
+             return false;
+         }
+ 		if (isNaN(endTime) ||endTime < 0 || endTime >24 || startTime > endTime) {
+ 			 $("#resultTime").text("올바른 시간을 입력하세요");
+             $("#resultTime").css("font-weight", "bold");
+             $("#resultTime").css("font-size", "10pt");
             return false;
         }
-	
-		if(content ==="" || content.length < 10 || content.length > 1000){
-			$("#resultCON").text("상세 내용은 10글자 이상, 1000자 이하여야 합니다.")
-			$("#resultCON").css("font-weight", "bold");
-            $("#resultCON").css("font-size", "10pt");
-			return false;
-		}
-		if(postcode ===''){
-			$("#resultPC").text("우편번호를 입력해야합니다.")
-			$("#resultPC").css("font-weight", "bold");
-            $("#resultPC").css("font-size", "10pt");
-			return false;
-		}
-		if(address ===''){
-			$("#resultAD").text("주소를 입력해야합니다.")
-			$("#resultAD").css("font-weight", "bold");
-            $("#resultAD").css("font-size", "10pt");
-			return false;
-		}
-		
-		 document.querySelector('form').submit();
+ 		if (isNaN(price) || price <= 10) {
+ 			 $("#resultP").text("올바른 가격을 입력하세요");
+              $("#resultP").css("font-weight", "bold");
+              $("#resultP").css("font-size", "10pt");
+             return false;
+         }
+ 		if (isNaN(size) || size <= 0) {
+ 			 $("#resultS").text("올바른 면적을 입력하세요");
+             $("#resultS").css("font-weight", "bold");
+             $("#resultS").css("font-size", "10pt");
+            return false;
+        }
+ 	
+ 		if(content ==="" || content.length < 10 || content.length > 3000){
+ 			$("#resultCON").text("상세 내용은 10글자 이상, 3000자 이하여야 합니다.")
+ 			$("#resultCON").css("font-weight", "bold");
+             $("#resultCON").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if(postcode ===''){
+ 			$("#resultPC").text("우편번호를 입력해야합니다.")
+ 			$("#resultPC").css("font-weight", "bold");
+             $("#resultPC").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 		if(address ===''){
+ 			$("#resultAD").text("주소를 입력해야합니다.")
+ 			$("#resultAD").css("font-weight", "bold");
+             $("#resultAD").css("font-size", "10pt");
+ 			return false;
+ 		}
+ 	
+        $.ajax({
+           url : "./bmedit",
+ 			type : "post",
+ 			data : {
+ 				 "bno":bno,
+ 				"title": title,
+ 				"content": content,
+ 				"addNum": postcode,
+ 				"add" : address,
+ 				"price" : price,
+ 				"startTime" : startTime,
+ 				"endTime" : endTime,
+ 				"size" : size,
+ 				"bcate" : cate,
+ 				"rentTime" : rentTime,
+ 				"equipment" : JSON.stringify(equipment),
+ 				"addD":detailAddress
+ 			},
+ 			dataType : "json",
+            success: function (data) {
+                if (data > 0) {
+                	$upload.prop('disabled', false); 
+                	 
+                } else {
+                    console.log("글 작성 중 오류가 발생했습니다.");
+                }
+            },
+            // ...
+        }); 
     });
-    });    
+});
 
- </script>       
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+</script>
+    
+  
 </body>
 </html>

@@ -229,6 +229,12 @@ public class BoardService {
 		return boardDAO.bnoI();
 	}
 
+	public void deleteImage(int a) {
+		
+		boardDAO.deleteImage(a);
+		
+	}
+
 
 
 

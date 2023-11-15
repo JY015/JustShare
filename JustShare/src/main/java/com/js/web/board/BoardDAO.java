@@ -78,6 +78,8 @@ public interface BoardDAO {
 
 	int bnoI();
 
+	void deleteImage(int a);
+
 
 	
 }

@@ -138,7 +138,6 @@ public class BoardController {
 		if(session.getAttribute("mid") != null) {
 		// 로그인 후 글 작성 내용 insert 
 		map.put("mid", session.getAttribute("mid"));
-		System.out.println(map);
 		Integer adr = boardService.adr(map);
 
 		// 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기
@@ -158,7 +157,6 @@ public class BoardController {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 				.getRequest();
 		String path = request.getServletContext().getRealPath("/img/places");
-		System.out.println(path);
 		// 다중 이미지를 가져와서 하나하나 분리함 > 서버에 저장해야함
 		// jsp 에서 받은 파일 저장하기
 		Map<String, Object> image = new HashMap<String, Object>();
@@ -302,7 +300,7 @@ public class BoardController {
 		String sid = String.valueOf( session.getAttribute("mid")) ;
 		map.put("mid", sid);
 		int result = boardService.bedit(map);
-		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰는 이유- 갯수가 달라질수 있어서 // 겹치는거 체크 ?
+		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰기
 		boardService.deleteEquip(map);
 		// 새로 받은 시설 테이블 추가 
 		Map<String, Object> equip = new HashMap<String, Object>();
@@ -445,8 +443,11 @@ public class BoardController {
 	  @PostMapping("/bmwrite")
 	  public int bmwrite(@RequestParam Map<String, Object>map,HttpSession session) {
 		  //작성 글 insert 
+		  // 띄어쓰기 적용하기 
+		    String b =String.valueOf( map.get("content"));
+		    String replaced = b.replaceAll("\\s", "<br>");
+		    map.put("content", replaced);
 		  	map.put("mid", session.getAttribute("mid"));
-			System.out.println(map);
 			Integer adr = boardService.adr(map); 
 		  // 방금 작성된 글의 번호를 가져옴
 		  int a = boardService.bno();
@@ -522,4 +523,94 @@ public class BoardController {
 		        return "업로드할 파일을 선택해주세요.";
 		    }
 	  }
+	  
+	  @ResponseBody
+	  @PostMapping("/bmedit")
+	  public int bmedit(@RequestParam Map<String, Object>map,HttpSession session) {
+		// 수정하는 사람의 mid 넣어주기 
+			String sid = String.valueOf( session.getAttribute("mid")) ;
+			map.put("mid", sid);
+			// 수정하는 글 띄어쓰기 넣어주기 
+			String b =String.valueOf( map.get("content"));
+		    String replaced = b.replaceAll("\\s", "<br>");
+		    map.put("content", replaced);
+		    // 보드 업데이트하기 
+			int result = boardService.bedit(map);
+			// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰기
+			boardService.deleteEquip(map);
+			// 새로 받은 시설 테이블 추가 
+			String bnoString = (String) map.get("bno");
+			int a = Integer.parseInt(bnoString);
+	        // JSON 문자열을 List<String>으로 변환
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        List<String> equipmentList;
+	        try {
+	            equipmentList = objectMapper.readValue((String) map.get("equipment"), List.class);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            // 필요에 따라 예외 처리
+	            return -1;
+	        }
+	        // 체크 박스로 여러개 받은 시설 테이블에 저장
+			 Map<String, Object> equip = new HashMap<String, Object>(); 
+			 int i = 0;
+			  equip.put("bno", a); 
+			  for (String equipment : equipmentList) {
+				  	
+				  	equip.put("i", equipment);
+		            boardService.equip(equip);
+		      }
+			  // 기존 이미지 삭제 
+			  boardService.deleteImage(a);
+			 
+		  
+	  return a;
+	  }
+	  
+	  @PostMapping("/editFile")
+	  public String editFile(@RequestParam("file") MultipartFile file, @RequestParam("bno")int bno) {
+		  System.out.println(file);
+		  System.out.println(bno);
+		  if (!file.isEmpty()) {
+		        //파일 이름 받아옴 
+		        String fileName = file.getOriginalFilename();
+		        String originFile = fileName.substring(fileName.lastIndexOf("/") + 1);
+		        // 파일 이름 가공 
+		        LocalDateTime ldt = LocalDateTime.now();
+				String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
+				String realFileName = format+originFile;
+				//경로 가져오기 
+				
+				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String path = request.getServletContext().getRealPath("/img/places");
+				
+				// 이미지 업로드 
+				File newFileName = new File(path,realFileName);
+				try {
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					FileCopyUtils.copy(file.getBytes(), newFileName);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				// 업로드 된 해당 이미지를 DB에 기록하기
+				// 첫번째로 올린 이미지를 메인이미지로
+				Map<String, Object> image = new HashMap<String, Object>();
+					image.put("bno", bno);
+					image.put("main",1);
+		        	image.put("originalFilename", originFile);
+					image.put("realFileName", realFileName);
+					boardService.image(image);
+		   
+		        return "파일 업로드 성공!";
+		    } else {
+		        return "업로드할 파일을 선택해주세요.";
+		    }
+	  }
+	  
+	  
 }
+
