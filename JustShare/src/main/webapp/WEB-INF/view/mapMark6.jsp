@@ -268,16 +268,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             }
           });
       });
-    var data = [ {
-        category: 'restaurant',
-        content: '맛있는 음식점',
-        latlng: new kakao.maps.LatLng(37.4923615,127.0292881)
-    },
-    {
-        category: 'cafe',
-        content: '아늑한 카페',
-        latlng: new kakao.maps.LatLng(37.4923615,127.0292881)
-    },
+    var data = [ 
         <c:forEach items="${imageAll}" var="all" varStatus="loop">
         {
             content: '<div class="custom-overlay-info">'
