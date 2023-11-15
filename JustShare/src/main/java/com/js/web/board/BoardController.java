@@ -131,84 +131,54 @@ public class BoardController {
 	
 	/* 글쓰기 부분 수정하기 */
 	
-	@PostMapping("/bwrite")
-	public String bwrite(@RequestParam Map<String, Object> map,
-			@RequestParam(value = "equipment", required = false) Integer[] equipment,
-			@RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
-		if(session.getAttribute("mid") != null) {
-		// 로그인 후 글 작성 내용 insert 
-		map.put("mid", session.getAttribute("mid"));
-		Integer adr = boardService.adr(map);
-
-		// 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기
-		int a = boardService.bno();
-
-		// 체크 박스로 여러개 받은 시설 테이블에 저장
-		Map<String, Object> equip = new HashMap<String, Object>();
-		int i = 0;
-		equip.put("bno", a);
-		for (i = 0; i < equipment.length; i++) {
-			equip.put("i", equipment[i]);
-			boardService.equip(equip);
-		}
-
-		// 이미지 업로드 + 대표 사진 설정하는 법
-		// path 경로 찾기
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-				.getRequest();
-		String path = request.getServletContext().getRealPath("/img/places");
-		// 다중 이미지를 가져와서 하나하나 분리함 > 서버에 저장해야함
-		// jsp 에서 받은 파일 저장하기
-		Map<String, Object> image = new HashMap<String, Object>();
-		int f = 0;
-		for (f = 0; f < upfile.length; f++) {
-			// 파일 이름 꺼내오기
-			String originalFilename = upfile[f].getOriginalFilename();
-
-			// 파일 확장자 처리 >> 이미지 파일만 올라갈 수 있게
-			String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-			// 이미지 파일만 처리
-			if ("jpg".equalsIgnoreCase(fileExtension) || "png".equalsIgnoreCase(fileExtension)
-					|| "bmp".equalsIgnoreCase(fileExtension) ||"jpeg".equalsIgnoreCase(fileExtension)) {
-				// 파일 이름 가공 >> 올린 이미지의 이름이 같을 수 있어서
-				LocalDateTime ldt = LocalDateTime.now();
-				String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
-				String realFileName = format+originalFilename;
-				// 이미지 업로드
-				File newFileName = new File(path,realFileName);
-				try {
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
-					FileCopyUtils.copy(upfile[f].getBytes(), newFileName);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				// 업로드 된 해당 이미지를 DB에 기록하기
-				// 첫번째로 올린 이미지를 메인이미지로 >> 메인 이미지 선택은 나중에
-				if (f == 0) {
-					image.put("main", 1);
-				} else {
-					image.put("main", 0);
-				}
-				image.put("bno", a);
-				image.put("originalFilename", originalFilename);
-				image.put("realFileName", realFileName);
-				boardService.image(image);
-
-			} else {
-				// 이미지가 아닌 파일은 처리하지 않음
-				return "이미지 파일만 가능합니다.";
-			}
-
-		}
-
-		return "redirect:board";
-	}else {
-		return "board";
-	}
-	}
+	/*
+	 * @PostMapping("/bwrite") public String bwrite(@RequestParam Map<String,
+	 * Object> map,
+	 * 
+	 * @RequestParam(value = "equipment", required = false) Integer[] equipment,
+	 * 
+	 * @RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
+	 * if(session.getAttribute("mid") != null) { // 로그인 후 글 작성 내용 insert
+	 * map.put("mid", session.getAttribute("mid")); Integer adr =
+	 * boardService.adr(map);
+	 * 
+	 * // 해당 글 번호 가져오기 >> 이걸 사진이랑 시설에 넣기 int a = boardService.bno();
+	 * 
+	 * // 체크 박스로 여러개 받은 시설 테이블에 저장 Map<String, Object> equip = new HashMap<String,
+	 * Object>(); int i = 0; equip.put("bno", a); for (i = 0; i < equipment.length;
+	 * i++) { equip.put("i", equipment[i]); boardService.equip(equip); }
+	 * 
+	 * // 이미지 업로드 + 대표 사진 설정하는 법 // path 경로 찾기 HttpServletRequest request =
+	 * ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+	 * .getRequest(); String path =
+	 * request.getServletContext().getRealPath("/img/places"); // 다중 이미지를 가져와서 하나하나
+	 * 분리함 > 서버에 저장해야함 // jsp 에서 받은 파일 저장하기 Map<String, Object> image = new
+	 * HashMap<String, Object>(); int f = 0; for (f = 0; f < upfile.length; f++) {
+	 * // 파일 이름 꺼내오기 String originalFilename = upfile[f].getOriginalFilename();
+	 * 
+	 * // 파일 확장자 처리 >> 이미지 파일만 올라갈 수 있게 String fileExtension =
+	 * originalFilename.substring(originalFilename.lastIndexOf(".") + 1); // 이미지 파일만
+	 * 처리 if ("jpg".equalsIgnoreCase(fileExtension) ||
+	 * "png".equalsIgnoreCase(fileExtension) ||
+	 * "bmp".equalsIgnoreCase(fileExtension)
+	 * ||"jpeg".equalsIgnoreCase(fileExtension)) { // 파일 이름 가공 >> 올린 이미지의 이름이 같을 수
+	 * 있어서 LocalDateTime ldt = LocalDateTime.now(); String format =
+	 * ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss")); String
+	 * realFileName = format+originalFilename; // 이미지 업로드 File newFileName = new
+	 * File(path,realFileName); try { } catch (Exception e) { e.printStackTrace(); }
+	 * try { FileCopyUtils.copy(upfile[f].getBytes(), newFileName); } catch
+	 * (IOException e) { e.printStackTrace(); } // 업로드 된 해당 이미지를 DB에 기록하기 // 첫번째로 올린
+	 * 이미지를 메인이미지로 >> 메인 이미지 선택은 나중에 if (f == 0) { image.put("main", 1); } else {
+	 * image.put("main", 0); } image.put("bno", a); image.put("originalFilename",
+	 * originalFilename); image.put("realFileName", realFileName);
+	 * boardService.image(image);
+	 * 
+	 * } else { // 이미지가 아닌 파일은 처리하지 않음 return "이미지 파일만 가능합니다."; }
+	 * 
+	 * }
+	 * 
+	 * return "redirect:board"; }else { return "board"; } }
+	 */
 	@GetMapping("/bdetail")
 	public String bdetail(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
 		// 해당 게시글 번호 받아와서 게시글 띄우기
@@ -288,33 +258,27 @@ public class BoardController {
 		}
 		}
 	
-	@PostMapping("/bedit")
-	public String beditU(@RequestParam Map<String, Object> map,
-			@RequestParam(value = "equipment", required = false) Integer[] equipment,
-			@RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
-		
-		// map 으로 새로받은 데이터는 업데이트 
-		
-		// 로그인 확인 + id 일치 확인 해야함 아직안함 
-		// 수정하는 사람의 mid 넣어주기 
-		String sid = String.valueOf( session.getAttribute("mid")) ;
-		map.put("mid", sid);
-		int result = boardService.bedit(map);
-		// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰기
-		boardService.deleteEquip(map);
-		// 새로 받은 시설 테이블 추가 
-		Map<String, Object> equip = new HashMap<String, Object>();
-		int i = 0;
-		equip.put("bno", map.get("bno"));
-		for (i = 0; i < equipment.length; i++) {
-			equip.put("i", equipment[i]);
-		boardService.equip(equip);	
-		}
-		// 이미지 처리법 어려움  기존 이미지 지우고 새로운 이미지 추가 > 겹치는거면 ? >시설처럼하면 서버에 남은 이미지 파일이 문제 
-		
-		return "redirect:/bdetail?bno="+map.get("bno");
-	}
-	
+		/*
+		 * @PostMapping("/bedit") public String beditU(@RequestParam Map<String, Object>
+		 * map,
+		 * 
+		 * @RequestParam(value = "equipment", required = false) Integer[] equipment,
+		 * 
+		 * @RequestParam("upFile") MultipartFile[] upfile, HttpSession session) {
+		 * 
+		 * // map 으로 새로받은 데이터는 업데이트
+		 * 
+		 * // 로그인 확인 + id 일치 확인 해야함 아직안함 // 수정하는 사람의 mid 넣어주기 String sid =
+		 * String.valueOf( session.getAttribute("mid")) ; map.put("mid", sid); int
+		 * result = boardService.bedit(map); // 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼
+		 * 전부 지우기>> 지우고 다시 쓰기 boardService.deleteEquip(map); // 새로 받은 시설 테이블 추가
+		 * Map<String, Object> equip = new HashMap<String, Object>(); int i = 0;
+		 * equip.put("bno", map.get("bno")); for (i = 0; i < equipment.length; i++) {
+		 * equip.put("i", equipment[i]); boardService.equip(equip); } // 이미지 처리법 어려움 기존
+		 * 이미지 지우고 새로운 이미지 추가 > 겹치는거면 ? >시설처럼하면 서버에 남은 이미지 파일이 문제
+		 * 
+		 * return "redirect:/bdetail?bno="+map.get("bno"); }
+		 */
 	
 	@GetMapping("/report")
 	public String report(@RequestParam Map<String, Object> map, HttpSession session, Model model) {
@@ -569,8 +533,6 @@ public class BoardController {
 	  
 	  @PostMapping("/editFile")
 	  public String editFile(@RequestParam("file") MultipartFile file, @RequestParam("bno")int bno) {
-		  System.out.println(file);
-		  System.out.println(bno);
 		  if (!file.isEmpty()) {
 		        //파일 이름 받아옴 
 		        String fileName = file.getOriginalFilename();

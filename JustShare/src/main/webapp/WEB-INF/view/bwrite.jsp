@@ -318,39 +318,39 @@ $(function () {
           })
     });
     
-    $upload.on('click', () => {
-           	
-    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
-    if ($uploadImg) {
-      $uploadImg.remove();
-      $uploadImg = null;
-    }
-    $progress.text('')
-    $.uploadImageByPath(selectImagePath, (total, current) => {
-      console.log(`total: ${total} , current: ${current}`)
-      $progress.text(`${current}/${total}`)
-    })
-      .then(({
-        status, header, body
-      }) => {
-        // status code
-        if (status === '200') {
-          $progress.text('업로드 완료')
-          const bodyJson = JSON.parse(body)
-          $uploadImg = $(document.createElement('img'))
-          $uploadImg.attr('height', '200px')
-          $uploadImg.attr('src', bodyJson.fullpath)
-          $uploadBox.append($uploadImg)
-        } else {
-        	window.location.href = 'http://172.30.1.30:8080/board'
-        	
-        }
-      })
-      .catch((err) => {
-        if (typeof err === 'string') alert(err)
-        console.error(err)
-      })
-    });
+	    $upload.on('click', () => {
+	           	
+	    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
+	    if ($uploadImg) {
+	      $uploadImg.remove();
+	      $uploadImg = null;
+	    }
+	    $progress.text('')
+	    $.uploadImageByPath(selectImagePath,bno, (total, current) => {
+	      console.log(`total: ${total} , current: ${current}`)
+	      $progress.text(`${current}/${total}`)
+	    })
+	      .then(({
+	        status, header, body
+	      }) => {
+	        // status code
+	        if (status === '200') {
+	          $progress.text('업로드 완료')
+	          const bodyJson = JSON.parse(body)
+	          $uploadImg = $(document.createElement('img'))
+	          $uploadImg.attr('height', '200px')
+	          $uploadImg.attr('src', bodyJson.fullpath)
+	          $uploadBox.append($uploadImg)
+	        } else {
+	        	window.location.href = 'http://172.30.1.30:8080/board'
+	        	
+	        }
+	      })
+	      .catch((err) => {
+	        if (typeof err === 'string') alert(err)
+	        console.error(err)
+	      })
+	    });
 
     $.imagePicker = function () {
           return new Promise((resolve) => {
@@ -379,12 +379,12 @@ $(function () {
 	      })
     };
 
-    $.uploadImageByPath = function (targetImgPath, progress, bno) {
+    $.uploadImageByPath = function (targetImgPath, bno, progress) {
              return new Promise((resolve) => {
 	        const _options = {
 	          url: "http://172.30.1.30:8080/uploadFile",
 	          header: {},
-	          params: {},
+	          params: {bno:bno},
 	          body: [
 	            { name: "file", content: targetImgPath, type: "FILE" },
 	          ],
@@ -508,7 +508,31 @@ $(function () {
  			dataType : "json",
             success: function (data) {
                 if (data > 0) {
+                	 var bno = data;
                 	 $upload.prop('disabled', false);
+                	// 이 부분에 $upload 클릭 시 실행되어야 하는 코드를 넣어주세요.
+                     if (selectImagePath === '') return alert('이미지를 선택해주세요.')
+                     if ($uploadImg) {
+                         $uploadImg.remove();
+                         $uploadImg = null;
+                     }
+                     $progress.text('')
+                     $.uploadImageByPath(selectImagePath, bno, (total, current) => {
+                         console.log(`total: ${total}, current: ${current}`)
+                         $progress.text(`${current}/${total}`)
+                     })
+                     .then(({ status, header, body }) => {
+                         if (status === '200') {
+                             $progress.text('업로드 완료')
+                             const bodyJson = JSON.parse(body)
+                             $uploadImg = $(document.createElement('img'))
+                             $uploadImg.attr('height', '200px')
+                             $uploadImg.attr('src', bodyJson.fullpath)
+                             $uploadBox.append($uploadImg)
+                         } else {
+                             window.location.href = 'http://172.30.1.30:8080/board'
+                         }
+                     })
                 	 
                 } else {
                     console.log("글 작성 중 오류가 발생했습니다.");
