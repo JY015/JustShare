@@ -66,9 +66,9 @@ body,html{
 			background-color: rgba(0,0,0,0.3) !important;
 			border:0 !important;
 			color:white !important;
-			height: 90px !important;
-			font-size: 40px !important;
-			padding-left: 40px !important;
+			height: 42px !important;
+			font-size: 20px !important;
+			padding-left: 18px !important;
 			
 		}
 		.search:focus{
@@ -116,19 +116,19 @@ body,html{
 			width: 100% !important;
 			padding: 10px 10px;
 			margin-left: 25px;
-			margin-top: 10px;
-			height: 180px;
+			margin-top: 3px;
+			height: 65px;
 			
 		}
 	.active{
 			background-color: rgba(0,0,0,0.3);
 	}
 		.user_img{
-			height: 160px;
-			width: 160px;
-			border:3px solid #f5f6fa;
-			margin-top: 10px;
-			margin-left: 10px;	
+			height: 70px;
+			width: 70px;
+			border:2px solid #f5f6fa;
+			margin-top: -22px;
+			margin-left: -17px;	
 		}
 		.user_img_msg{
 			height: 110px;
@@ -160,24 +160,24 @@ body,html{
 	}
 	.online_icon{
 		position: absolute;
-		height: 40px;
-		width:40px;
+		height: 15px;
+		width:15px;
 		background-color: #4cd137;
 		border-radius: 50%;
-		top: 130px;
-		left: 130px;
-		border:3px solid white;
+		top: 30px;
+		left: 37px;
+		border:1px solid white;
 	}
 	.offline{
 		background-color: #c23616 !important;
 			position: absolute;
-		height: 40px;
-		width:40px;
+		height: 15px;
+		width:15px;
 	
 		border-radius: 50%;
-		top: 130px;
-		left: 127px;
-		border:3px solid white;
+		top: 30px;
+		left: 37px;
+		border:1px solid white;
 	}
 	.user_info1{
 		margin-top: auto;
@@ -186,12 +186,10 @@ body,html{
 	}
 	
 	.user_info{
-		margin-top: 32px;
-		margin-bottom: auto;
-		margin-left: 140px;
+		margin-top: -9px;
 		width:75%;
 		font-size: 37px;
-		height: 132px;
+		height: 56px;
 	}
 	.user_info1 span{
 		font-size: 60px;
@@ -215,11 +213,11 @@ body,html{
 	
 	.msgback {
 	color: white;
-		font-size: 85px;
+		font-size: 30px;
 		cursor: pointer;
 	
 	margin-right:15px;
-	margin-top:45px;
+	margin-top:20px;
 	margin-left: 20px;
 	}
 	.msg_cotainer{
@@ -392,14 +390,14 @@ body,html{
 }
 
 .toId {
-		font-size: 50px;
+		font-size: 16px;
 		color: white;
 	
 }
 
 .time {
-	font-size: 25px;
-	margin-top: 20px;
+	font-size: 11px;
+	
 		color:  #e0e0e0;
 		float:right;
 		padding-right: 30px;
@@ -409,7 +407,7 @@ body,html{
 .roommessage{
 	
 	color:  #c0c0c0;
-padding-top: 18px;
+padding-top: 5px;
 	
 	
 }
@@ -561,10 +559,10 @@ font-size: 45px;
    }
    
    	.input-group-text1 {
-		font-size: 50px;
+		font-size: 22px;
 		width: 95px;
-		padding-left: 22px;
-	padding-top: 18px;
+		padding-left: 52px;
+	padding-top: 12px;
    
    }
    
@@ -635,7 +633,7 @@ img {
 .bottom_nav_menu {
 	
 	display: none ! important;
-	height: 130px ! important;
+	height: 56px ! important;
 	padding-top: 2px ! important;
 }
 
@@ -647,17 +645,17 @@ img {
 
 .bottom_nav_menu ul li a p {
 	
-	font-size: 26px ! important;
-	margin-top: 6px ! important;
-	font-weight: 600 ! important;
+	font-size: 12px ! important;
+	margin-top: 1px ! important;
+	font-weight: 800 ! important;
 }
 
 .container_w::before {
-	top:38px ! important;
-	left:62px ! important;
-	height: 45% ! important;
-	width: 34% ! important;
-filter: blur(14px) ! important;
+	top:8px ! important;
+	left:11px ! important;
+	height: 40% ! important;
+	width: 32% ! important;
+filter: blur(7px) ! important;
 	}
 	
 	.container_w::after {

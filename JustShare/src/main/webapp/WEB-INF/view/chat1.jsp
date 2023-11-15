@@ -34,21 +34,21 @@
 
 .xi-document, .xi-gps, .xi-message-o, .xi-user-o {
    text-align: center;
-   font-size: 60px;
+   font-size: 22px;
    position: relative;
-   top: 10px;
+   top: 6px;
    color: rgba(0, 0, 0, 0.4);
 }
  .home_btn {
-  width: 133px;
-  height: 133px;
+  width: 58px;
+  height: 58px;
   border: solid 4px white;
   border-radius: 200px;
   /* box-shadow: 0 -2px 8px #ffffff inset; */
   box-shadow: 0 -2px 8px #4122d3 inset;
   background-color: #6b4bf5;
   /* background-color: #7759ff; */
-  margin: -6px auto;
+  margin: -3px auto;
   /* 여기 바꿈 -12px auto*/
 }
 

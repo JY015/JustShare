@@ -1,9 +1,5 @@
 package com.js.web.main;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +27,17 @@ public class MainController {
 		// 메인게시물 최신순
 		List<Map<String, Object>> boardlatest = mainService.boardlatest();
 		model.addAttribute("boardlatest", boardlatest);
-		System.out.println(boardlatest);
+		//System.out.println(boardlatest);
 		
 		// 메인게시물 조회순
 		List<Map<String, Object>> boardreadcount = mainService.boardreadcount();
 		model.addAttribute("boardreadcount", boardreadcount);
-		System.out.println(boardreadcount);
+		//System.out.println(boardreadcount);
 		
 		// 메인게시물 좋아요순
 		List<Map<String, Object>> blikescount = mainService.blikescount();
 		model.addAttribute("blikescount", blikescount);
-		System.out.println(blikescount);
+		//System.out.println(blikescount);
 				
 		
 		List<Map<String, Object>> cateList = mainService.cateList();

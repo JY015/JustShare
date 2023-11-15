@@ -616,7 +616,8 @@
 	background: none;
 	margin-bottom: 10px;
 	white-space: nowrap;
-	width:48px;
+	width:35px;
+	font-size: 12px!important;
 	
 }
 .all{
@@ -624,7 +625,8 @@
 	background: none;
 	margin-bottom: 10px;
 	white-space: nowrap;
-	width:48px;	
+	width:35px;	
+	font-size: 12px!important;
 }
 
 
@@ -632,7 +634,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
 }
 
 .toggle-menu-btn {

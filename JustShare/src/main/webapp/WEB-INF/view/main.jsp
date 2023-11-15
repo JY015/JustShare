@@ -68,7 +68,7 @@ var _ss_user_id   = "";
         <div class="header__first_row">
            <div class="sign-area">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
+                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login">로그인</a></li></c:when>
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
@@ -161,11 +161,11 @@ var _ss_user_id   = "";
                
                <div class="main_banner_text">
                   <h2>
-  <div class="font_w300">팝업, 전시, 축제 등</div>
+  <div class="font_w300">여러 공간을</div>
   <div>한 번에 확인할 수 없을까?</div>
 </h2>
 <div class="num_text">03</div>
-<div class="main_sub_text">전국의 다양한 콘텐츠를 경험하세요.</div>
+<div class="main_sub_text">전국의 다양한 공간을 경험하세요.</div>
                </div>
             </div>
          </li>
@@ -179,7 +179,7 @@ var _ss_user_id   = "";
                
                <div class="main_banner_text">
                   <h2>
-  <div class="font_w300">팝업스토어? 플리마켓?</div>
+  <div class="font_w300">공간대여? </div>
   <div>하나도 어렵지 않아요.</div>
 </h2>
 <div class="num_text">01</div>
@@ -197,7 +197,7 @@ var _ss_user_id   = "";
                <div class="main_banner_text">
                   <h2>
   <div class="font_w300">니즈에 딱 맞는 </div>
-  <div>팝업 공간이 바로 여기에!</div>
+  <div>공간이 바로 여기에!</div>
 </h2>
 
 <div class="num_text" xss="removed">02</div>
@@ -258,7 +258,7 @@ var _ss_user_id   = "";
 <div class="category studio"><img onclick="window.location.href='./board?categories=9'" alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
 <div class="category business"><img onclick="window.location.href='./board?categories=12'" alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
 <div class="category business"><img onclick="window.location.href='./board?categories=13'" alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
-<div class="category culture"><img onclick="window.location.href='./board?categories=10'" alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img onclick="window.location.href='./board?categories=10'" alt="gallery" src="./img/category/gallery.png"><p>${cateList[9].cname }</p></div>
 <div class="category culture"><img onclick="window.location.href='./board?categories=11'" alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
 </div>
 </div>
