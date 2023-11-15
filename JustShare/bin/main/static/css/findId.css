@@ -1,4 +1,20 @@
 body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);	
+}
+
+.button-container{
+	display: flex;
+
    font-family: Arial, sans-serif;
    text-align: center;
 }
@@ -14,6 +30,7 @@ body {
 
 .button-container{
    display: flex;
+
     padding-bottom: 10px;
 }
 
@@ -26,6 +43,11 @@ label {
 }
 
 input[type="text"] {
+	padding: 8px !important;
+	margin: 5px 0 !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+
    padding: 8px !important;
    margin: 5px 0 !important;
    border: 1px solid #ccc !important;
@@ -55,5 +77,6 @@ button {
 }
 
 .image-container {
-   margin: 20px 0;
+	margin: 20px 0;
 }
+

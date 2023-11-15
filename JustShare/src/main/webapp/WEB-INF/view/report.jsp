@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
 
+    
+    <link rel="stylesheet" href="/css/register.css?ver=20000120" />
+
+
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
@@ -42,18 +46,59 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
-<head>
-<meta charset="UTF-8">
-<title>로그인 창</title>
-
-<script src="./js/jquery-3.7.0.min.js"></script>
+</style>
 </head>
 
-<script>
-var _ss_user_id   = "";
+<body>
+<%@ include file="header.jsp"%>
+	<div class="body__container section">
+	<section class="signup_wrap">
+	 <div class="sign_inner">
+	 <div class="signup_list_wrap">
+	 <div class="signup_title">
+	 <div class="sign_text">신고하기 </div>
+	 <div class="sign_text_list">신고자 : ${map.rmid} / 신고 게시물 : ${map.bno } </div>
+	 </div>
+	 </div>
+	 <!-- 내용 -->
+	 <form id="mf" name="mf" action="./report" target=_hidden_frame  method="post" >
+	 <input type="hidden" name="bno" value="${map.bno }">
+	 <input type="hidden" name="rmid" value="${map.rmid }">
+	 <input type="hidden" name="mid" value=${map.mid }>
+	 <div class="input_sign_w">
+	 <table>
+	 <colgroup>
+		<col style="width:180px">
+	  </colgroup>
+	  <tbody>
+		<tr class="border_bottom">
+			<th><label for="category">신고 사유</label></th>
+			<td>
+			<c:forEach items="${reportCateList }" var="n">
+			<div class="radioDiv">
+			<input type="radio"  id="radioBtn"  class="input_border"  name="rcate" value="${n.rcate}"> ${n.rcateName }
+			<label for="radioBtn">라디오 버튼</label>
+			</div>
+			</c:forEach>
+			</td>
+		</tr>
+		<tr class="border_bottom">
+			<th><label for="content">상세 내용</label><span aria-hidden="true">*</span></th>
+			<td>
+			<textarea name="rcontent" id="rcontent" placeholder="내용을 입력해주세요. (최소 10자 )"></textarea>
+			</td>
+		</tr>
+	  </tbody>
+	 </table>
+	 </div>
+	 <div class="sign_btn_w">
+	 <button type="button" onclick="reportSubmit()">신고하기</button>
+	 </div>
+	 </form>
+	 </div>
+	 </section>
+	</div>
 
-</script>
-  </head>
 <body>
 <%@ include file="header.jsp"%>
 	<h1>신고하기</h1>
@@ -79,7 +124,6 @@ var _ss_user_id   = "";
 	<button type="button" onclick="reportSubmit()">신고하기</button>
 	</form>
 
-<!--  여기스크립트 지금 비상비상  -->
 
 	<script>
     function reportSubmit() {
