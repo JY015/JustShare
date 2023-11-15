@@ -94,7 +94,7 @@ var _ss_user_id   = "";
 	<p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
 	</c:if>
 	</div>   
-         <button class="login_click" type="submit">로그인</button><br><br>
+         <button style="background-color: #004AAD!important" class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
 
@@ -110,7 +110,7 @@ var _ss_user_id   = "";
    </div>
       <br><br>
 
-<%--       <%@ include file="footer.jsp"%> --%>
+      <%@ include file="footer.jsp"%>
  
 <footer class="footer1400">
         <div id="footer__box" class="footer__inner txt__subtit">

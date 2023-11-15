@@ -52,9 +52,19 @@ public class AdminController {
 		int change = adminService.gradeChange(map);		
 		model.addAttribute("change", change);
 
-		return"redirect:/admin/member";
+		return "redirect:/admin/member";
 	}
 	
+	@GetMapping("admin/reportgrade") 
+	public String reportgrade(@RequestParam Map<String, Object> map, Model model) {
+		
+		int reportgrade = adminService.reportgrade(map);
+		model.addAttribute("reportgrade", reportgrade);
+		
+		return "redirect:/admin/reportList";
+		
+	}
+
 	@GetMapping("/admin/reportList")
 	public String report(Model model) {
 		List<Map<String, Object>> reportList = adminService.reportList();
@@ -88,6 +98,23 @@ public class AdminController {
 		
 		return "admin/chart";
 	}
+	
+	
+	@GetMapping("/admin/a")
+	public String adminadminadmin(Model model) {
+		int memberCount = adminService.memberCount();
+		int boardCount = adminService.boardCount();
+		int reportCount = adminService.reportCount();
+		int tradeCount = adminService.tradeCount();
+		List<Map<String, Object>> boardCate = adminService.boardCate();
+		model.addAttribute("memberCount", memberCount);
+		model.addAttribute("boardCount", boardCount);
+		model.addAttribute("reportCount", reportCount);
+		model.addAttribute("tradeCount", tradeCount);
+		model.addAttribute("boardCate", boardCate);
+		return "admin/a";
+	}
+	
 
 }
 

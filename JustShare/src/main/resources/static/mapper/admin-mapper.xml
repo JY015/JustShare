@@ -24,13 +24,12 @@ WHERE mno=#{mno}
 <select id="reportList" resultType="map">	
 SELECT r.*, rc.rcateName
 FROM report r
-JOIN reportCate rc ON r.rcate = rc.rcate;
-
+JOIN reportCate rc ON r.rcate = rc.rcate WHERE reportgrade = 0;
 </select>
 
 <select id="reportListMember" parameterType="Map" resultType="Map">
-	SELECT mid, COUNT(*) as count
-	FROM report
+	 SELECT mid, COUNT(*) as count
+	FROM report WHERE reportgrade = 1
 	GROUP BY mid;
 </select>
 
@@ -43,9 +42,18 @@ JOIN reportCate rc ON r.rcate = rc.rcate;
 );
 </update>
 
+<update id="reportgrade" parameterType="Map">
+UPDATE report 
+SET reportgrade=#{reportgrade}
+WHERE rno =#{rno}
+</update>
+
+
+
 <select id="tradeList" resultType="Map">
-SELECT from_user_id, to_user_id, bno, timestamp,
-       ROW_NUMBER() OVER (PARTITION BY DATE(timestamp) ORDER BY timestamp) as total_count
+SELECT from_user_id, to_user_id, bno, 
+       DATE_ADD(timestamp, INTERVAL -9 HOUR) as adjusted_timestamp,
+       ROW_NUMBER() OVER (PARTITION BY DATE(DATE_ADD(timestamp, INTERVAL -9 HOUR)) ORDER BY timestamp) as total_count
 FROM tradehistory;
 </select>
 
@@ -67,14 +75,14 @@ FROM
 
 
 <select id="category" resultType="Map">
-SELECT
+  SELECT
     COUNT(CASE WHEN rcate = 1 THEN 1 ELSE NULL END) AS category1,
     COUNT(CASE WHEN rcate = 2 THEN 1 ELSE NULL END) AS category2,
     COUNT(CASE WHEN rcate = 3 THEN 1 ELSE NULL END) AS category3,
     COUNT(CASE WHEN rcate = 4 THEN 1 ELSE NULL END) AS category4,
     COUNT(CASE WHEN rcate = 5 THEN 1 ELSE NULL END) AS category5
 FROM
-    report;
+    report WHERE reportgrade = 1;
 </select>
 
 <select id="boardCate" resultType="Map">

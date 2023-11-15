@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/import.css?ver=20000120" />
     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
-   <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+    <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 	<!--link rel="stylesheet" href="/css/spacedetail.css?ver=20000120"-->
 	<link rel="stylesheet" href="/css/listpage.css?ver=20000120">
@@ -40,6 +40,13 @@ var _ss_user_id	= "";
   </head>
 <body>
   <div class="body__container section">
+  <input type="hidden" class="is_phpself" value="/help/leasing.html">
+  <input type="hidden" class="is_app_banner" value="">
+	<header id="header" class="header_bg_new">
+
+    </header>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <div class="full-line box-bottom" style="display:block"></div>
 	<section class="ani1 leasing-management">
 	  <div class="whole-title_black">
@@ -78,7 +85,7 @@ var _ss_user_id	= "";
 	  </div>
 	  <div class="leasing-container_new" style="z-index:0;">
 	    <div class="contentbox">
-	     <!--  <img src="https://www.value-venue.com/images/managementbuilding.jpg" alt=""> 이미지 삭제한거-->
+	      <img src="https://www.value-venue.com/images/managementbuilding.jpg" alt="">
 	    </div>
 	  </div>
 	</section>
@@ -91,7 +98,7 @@ var _ss_user_id	= "";
 			<div>
 			<p class="work-title">총 멤버</p>
 			<p class="work-description"> <br>
-			<a style="font-size: 22px;" href="./member">• ${memberCount}명</a>
+			<a href="./member"> •${memberCount}명</a>
 		</div>
 		</div>
 		</div>
@@ -100,9 +107,9 @@ var _ss_user_id	= "";
 			<img src="https://www.value-venue.com/images/ic_work2.svg" alt="">
 			<div>
 			<p class="work-title">상품 등록 수</p>
-			<p class="work-description">
+			<p class="work-description"><br>
 			 <br>
-			<a style="font-size: 22px;" href="../board">• ${boardCount}개</a>
+			• <a href="../board">${boardCount}개</a>
 		</div>
 		</div>
 		</div>
@@ -111,9 +118,10 @@ var _ss_user_id	= "";
 			<img src="https://www.value-venue.com/images/ic_work3.svg" alt="">
 			<div>
 			<p class="work-title">신고 갯수</p>
-			<p class="work-description">
+			<p class="work-description"><br>
 			 <br>
-			<a style="font-size: 22px;" href="./reportList">• ${reportCount}개</a></p>
+			 <br>
+			• <a href="./reportList">${reportCount}개</a></p>
 		</div>
 		</div>
 		</div>
@@ -123,13 +131,15 @@ var _ss_user_id	= "";
 			<div>
 			<p class="work-title">거래 횟수</p>
 			<p class="work-description"><br>
-			<a style="font-size: 22px;" href="./tradeList">•  ${tradeCount}개</a></p>
+			 <br>
+			 <br>
+			• <a href="./tradeList">${tradeCount}개</a></p>
 		</div>
 		</div>
 		</div>
 	</div>
 	</section>
-<div id="donutchart" style="width: 100%; height: 100%; text-align: center;"></div>
+<div id="donutchart" style="width: 100%; height: 100%;"></div>
 <br><br><br>
     <c:if test="${sessionScope.mgrade < 4}">
         <div class="warning-message">
@@ -160,6 +170,7 @@ var _ss_user_id	= "";
           ['사무실',    ${boardCate[0].bcategory12 }],
           ['오피스텔',    ${boardCate[0].bcategory13 }], 
         ]);
+
         var options = {
           title: '<상품 등록 카테고리>',
           pieHole: 0.1,
@@ -169,45 +180,44 @@ var _ss_user_id	= "";
       }
     </script>    
 
+<%@ include file="adminfooter.jsp"%>
 
- <footer class="footer1400">
+
+      <footer class="footer1400">
         <div id="footer__box" class="footer__inner txt__subtit">
           <div class="flex">
+            <ul>
+              <li><a href="/notice/list">공지사항</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/qna/list">문의하기</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/faq">자주 묻는 질문</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/help/policy">이용약관</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/help/privacy">개인정보처리방침</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+            </ul>
           </div>
+          <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
-            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
-            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
-            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
-            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+            <img style="width: 96px;margin-left: 4px;" src="/images/mo/logo_m_active2.svg" alt="">
+            <p>서울시 성동구 왕십리로63 언더스탠드에비뉴 D25<br>
+            TEL : <a href="tel:02-1661-6925">02-1661-6925</a> &nbsp;&nbsp;사업자등록번호 : 156-81-00883 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">valuevenue@valuevenue.co.kr</a> </p>
           </div>
         </div>
         </div>
       </footer>
     </div>
-    <br><br><br>
-	<%@ include file="adminfooter.jsp"%>
-	
 	<style>
-.leasing-container_new {
-    height: 550px;
-    margin-bottom: 125px;
-}	
-	.workcard-container{
-		grid-template-columns: repeat(2, 1fr)!important;
-		margin-right: 22px;
-	}
-	
-	
-	.work-card .work-title{
-	font-weight: 600;
-    font-size: 22px;
-    margin-bottom: 14px;
-	}
-	
-	
-	.work-card {
-		width: 107%;
+	.work-card .work-title {
+	   	font-weight: 600important;
+   		 font-size: 21pximportant;
+    	margin-bottom: 14px important;
 	}
 	
 	.mb-banner {
@@ -242,7 +252,6 @@ var _ss_user_id	= "";
 		z-index:110;
 		left:0;		
 	}
-	
 	.notScroll {overflow: hidden;width: 100%;height: 100vh;}
 	</style>
   </body>

@@ -248,7 +248,7 @@ $(function(){
 			<br><br>
 		
 		<label for="mname">생년월일</label><br>
-			<input type="date" name="mbirth" id="mbirth" placeholder="생일" disabled="disabled">
+			<input type="date" name="mbirth" id="mbirth" placeholder="생일" disabled="disabled" width="100%!important;">
 		             <br>
 		             <span id="mbirthMsg" class="tip"></span>
 			<br><br>

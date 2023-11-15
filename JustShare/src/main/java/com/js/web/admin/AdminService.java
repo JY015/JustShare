@@ -92,6 +92,11 @@ public class AdminService {
 		return adminDAO.boardCate();
 	}
 
+	public int reportgrade(Map<String, Object> map) {
+		
+		return adminDAO.reportgrade(map);
+	}
+
 
 
 

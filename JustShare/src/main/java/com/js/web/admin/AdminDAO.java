@@ -40,4 +40,6 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> boardCate();
 
+	int reportgrade(Map<String, Object> map);
+
 }

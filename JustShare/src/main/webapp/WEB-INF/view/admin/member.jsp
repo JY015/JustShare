@@ -33,6 +33,7 @@ location.href="./gradeChange?mno="+mno+"&grade="+value;
 	
 }
   }
+  
 </script>
 </head>
 <style>
@@ -84,8 +85,7 @@ select {
 				<div class="div-cell">${row.memail}</div>
 
 				<div class="div-cell">
-					<select id="grade" name="grade"
-						onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
+					<select id="grade" name="grade"	onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
 						<optgroup label="회원등급 관리">
 							<option value="1" ${row.mgrade eq 1 ? 'selected="selected"' : ''}>탈퇴</option>
 							<option value="2" ${row.mgrade eq 2 ? 'selected="selected"' : ''}>징계</option>
@@ -97,6 +97,11 @@ select {
 			</div>
 		</c:forEach>
 	</div>
+	
+
+	
+	
+	
 	<%@ include file="adminfooter.jsp"%>
 </body>
 </html>

@@ -49,6 +49,10 @@
 	padding: 10px;
 	border: 1px solid #f0f0f0;
 }
+
+button {
+    background-color: #004AAD!important;
+ }   
 </style>
 	<div class="div-table">
 		<div class="div-rowrow">
@@ -62,9 +66,7 @@
 </div>
 </c:forEach>
 </div>
-
 <div id="barchart_values" style="width: 100%; height: 100%;"></div>
-
  <button class="btn btn-primary" id="showAllTransactions">전체 거래내역 보기</button>
             <div class="div-table" id="allTransactionsTable" style="display:none;">
                 <!-- 전체 거래내역을 표시할 테이블 -->
@@ -87,8 +89,7 @@
         <br><br><br><br>
 <%@ include file="adminfooter.jsp"%>
 
-<br><br>
-				
+<br><br>				
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load("current", {packages:["corechart"]});
@@ -116,7 +117,7 @@
     	    title: "<JustShare 거래내역 차트>",
     	    width: '100%', 
     	    height: 300,
-    	    bar: { groupWidth: "85%" },
+    	    bar: { groupWidth: "50%" },
     	    legend: { position: "none" },
     	    hAxis: {
     	      title: '거래 수',
