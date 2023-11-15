@@ -70,9 +70,9 @@ var _ss_user_id   = "";
             <input type="text" id="mphone" name="mphone" placeholder="ex) 01012345678" required="required" maxlength="11"><br>
             <br><br>
             <div class="button-container">
-        	<button type="button" style="margin-right: 10px!important; border: solid 1px #020202 !important; color: black !important; background-color: white !important;" onclick="window.location.href = './login';">취소</button>
-        	<button type="submit">이메일 인증</button>
-    	</div>
+           <button type="button" style="margin-right: 10px!important; border: solid 1px #020202 !important; color: black !important; background-color: white !important;" onclick="window.location.href = './login';">취소</button>
+           <button type="submit">이메일 인증</button>
+       </div>
 </form>   
     </c:if>
     <br>

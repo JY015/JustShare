@@ -27,69 +27,71 @@
 <body> 
 <style>
 .div-table {
-	display: table;
-	width: 100%;
+   display: table;
+   width: 100%;
 }
 
 .div-row {
-	display: table-row;
+   display: table-row;
 }
 
 .div-cell {
-	display: table-cell;
-	padding: 10px;
-	border: 1px solid #f0f0f0;
-	width: 25%;
+   display: table-cell;
+   padding: 10px;
+   border: 1px solid #f0f0f0;
+   width: 25%;
 }
 
 .div-cell-a{
-	border: 1px solid #f0f0f0;
-	display: table-cell;
+   border: 1px solid #f0f0f0;
+   display: table-cell;
 }
 
 .report-table {
-	display: table;
-	width: 100%;
+   display: table;
+   width: 100%;
 }
 
 .report-row {
-	display: table-row;
+   display: table-row;
 }
 
 .report-table-header{
-	display: table;
-	width: 100%;
+   display: table;
+   width: 100%;
 }
 
 .report-row-header{
-	display: table-row;
-	background-color: #f5f5f5;
+   display: table-row;
+   background-color: #f5f5f5;
 }
 
-
+button {
+    background-color: #004AAD!important;
+ }   
 
 </style>
 
 <div style="text-align: center">
 <div class="div-table">
-		<div class="div-row">
-			<div class="div-cell">신고 아이디</div>
-			<div class="div-cell">신고 누적</div>
-		</div>
-		
-		<c:forEach items="${reportListMember}" var="m">
-			<div class="div-row">
-				 <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
-				<div class="div-cell">${m.count}회
-				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
-			</div>
-		</div>
+      <div class="div-row">
+         <div class="div-cell">신고 아이디</div>
+         <div class="div-cell">신고 누적</div>
+      </div>
+      
+      <c:forEach items="${reportListMember}" var="m">
+         <div class="div-row">
+             <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
+            <div class="div-cell">${m.count}회
+            <c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
+         </div>
+      </div>
 </c:forEach>
 </div>
  <div id="donutchart" style="width: 100%; height: 100%;"></div>
-<button id="toggleButton">펼치기/숨기기</button>	
+<button id="toggleButton" style="background-color: #004AAD!important">펼치기/숨기기</button>   
 <br>
-	<div class="report-table-header">
+   <div class="report-table-header">
     <div class="report-row-header">
         <div class="div-cell">신고한 사람</div>
         <div class="div-cell">신고 당한<br>사람</div>
@@ -118,7 +120,7 @@
         });
     }); 
     function showReports(userId) {
-    	  $('.report-table .report-row').hide();
+         $('.report-table .report-row').hide();
         if (userId) {
             $('.div-cell-a').each(function () {
                 if ($(this).text() === userId) {
@@ -158,7 +160,7 @@
 
 
 
-		
-				
+      
+            
 </body>
 </html>

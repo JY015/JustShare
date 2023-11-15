@@ -32,9 +32,9 @@
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <link rel="stylesheet" href="/css/footertoastr.min.css" />
 <script src="./js/socket2.js"></script>
  
@@ -478,7 +478,7 @@
 						        data.forEach(function(item) {
 						            // 새로운 카드 아이템 생성
 						            var newCardItem = "<div class='card_item2 pop-up'>";
-						            newCardItem += "<div class='cccc'><div class-='imageContainer'><img class='main' src='/img/places/" + item.realFile + "'><div class='like' data-bno='"+item.bno +"'</div><c:choose><c:when test='"+item.isLiked eq 1+"'><img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/></c:when><c:otherwise><img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png' /></c:otherwise></c:choose></div></div></div>";
+						            newCardItem += "<div class='cccc'><div class='imageContainer'><img class='main' src='/img/places/" + item.realFile + "' " + (item.tradeFin === 1 ? "style='filter: blur(5px);'" : "") + ">" + (item.tradeFin === 1 ? "<h1 class='main_image_text' style='font-size:45px'>거래 완료</h1>" : "") + "<div class='like' data-bno='" + item.bno + "'></div>" + (item.isLiked === 1 ? "<img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/>" : "<img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png'/>") + "</div></div>";
 						            newCardItem += "<a class='card-surface' href='./bdetail?bno=" + item.bno + "'>";
 						            newCardItem += "<div class='card_inner2'>";
 						            newCardItem += "<div class='txt__wrap2'>";

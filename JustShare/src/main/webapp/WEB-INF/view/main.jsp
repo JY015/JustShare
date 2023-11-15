@@ -301,7 +301,7 @@ var _ss_user_id   = "";
     <div class="partition-line"></div>
     <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
         <h4 class="txt__tit">최신순</h4>
-        <span class="txt__subtit">최신이다</span>
+        <span class="txt__subtit">최근 등록한 게시물을 살펴보세요. </span>
         <span class="see-more"><a href="/schedule/search?gubun=space">더보기
         <div class="arrow_right"></div></span></a>
         <div class="swiper swiper_space1">
@@ -316,7 +316,7 @@ var _ss_user_id   = "";
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/images/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="../img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -357,7 +357,7 @@ navigation: {   // 버튼 사용자 지정
    <div class="partition-line"></div>
     <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
         <h4 class="txt__tit">조회수 높은순</h4>
-        <span class="txt__subtit">조회수가 높다</span>
+        <span class="txt__subtit">조회수가 높은 게시물을 살펴보세요.</span>
         <span class="see-more"><a href="/schedule/search?gubun=space">더보기
         <div class="arrow_right"></div></span></a>
         <div class="swiper swiper_space2">
@@ -372,7 +372,7 @@ navigation: {   // 버튼 사용자 지정
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="/images/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="../img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -410,7 +410,7 @@ navigation: {   // 버튼 사용자 지정
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
      <h4 class="txt__tit">찜 높은순</h4>
-     <span class="txt__subtit">찜이 높아요</span>
+     <span class="txt__subtit">찜이 높은 게시물을 살펴보세요.</span>
      <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
      <div>
       <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
@@ -425,7 +425,7 @@ navigation: {   // 버튼 사용자 지정
                  <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
-                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+                 <img class="card_img" src="../img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
             </a>
             </div>
      <div  class="card__inner2">         
@@ -471,8 +471,8 @@ navigation: {   // 버튼 사용자 지정
 
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-     <h4 class="txt__tit">더미1</h4>
-     <span class="txt__subtit">더미1</span>
+     <h4 class="txt__tit">내 주변 공간</h4>
+     <span class="txt__subtit">내 주변 공간을 살펴보세요.</span>
      <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
      <div>
       <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
@@ -487,7 +487,7 @@ navigation: {   // 버튼 사용자 지정
                   <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
-                 <img class="card_img" src="/images/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+                 <img class="card_img" src="./img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
 
             </div>
      <div  class="card__inner2">         

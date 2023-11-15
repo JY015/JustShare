@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -30,73 +30,73 @@ function gradeCh(mno, name, value){
 
 if(confirm(name + "님의 등급을 변경하시겠습니까?")){
 location.href="./gradeChange?mno="+mno+"&grade="+value;
-	
+   
 }
   }
 </script>
 </head>
 <style>
 .div-table {
-	display: table;
-	width: 100%;
+   display: table;
+   width: 100%;
 }
 
 .div-row {
-	display: table-row;
+   display: table-row;
 
 }
 
 .div-cell-head {
-	display: table-cell;
-	padding: 10px;
-	border: 1px solid #f0f0f0;
-	background-color: #f5f5f5;
+   display: table-cell;
+   padding: 10px;
+   border: 1px solid #f0f0f0;
+   background-color: #f5f5f5;
 }
 
 .div-cell{
-	display: table-cell;
-	padding: 10px;
-	border: 1px solid #f0f0f0;
-	color: currentColor;
+   display: table-cell;
+   padding: 10px;
+   border: 1px solid #f0f0f0;
+   color: currentColor;
 
 }
 
 select {
-	width: 100%;
+   width: 100%;
 }
 </style>
 </head>
 <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
-<body style="font-size: 13px;">	
-	<div style="text-align: center;" class="div-table">
-		<div class="div-row">
-			<div class="div-cell-head">아이디</div>
-			<div class="div-cell-head">이름</div>
-			<div class="div-cell-head">이메일</div>
-			<div class="div-cell-head">등급</div>
+<body style="font-size: 13px;">   
+   <div style="text-align: center;" class="div-table">
+      <div class="div-row">
+         <div class="div-cell-head">아이디</div>
+         <div class="div-cell-head">이름</div>
+         <div class="div-cell-head">이메일</div>
+         <div class="div-cell-head">등급</div>
 
 
-		</div>
-		<c:forEach items="${memberList}" var="row">
-				<div class="div-row" style="${row.mgrade <= 2 ? 'color: red;!important;' : (row.mgrade == 4 ? 'color: #0056b3!important;' : '')}" >
-				<div class="div-cell">${row.mid}</div>
-				<div class="div-cell">${row.mname}</div>
-				<div class="div-cell">${row.memail}</div>
+      </div>
+      <c:forEach items="${memberList}" var="row">
+            <div class="div-row" style="${row.mgrade <= 2 ? 'color: red;!important;' : (row.mgrade == 4 ? 'color: #0056b3!important;' : '')}" >
+            <div class="div-cell">${row.mid}</div>
+            <div class="div-cell">${row.mname}</div>
+            <div class="div-cell">${row.memail}</div>
 
-				<div class="div-cell">
-					<select id="grade" name="grade"
-						onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
-						<optgroup label="회원등급 관리">
-							<option value="1" ${row.mgrade eq 1 ? 'selected="selected"' : ''}>탈퇴</option>
-							<option value="2" ${row.mgrade eq 2 ? 'selected="selected"' : ''}>징계</option>
-							<option value="3" ${row.mgrade eq 3 ? 'selected="selected"' : ''}>일반</option>
-							<option value="4" ${row.mgrade eq 4 ? 'selected="selected"' : ''}>관리자</option>
-						</optgroup>
-					</select>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-	<%@ include file="adminfooter.jsp"%>
+            <div class="div-cell">
+               <select id="grade" name="grade"
+                  onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
+                  <optgroup label="회원등급 관리">
+                     <option value="1" ${row.mgrade eq 1 ? 'selected="selected"' : ''}>탈퇴</option>
+                     <option value="2" ${row.mgrade eq 2 ? 'selected="selected"' : ''}>징계</option>
+                     <option value="3" ${row.mgrade eq 3 ? 'selected="selected"' : ''}>일반</option>
+                     <option value="4" ${row.mgrade eq 4 ? 'selected="selected"' : ''}>관리자</option>
+                  </optgroup>
+               </select>
+            </div>
+         </div>
+      </c:forEach>
+   </div>
+   <%@ include file="adminfooter.jsp"%>
 </body>
 </html>

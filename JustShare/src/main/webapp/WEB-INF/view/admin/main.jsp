@@ -74,7 +74,7 @@
         .admin-actions a {
             text-decoration: none;
             color: #fff;
-            background-color: #f64d61 !important;
+            background-color: #004AAD !important;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -112,8 +112,8 @@ th {
 }   
 
 td{
-	padding: 30px 0 34px !important;
-	text-align: center !important;
+   padding: 30px 0 34px !important;
+   text-align: center !important;
 } 
 </style>
 </head>
@@ -126,7 +126,7 @@ td{
     <div class="admin-actions">
         <a href="../logout">로그아웃</a>
     </div>
-   	<div class="data-table" style="text-align: center">
+      <div class="data-table" style="text-align: center">
     <table>
         <tr>
             <th>종류</th>
@@ -195,4 +195,3 @@ td{
 <%@ include file="adminfooter.jsp"%>
 </body>
 </html>
-

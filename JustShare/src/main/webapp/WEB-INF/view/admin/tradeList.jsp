@@ -32,33 +32,37 @@
 <br>
 <style>
 .div-table {
-	display: table;
-	width: 100%;
+   display: table;
+   width: 100%;
 }
 
 .div-row {
-	display: table-row;
+   display: table-row;
 }
 .div-rowrow{
-	display: table-row;
-	background-color: #f5f5f5;
+   display: table-row;
+   background-color: #f5f5f5;
 }
 
 .div-cell {
-	display: table-cell;
-	padding: 10px;
-	border: 1px solid #f0f0f0;
+   display: table-cell;
+   padding: 10px;
+   border: 1px solid #f0f0f0;
 }
+
+button {
+    background-color: #004AAD!important;
+ }   
 </style>
-	<div class="div-table">
-		<div class="div-rowrow">
-			<div class="div-cell">거래 날짜</div>
-			<div class="div-cell">거래 횟수</div>
-		</div>
-		<c:forEach items="${dateList}" var="row">
-			<div class="div-row">
-				<div class="div-cell">${row.dateOnly}</div>
-				<div class="div-cell">${row.count}</div>
+   <div class="div-table">
+      <div class="div-rowrow">
+         <div class="div-cell">거래 날짜</div>
+         <div class="div-cell">거래 횟수</div>
+      </div>
+      <c:forEach items="${dateList}" var="row">
+         <div class="div-row">
+            <div class="div-cell">${row.dateOnly}</div>
+            <div class="div-cell">${row.count}</div>
 </div>
 </c:forEach>
 </div>
@@ -88,7 +92,7 @@
 <%@ include file="adminfooter.jsp"%>
 
 <br><br>
-				
+            
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load("current", {packages:["corechart"]});
@@ -113,27 +117,27 @@
       2]);
 
     var options = {
-    	    title: "<JustShare 거래내역 차트>",
-    	    width: '100%', 
-    	    height: 300,
-    	    bar: { groupWidth: "85%" },
-    	    legend: { position: "none" },
-    	    hAxis: {
-    	      title: '거래 수',
-    	    },
-    	  };
+           title: "<JustShare 거래내역 차트>",
+           width: '100%', 
+           height: 300,
+           bar: { groupWidth: "85%" },
+           legend: { position: "none" },
+           hAxis: {
+             title: '거래 수',
+           },
+         };
 
-    	  var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+         var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 
-    	  // 창 크기가 변경될 때마다 drawChart 함수를 호출하여 차트를 그립니다.
-    	  google.visualization.events.addListener(chart, 'ready', function () {
-    	    window.onresize = function () {
-    	      drawChart();
-    	    };
-    	  });
+         // 창 크기가 변경될 때마다 drawChart 함수를 호출하여 차트를 그립니다.
+         google.visualization.events.addListener(chart, 'ready', function () {
+           window.onresize = function () {
+             drawChart();
+           };
+         });
 
-    	  chart.draw(view, options);
-    	}
+         chart.draw(view, options);
+       }
   $(document).ready(function () {
       $("#showAllTransactions").click(function () {
           $("#allTransactionsTable").toggle();
