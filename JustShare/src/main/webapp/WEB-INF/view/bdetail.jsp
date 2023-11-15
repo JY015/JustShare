@@ -202,7 +202,7 @@
 			   <hr class="detail-divline">
 			   <div class="spaceDetailInfo_summary">
 			   <div class="host" style="display: flex; align-items:baseline;"><p class="txt__tit">호스트 &nbsp;${detail.mid } &nbsp;<i class="fa-solid fa-star" style="color: #e2d86a;"></i> ${detail.averageS }
-			   <div class="iconright" style="margin-left: auto; margin-right: 5px;"><i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i> </div></p></div>
+			   <div class="iconright" style="margin-left: auto; margin-right: 5px;"><i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i></div></div>
 			   <div style="display: flex; align-items:baseline;"><p class="txt__tit">공간 소개</p></div>
 			   		<div class="detailContext">
 			   			<p class="txt__tit26">공간 정보</p>
@@ -263,7 +263,7 @@
 		<!-- 요 밑에 친구를 foreach로 돌리기  -->
 		<div class="calender-cardmb-normal" onclick="window.location.href='./bdetail?bno=${place[0].bno}'">
 		<div class="imagemb-box">
-        <img  src="/img/places/${place[0].image }" alt="" onerror="this.src='/images/no_image.png'">
+        <img  src="/img/places/${place[0].image }" alt="">
         </div>
         <div class="calendercard-innermb">
         <p class="txt__card__tit">${place[0].btitle }<p class="txt__subtit__sm">${place[0].addr }</p>
@@ -331,17 +331,6 @@
    </ul>
 </nav>
 <script>
-   $(document).ready(function() {
-	   
-       // "마이페이지" 링크를 클릭했을 때
-       $(".b_nav_list a").click(function(event) {
-           if (${sessionScope.mid eq null}) {
-               // sessionScope.mid가 null일 때 알림 메시지 표시
-               alert("로그인 후 이용이 가능합니다.");
-               event.preventDefault(); // 링크 이동을 막음
-           }
-       });
-   });
    //좋아요 
    $(document).on("click", ".like", function() {
 	    const mid = "${sessionScope.mid}";
@@ -391,6 +380,7 @@
 
 <script type="text/javascript">
 	let sid = "${sessionScope.mid}";
+	console.log(sid)
 	let mid = "${detail.mid}";
 	let tradeFin=${detail.tradeFin};
 	var mgrade = ${sessionScope.mgrade};
@@ -422,6 +412,7 @@ function report(){
 	let chk3 = confirm("신고하시겠습니까?");
 	
 	if(chk3){
+		
 		if(sid == null || sid == ""){
 			alert("신고하려면 로그인이 필요합니다")
 			return false;
