@@ -40,9 +40,9 @@ public class MainController {
             
             List<Map<String, Object>> cateList = mainService.cateList();
             model.addAttribute("cateList", cateList);
-            System.out.println(cateList);
+            //System.out.println(cateList);
             
-            System.out.println(imageC);
+            //System.out.println(imageC);
             
             for (int i = 0; i < imgsubst.size(); i++) {
             	String addr = (String) imgsubst.get(i).get("addr");
@@ -55,7 +55,7 @@ public class MainController {
             	    String first = addrList.get(0);
             	    String second = addrList.get(1);
             	    String addrsplit = first +" "+ second;
-            	    System.out.println(addrsplit);
+            	   // System.out.println(addrsplit);
             	    imgsubst.get(i).put("addr", addrsplit);
             	} else {
             	    System.out.println("주소 형식이 올바르지 않습니다.");
@@ -72,7 +72,7 @@ public class MainController {
             }
             
             model.addAttribute("imgsubst", imgsubst);
-            System.out.println(imgsubst);
+            //System.out.println(imgsubst);
             
       return "main";
 

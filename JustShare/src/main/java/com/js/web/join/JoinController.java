@@ -30,7 +30,7 @@ public class JoinController {
 		String combinedAddress =(String) map.get("maddr") + map.get("maddr2"); 
 		
 		 map.put("maddr", combinedAddress);
-		 System.out.println(map);
+		 //System.out.println(map);
 		int result = joinService.join(map);
 		
 		if(result == 1) {

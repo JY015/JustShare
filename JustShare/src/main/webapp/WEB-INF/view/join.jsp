@@ -95,6 +95,8 @@ $(function(){
                $('#mid').css("border","1px solid #666666");
                $('#midMsg').css("color","red");
                $('#mphone').prop('readonly', false);
+               $('.get__number').prop('disabled', false);
+               
  
             }
          },
@@ -215,7 +217,7 @@ $(function(){
          <input class="mphone" type="text" id="mphone" name="mphone" placeholder="핸드폰번호" maxlength="11" readonly="true"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
 		<span id="mphoneMsg" class="tip"></span>
 		<br>
-		<button type="button" id="send" class="get__number" onclick="takeTarget()">인증번호받기</button> <!-- 문자보내는 전송버튼 -->
+		<button type="button" id="send" class="get__number" onclick="takeTarget()" disabled="disabled"	>인증번호받기</button> <!-- 문자보내는 전송버튼 -->
 		<input class="input__target" id="userNum" type="text" maxlength="6" placeholder="인증번호입력" disabled="disabled" />
 		<span class="target__time">
 		<span id="remaining__min">3</span> :
@@ -369,7 +371,7 @@ function resetTimer() {
     $('#send').text("인증번호 다시받기");
     $('#mphone').attr('disabled', false);
     clearInterval(timerInterval); // 기존 타이머를 초기화합니다.
-    time = 3; // 3분으로 다시 설정합니다.
+    time = 180; // 3분으로 다시 설정합니다.
 }
 
 let timerInterval; // 타이머 setInterval의 참조를 저장하기 위한 변수
@@ -379,7 +381,7 @@ const remainingMin = document.getElementById("remaining__min");
 const remainingSec = document.getElementById("remaining__sec");
 const completeBtn = document.getElementById("userNum");
 
-let time = 3;
+let time = 180;
 
 const takeTarget = () => {
 	$('.target__time').show();

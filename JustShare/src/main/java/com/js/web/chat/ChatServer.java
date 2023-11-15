@@ -16,7 +16,7 @@ public class ChatServer implements WebSocketConfigurer {
 	 @Override
 	    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 	        registry.addHandler(chatWebSocketHandler(), "/chat") // WebSocket 엔드포인트 및 핸들러 등록
-	        .setAllowedOrigins("http://localhost:8080")
+	        .setAllowedOrigins("https://fiveguys.gabia.io")
 	        .withSockJS();
 	        //.allowedOriginPatterns("*")
 	    }

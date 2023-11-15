@@ -3,7 +3,7 @@
 
 
 
-	const socket = new SockJS("//localhost:8080/chat");
+	const socket = new SockJS("//fiveguys.gabia.io/chat");
 	//const socket = new WebSocket("ws://localhost:8080/chat");
 	 let msgcount=0;
 	 //let mid = sessionStorage.getItem("mid");
