@@ -29,7 +29,6 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
    
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
