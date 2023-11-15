@@ -110,7 +110,7 @@ var _ss_user_id   = "";
    </div>
       <br><br>
 
-<%--       <%@ include file="footer.jsp"%> --%>
+      <%@ include file="footer.jsp"%>
  
 <footer class="footer1400">
         <div id="footer__box" class="footer__inner txt__subtit">

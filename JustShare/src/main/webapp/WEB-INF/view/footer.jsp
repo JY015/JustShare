@@ -16,8 +16,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
-<link rel="stylesheet" href="./css/login.css">
-
 
 <!-- 폰트어썸 -->
 <link rel="stylesheet"
