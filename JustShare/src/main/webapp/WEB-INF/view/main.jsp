@@ -71,7 +71,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -111,7 +111,7 @@ var _ss_user_id   = "";
            <div class="blue_btn">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></c:otherwise>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>
@@ -249,19 +249,19 @@ var _ss_user_id   = "";
     </div>
     <br>
 <div class="entire-cate">
-<div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
-<div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
-<div class="category commercial"><img alt="drink" src="./img/category/drink.png"><p>${cateList[2].cname }</p></div>
-<div class="category commercial"><img alt="else" src="./img/category/else.png"><p>${cateList[7].cname }</p></div>
-<div class="category studio"><img alt="practice" src="./img/category/practice.png"><p>${cateList[3].cname }</p></div>
-<div class="category studio"><img alt="rec" src="./img/category/rec.png"><p>${cateList[4].cname }</p></div>
-<div class="category studio"><img alt="party" src="./img/category/party.png"><p>${cateList[5].cname }</p></div>
-<div class="category studio"><img alt="set" src="./img/category/set.png"><p>${cateList[6].cname }</p></div>
-<div class="category studio"><img alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
-<div class="category business"><img alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
-<div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
-<div class="category culture"><img alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
-<div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=1'" alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=2'" alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=3'" alt="drink" src="./img/category/drink.png"><p>${cateList[2].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=8'" alt="else" src="./img/category/else.png"><p>${cateList[7].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=4'" alt="practice" src="./img/category/practice.png"><p>${cateList[3].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=5'" alt="rec" src="./img/category/rec.png"><p>${cateList[4].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=6'" alt="party" src="./img/category/party.png"><p>${cateList[5].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=7'" alt="set" src="./img/category/set.png"><p>${cateList[6].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=9'" alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
+<div class="category business"><img onclick="window.location.href='./board?categories=12'" alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
+<div class="category business"><img onclick="window.location.href='./board?categories=13'" alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
+<div class="category culture"><img onclick="window.location.href='./board?categories=10'" alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img onclick="window.location.href='./board?categories=11'" alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
 </div>
 </div>
  <script>

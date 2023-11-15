@@ -82,6 +82,16 @@ public class AdminService {
 		return adminDAO.monthDay();
 	}
 
+	public List<Map<String, Object>> category() {
+		
+		return adminDAO.category();
+	}
+
+	public List<Map<String, Object>> boardCate() {
+		
+		return adminDAO.boardCate();
+	}
+
 
 
 

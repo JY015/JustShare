@@ -82,7 +82,7 @@ var _ss_user_id   = "";
 </c:if>
 <c:if test="${count eq 0}">
 <br><br>
-    <p style="color: red; font-weight: bold;">가입된 아이디가 없습니다.</p>
+    <p style="color: red; font-weight: bold;">가입된 아이디가 없습니다. 다시 확인해주세요.</p>
 </c:if>
 <br><br><br>
 

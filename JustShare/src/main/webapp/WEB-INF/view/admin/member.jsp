@@ -51,7 +51,6 @@ location.href="./gradeChange?mno="+mno+"&grade="+value;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
 	background-color: #f5f5f5;
-	colo
 }
 
 .div-cell{

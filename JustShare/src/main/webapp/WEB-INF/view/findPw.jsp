@@ -89,7 +89,7 @@ var _ss_user_id   = "";
         <form id="findPwFinal" action="./findPwFinal" method="post" class="container">
             <label for="findPwFinalCode">임시비밀번호를 입력하세요</label>
                         <div class="timer">
-                <span style="color: red;" id="remaining__min">3</span> :
+                <span style="color: red;" id="remaining__min">1</span> :
                 <span style="color: red;" id="remaining__sec">00</span>
             </div>
             <input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="임시비밀번호 6자리" required="required" maxlength="6">
@@ -101,15 +101,19 @@ var _ss_user_id   = "";
             </div>
         </form>
     </c:if>
+    <br><br><br><br><br><br><br>
     <c:if test="${findPwCheck eq 0}">
         <p style="color: red;" class="error">일치하는 회원정보가 없습니다.<br> 아이디와 핸드폰 번호를 다시 확인해주세요.</p>
+        <br><br><br>
         <a href="./findPw">돌아가기</a>
     </c:if>
-    findpwCheck : ${findPwCheck}<br>
+    <br><br><br><br><br><br><br>
+    
+ <%--    findpwCheck : ${findPwCheck}<br>
     findpwEmail : ${findPwEmail}<br>
     memail :  ${memail}<br>
     uuid : ${uuid}<br>
-    uuidPw : ${uuidPw}
+    uuidPw : ${uuidPw} --%>
     <script type="text/javascript">
         function findPwFinal() { 
             var input = document.getElementById('findPwFinalCode'); 
@@ -126,7 +130,7 @@ var _ss_user_id   = "";
         const remainingMin = document.getElementById("remaining__min");
         const remainingSec = document.getElementById("remaining__sec");
         const findPwFinalCode = document.getElementById("findPwFinalCode");
-        let time = 5;
+        let time = 60;
         const takeTarget = () => {
             const intervalId = setInterval(function () {
                 if (time > 0) {

@@ -36,4 +36,8 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> monthDay();
 
+	List<Map<String, Object>> category();
+
+	List<Map<String, Object>> boardCate();
+
 }

@@ -39,9 +39,13 @@
 	display: table-cell;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
+	width: 25%;
 }
 
-
+.div-cell-a{
+	border: 1px solid #f0f0f0;
+	display: table-cell;
+}
 
 .report-table {
 	display: table;
@@ -59,6 +63,7 @@
 
 .report-row-header{
 	display: table-row;
+	background-color: #f5f5f5;
 }
 
 
@@ -81,14 +86,15 @@
 		</div>
 </c:forEach>
 </div>
+ <div id="donutchart" style="width: 100%; height: 100%;"></div>
 <button id="toggleButton">펼치기/숨기기</button>	
 <br>
 	<div class="report-table-header">
     <div class="report-row-header">
         <div class="div-cell">신고한 사람</div>
-        <div class="div-cell">신고 당한 사람</div>
+        <div class="div-cell">신고 당한<br>사람</div>
         <div class="div-cell">신고 내용</div>
-        <div class="div-cell">신고 카테고리</div>
+        <div class="div-cell">신고<br>카테고리</div>
     </div>
     </div>
     <div class="report-table">
@@ -102,6 +108,7 @@
     </c:forEach>
 </div>
 </div>
+
 <br><br><br><br>
 
 <script>
@@ -122,8 +129,35 @@
         }
     }
 </script>
-
 <%@ include file="adminfooter.jsp"%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['정보 다름',     ${category[0].category1 }],
+          ['중복게시물',      ${category[0].category2 }],
+          ['의심스러움',  ${category[0].category3 }],
+          ['거래관련 분쟁', ${category[0].category4 }],
+          ['기타',    ${category[0].category5 }]
+        ]);
+
+        var options = {
+          title: '<카테고리별 신고>',
+          pieHole: 0.1,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
+
+
+
 		
 				
 </body>
