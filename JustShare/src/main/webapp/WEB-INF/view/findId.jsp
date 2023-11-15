@@ -59,10 +59,10 @@ var _ss_user_id   = "";
 <div class="findId-form">
     <form action="./findId" method="post" class="container">
     <div class="text_find_id">
-				 <h1 style="font-size: 30px;">FIND ID</h1><br>
-				<span style="color: #8A8A8A">가입하신 정보를 입력해주시면 등록된 <br>휴대폰 번호로 전송 해드립니다.</span>
-			</div>  
-    	 <label style="text-align: left;" for="mname">이름</label>
+             <h1 style="font-size: 30px;">FIND ID</h1><br>
+            <span style="color: #8A8A8A">가입하신 정보를 입력해주시면 등록된 <br>휴대폰 번호로 전송 해드립니다.</span>
+         </div>  
+        <label style="text-align: left;" for="mname">이름</label>
         <input type="text" name="mname" placeholder="ex) 홍길동" required="required" maxlength="8"><br><br>
         <label style="text-align: left;">핸드폰 번호</label>
         <input type="text" name="mphone" placeholder="ex) 01012345678" required="required" maxlength="11"><br><br><br>

@@ -17,7 +17,7 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 
-	  <link rel="stylesheet" href="/css/main_page.css" />
+     <link rel="stylesheet" href="/css/main_page.css" />
    <!-- 회원가입 3가지회원 유형 css new -->
 
     <link rel="stylesheet" href="/css/main_page.css" />
@@ -89,12 +89,12 @@ var _ss_user_id   = "";
          <input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br><br><br>
       <h3 style="text-align: left;"><label for="name">비밀번호</label></h3>
          <input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br><br>
- 	  <div style="text-align:center;">
-	<c:if test="${loginCheckCount eq 1}">
-	<p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
-	</c:if>
-	</div>   
-         <button class="login_click" type="submit">로그인</button><br><br>
+      <div style="text-align:center;">
+   <c:if test="${loginCheckCount eq 1}">
+   <p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
+   </c:if>
+   </div>   
+         <button style="background-color: #004AAD!important" class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
 
