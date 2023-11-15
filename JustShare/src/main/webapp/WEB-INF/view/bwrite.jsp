@@ -28,31 +28,25 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <!-- 회원가입 3가지회원 유형 css new -->
-	<!-- <link rel="stylesheet" href="/css/register.css?ver=20000120" /> -->
+<link rel="stylesheet" href="/css/register.css?ver=20000120"/> 
 	<!-- 고객센터 css -->
-	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
 	<!-- 폰트어썸 -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="/css/footertoastr.min.css" />
+<script src="./js/socket2.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-	<link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
-	
+
  <script src="/js/valuevenue.js?ver=20000120" defer></script>
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
- <style type="text/css">
-<style>
-       .image-preview {
-            display: inline-block; /* 이미지를 가로로 나열하기 위해 인라인-블록 요소로 설정 */
-            margin: 10px; /* 이미지 사이의 간격 조정 */
-        }
-        .preview-image {
-            max-width: 70px; /* 최대 너비를 조절하여 이미지 크기 제한 */
-            max-height: 70px; /* 최대 높이를 조절하여 이미지 크기 제한 */
-            
-        }
-</style>
+ 
+
 </head>
 <body>
 <%@ include file="header.jsp"%>
@@ -78,7 +72,7 @@
 						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
 						<td>
 						 <div class="id_mo f_ex">
-						 <button id="picker" type="button">파일 선택</button>
+						 <button id="picker" type="button" class="choose">파일 선택</button>
 						 </div>
 						 <div id="box"></div>
   						<div id="progress"></div>
@@ -407,7 +401,7 @@ $(function () {
     };
 
     $(".writeB").click(function(){
-    		const $writeButton = $(this);
+    	 const $writeButton = $(this);
          const titleInput = document.getElementById('titleInput');
          const contentInput = document.getElementById('contentInput');
          const postcodeInput = document.getElementById('sample2_postcode');
@@ -514,8 +508,8 @@ $(function () {
  			dataType : "json",
             success: function (data) {
                 if (data > 0) {
-                	 
                 	 $upload.prop('disabled', false);
+                	 
                 } else {
                     console.log("글 작성 중 오류가 발생했습니다.");
                 }
