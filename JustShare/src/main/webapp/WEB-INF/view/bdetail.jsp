@@ -263,7 +263,7 @@
 		<!-- 요 밑에 친구를 foreach로 돌리기  -->
 		<div class="calender-cardmb-normal" onclick="window.location.href='./bdetail?bno=${place[0].bno}'">
 		<div class="imagemb-box">
-        <img  src="/img/places/${place[0].image }" alt="" onerror="this.src='/images/no_image.png'">
+        <img  src="/img/places/${place[0].image }" alt="" >
         </div>
         <div class="calendercard-innermb">
         <p class="txt__card__tit">${place[0].btitle }<p class="txt__subtit__sm">${place[0].addr }</p>

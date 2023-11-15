@@ -155,8 +155,8 @@ var _ss_user_id   = "";
          <li class="swiper-slide tranEff">
 <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc1.jpg" onerror="this.src='/images/no_image.png'" alt="배너">
-                                 <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/images/no_image.png'" alt="배너 모바일" />
+                  <img class="pc_banner" src="/img/pc1.jpg" onerror="this.src='/img/no_image.png'" alt="배너">
+                                 <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/img/no_image.png'" alt="배너 모바일" />
                </div>                
                
                <div class="main_banner_text">
@@ -173,8 +173,8 @@ var _ss_user_id   = "";
       <li class="swiper-slide tranEff swiper-slide-prev" style="width: 893px; opacity: 1; transform: translate3d(-893px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 3" data-swiper-slide-index="0">
             <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
-                  <img class="mo_banner" src="/img/m2.jpg" onerror="this.src='/images/no_image.png'" alt="배너모바일">
+                  <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
+                  <img class="mo_banner" src="/img/m2.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
                </div>                
                
                <div class="main_banner_text">
@@ -190,8 +190,8 @@ var _ss_user_id   = "";
          </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active" style="width: 893px; opacity: 1; transform: translate3d(-1786px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 3" data-swiper-slide-index="1">
             <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc3.jpg"  onerror="this.src='/images/no_image.png'" alt="배너">
-                  <img class="mo_banner" src="/img/m3.jpg" onerror="this.src='/images/no_image.png'" alt="배너모바일">
+                  <img class="pc_banner" src="/img/pc3.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
+                  <img class="mo_banner" src="/img/m3.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
                </div>                
                
                <div class="main_banner_text">
@@ -315,7 +315,7 @@ var _ss_user_id   = "";
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="../img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="../img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/img/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -371,7 +371,7 @@ navigation: {   // 버튼 사용자 지정
       <c:forEach items="${imageC }" var="row" varStatus="loop">
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="../img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/images/no_image.png'" alt="" />
+               <img class="card_img" src="../img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/img/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -424,7 +424,7 @@ navigation: {   // 버튼 사용자 지정
                  <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
-                 <img class="card_img" src="../img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+                 <img class="card_img" src="../img/places/${row.realFile}" onerror="this.src='/img/no_image.png'" alt="">
             </a>
             </div>
      <div  class="card__inner2">         
@@ -486,7 +486,7 @@ navigation: {   // 버튼 사용자 지정
                   <span>${row.addr }</span>
                </div>
                 <a href="./bdetail?bno=${row.bno}">
-                 <img class="card_img" src="./img/places/${row.realFile}" onerror="this.src='/images/no_image.png'" alt="">
+                 <img class="card_img" src="./img/places/${row.realFile}" onerror="this.src='/img/no_image.png'" alt="">
 
             </div>
      <div  class="card__inner2">         
