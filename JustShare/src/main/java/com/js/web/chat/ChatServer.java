@@ -16,7 +16,7 @@ public class ChatServer implements WebSocketConfigurer {
 	 @Override
 	    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 	        registry.addHandler(chatWebSocketHandler(), "/chat") // WebSocket 엔드포인트 및 핸들러 등록
-	        .setAllowedOrigins("//localhost:8080/")
+	        .setAllowedOrigins("http://justshare.store")
 	        .withSockJS();
 	        //.allowedOriginPatterns("*")
 	    }

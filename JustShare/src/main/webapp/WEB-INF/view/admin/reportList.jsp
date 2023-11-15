@@ -27,85 +27,104 @@
 <body> 
 <style>
 .div-table {
-   display: table;
-   width: 100%;
+	display: table;
+	width: 100%;
 }
 
 .div-row {
-   display: table-row;
+	display: table-row;
 }
 
 .div-cell {
-   display: table-cell;
-   padding: 10px;
-   border: 1px solid #f0f0f0;
-   width: 25%;
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid #f0f0f0;
+	width: 20%;
 }
 
 .div-cell-a{
-   border: 1px solid #f0f0f0;
-   display: table-cell;
+	border: 1px solid #f0f0f0;
+	display: table-cell;
+	width: 20%;
 }
 
 .report-table {
-   display: table;
-   width: 100%;
+	display: table;
+	width: 100%;
 }
 
 .report-row {
-   display: table-row;
+	display: table-row;
 }
 
 .report-table-header{
-   display: table;
-   width: 100%;
+	display: table;
+	width: 100%;
 }
 
 .report-row-header{
-   display: table-row;
-   background-color: #f5f5f5;
+	display: table-row;
+	background-color: #f5f5f5;	
 }
 
 button {
     background-color: #004AAD!important;
  }   
 
+
+.reportgrade{
+	width: 100%;
+}
+
 </style>
 
 <div style="text-align: center">
 <div class="div-table">
-      <div class="div-row">
-         <div class="div-cell">신고 아이디</div>
-         <div class="div-cell">신고 누적</div>
-      </div>
-      
-      <c:forEach items="${reportListMember}" var="m">
-         <div class="div-row">
-             <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
-            <div class="div-cell">${m.count}회
-            <c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
-         </div>
-      </div>
+		<div class="div-row">
+			<div class="div-cell">신고 아이디</div>
+			<div class="div-cell">신고 누적</div>
+		</div>
+		
+		<c:forEach items="${reportListMember}" var="m">
+			<div class="div-row">
+				 <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
+				<div class="div-cell">${m.count}회
+				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
+			</div>
+		</div>
 </c:forEach>
 </div>
+
+<br><br><br>
  <div id="donutchart" style="width: 100%; height: 100%;"></div>
-<button id="toggleButton" style="background-color: #004AAD!important">펼치기/숨기기</button>   
-<br>
-   <div class="report-table-header">
+ <br><br><br>
+ 
+<button id="toggleButton" style="background-color: #004AAD!important">펼치기/숨기기</button>	
+<br> <br><br><br>
+	<div class="report-table-header">
     <div class="report-row-header">
-        <div class="div-cell">신고한 사람</div>
+        <div class="div-cell">신고한<br>사람</div>
         <div class="div-cell">신고 당한<br>사람</div>
-        <div class="div-cell">신고 내용</div>
+        <div class="div-cell">신고<br>내용</div>
         <div class="div-cell">신고<br>카테고리</div>
+        <div class="div-cell">신고<br>승인</div>
     </div>
     </div>
     <div class="report-table">
     <c:forEach items="${reportList}" var="row">
-        <div class="report-row" onclick="location.href='/bdetail?bno=${row.bno}'">
-            <div class="div-cell">${row.rmid}</div>
-            <div class="div-cell-a">${row.mid}</div>
-            <div class="div-cell">${row.rcontent}</div>
-            <div class="div-cell">${row.rcateName}</div>
+        <div class="report-row">
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rmid}</div>
+            <div class="div-cell-a" onclick="location.href='/bdetail?bno=${row.bno}'">${row.mid}</div>
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcontent}</div>
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcateName}</div>
+            	<div class="div-cell">
+					<select class="reportgrade" name="reportgrade"	onchange="reportgrade(${row.rno }, this.value)">
+						<optgroup label="신고 관리">
+							<option value="0" ${row.reportgrade eq 0 ? 'selected="selected"' : ''}>반려</option>
+							<option value="1" ${row.reportgrade eq 1 ? 'selected="selected"' : ''}>승인</option>
+						</optgroup>
+					</select>
+				</div>
         </div>
     </c:forEach>
 </div>
@@ -120,7 +139,7 @@ button {
         });
     }); 
     function showReports(userId) {
-         $('.report-table .report-row').hide();
+    	  $('.report-table .report-row').hide();
         if (userId) {
             $('.div-cell-a').each(function () {
                 if ($(this).text() === userId) {
@@ -130,6 +149,17 @@ button {
             });
         }
     }
+        
+    function reportgrade(rno, value){
+    	if(confirm("신고 승인 하시겠습니까?")){
+    	location.href="./reportgrade?rno="+rno+"&reportgrade="+value;  		
+    	} else {
+            alert("신고 승인이 취소되었습니다.");
+        }
+    }  
+
+    
+    
 </script>
 <%@ include file="adminfooter.jsp"%>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -160,7 +190,7 @@ button {
 
 
 
-      
-            
+		
+				
 </body>
 </html>

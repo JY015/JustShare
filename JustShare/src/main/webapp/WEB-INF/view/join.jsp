@@ -96,7 +96,7 @@ $(function(){
                $('#midMsg').css("color","red");
                $('#mphone').prop('readonly', false);
                $('.get__number').prop('disabled', false);
-               
+               $('.maddr').prop('disabled', false);
  
             }
          },
@@ -245,7 +245,7 @@ $(function(){
 			<br><br>
 		
 		<label for="mname">주소</label><br>
-		<input type="text" id="sample2_postcode" class="maddr" placeholder="우편번호" readonly>
+		<input type="text" id="sample2_postcode" class="maddr" placeholder="우편번호" disabled="disabled">
 		<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" hidden="hidden"><br>
 		<span id="maddrMsg" class="tip"></span>
 		<input type="text" id="sample2_address" name="maddr" placeholder="주소" readonly><br>

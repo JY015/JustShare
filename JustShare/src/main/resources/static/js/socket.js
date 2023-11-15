@@ -1,4 +1,4 @@
- const socket = new SockJS("//localhost:8080/chat");
+ const socket =  new SockJS("http://justshare.store/chat");
    //const socket = new WebSocket("ws://localhost:8080/chat");
     let msgcount=0;
     //let mid = sessionStorage.getItem("mid");
