@@ -17,12 +17,29 @@
 SELECT * FROM image WHERE main= 1 ORDER BY bno DESC 
 </select>
 
-<select id="imageC" resultType="Map"> 
+<select id="boardlatest" resultType="Map"> 
 SELECT b.bno,(Select i.realFile from image i where b.bno=i.bno AND i.main = 1 )as realFile, b.btitle,b.addr, b.addDetail
 FROM board b
 WHERE 
 b.bdel=1  
 ORDER BY b.bno DESC 
+LIMIT 10
+</select>
+
+<select id="boardreadcount" resultType="Map"> 
+SELECT b.bno,(Select i.realFile from image i where b.bno=i.bno AND i.main = 1 )as realFile, b.btitle,b.addr, b.addDetail
+FROM board b
+WHERE 
+b.bdel=1  
+ORDER BY b.bread DESC 
+LIMIT 10
+</select>
+<select id="blikescount" resultType="Map"> 
+SELECT b.bno,(Select i.realFile from image i where b.bno=i.bno AND i.main = 1 )as realFile, b.btitle,b.addr, b.addDetail, (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount, DATE_FORMAT(b.bdate,'%Y.%m.%d')as bdate
+FROM board b
+WHERE 
+b.bdel=1  
+ORDER BY likesCount DESC 
 LIMIT 10
 </select>
 
