@@ -25,11 +25,13 @@ public class AdminController {
 		int boardCount = adminService.boardCount();
 		int reportCount = adminService.reportCount();
 		int tradeCount = adminService.tradeCount();
+		List<Map<String, Object>> boardCate = adminService.boardCate();
 		model.addAttribute("memberCount", memberCount);
 		model.addAttribute("boardCount", boardCount);
 		model.addAttribute("reportCount", reportCount);
 		model.addAttribute("tradeCount", tradeCount);
-			return "admin/main";
+		model.addAttribute("boardCate", boardCate);
+		return "admin/main";
 	}
 		
 	@GetMapping("/admin/member")
@@ -53,15 +55,16 @@ public class AdminController {
 		return"redirect:/admin/member";
 	}
 	
-
 	@GetMapping("/admin/reportList")
 	public String report(Model model) {
 		List<Map<String, Object>> reportList = adminService.reportList();
 		List<Map<String, Object>> reportListMember = adminService.reportListMember(reportList);
+		List<Map<String, Object>> category = adminService.category();
 		adminService.gradeDown(); //신고 누적에 따른 강등
 		System.out.println("reportListMember : "  + reportListMember);
 		model.addAttribute("reportListMember", reportListMember);
 		model.addAttribute("reportList", reportList);
+		model.addAttribute("category", category);
 		return "admin/reportList";
 	}
 	
@@ -85,11 +88,7 @@ public class AdminController {
 		
 		return "admin/chart";
 	}
-	
-	
-	
-	
-	
+
 }
 
 	

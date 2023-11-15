@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
    <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
@@ -18,12 +18,11 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>  
    
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
@@ -51,8 +50,6 @@
 <script>
 var _ss_user_id   = "";
 </script>
-
-
   </head> 
 <body>
 
@@ -61,7 +58,7 @@ var _ss_user_id   = "";
   <input type="hidden" class="is_app_banner" value="">
    
    <div class="top_app_banner" style="display:none;background-color: #fff7e1">
-      <div class="app_div">JustShare 앱으로 더욱 편리하게 이용해 보세요, 
+      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
          <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
       </div>
       <div class="app_div_close"></div>
@@ -73,7 +70,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -95,14 +92,15 @@ var _ss_user_id   = "";
         <div class="right-side">
             <div class="sign-group">
            <div class="alarm-group" onclick="top.location.href='/member/alarm'">알림아이콘</div>
-          </div>
+<!--            <div class="my-thumb" style="background-image: url(/images/ico_profile.svg);">내 썸네일 이미지</div>                     
+ -->            </div>
           </div>
       </div>
  
       </div>
     </header>
           
-    
+          <!--  모바일  -->
   <header class="header_topnav_new">
         <div class="header_topnav_inner_n">
          <div class="first_row">
@@ -111,8 +109,8 @@ var _ss_user_id   = "";
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-key xi-2x"></i></a></c:when>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>
@@ -144,7 +142,7 @@ var _ss_user_id   = "";
                 <button type='button' class="btn btn--outlined-primary" onclick="location.href='/member/modify'">정보수정</button>
               </li>
               <li>
-                <button type='button' class="btn btn--primary" onclick="top.location.href='/logout'">로그아웃</button>
+                <button type='button' class="btn btn--primary" onclick="logoutAndCloseSocket()">로그아웃</button>
               </li>
             </ul>
           </div>
@@ -239,7 +237,7 @@ var _ss_user_id   = "";
    });
    
    </script>
-
+<br><br>
 <div class="all-container">
 <div class="all-category-container">
     <div class="category-item"><p class="all" style="cursor:pointer;">전체</p></div>
@@ -250,19 +248,19 @@ var _ss_user_id   = "";
     </div>
     <br>
 <div class="entire-cate">
-<div class="category commercial"><img alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
-<div class="category commercial"><img alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
-<div class="category commercial"><img alt="drink" src="./img/category/drink.png"><p>${cateList[2].cname }</p></div>
-<div class="category commercial"><img alt="else" src="./img/category/else.png"><p>${cateList[7].cname }</p></div>
-<div class="category studio"><img alt="practice" src="./img/category/practice.png"><p>${cateList[3].cname }</p></div>
-<div class="category studio"><img alt="rec" src="./img/category/rec.png"><p>${cateList[4].cname }</p></div>
-<div class="category studio"><img alt="party" src="./img/category/party.png"><p>${cateList[5].cname }</p></div>
-<div class="category studio"><img alt="set" src="./img/category/set.png"><p>${cateList[6].cname }</p></div>
-<div class="category studio"><img alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
-<div class="category business"><img alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
-<div class="category business"><img alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
-<div class="category culture"><img alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
-<div class="category culture"><img alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=1'" alt="cafe" src="./img/category/cafe.png"><p>${cateList[0].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=2'" alt="food" src="./img/category/food.png"><p>${cateList[1].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=3'" alt="drink" src="./img/category/drink.png"><p>${cateList[2].cname }</p></div>
+<div class="category commercial"><img onclick="window.location.href='./board?categories=8'" alt="else" src="./img/category/else.png"><p>${cateList[7].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=4'" alt="practice" src="./img/category/practice.png"><p>${cateList[3].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=5'" alt="rec" src="./img/category/rec.png"><p>${cateList[4].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=6'" alt="party" src="./img/category/party.png"><p>${cateList[5].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=7'" alt="set" src="./img/category/set.png"><p>${cateList[6].cname }</p></div>
+<div class="category studio"><img onclick="window.location.href='./board?categories=9'" alt="auditorium" src="./img/category/auditorium.png"><p>${cateList[8].cname }</p></div>
+<div class="category business"><img onclick="window.location.href='./board?categories=12'" alt="office" src="./img/category/office.png"><p>${cateList[11].cname }</p></div>
+<div class="category business"><img onclick="window.location.href='./board?categories=13'" alt="officetels" src="./img/category/officetels.png"><p>${cateList[12].cname }</p></div>
+<div class="category culture"><img onclick="window.location.href='./board?categories=10'" alt="gallery" src="./img/category/gallery2.png"><p>${cateList[9].cname }</p></div>
+<div class="category culture"><img onclick="window.location.href='./board?categories=11'" alt="concert" src="./img/category/concert.png"><p>${cateList[10].cname }</p></div>
 </div>
 </div>
  <script>
@@ -408,7 +406,6 @@ navigation: {   // 버튼 사용자 지정
    prevEl: '.swiper-button-prev',
 },
 });
-
 </script>
    <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">

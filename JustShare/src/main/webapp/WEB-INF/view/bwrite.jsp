@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <!-- 회원가입 3가지회원 유형 css new -->
-	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
+	<!-- <link rel="stylesheet" href="/css/register.css?ver=20000120" /> -->
 	<!-- 고객센터 css -->
 	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
 	<!-- 폰트어썸 -->
@@ -179,8 +179,8 @@
 			<button type="button"  id="upload" class="btn_clear_black">이미지 업로드하기</button>
 		</div>
 	</form>
-	
-	
+
+
 	<br><br><br><br>
 	
 	 <%@ include file="footer.jsp" %> 

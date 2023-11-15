@@ -41,6 +41,7 @@
 }
 .div-rowrow{
 	display: table-row;
+	background-color: #f5f5f5;
 }
 
 .div-cell {
@@ -83,6 +84,7 @@
                 </c:forEach>
             </div>
         </div>
+        <br><br><br><br>
 <%@ include file="adminfooter.jsp"%>
 
 <br><br>
@@ -111,7 +113,7 @@
       2]);
 
     var options = {
-    	    title: "JustShare 거래내역 차트",
+    	    title: "<JustShare 거래내역 차트>",
     	    width: '100%', 
     	    height: 300,
     	    bar: { groupWidth: "85%" },

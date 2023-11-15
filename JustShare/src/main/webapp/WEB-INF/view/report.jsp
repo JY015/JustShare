@@ -20,8 +20,10 @@
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
+
     
     <link rel="stylesheet" href="/css/register.css?ver=20000120" />
+
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
    <meta property="og:locale"       content="ko_KR" />
@@ -44,15 +46,6 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
-
-<meta charset="UTF-8">
-<title>로그인 창</title>
-
-<script src="./js/jquery-3.7.0.min.js"></script>
-<style type="text/css">
-.radioDiv{margin-bottom: 10px;}
-
-
 </style>
 </head>
 
@@ -105,6 +98,32 @@
 	 </div>
 	 </section>
 	</div>
+
+<body>
+<%@ include file="header.jsp"%>
+	<h1>신고하기</h1>
+	신고자 : ${map.rmid}
+	신고 게시물 : ${map.bno }
+	
+	<form id="reportForm" action="./report" method="post" >
+	<input type="hidden" name="bno" value="${map.bno }">
+	<input type="hidden" name="rmid" value="${map.rmid }">
+	<input type="hidden" name="mid" value=${map.mid }>
+	신고 사유
+	<div>
+	<c:forEach items="${reportCateList }" var="n">
+	<div>
+	<input type="radio" name="rcate" value="${n.rcate}">${n.rcateName }
+	</div>
+	</c:forEach>
+	</div>
+	상세내용
+	<div>
+	<textarea name="rcontent" id="rcontent"></textarea>
+	</div>
+	<button type="button" onclick="reportSubmit()">신고하기</button>
+	</form>
+
 
 	<script>
     function reportSubmit() {

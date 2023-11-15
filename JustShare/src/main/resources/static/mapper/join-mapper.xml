@@ -4,19 +4,11 @@
 
 <insert id="join" parameterType="com.js.web.join.JoinDTO">
 	    INSERT INTO members(mid, mpw, mname, maddr, mbirth, mphone, memail)
-	    VALUES(#{user_id}, #{user_pw}, #{user_name}, #{maddr2}, #{user_birthday}, #{user_phone}, #{user_email})
+	    VALUES(#{mid}, #{mpw}, #{mname}, #{maddr}, #{mbirth}, #{mphone}, #{memail})
 	</insert>
 	
 	<select id="checkID" parameterType="String" resultType="Integer">
 		SELECT COUNT(*) FROM members WHERE mid=#{id}
 	</select>
 	
-	<select id="emailchk" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM members WHERE memail=#{email}
-	</select>
-	
-<select id="phonechk" parameterType="Integer" resultType="Integer">
-		SELECT COUNT(*) FROM members WHERE mphone=#{user_phone}
-	</select>
-
 </mapper>

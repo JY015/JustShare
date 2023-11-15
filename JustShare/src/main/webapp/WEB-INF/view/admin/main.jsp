@@ -28,8 +28,7 @@
     <style> 
 </style>
 </head>
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,12 +68,13 @@
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
+            
         }
 
         .admin-actions a {
             text-decoration: none;
             color: #fff;
-            background-color: #007bff;
+            background-color: #f64d61 !important;
             padding: 10px 20px;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -150,6 +150,8 @@ td{
         </tr>
     </table>
 </div>
+<div id="donutchart" style="width: 100%; height: 100%;"></div>
+<br><br><br>
     <c:if test="${sessionScope.mgrade < 4}">
         <div class="warning-message">
             <script>
@@ -158,6 +160,38 @@ td{
             </script>
         </div>
     </c:if>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', '보드 카테고리'],
+          ['카페',     ${boardCate[0].bcategory1 }],
+          ['식당',      ${boardCate[0].bcategory2 }],
+          ['술집',  ${boardCate[0].bcategory3 }],
+          ['연습실', ${boardCate[0].bcategory4 }],
+          ['녹음실',    ${boardCate[0].bcategory5 }],
+          ['파티장',    ${boardCate[0].bcategory6 }],
+          ['세트장',    ${boardCate[0].bcategory7 }],
+          ['공방',    ${boardCate[0].bcategory8 }],
+          ['강당',    ${boardCate[0].bcategory9 }],
+          ['갤러리',    ${boardCate[0].bcategory10 }],
+          ['공연장',    ${boardCate[0].bcategory11 }],
+          ['사무실',    ${boardCate[0].bcategory12 }],
+          ['오피스텔',    ${boardCate[0].bcategory13 }], 
+        ]);
+
+        var options = {
+          title: '<상품 등록 카테고리>',
+          pieHole: 0.1,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>    
+    
 <%@ include file="adminfooter.jsp"%>
 </body>
 </html>

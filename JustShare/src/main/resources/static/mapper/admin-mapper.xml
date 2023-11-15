@@ -65,6 +65,40 @@ FROM
   tradehistory;
 </select>
 
+
+<select id="category" resultType="Map">
+SELECT
+    COUNT(CASE WHEN rcate = 1 THEN 1 ELSE NULL END) AS category1,
+    COUNT(CASE WHEN rcate = 2 THEN 1 ELSE NULL END) AS category2,
+    COUNT(CASE WHEN rcate = 3 THEN 1 ELSE NULL END) AS category3,
+    COUNT(CASE WHEN rcate = 4 THEN 1 ELSE NULL END) AS category4,
+    COUNT(CASE WHEN rcate = 5 THEN 1 ELSE NULL END) AS category5
+FROM
+    report;
+</select>
+
+<select id="boardCate" resultType="Map">
+SELECT
+    COUNT(CASE WHEN cate = 1 THEN 1 ELSE NULL END) AS bcategory1,
+    COUNT(CASE WHEN cate = 2 THEN 1 ELSE NULL END) AS bcategory2,
+    COUNT(CASE WHEN cate = 3 THEN 1 ELSE NULL END) AS bcategory3,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory4,
+    COUNT(CASE WHEN cate = 5 THEN 1 ELSE NULL END) AS bcategory5,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory6,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory7,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory8,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory9,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory10,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory11,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory12,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory13
+    
+FROM
+    board;
+</select>
+
+
+
 <select id="monthDay" resultType="Map">
 SELECT
   DATE_FORMAT(timestamp, '%m-%d') AS monthDay,

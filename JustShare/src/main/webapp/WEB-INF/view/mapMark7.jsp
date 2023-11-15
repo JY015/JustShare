@@ -78,13 +78,19 @@
 						<button id="zoomOutButton">
 							<img src="../img/minus.png" alt="축소">
 						</button>
-<div class="hamburger-menu">
-<button class="all" ><img alt="all" src="./img/category/all.png"></button>
-    <button class="category-button" data-category="commercial"><img alt="cafe" src="./img/category/상업.png"></button>
-    <button class="category-button" data-category="studio"><img alt="cafe" src="./img/category/스튜디오.png"></button>
-    <button class="category-button" data-category="culture"><img alt="cafe" src="./img/category/문화.png"></button>
-    <button class="category-button" data-category="business"><img alt="cafe" src="./img/category/업무.png"></button>
-</div>
+ <div class="button-container">
+    <button class="toggle-menu-btn">
+     <img alt="cate" src="./img/category/cate.png">
+    </button>
+
+    <div class="menu">
+      <button class="all"><img alt="all" src="./img/category/all.png"><br>전체보기</button>
+      <button class="category-button" data-category="commercial"><img alt="commercial" src="./img/category/상업.png"><br>상업</button>
+      <button class="category-button" data-category="studio"><img alt="studio" src="./img/category/스튜디오.png"><br>스튜디오</button>
+      <button class="category-button" data-category="culture"><img alt="culture" src="./img/category/문화.png"><br>문화</button>
+      <button class="category-button" data-category="business"><img alt="business" src="./img/category/업무.png"><br>업무</button>
+    </div>
+  </div>
 					</div>
 				</div>
 			</div>
@@ -112,7 +118,17 @@
                     </div>
                 </div>
   
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	  const toggleMenuBtn = document.querySelector('.toggle-menu-btn');
+	  const menu = document.querySelector('.menu');
 
+	  toggleMenuBtn.addEventListener('click', function() {
+	    menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'flex' : 'none';
+	  });
+	});
+
+</script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
@@ -145,8 +161,6 @@ function createMarker(latitude, longitude) {
         zIndex: 5,
         image: markerImage
     });
-    
-    
 }
 
 function panTo() {
@@ -162,12 +176,14 @@ function panTo() {
                 alert("GPS 정보를 수신 할 수 없습니다.\r\n잠시 후 다시 시도해주세요");
                 return;
             } else {
+            	
                 createMarker(latitude, longitude); // 새로운 위치로 마커 생성
                 updateMapCenter(latitude, longitude); // 지도 중심 위치 업데이트
             }
         });
     }
 }
+
 //맵 중심을 업데이트하는 함수
 function updateMapCenter(latitude, longitude) {
     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);
@@ -202,7 +218,7 @@ function closeCustomOverlay() {
     }
 }	
 
-function createMarker(item, markerImage) {
+function createMarker2(item, markerImage) {
 	var marker = new kakao.maps.Marker({
 	                    position: item.latlng,
 	                    map: map,
@@ -400,9 +416,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
 	    var level = map.getLevel();
 	    map.setLevel(level + 1);
 	});
-     
+
     
-    kakao.maps.load(function() {
+    kakao.maps.load(function(error) {
         var geocoder = new kakao.maps.services.Geocoder();
         var latlng = new kakao.maps.LatLng(latitude, longitude);
 
@@ -412,6 +428,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
             	var address = result[0].address.address_name;
             	document.querySelector(".tit_location").innerHTML = address;
  		} else {
+ 			cosole.error("error")
               alert("주소를 찾을 수 없습니다.");
             }
           });

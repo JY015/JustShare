@@ -16,10 +16,21 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
+
+	  <link rel="stylesheet" href="/css/main_page.css" />
+   <!-- 회원가입 3가지회원 유형 css new -->
+
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
 
+
+   <!-- 고객센터 css -->
+   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
+   <!-- 폰트어썸 -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+   <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />   
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
    <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
@@ -37,6 +48,7 @@
    <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="/js/valuevenue.js?ver=20000120" defer></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
@@ -53,7 +65,16 @@ var _ss_user_id   = "";
 </script>
   </head>
 <body>
+
+<!--헤더 시작-->
 <%@ include file="header.jsp"%>
+<!--헤더 끝-->
+  <div class="body__container section">
+  <input type="hidden" class="is_phpself" value="/login.php">
+  <input type="hidden" class="is_app_banner" value="">
+  
+
+
     
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
@@ -68,11 +89,11 @@ var _ss_user_id   = "";
          <input id="mid" type="text" name="mid" placeholder="아이디를 입력하세요" required="required"><br><br><br>
       <h3 style="text-align: left;"><label for="name">비밀번호</label></h3>
          <input id="mpw" type="password" name="mpw" placeholder="암호를 입력하세요" required="required"><br><br>
-      <div style="text-align:center;">
-   <c:if test="${loginCheckCount eq 1}">
-   <p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
-   </c:if>
-   </div>   
+ 	  <div style="text-align:center;">
+	<c:if test="${loginCheckCount eq 1}">
+	<p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
+	</c:if>
+	</div>   
          <button class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
@@ -89,7 +110,7 @@ var _ss_user_id   = "";
    </div>
       <br><br>
 
-      <%@ include file="footer.jsp"%>
+<%--       <%@ include file="footer.jsp"%> --%>
  
 <footer class="footer1400">
         <div id="footer__box" class="footer__inner txt__subtit">
@@ -110,7 +131,11 @@ var _ss_user_id   = "";
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
+
+            <img style="width: 96px;margin-left: 4px;" src="/images/mo/logo_m_active2.svg" alt="">
+
             <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
+
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
             TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
             <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
@@ -119,6 +144,7 @@ var _ss_user_id   = "";
         </div>
       </footer>
     </div>
+
 
   </body>
 </html>
