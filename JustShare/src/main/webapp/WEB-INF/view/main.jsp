@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
    <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
@@ -143,7 +142,7 @@ var _ss_user_id   = "";
                 <button type='button' class="btn btn--outlined-primary" onclick="location.href='/member/modify'">정보수정</button>
               </li>
               <li>
-                <button type='button' class="btn btn--primary" onclick="top.location.href='/logout'">로그아웃</button>
+                <button type='button' class="btn btn--primary" onclick="logoutAndCloseSocket()">로그아웃</button>
               </li>
             </ul>
           </div>

@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <!-- 회원가입 3가지회원 유형 css new -->
-	<link rel="stylesheet" href="/css/register.css?ver=20000120" />
+	<!-- <link rel="stylesheet" href="/css/register.css?ver=20000120" /> -->
 	<!-- 고객센터 css -->
 	<link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
 	<!-- 폰트어썸 -->

@@ -4,6 +4,7 @@ package com.js.web.main;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -44,9 +45,23 @@ public class MainController {
             System.out.println(imageC);
             
             for (int i = 0; i < imgsubst.size(); i++) {
-               String addr = String.valueOf(((String) imgsubst.get(i).get("addr")).substring(0, 7));   
-               imgsubst.get(i).put("addr", addr);
+            	String addr = (String) imgsubst.get(i).get("addr");
+
+            	String[] addrArray = addr.split(" ");
+
+            	List<String> addrList = Arrays.asList(addrArray);
+
+            	if (!addrList.isEmpty()) {
+            	    String first = addrList.get(0);
+            	    String second = addrList.get(1);
+            	    String addrsplit = first +" "+ second;
+            	    System.out.println(addrsplit);
+            	    imgsubst.get(i).put("addr", addrsplit);
+            	} else {
+            	    System.out.println("주소 형식이 올바르지 않습니다.");
+            	}
             }
+
             
             for (int i = 0; i < imgsubst.size(); i++) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -634,7 +634,39 @@ img {
 
 .bottom_nav_menu {
 	
-	display: none !important;
+	display: none ! important;
+	height: 130px ! important;
+	padding-top: 2px ! important;
+}
+
+.bottom_nav_menu ul {
+	
+	font-size:25px ! important; 
+	height: 150px ! important;
+}
+
+.bottom_nav_menu ul li a p {
+	
+	font-size: 26px ! important;
+	margin-top: 6px ! important;
+	font-weight: 600 ! important;
+}
+
+.container_w::before {
+	top:38px ! important;
+	left:62px ! important;
+	height: 45% ! important;
+	width: 34% ! important;
+filter: blur(14px) ! important;
+	}
+	
+	.container_w::after {
+    /* background-color: #1673ff; */
+    background: linear-gradient(144deg, #1673ff 100%, #0300ad 100%);
+    z-index: 1;
+    animation: backglow2 3s ease infinite;
+    top: 20px ! important;
+    left: 27px ! important;
 }
 
 @media screen and (max-width: 1058px) {
