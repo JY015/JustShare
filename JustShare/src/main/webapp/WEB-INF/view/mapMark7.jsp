@@ -78,13 +78,19 @@
 						<button id="zoomOutButton">
 							<img src="../img/minus.png" alt="축소">
 						</button>
-<div class="hamburger-menu">
-<button class="all" ><img alt="all" src="./img/category/all.png"></button>
-    <button class="category-button" data-category="commercial"><img alt="cafe" src="./img/category/상업.png"></button>
-    <button class="category-button" data-category="studio"><img alt="cafe" src="./img/category/스튜디오.png"></button>
-    <button class="category-button" data-category="culture"><img alt="cafe" src="./img/category/문화.png"></button>
-    <button class="category-button" data-category="business"><img alt="cafe" src="./img/category/업무.png"></button>
-</div>
+ <div class="button-container">
+    <button class="toggle-menu-btn">
+     <img alt="cate" src="./img/category/cate.png">
+    </button>
+
+    <div class="menu">
+      <button class="all"><img alt="all" src="./img/category/all.png"><br>전체보기</button>
+      <button class="category-button" data-category="commercial"><img alt="commercial" src="./img/category/상업.png"><br>상업</button>
+      <button class="category-button" data-category="studio"><img alt="studio" src="./img/category/스튜디오.png"><br>스튜디오</button>
+      <button class="category-button" data-category="culture"><img alt="culture" src="./img/category/문화.png"><br>문화</button>
+      <button class="category-button" data-category="business"><img alt="business" src="./img/category/업무.png"><br>업무</button>
+    </div>
+  </div>
 					</div>
 				</div>
 			</div>
@@ -112,7 +118,17 @@
                     </div>
                 </div>
   
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	  const toggleMenuBtn = document.querySelector('.toggle-menu-btn');
+	  const menu = document.querySelector('.menu');
 
+	  toggleMenuBtn.addEventListener('click', function() {
+	    menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'flex' : 'none';
+	  });
+	});
+
+</script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
