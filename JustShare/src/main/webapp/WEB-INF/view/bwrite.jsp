@@ -179,6 +179,8 @@
 			<button type="button"  id="upload" class="btn_clear_black">이미지 업로드하기</button>
 		</div>
 	</form>
+	
+	
 	<br><br><br><br>
 	
 	 <%@ include file="footer.jsp" %> 
@@ -405,6 +407,7 @@ $(function () {
     };
 
     $(".writeB").click(function(){
+    		const $writeButton = $(this);
          const titleInput = document.getElementById('titleInput');
          const contentInput = document.getElementById('contentInput');
          const postcodeInput = document.getElementById('sample2_postcode');
@@ -511,6 +514,7 @@ $(function () {
  			dataType : "json",
             success: function (data) {
                 if (data > 0) {
+                	 
                 	 $upload.prop('disabled', false);
                 } else {
                     console.log("글 작성 중 오류가 발생했습니다.");

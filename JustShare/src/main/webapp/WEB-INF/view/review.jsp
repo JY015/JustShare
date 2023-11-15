@@ -17,6 +17,7 @@
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
+      <link rel="stylesheet" href="/css/register.css?ver=20000120" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -90,39 +91,61 @@
    cursor: pointer;
    color: #dabd18b2;
 }
+.border_bottom th label {font-size: 25px !important;}
 
 
 </style>
 </head>
 <body>
 <%@ include file="header.jsp"%>
-거래 게시글 번호 : ${map.bno }
-판매자 : ${map.tid }
-구매자 : ${map.fid }
+<div class="body__container section">
+<section class="signup_wrap">
+<div class="sign_inner">
+<div class="signup_list_wrap">
+<div class="signup_title">
+<div class="sign_text">리뷰 </div>
+<div class="sign_text_list">거래 게시글 번호 : ${map.bno } / 판매자 : ${map.tid } / 구매자 : ${map.fid }</div>
+</div>
+</div>
+ <!-- 내용 -->
 <form class="mb-3" name="myform" id="myform" method="post">
-	<fieldset>
-		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="hidden" name=bno value="${map.bno}">
-		<!-- 구매자 /판매자 누가 작성했는지 구분하기  -->
-		<input type="hidden" id="rfid" name="rfid" value="<c:choose><c:when test='${sessionScope.mid eq map.fid }'>${map.fid}</c:when><c:otherwise>${map.tid }</c:otherwise></c:choose>" >
-		<input type="hidden" id ="rtid" name="rtid" value="<c:choose><c:when test='${sessionScope.mid eq map.fid }'>${map.tid}</c:when><c:otherwise>${map.fid }</c:otherwise></c:choose>">
-		<!-- 별점 주기 라디오 사용 --> 
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-			for="rate1"><i class="rating__star fas fa-star"></i></label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-			for="rate2"><i class="rating__star fas fa-star"></i></label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-			for="rate3"><i class="rating__star fas fa-star"></i></label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-			for="rate4"><i class="rating__star fas fa-star"></i></label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-			for="rate5"><i class="rating__star fas fa-star"></i></label>
-	</fieldset>
-	<div>
-		<textarea class="col-auto form-control"  name="reviewContent" id="reviewContent" placeholder="거래후기를 남겨주세요 !!"></textarea>
-	</div>
-	<button>취소하기</button><button type="button" onclick="submitReview()">리뷰 남기기 </button>
-</form>	
+<input type="hidden" name=bno value="${map.bno}">
+<input type="hidden" id="rfid" name="rfid" value="<c:choose><c:when test='${sessionScope.mid eq map.fid }'>${map.fid}</c:when><c:otherwise>${map.tid }</c:otherwise></c:choose>" >
+<input type="hidden" id ="rtid" name="rtid" value="<c:choose><c:when test='${sessionScope.mid eq map.fid }'>${map.tid}</c:when><c:otherwise>${map.fid }</c:otherwise></c:choose>">
+<div class="input_sign_w">
+<table>
+<colgroup>
+	<col style="width:180px">
+</colgroup>
+ <tbody>
+ <tr class="border_bottom">
+ <th><label for="reviewStar">별점 주기</label></th>
+ <td>
+ <fieldset>
+<input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1"><i class="rating__star fas fa-star"></i></label>
+<input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2"><i class="rating__star fas fa-star"></i></label>
+<input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3"><i class="rating__star fas fa-star"></i></label>
+<input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4"><i class="rating__star fas fa-star"></i></label>
+<input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5"><i class="rating__star fas fa-star"></i></label>
+ </fieldset>
+ </td>
+ </tr>
+ <tr class="border_bottom">
+ <th><label for="content">상세 내용</label><span aria-hidden="true">*</span></th>
+ <td>
+  <textarea class="col-auto form-control"  name="reviewContent" id="reviewContent" placeholder="거래후기를 남겨주세요 !!"></textarea>
+ </td>
+ </tr>
+ </tbody> 
+</table>
+</div>
+<div class="sign_btn_w">
+<button>취소하기</button><button type="button" onclick="submitReview()">리뷰 남기기 </button>		
+</div>
+</form>
+</div>
+</section>
+</div>
 <%@ include file="footer.jsp"%>
 <script>
 //유효성 검사 

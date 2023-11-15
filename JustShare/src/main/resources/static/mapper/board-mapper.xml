@@ -271,7 +271,7 @@
 <select id="place">
  SELECT b.btitle,b.startTime,b.endTime,b.addr,(SELECT i.realFile from image i where b.bno = i.bno and i.main = 1 )as image ,b.bno
  FROM board b
- WHERE b.cate=#{cate} and b.ano=#{ano} 
+ WHERE b.cate=#{cate} and b.ano=#{ano} and b.bno != #{bno} 
  ORDER by RAND() LIMIT 5;
 
 </select>
