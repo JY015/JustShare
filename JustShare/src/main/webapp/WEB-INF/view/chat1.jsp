@@ -34,21 +34,21 @@
 
 .xi-document, .xi-gps, .xi-message-o, .xi-user-o {
    text-align: center;
-   font-size: 162%;
+   font-size: 60px;
    position: relative;
-   top: 7px;
+   top: 10px;
    color: rgba(0, 0, 0, 0.4);
 }
  .home_btn {
-  width: 60px;
-  height: 60px;
+  width: 133px;
+  height: 133px;
   border: solid 4px white;
   border-radius: 200px;
   /* box-shadow: 0 -2px 8px #ffffff inset; */
   box-shadow: 0 -2px 8px #4122d3 inset;
   background-color: #6b4bf5;
   /* background-color: #7759ff; */
-  margin: -2px auto;
+  margin: -6px auto;
   /* 여기 바꿈 -12px auto*/
 }
 
@@ -436,7 +436,7 @@ function jstradefromupdate(mid,toId,bno) {
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 1000,
+				    timeOut: 3000,
 				    onShown: function() {
 				       	
 				    },
@@ -477,7 +477,7 @@ function jstradetoupdate(mid,toId,bno){
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 1000,
+				    timeOut: 3000,
 				    onShown: function() {
 				
 				        
@@ -543,7 +543,7 @@ function tradefromupdate(mid,toId) {
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 5000,
+				    timeOut: 4000,
 				    onShown: function() {
 				        // Toastr 알림이 표시된 후에 실행할 함수 호출
 				        //setTimeout(function() {
@@ -581,7 +581,7 @@ function tradefromupdate(mid,toId) {
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 1000,
+				    timeOut: 3000,
 				    onShown: function() {
 				       	
 				    }
@@ -624,7 +624,7 @@ function tradetoupdate(mid,toId){
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 2000,
+				    timeOut: 4000,
 				    onShown: function() {
 				     
 				      
@@ -667,7 +667,7 @@ function tradetoupdate(mid,toId){
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 1000,
+				    timeOut: 3000,
 				    onShown: function() {
 				
 				        
@@ -784,7 +784,7 @@ function updateMessage(sender, time, message,sort,bno) {
     var roomlist = document.getElementById("roomlist");
 
    
-    
+ 
        var timeElement;
        var messageElement;
        var toIdElement;
@@ -803,7 +803,8 @@ function updateMessage(sender, time, message,sort,bno) {
         
         // sort로 2가지 전송을 확인하기 메세지전송후 내목록업데이트시 sort1  
         //
-        if (toIdElement.textContent === sender && sort ===1) {
+        if (toIdElement.textContent == sender && sort ===1) {
+        
             // sender가 일치하는 경우에만 time 및 message 업데이트
             timeElement = userList[i].querySelector('.time');
             messageElement = userList[i].querySelector('.roommessage');
@@ -888,22 +889,10 @@ function updateMessage(sender, time, message,sort,bno) {
             
               timeOut: 2000
           };
-          toastr.success("관모님과 첫 대화가 시작 되었습니다.","알림" );
+          toastr.success(sender+"님과 첫 대화가 시작 되었습니다.","알림" );
 	   
   	    
-  	    
-  		//alert(sender+"님과 첫 대화가 시작 되었습니다.");
-  		
-  		
-  	
-  	/*
-  		if(currentScreen != 'contacts_card') {
-  			
-  			alert(sender+"님과 첫 대화가 시작 되었습니다.");
-  		}
-  	
-  */
-
+ 
 	
      
       } 

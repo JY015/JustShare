@@ -13,6 +13,10 @@
 	    // 여기서 WebSocket 연결을 닫는 코드를 추가
 	    var mid = sessionStorage.getItem("mid"); 
 	    
+	    		
+		 var result = confirm("로그아웃 하시겠습니까?");
+				 		
+	if(result) { 
 	    
             
 	    if(mid!=null) { 
@@ -34,6 +38,8 @@
         // mid가 없는 경우에는 그냥 로그아웃만 수행
         window.location.href = './logout';
     }
+    
+    }
 }
 	 //socket.send(JSON.stringify(jsonmsg));
 		
@@ -45,7 +51,7 @@
 
  
 socket.onopen = function(event) {
- //
+
     // 웹소켓이 연결되었을 때 실행할 공통 코드
  var mid = sessionStorage.getItem("mid");
 const noteNumElement = document.querySelector('.note-num');
@@ -133,7 +139,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
                 preventDuplicates:true,
                 
                 positionClass: 'toast-top-center',
-                timeOut: 2000,
+                timeOut: 3000,
                 onShown: function() {
 				       	
 				  },
@@ -262,7 +268,7 @@ function jstradefromupdate(mid,toId,bno) {
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 2000,
+				    timeOut: 3000,
 				    onShown: function() {
 				       	
 				    },
@@ -306,7 +312,7 @@ function jstradetoupdate(mid,toId,bno){
 				    preventDuplicates:true,
 				    
 				    positionClass: 'toast-top-center',
-				    timeOut: 2000,
+				    timeOut: 3000,
 				    onShown: function() {
 				
 				        
