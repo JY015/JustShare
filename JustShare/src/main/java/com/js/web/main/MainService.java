@@ -34,10 +34,20 @@ public class MainService {
 	}
 
 
+	public List<Map<String, Object>> boardlatest() {
+		return mainDAO.boardlatest();
+	}
 
-	public List<Map<String, Object>> imageC() {
 
-		return mainDAO.imageC();
+
+	public List<Map<String, Object>> boardreadcount() {
+		return mainDAO.boardreadcount();
+	}
+
+
+
+	public List<Map<String, Object>> blikescount() {
+		return mainDAO.blikescount();
 	}
 
 

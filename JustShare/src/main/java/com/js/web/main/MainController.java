@@ -1,6 +1,5 @@
 package com.js.web.main;
 
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -16,66 +15,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class MainController {
 
-   @Autowired
-   private MainService mainService;
-   
+	@Autowired
+	private MainService mainService;
 
-   @GetMapping("/")
-   public String main2(Model model, HttpSession session, @RequestParam Map<String, Object> map) {
-      
-            //배너
-            List<MainDTO> bannerlist = mainService.bannerlist();
-            model.addAttribute("bannerlist", bannerlist);
-            //메인게시물 최신순    
-            List<Map<String,Object>> imageD = mainService.imageD();
-            model.addAttribute("imageD", imageD);
-            //메인게시물 조회순
-            List<Map<String,Object>> imageC = mainService.imageC();
-            List<Map<String,Object>> imgsubst = mainService.imageC();
-            model.addAttribute("imageC", imageC);
-            
-            List<Map<String, Object>> cateList = mainService.cateList();
-            model.addAttribute("cateList", cateList);
-            //System.out.println(cateList);
-            
-            //System.out.println(imageC);
-            
-            for (int i = 0; i < imgsubst.size(); i++) {
-            	String addr = (String) imgsubst.get(i).get("addr");
+	@GetMapping("/")
+	public String main2(Model model, HttpSession session, @RequestParam Map<String, Object> map) {
 
-            	String[] addrArray = addr.split(" ");
+		// 배너
+		List<MainDTO> bannerlist = mainService.bannerlist();
+		model.addAttribute("bannerlist", bannerlist);
+		
+		// 메인게시물 최신순
+		List<Map<String, Object>> boardlatest = mainService.boardlatest();
+		model.addAttribute("boardlatest", boardlatest);
+		System.out.println(boardlatest);
+		
+		// 메인게시물 조회순
+		List<Map<String, Object>> boardreadcount = mainService.boardreadcount();
+		model.addAttribute("boardreadcount", boardreadcount);
+		System.out.println(boardreadcount);
+		
+		// 메인게시물 좋아요순
+		List<Map<String, Object>> blikescount = mainService.blikescount();
+		model.addAttribute("blikescount", blikescount);
+		System.out.println(blikescount);
+				
+		
+		List<Map<String, Object>> cateList = mainService.cateList();
+		model.addAttribute("cateList", cateList);
 
-            	List<String> addrList = Arrays.asList(addrArray);
 
-            	if (!addrList.isEmpty()) {
-            	    String first = addrList.get(0);
-            	    String second = addrList.get(1);
-            	    String addrsplit = first +" "+ second;
-            	   // System.out.println(addrsplit);
-            	    imgsubst.get(i).put("addr", addrsplit);
-            	} else {
-            	    System.out.println("주소 형식이 올바르지 않습니다.");
-            	}
-            }
+		return "main";
 
-            
-            for (int i = 0; i < imgsubst.size(); i++) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                   LocalDateTime localDateTime = (LocalDateTime) imgsubst.get(i).get("bdate"); // "bDate" 필드 이름에 맞게 변경
-                   Timestamp timestamp = Timestamp.valueOf(localDateTime);
-                   String bdate_substring = sdf.format(timestamp).substring(0,10);
-                   imgsubst.get(i).put("bdate", bdate_substring);
-            }
-            
-            model.addAttribute("imgsubst", imgsubst);
-            //System.out.println(imgsubst);
-            
-      return "main";
-
-   }
+	}
 
 }

@@ -312,7 +312,7 @@ var _ss_user_id   = "";
                </div>
             </div>
             
-      <c:forEach items="${imageC }" var="row" varStatus="loop">
+      <c:forEach items="${boardlatest }" var="row" >
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
                <img class="card_img" src="../img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/img/no_image.png'" alt="" />
@@ -368,10 +368,10 @@ navigation: {   // 버튼 사용자 지정
                </div>
             </div>
             
-      <c:forEach items="${imageC }" var="row" varStatus="loop">
+     <c:forEach items="${boardreadcount }" var="row" >
               <button class="space_120 btn_like-16 " data-id="120" data-gubun="space"></button>
               <a href="./bdetail?bno=${row.bno}">
-               <img class="card_img" src="../img/places/${row.realFile}"  style="width:230px; height:230px;" onerror="this.src='/img/no_image.png'" alt="" />
+               <img class="card_img" src="../img/places/${row.realFile}" style="width:230px; height:170px;" onerror="this.src='/img/no_image.png'" alt="" />
             <div  class="card__inner">         
               <div class="txt__wrap">
                <p class="txt__card__tit">${row.btitle}</p><p class="txt__subtit__sm">${row.addr}</p>
@@ -406,15 +406,15 @@ navigation: {   // 버튼 사용자 지정
 },
 });
 </script>
-   <div class="partition-line"></div>
+  <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-     <h4 class="txt__tit">찜 높은순</h4>
-     <span class="txt__subtit">찜이 높은 게시물을 살펴보세요.</span>
+     <h4 class="txt__tit">좋아요 높은순</h4>
+     <span class="txt__subtit">좋아요 높은 게시물을 살펴보세요.</span>
      <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
      <div>
       <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
         <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
-   <c:forEach items="${imgsubst }" var="row" varStatus="loop">
+   <c:forEach items="${blikescount }" var="row" varStatus="loop">
          <div class="card__item2 swiper-slide main-p swiper-slide-active" role="group" aria-label="1 / 10" style="margin-right: 20px;">           
             <div class="cccc">
                <div class="card-sign-group">
@@ -468,7 +468,7 @@ navigation: {   // 버튼 사용자 지정
 
 </script>
 
-   <div class="partition-line"></div>
+  <%--   <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
      <h4 class="txt__tit">내 주변 공간</h4>
      <span class="txt__subtit">내 주변 공간을 살펴보세요.</span>
@@ -508,9 +508,9 @@ navigation: {   // 버튼 사용자 지정
      <div class="swiper-button-next popup_due_card3_next" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="false"></div>
      <div class="swiper-button-prev popup_due_card3_prev swiper-button-disabled" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-95dca4881fa61d33" aria-disabled="true"></div>
 
-
    </section>
-
+ --%>
+ 
    <div class="partition-line"></div>
    <script>
    var mySwiper = new Swiper('.swiper', {
