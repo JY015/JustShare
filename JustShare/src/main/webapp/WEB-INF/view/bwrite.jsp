@@ -12,11 +12,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -60,23 +55,9 @@
 </style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+<%@ include file="header.jsp"%>
 	<!-- 전체 div -->
 	<div class="body__container section">
-	<!-- 헤더부분 -->
-	<!-- 모바일 버전 헤더  -->
-	<header class="header__topnav_type2">
-		  <div class="header_topnav_inner_n">
-			<div class="first_row">
-			  <div class="left-side">
-				<div class="back" style="cursor:pointer" onclick="history.back();">뒤로가기</div>
-				<h1 class="logo"><a href="/">로고</a></h1>
-			  </div>
-			</div>
-
-		  </div>
-		</header>
-	<!-- 타이틀 부분  -->
 	 <section class="signup_wrap">
 	 <div class="sign_inner">
 	 <div class="signup_list_wrap">
@@ -174,8 +155,8 @@
 					<tr class="border_bottom">
 						<th><label for="equip">보유 시설</label></th>
 							<td>
-							<c:forEach items="${equiplist }" var="n">
-							<input class="required input_border" type="checkbox" name="equipment"  id="equipmetInput" value="${n.eid }" />${n.ename }
+							<c:forEach items="${equiplist }" var="n"><br>
+							<input class="required input_border" type="checkbox" name="equipment"  id="equipmetInput" value="${n.eid }" /><span class="ename">&nbsp&nbsp&nbsp ${n.ename }</span> 
 							</c:forEach>
 							</td>
 							</tr>	
@@ -212,6 +193,8 @@
 			<button type="button" class="btn_black writeB" >작성완료</button>
 		</div>
 	</form>
+	<br><br><br><br>
+	
 	 <%@ include file="footer.jsp" %> 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
