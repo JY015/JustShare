@@ -94,7 +94,7 @@
 	
 
 	//const socket = new WebSocket("ws://localhost:8080/chat");
-	const socket = new SockJS("//fiveguys.gabia.io/chat");
+	const socket = new SockJS("http://localhost:8080/chat");
 	 // ##소켓 연결##
      socket.onopen = function(event) {
        	console.log("커넥션이 만들어졌습니다.1");

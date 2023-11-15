@@ -8,10 +8,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
+   <meta name="description" content="JustShare는 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
    <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
     <link rel="stylesheet" href="/css/import.css?ver=20000120" />
     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -26,18 +25,18 @@
    
    <meta property="og:locale"       content="ko_KR" />
    <meta property="og:type"       content="website" />
-   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta property="og:title"       content="팝업스토어 NO.1 JustShare - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta property="og:description"  content="JustShare는 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
    <meta property="og:url"          content="https://www.valuevenue.co.kr/" />
    <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
-   <meta property="og:site_name"    content="가치공간" />
+   <meta property="og:site_name"    content="JustShare" />
    <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
 
    <meta name="twitter:card"       content="summary" />
-   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
+   <meta name="twitter:title"       content="팝업스토어 NO.1 JustShare - 온라이프(On-Life) 리테일 플랫폼" />
+   <meta name="twitter:description" content="JustShare는  가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
    <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
-   <meta name="twitter:domain"       content="가치공간" />
+   <meta name="twitter:domain"       content="JustShare" />
    
    <meta name="robots" content="index,follow">
    <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
@@ -58,7 +57,7 @@ var _ss_user_id   = "";
   <input type="hidden" class="is_app_banner" value="">
    
    <div class="top_app_banner" style="display:none;background-color: #fff7e1">
-      <div class="app_div">가치공간 앱으로 더욱 편리하게 이용해 보세요, 
+      <div class="app_div">
          <a class="banner_app_link" href="https://play.google.com/store/apps/details?id=com.valuevenue.gachispace"><span class="app_down">다운로드</span></a>
       </div>
       <div class="app_div_close"></div>
@@ -184,7 +183,7 @@ var _ss_user_id   = "";
   <div>하나도 어렵지 않아요.</div>
 </h2>
 <div class="num_text">01</div>
-  <div class="main_sub_text">A부터 Z까지 가치공간과 함께라면!
+  <div class="main_sub_text">A부터 Z까지 JustShare와 함께라면!
 </div>
          </div>
             </div>
@@ -202,7 +201,7 @@ var _ss_user_id   = "";
 </h2>
 
 <div class="num_text" xss="removed">02</div>
-<div class="main_sub_text">가치공간의 공간 매칭 서비스를 받아보세요.</div>
+<div class="main_sub_text">JustShare의 공간 매칭 서비스를 받아보세요.</div>
          </div>
             </div>
          </li></ul>
@@ -545,7 +544,7 @@ navigation: {   // 버튼 사용자 지정
       <p class="txt__banner_tit">JustShare</p>
      </div>
      <div class="banner-copy">
-      <p class="txt__banner_copy">JustShare은 공간자와 브랜드, 그리고 소비자가 가치공간의 플랫폼 안에서 각자의 가치를 실현하고 한 단계 성장할 수 있는 기회를 제공하는 진화(revolution)의 장입니다.</p>
+      <p class="txt__banner_copy">JustShare은 공간자와 브랜드, 그리고 소비자가 JustShare의 플랫폼 안에서 각자의 가치를 실현하고 한 단계 성장할 수 있는 기회를 제공하는 진화(revolution)의 장입니다.</p>
       <button class="btn_banner"><a href="" target="_blank">사용자 가이드 보기</a></button>
      </div>
      <div class="banner-img img_adjustment">

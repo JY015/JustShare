@@ -123,7 +123,7 @@ public class LoginController {
    @PostMapping("/findPw") 
    public String findPw(@RequestParam Map<String, Object> map, Model model) throws EmailException {
     
-	/* util.htmlMailSender(map); */
+	 util.htmlMailSender(map); 
       System.out.println("findPw 여기" + map);
       String uuidPw = (String) map.get("uuid");
       System.out.println("uuidPw" + uuidPw);
