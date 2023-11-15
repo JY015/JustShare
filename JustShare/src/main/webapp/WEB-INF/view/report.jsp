@@ -99,32 +99,6 @@
 	 </section>
 	</div>
 
-<body>
-<%@ include file="header.jsp"%>
-	<h1>신고하기</h1>
-	신고자 : ${map.rmid}
-	신고 게시물 : ${map.bno }
-	
-	<form id="reportForm" action="./report" method="post" >
-	<input type="hidden" name="bno" value="${map.bno }">
-	<input type="hidden" name="rmid" value="${map.rmid }">
-	<input type="hidden" name="mid" value=${map.mid }>
-	신고 사유
-	<div>
-	<c:forEach items="${reportCateList }" var="n">
-	<div>
-	<input type="radio" name="rcate" value="${n.rcate}">${n.rcateName }
-	</div>
-	</c:forEach>
-	</div>
-	상세내용
-	<div>
-	<textarea name="rcontent" id="rcontent"></textarea>
-	</div>
-	<button type="button" onclick="reportSubmit()">신고하기</button>
-	</form>
-
-
 	<script>
     function reportSubmit() {
         const dpValue = ${map.dp}; // dp 값 가져오기
