@@ -485,7 +485,7 @@
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
 						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
 						            newCardItem += "<hr class='card-line'>";
-						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.price + "원 /"+item.rentTime+item.isLiked+"</p>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.price + "원 /"+item.rentTime+"</p>";
 						            newCardItem += "</div></div></a></div>";
 
 						            // 새로운 카드 아이템을 기존의 div에 추가
