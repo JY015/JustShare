@@ -6,54 +6,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
-    <title>Just Share</title>
-   <link rel="canonical"  href="https://www.valuevenue.co.kr/"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
-   <link rel="stylesheet" href="/css/style.css?ver=20000120" />
-   <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <title>회원가입</title>
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
-   <link rel="stylesheet" href="/css/main_page.css" />
+    <link rel="stylesheet" href="/css/main_page.css" />
    <link rel="stylesheet" href="/css/join.css" />
 
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-   
-   
-   <meta property="og:locale"       content="ko_KR" />
-   <meta property="og:type"       content="website" />
-   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta property="og:url"          content="https://www.valuevenue.co.kr/" />
-   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
-   <meta property="og:site_name"    content="가치공간" />
-   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
-
-   <meta name="twitter:card"       content="summary" />
-   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
-   <meta name="twitter:domain"       content="가치공간" />
-   
-   <meta name="robots" content="index,follow">
-   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
-   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="/js/valuevenue.js?ver=20000120" defer></script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/common.js?ver=20000120" defer></script>
-    <script src="/js/cookie.js?ver=20000120" defer></script>
-<script>
-var _ss_user_id   = "";
-</script>
-
-  <%@ include file="header.jsp"%>
 <body>
-
+  <%@ include file="header.jsp"%>
 
 <script src="./js/jquery-3.7.0.min.js"></script>
 <script>
@@ -97,6 +56,7 @@ $(function(){
                $('#mphone').prop('readonly', false);
                $('.get__number').prop('disabled', false);
                $('.maddr').prop('disabled', false);
+               $('.maddr2').prop('disabled', false);
  
             }
          },
@@ -202,7 +162,7 @@ $(function(){
 </script>
 </head>
 <body>
-<div class="findId-form">
+<div class="join-form">
      <form action="./join" method="post" class="container">
     <div class="text_find_id">
 	<h4>회원가입</h4>
@@ -249,7 +209,7 @@ $(function(){
 		<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기" hidden="hidden"><br>
 		<span id="maddrMsg" class="tip"></span>
 		<input type="text" id="sample2_address" name="maddr" placeholder="주소" readonly><br>
-		<input type="text" id="sample2_detailAddress" name="maddr2" class="maddr2" placeholder="상세주소">
+		<input type="text" id="sample2_detailAddress" name="maddr2" class="maddr2" placeholder="상세주소" disabled="disabled">
 		<span id="maddrMsg2" class="tip"></span>
 		<input type="hidden" id="sample2_extraAddress" placeholder="참고항목">
 

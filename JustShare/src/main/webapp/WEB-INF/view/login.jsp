@@ -7,62 +7,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
-   <link rel="canonical"  href="https://www.valuevenue.co.kr/login"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-
-     <link rel="stylesheet" href="/css/main_page.css" />
-   <!-- 회원가입 3가지회원 유형 css new -->
-
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
 
 
-   <!-- 고객센터 css -->
-   <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-   <!-- 폰트어썸 -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <meta property="og:locale"       content="ko_KR" />
-   <meta property="og:type"       content="website" />
-   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta property="og:url"          content="https://www.valuevenue.co.kr/login" />
-   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
-   <meta property="og:site_name"    content="가치공간" />
-   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
-   <meta name="twitter:card"       content="summary" />
-   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
-   <meta name="twitter:domain"       content="가치공간" /> 
-   <meta name="robots" content="index,follow">
-   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
-   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="/js/valuevenue.js?ver=20000120" defer></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/common.js?ver=20000120" defer></script>
-    <script src="/js/cookie.js?ver=20000120" defer></script>
 <head>
 <meta charset="UTF-8">
-<title>로그인 창</title>
+<title>로그인</title>
 
 <script src="./js/jquery-3.7.0.min.js"></script>
 </head>
 
-<script>
-var _ss_user_id   = "";
-
-</script>
-  </head>
 <body>
 
 <!--헤더 시작-->
@@ -71,8 +27,6 @@ var _ss_user_id   = "";
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/login.php">
   <input type="hidden" class="is_app_banner" value="">
-  
-
 
     
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>

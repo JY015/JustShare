@@ -6,7 +6,7 @@
         <div class="header__first_row">
            <div class="sign-area">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
+                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login">로그인</a></li></c:when>
                          <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
