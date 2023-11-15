@@ -478,14 +478,14 @@
 						        data.forEach(function(item) {
 						            // 새로운 카드 아이템 생성
 						            var newCardItem = "<div class='card_item2 pop-up'>";
-						            newCardItem += "<div class='cccc'><div class='imageContainer'><img class='main' src='/img/places/" + item.realFile + "' " + (item.tradeFin === 1 ? "style='filter: blur(5px);'" : "") + ">" + (item.tradeFin === 1 ? "<h1 class='main_image_text' style='font-size:45px'>거래 완료</h1>" : "") + "<div class='like' data-bno='" + item.bno + "'></div>" + (item.isLiked === 1 ? "<img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/>" : "<img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png'/>") + "</div></div>";
+						            newCardItem += "<div class='cccc'><div class='imageContainer'><img class='main' src='/img/places/" + item.realFile + "' " + (item.tradeFin === 1 ? "style='filter: blur(5px);'" : "") + ">" + (item.tradeFin === 1 ? "<h1 class='main_image_text' style='font-size:45px'>거래 완료</h1>" : "") + "<div class='like' data-bno='" + item.bno + "'>" + (item.isLiked === 1 ? "<img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/>" : "<img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png'/>") + "</div></div></div>";
 						            newCardItem += "<a class='card-surface' href='./bdetail?bno=" + item.bno + "'>";
 						            newCardItem += "<div class='card_inner2'>";
 						            newCardItem += "<div class='txt__wrap2'>";
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
 						            newCardItem += "<p class='txt__subtit__event addrp'>" + item.addr + "<span class='likes_count' data-count='" + item.likesCount + "'><i class='far fa-heart'></i> " + item.likesCount + "</span></p>";
 						            newCardItem += "<hr class='card-line'>";
-						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.price + "원 /"+item.rentTime+"</p>";
+						            newCardItem += "<p class='txt__card__tit price'><span class='read_count'>" + item.fdate + "</span> " + item.price + "원 /"+item.rentTime+item.isLiked+"</p>";
 						            newCardItem += "</div></div></a></div>";
 
 						            // 새로운 카드 아이템을 기존의 div에 추가
