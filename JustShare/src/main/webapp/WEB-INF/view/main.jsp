@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
    <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
 
    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
@@ -73,7 +72,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></li></c:otherwise>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -112,7 +111,7 @@ var _ss_user_id   = "";
            <div class="blue_btn">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-user xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><i class="xi-log-out"></i></a></c:otherwise>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>
@@ -144,7 +143,7 @@ var _ss_user_id   = "";
                 <button type='button' class="btn btn--outlined-primary" onclick="location.href='/member/modify'">정보수정</button>
               </li>
               <li>
-                <button type='button' class="btn btn--primary" onclick="top.location.href='/logout'">로그아웃</button>
+                <button type='button' class="btn btn--primary" onclick="logoutAndCloseSocket()">로그아웃</button>
               </li>
             </ul>
           </div>
