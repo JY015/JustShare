@@ -19,7 +19,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <!-- 추가한거 -->
+<link rel="canonical" href="https://www.valuevenue.co.kr/login" />
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
@@ -27,14 +29,21 @@
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
 <link rel="stylesheet" href="/css/spacedetail.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
 
 <!-- fancybox -->
-	<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>	
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
  <script src="/js/valuevenue.js?ver=20000120" defer></script>
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="/css/footertoastr.min.css" />
+<script src="./js/socket2.js"></script>
  <style>
 .fancybox__container *, .fancybox__container *::before, .fancybox__container *::after { color: white;}
 .fancybox__counter{display:none;}
@@ -69,16 +78,80 @@
 .spaceDetailInfo_summary .host{background-color:#004AAD; margin-bottom: 15px; border-radius: 10px;}
 
 .spaceDetailInfo_summary .host .txt__tit {color:white; margin-bottom:5px; margin-left: 10px;}
-.spaceDetailInfo_summary .host .txt__tit .fa-ban{right:4px; }
 .spDetail_topinfo .spaceDetailInfo_summary  .txt__tit26 {margin-bottom : 17px;}
 .spDetail_topinfo .tag__wrap {width: 100%;}
 .spDetail_topinfo .tag__wrap button {background-color : #3C7CF5; color:white; padding: 0 0.5rem; border-radius: 1.5rem; margin-right: 0.375rem; font:inherit;}
 .detailContext {margin-top:20px;  margin-bottom: 20px; }
-.detailContext .detailp {margin-top : 18px; margin-bottom: 18px;}
-.detailContext .detailc {margin-top : 18px; margin-bottom: 18px; font-size: 18px; line-height: 2;}
+.detailContext .detailp {margin-top : 18px; margin-bottom: 18px; line-height: 1.5em; /* 원하는 여백 조절 */}
+.detailContext .detailc {margin-top : 20px; margin-bottom: 20px; font-size: 18px; line-height: 2;}
 .cate{height: 40px; width: 40px;}
 .swiper-slide .frontImage{height:300px; width: 400px;}
-.detailmap {margin-top: 15px; font-size: 18px;}
+.detailmap {margin-top: 15px; font-size: 14px;}
+.b_nav_list {top: 7px;}
+.xi-document, .xi-gps, .xi-message-o, .xi-user-o {
+   text-align: center;
+   font-size: 162%;
+   position: relative;
+   top: 7px;
+   color: rgba(0, 0, 0, 0.4);
+}
+
+
+ .home_btn {
+  width: 60px;
+  height: 60px;
+  border: solid 4px white;
+  border-radius: 200px;
+  /* box-shadow: 0 -2px 8px #ffffff inset; */
+  box-shadow: 0 -2px 8px #4122d3 inset;
+  background-color: #6b4bf5;
+  /* background-color: #7759ff; */
+  margin: -2px auto;
+  /* 여기 바꿈 -12px auto*/
+}
+
+.note-num {
+   position: relative;
+   
+  
+    z-index: 2; /* 숫자 아이콘을 아이콘 위에 겹치게 하려면 z-index를 조절 */
+    height: 16px;
+    width: 19px;
+ 
+    text-align: center;
+    background-color: red;
+    border-radius: 100%;
+    color: white;
+    display: none;
+    bottom: 56px;
+    left:50%;
+    line-height:1.6;
+    
+    font-size: 11px;
+
+
+   
+}
+
+.bottom_nav_menu ul li {
+    width: 33%;
+    height: 100%;
+}
+.bottom_nav_menu .trade {
+	 line-height: 3;
+	background-color: #004AAD;
+	border-radius :8px;
+	color : white;
+	font-size: 20px;
+    
+}
+.bottom_nav_menu .placep{
+	font-size: 20px;
+	 line-height: 3;
+}
+ .likeon, .likeoff { width: 55px; height: 50px;}
+ .fa-star{rigth:5px;}
+ .host .iconright{ font-size :22px !important;}
 </style>
 </head>
 <body>
@@ -129,7 +202,7 @@
 			   <hr class="detail-divline">
 			   <div class="spaceDetailInfo_summary">
 			   <div class="host" style="display: flex; align-items:baseline;"><p class="txt__tit">호스트 &nbsp;${detail.mid } &nbsp;<i class="fa-solid fa-star" style="color: #e2d86a;"></i> ${detail.averageS }
-			   <i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i></p></div>
+			   <div class="iconright" style="margin-left: auto; margin-right: 5px;"><i class="fa-regular fa-user" style="color: #ffffff;"></i> &nbsp; <i class="fa-solid fa-ban" style="color: #ffffff;" onclick="report()"></i> </div></p></div>
 			   <div style="display: flex; align-items:baseline;"><p class="txt__tit">공간 소개</p></div>
 			   		<div class="detailContext">
 			   			<p class="txt__tit26">공간 정보</p>
@@ -183,6 +256,7 @@
 	<div class="detailmap"><i class="fa-solid fa-location-dot"></i> 상세주소 &nbsp; ${detail.addr }  ${detail.addDetail } </div>
 	</div>
 	<hr class="detail-divline2">
+	<c:if test="${not empty place}">
 	<section class="section--story inner pdb0 m--pdt110" id="similar-space">
 	<p class="txt__tit">비슷한 공간</p>
 	<div class="owl-carousel owl-theme card__carousel card owl-loaded">
@@ -193,11 +267,12 @@
         </div>
         <div class="calendercard-innermb">
         <p class="txt__card__tit">${place[0].btitle }<p class="txt__subtit__sm">${place[0].addr }</p>
-         <div class="txt__subtit__eventmb">대여시간 <span class="term">${place[0].startTime }:00 -${place[0].endTime } :00</span></div>
+         <div class="txt__subtit__eventmb">대여시간 <span class="term">${place[0].startTime }:00 -${place[0].endTime }:00</span></div>
         </div>
         </div>
 	</div>
 	</section>
+	</c:if>
 
 	</section>
 	</section>
@@ -206,22 +281,113 @@
 	</div>
 	</section>
 </div>
-		
- 		<div class="inf2" data-bno=${param.bno }>  
+<footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+            <ul>
+              <li><a href="/notice/list">공지사항</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/contact/forms">제휴 및 입점문의</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/qna/list">문의하기</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/faq">자주 묻는 질문</a></li>
+              <li class="line" style="border-left: 1px solid grey; height: 14px; padding-right: 18px;"></li>
+              <li><a href="/help/policy">이용약관</a></li>
+                   <c:if test="${sessionScope.mgrade eq 4}"><a href="./admin/main">관리자페이지</a></c:if>             
+            </ul>
+          </div>
+          <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
+<nav class="bottom_nav_menu">
+   <ul><!-- 여기 수정함 b로-->
+      <li >
+      <div class="like" data-bno=${param.bno }>  
        	<c:choose>
 		<c:when test="${isLike eq 1  }">     
-		<span><i class="fas fa-heart" style='color:red'></i> 찜 </span>
+		<img class="likeon" src="../img/icon/zzheart.png" />
+        <img class="likeoff" src="../img/icon/zheart.png" style='display: none'/>
 		</c:when>
 		<c:otherwise>
-		<span><i class="far fa-heart" ></i> 찜 </span>
+		<img class="likeon" src="../img/icon/zzheart.png" style='display: none'/>
+        <img class="likeoff" src="../img/icon/zheart.png" />
 		</c:otherwise>
 		</c:choose>  	
-		<span class="likes_count" data-count=${likesCount } >${likesCount }</span>
         </div>
+        </li>
 
-<button type="submit" onclick="chat()">거래하기</button>
+      <li class="placep">${detail.price } 원</li>
 
+      <li class="trade" onclick="chat()">거래하기</li>
+   </ul>
+</nav>
+<script>
+   $(document).ready(function() {
+	   
+       // "마이페이지" 링크를 클릭했을 때
+       $(".b_nav_list a").click(function(event) {
+           if (${sessionScope.mid eq null}) {
+               // sessionScope.mid가 null일 때 알림 메시지 표시
+               alert("로그인 후 이용이 가능합니다.");
+               event.preventDefault(); // 링크 이동을 막음
+           }
+       });
+   });
+   //좋아요 
+   $(document).on("click", ".like", function() {
+	    const mid = "${sessionScope.mid}";
+	    // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
+	    if (!mid) {
+	        alert("로그인이 필요합니다.");
+	        return;
+	    }
 
+	    const bno = $(this).closest(".like").data("bno");
+	    const $img = $(this).find("img.likeon");
+	    console.log(bno);
+	    let likes = "";
+
+	    if ($img.css("display") === "none") {
+	        likes = "on";
+	        $img.show(); // 이미지를 보이게 함
+	        $img.siblings(".likeoff").hide(); // 형제 엘리먼트를 숨김
+	    } else {
+	        likes = "off";
+	        $img.hide(); // 이미지를 숨김
+	        $img.siblings(".likeoff").show(); // 형제 엘리먼트를 보이게 함
+	    }
+
+	    const data = {
+	        mid: mid,
+	        likes: likes,
+	        bno: bno
+	    };
+
+	    $.ajax({
+	        url: "/like",
+	        type: "POST",
+	        data: data
+	    })
+	    .done(function(result) {
+	        console.log(result.body);
+	        
+	    })
+	    .fail(function(error) {
+	        alert(error.responseText);
+	    });
+	
+	    
+	});
+ </script>
 
 <script type="text/javascript">
 	let sid = "${sessionScope.mid}";
@@ -263,7 +429,11 @@ function report(){
 		if(sid == mid){
 			alert("작성자가 본인의 게시물을 신고할 수 없습니다")
 			return false;
-		}	
+		}
+		if(tradeFin == 1){
+			alert("거래 완료된 글은 신고할 수 없습니다")
+			return false;
+		}
 		
 		location.href="/report?bno=${detail.bno }&mid=${detail.mid}";
 			
@@ -313,7 +483,7 @@ var marker = new kakao.maps.Marker({
 marker.setMap(map);
 
 
-var iwContent = '<div style="padding:5px;">'+"${detail.btitle}"+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px; width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">'+"${detail.btitle}"+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 iwPosition = new kakao.maps.LatLng(x, y); //인포윈도우 표시 위치입니다
 
 //인포윈도우를 생성합니다
@@ -355,57 +525,8 @@ infowindow.open(map, marker);
       
       
     </script>
-
-   
  <!-- 스와이퍼 사용  -->   
 
-<!-- 좋아요 스크립트 -->
- <script type="text/javascript">
- $(".inf2 i").click(function(){
-		const mid = "${sessionScope.mid}";
-		  // 로그인 하지 않았으면 알림창 띄우고 스크립트 종료
-	    if (!mid) {
-	        alert("로그인이 필요합니다.");
-	        return;
-	    }
-		// 로그인 확인 후 좋아요 스크립트 진행  
-		  
-		let likes ="";
-		const bno = $(".inf2").data("bno");
-		if($(this).hasClass("far")) {
-			likes = "on";
-		} else {
-			likes = "off";
-		}
-		const data = {
-			mid : mid,
-			likes : likes,
-			bno : bno
-		}
-		$.ajax({
-			url: "/like",
-			type: "POST",
-			data: data
-		})
-		.done(function(result){
-				console.log(result.body);
-				let likesCount = $(".likes_count").data("count");
-				
-				if(likes == "on") {
-					$(".inf2 i").removeClass("far").addClass("fas");
-					$(".likes_count").text(likesCount+1);
-					$(".likes_count").data("count", likesCount+1 );
-				} else {
-					$(".inf2 i").removeClass("fas").addClass("far");
-					$(".likes_count").text(likesCount-1);
-					$(".likes_count").data("count", likesCount-1 );
-				}
-			})
-		.fail(function(error){
-			alert(error.responseText);
-		})
-	})
- </script>
  
 </body>
 </html>

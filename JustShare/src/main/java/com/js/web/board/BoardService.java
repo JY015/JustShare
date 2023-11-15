@@ -224,6 +224,11 @@ public class BoardService {
 		return boardDAO.tradeFin(map);
 	}
 
+	public int bnoI() {
+		
+		return boardDAO.bnoI();
+	}
+
 
 
 
