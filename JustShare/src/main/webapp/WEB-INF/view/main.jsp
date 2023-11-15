@@ -301,7 +301,7 @@ var _ss_user_id   = "";
     <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
         <h4 class="txt__tit">최신순</h4>
         <span class="txt__subtit">최근 등록한 게시물을 살펴보세요. </span>
-        <span class="see-more"><a href="/schedule/search?gubun=space">더보기
+        <span class="see-more"><a href="/board">더보기
         <div class="arrow_right"></div></span></a>
         <div class="swiper swiper_space1">
         <div class="swiper-wrapper">
@@ -357,7 +357,7 @@ navigation: {   // 버튼 사용자 지정
     <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
         <h4 class="txt__tit">조회수 높은순</h4>
         <span class="txt__subtit">조회수가 높은 게시물을 살펴보세요.</span>
-        <span class="see-more"><a href="/schedule/search?gubun=space">더보기
+        <span class="see-more"><a href="/board?searchV=&areas=&categories=&equipments=&minPrice=&maxPrice=&sort=3">더보기
         <div class="arrow_right"></div></span></a>
         <div class="swiper swiper_space2">
         <div class="swiper-wrapper swiper_space2">
@@ -410,7 +410,7 @@ navigation: {   // 버튼 사용자 지정
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
      <h4 class="txt__tit">좋아요 높은순</h4>
      <span class="txt__subtit">좋아요 높은 게시물을 살펴보세요.</span>
-     <span class="see-more"><a href="/schedule/search?gubun=popup&amp;sort=soon">더보기</a><div class="arrow_right"></div></span>
+     <span class="see-more"><a href="/board?searchV=&areas=&categories=&equipments=&minPrice=&maxPrice=&sort=2">더보기</a><div class="arrow_right"></div></span>
      <div>
       <div class="swiper popup_due_card3_swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
         <div class="swiper-wrapper" id="swiper-wrapper-95dca4881fa61d33" aria-live="polite">   
