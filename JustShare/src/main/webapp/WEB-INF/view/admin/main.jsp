@@ -26,133 +26,78 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 
     <style> 
-</style>
-</head>
+</style></head>
+<body>
+<%@ include file="header.jsp"%>
+  <div class="body__container section">
+   <section class="ani1 leasing-management">
+     <div class="whole-title_black">
+       <h1>Leasing</h1>
+     </div>
+     <a href="/contact/forms?no=6" ><div class="sticker_new">
+       <img class="building" src="https://www.value-venue.com/images/rentask.png" alt="">
+      <div class="sticker-content">
+        <img src="https://www.value-venue.com/images/ic_asking.svg" alt="">
+        <p>임차대행 문의하기</p>
+      </div>
+      </div>
+      </a> 
+     <h1 class="title">관리자 페이지</h1>
+      <div class="leasing-management-subtitle">
+       <p class="sub-copy">JustShare의 전문성과 세분화된 조직 체계로 
+      차별화된 수익 구조와 안정적인 프로젝트</p>
+     </div>
+   </section>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just Share - Admin Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        .admin-info {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .admin-actions {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            
-        }
-
-        .admin-actions a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #004AAD !important;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .admin-actions a:hover {
-            background-color: #0056b3;
-        }
-
-        .warning-message {
-            background-color: #dc3545;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-        }
-       .data-table {
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: !important;
-    
-}
-
-th {
-    background-color: #f2f2f2;
-}   
-
-td{
-   padding: 30px 0 34px !important;
-   text-align: center !important;
-} 
-</style>
-</head>
- <img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br><br><br><br><br><br><br><br>
-<body class="container">
-    <h1>Just Share - Admin Page</h1>
-    <div class="admin-info">
-        관리자 아이디 : ${sessionScope.mid} 관리자님 안녕하세요.
-    </div>
-    <div class="admin-actions">
-        <a href="../logout">로그아웃</a>
-    </div>
-      <div class="data-table" style="text-align: center">
-    <table>
-        <tr>
-            <th>종류</th>
-            <th>개수</th>
-        </tr>
-        <tr>
-            <td>총 멤버</td>
-            <td><a href="./member">${memberCount}개</a></td>
-        </tr>
-        <tr>
-            <td>상품 등록 수</td>
-            <td><a href="../board">${boardCount}개</a></td>
-        </tr>
-        <tr>
-            <td>신고 갯수</td>
-            <td><a href="./reportList">${reportCount}개</a></td>
-        </tr>
-        <tr>
-            <td>거래 횟수</td>
-            <td><a href="./tradeList">${tradeCount}개</a></td>
-        </tr>
-    </table>
-</div>
-<div id="donutchart" style="width: 100%; height: 100%;"></div>
+   <section class="wework ani1">
+   <div class="workcard-container">
+      <div class="work-card">
+      <div class="work-content">
+         <img src="https://www.value-venue.com/images/ic_work1.svg" alt="">
+         <div>
+         <p class="work-title">총 멤버</p>
+         <p class="work-description"> <br>
+         <a style="font-size: 22px;" href="./member">• ${memberCount}명</a>
+      </div>
+      </div>
+      </div>
+      <div class="work-card">
+      <div class="work-content">
+         <img src="https://www.value-venue.com/images/ic_work2.svg" alt="">
+         <div>
+         <p class="work-title">상품 등록</p>
+         <p class="work-description">
+          <br>
+         <a style="font-size: 22px;" href="../board">• ${boardCount}개</a>
+      </div>
+      </div>
+      </div>
+      <div class="work-card">
+      <div class="work-content">
+         <img src="../img/report.png" alt="">
+         <div>
+         <p class="work-title">신고</p>
+         <p class="work-description">
+          <br>
+         <a style="font-size: 22px;" href="./reportList">• ${reportCount}개</a></p>
+      </div>
+      </div>
+      </div>
+         <div class="work-card">
+      <div class="work-content">
+         <img src="https://www.value-venue.com/images/ic_work3.svg" alt="">
+         <div>
+         <p class="work-title">거래</p>
+         <p class="work-description"><br>
+         <a style="font-size: 22px;" href="./tradeList">• ${tradeCount}개</a></p>
+      </div>
+      </div>
+      </div>
+   </div>
+   </section>
+<div id="donutchart" style="width: 100%; height: 100%; text-align: center;"></div>
 <br><br><br>
-    <c:if test="${sessionScope.mgrade < 4}">
+    <c:if test="${sessionScope.mgrade < 4 || sessionScope.mgrade == null}">
         <div class="warning-message">
             <script>
                 alert("관리자모드는 접근할 수 없습니다.");
@@ -181,17 +126,142 @@ td{
           ['사무실',    ${boardCate[0].bcategory12 }],
           ['오피스텔',    ${boardCate[0].bcategory13 }], 
         ]);
-
         var options = {
           title: '<상품 등록 카테고리>',
           pieHole: 0.1,
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
     </script>    
-    
-<%@ include file="adminfooter.jsp"%>
-</body>
+
+
+ <footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+          </div>
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
+    </div>
+    <br><br><br>
+   <%@ include file="adminfooter.jsp"%>
+   
+   <style>
+.contentbox img{
+   width: 100%;
+}
+
+
+.leasing-content{
+   height: 59%;
+}
+
+.workcard-container{
+      grid-template-columns: repeat(2, 1fr)!important;
+      gap: 30px!important;
+   }
+   
+   
+.leasing-container_new {
+   height: 760px;
+   margin-bottom: 0px;
+}
+
+/* /* .leasing-content{
+   top: 0%;
+   height: 40%;
+}   
+
+
+
+
+.leasing-container_new {
+   height: 20%;
+   margin-bottom: 0px;
+}
+
+.textcontent{
+   padding-top: 0%;
+}
+
+.text-box {
+    margin-top: 40px;
+    padding-left: 0%;
+    padding-right: 0%;
+} */ */
+   
+   
+/* .leasing-container_new {
+    height: 550px;
+    margin-bottom: 125px;
+}   
+   .workcard-container{
+      grid-template-columns: repeat(2, 1fr)!important;
+      gap: 30px!important;
+   }
+   
+.leasing-content{
+ top: 0%;
+ height: 400px;
+}   
+   
+   .textcontent{
+      padding-top: 27%;
+   }
+   
+   .work-card .work-title{
+   font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 14px;
+   }
+   
+   
+   .work-card {
+      width: 107%;
+   } */
+   
+   .mb-banner {
+      height:200px;
+      margin: 0 10px 120px 10px;
+      background-color: #fff;
+      border-radius: 10px;
+   }
+   .mb-banner-img{
+      width:100%;
+      height:80px;
+      text-align:center;
+   }
+   .mb-banner-sub {
+      height:30px;
+      color: #fff;
+      background-color: #1F6CFD;
+      border-radius: 5px;
+      padding: 5px;
+      margin-top:5px;      
+   }
+   .mb-banner_title {
+      color:black;
+      text-align:center;
+      font-size:14px;
+   }
+   .mobile_pop_section {
+      display:block;
+      bottom:0;
+      position:fixed;
+      width:100%;
+      z-index:110;
+      left:0;      
+   }
+   
+   .notScroll {overflow: hidden;width: 100%;height: 100vh;}
+   </style>
+  </body>
 </html>

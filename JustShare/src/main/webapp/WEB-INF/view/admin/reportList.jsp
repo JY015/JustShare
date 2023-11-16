@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
 <body> 
+<%@ include file="header.jsp"%>
+
 <style>
 .div-table {
 	display: table;
@@ -32,18 +33,26 @@
 }
 
 .div-row {
-	display: table-row;
+	display: table-row;	
+}
+
+.div-cell1{
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid black;
+	width: 20%;
+	background-color: #ccdaee;	
 }
 
 .div-cell {
 	display: table-cell;
 	padding: 10px;
-	border: 1px solid #f0f0f0;
+	border: 1px solid black;
 	width: 20%;
 }
 
 .div-cell-a{
-	border: 1px solid #f0f0f0;
+	border: 1px solid black;
 	display: table-cell;
 	width: 20%;
 }
@@ -64,7 +73,7 @@
 
 .report-row-header{
 	display: table-row;
-	background-color: #f5f5f5;	
+	background-color: #ccdaee;	
 }
 
 button {
@@ -81,8 +90,8 @@ button {
 <div style="text-align: center">
 <div class="div-table">
 		<div class="div-row">
-			<div class="div-cell">신고 아이디</div>
-			<div class="div-cell">신고 누적</div>
+			<div class="div-cell1">신고 아이디</div>
+			<div class="div-cell1">신고 누적</div>
 		</div>
 		
 		<c:forEach items="${reportListMember}" var="m">
@@ -186,7 +195,20 @@ button {
       }
     </script>
 
-
+<footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+          </div>
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
 
 
 

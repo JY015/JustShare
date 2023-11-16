@@ -176,7 +176,7 @@
 </h2>
 
 <div class="num_text" xss="removed">02</div>
-<div class="main_sub_text">JustShare의 공간 매칭 서비스를 받아보세요.</div>
+<div class="main_sub_text">JustShare만의 서비스를 받아보세요.</div>
          </div>
             </div>
          </li></ul>

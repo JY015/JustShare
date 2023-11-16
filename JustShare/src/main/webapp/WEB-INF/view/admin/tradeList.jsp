@@ -181,12 +181,22 @@ button {
       });        
   });
   
-
-  
-  
 </script>
 
-
   <%@ include file="adminfooter.jsp"%>
+  <footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+          </div>
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
 </body>
 </html>
