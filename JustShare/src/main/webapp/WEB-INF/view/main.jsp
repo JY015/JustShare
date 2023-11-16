@@ -50,11 +50,11 @@
             <a href="/mypage"> 마이페이지</a> 
             
          <div class="half-line"></div>
-            <a href="/help/pc_guide20230426.pdf" target="_blank">가이드</a>
+            <a href="/login" target="_blank">가이드</a>
             <div class="half-line"></div>
-         <a href="/contact/forms">제휴 및 입점문의</a>
+         <a href="/login">제휴 및 입점문의</a>
             <div class="half-line"></div>
-         <a href="/faq">자주 묻는 질문</a>
+         <a href="/login">자주 묻는 질문</a>
            </div>
         </div>
         <div class="full-line"></div>
@@ -83,8 +83,8 @@
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-key xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-log-in xi-2x"></i></a></c:when>
+                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out xi-2x"></i></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>

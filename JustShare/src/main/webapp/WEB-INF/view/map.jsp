@@ -9,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
     <title>Map</title>
 
+    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
     <link rel="stylesheet" href="/css/main_page.css" />
    <link rel="stylesheet" href="/css/map.css" />
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <meta charset="UTF-8">
 <title>Map</title>
@@ -26,14 +27,31 @@
 
 			<div class="content_map">
 				<div class="map_area hide" style="display: block;">
-					<div class="wrap_tit">
-						<strong class="tit_location"></strong>
-					</div>
+						<div class="wrap_tit">
+							<strong class="tit_location"></strong><br>
+							<div class="cate_btn">
+	     <button class="all"><img alt="all" src="./img/category/all.png"><br>전체보기</button>
+	      <button class="category-button" data-category="카페"><img alt="commercial" src="./img/category/cafe.png"><br>카페</button>
+	      <button class="category-button" data-category="식당"><img alt="studio" src="./img/category/food.png"><br>식당</button>
+	      <button class="category-button" data-category="술집"><img alt="culture" src="./img/category/drink.png"><br>술집</button>
+	      <button class="category-button" data-category="공방/작업실"><img alt="commercial" src="./img/category/else.png"><br>공방<br>작업실</button>
+	      <button class="category-button" data-category="연습실"><img alt="business" src="./img/category/practice.png"><br>연습실</button>
+	      <button class="category-button" data-category="녹음실"><img alt="studio" src="./img/category/rec.png"><br>녹음실</button>
+	      <button class="category-button" data-category="파티장"><img alt="culture" src="./img/category/party.png"><br>파티장</button>
+	      <button class="category-button" data-category="세트장"><img alt="business" src="./img/category/set.png"><br>세트장</button>
+	      <button class="category-button" data-category="강당"><img alt="commercial" src="./img/category/auditorium.png"><br>강당</button>
+	      <button class="category-button" data-category="사무실"><img alt="studio" src="./img/category/office.png"><br>사무실</button>
+	      <button class="category-button" data-category="오피스텔"><img alt="culture" src="./img/category/officetels.png"><br>오피스텔</button>
+	      <button class="category-button" data-category="갤러리"><img alt="business" src="./img/category/gallery.png"><br>갤러리</button>
+	      <button class="category-button" data-category="공연장"><img alt="business" src="./img/category/concert.png"><br>공연장</button>
+							</div>
+	
+	  </div>
 					<div class="map_wrap">
 					<div id="map">
 						<div style="cursor: auto; z-index: 2;"></div>
 					</div>
-
+</div>
 					<div class="custom_zoomcontrol radius_border">
 						<button type="button" onclick="panTo()"class="mylocationblue_btn">
 							<img class="mylocationblue_img" src="../img/mylocationblue.png" >
@@ -44,19 +62,11 @@
 						<button id="zoomOutButton">
 							<img src="../img/minus.png" alt="축소">
 						</button>
+			
  <div class="button-container">
     <button class="toggle-menu-btn">
      <img alt="cate" src="./img/category/cate.png">
     </button>
-
-    <div class="menu">
-      <button class="all"><img alt="all" src="./img/category/all.png"><br>전체보기</button>
-      <button class="category-button" data-category="commercial"><img alt="commercial" src="./img/category/상업.png"><br>상업</button>
-      <button class="category-button" data-category="studio"><img alt="studio" src="./img/category/스튜디오.png"><br>스튜디오</button>
-      <button class="category-button" data-category="culture"><img alt="culture" src="./img/category/문화.png"><br>문화</button>
-      <button class="category-button" data-category="business"><img alt="business" src="./img/category/업무.png"><br>업무</button>
-    </div>
-  </div>
 					</div>
 				</div>
 			</div>
@@ -84,17 +94,34 @@
                     </div>
                 </div>
   
+  
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-	  const toggleMenuBtn = document.querySelector('.toggle-menu-btn');
-	  const menu = document.querySelector('.menu');
+$(document).ready(function() {
+    const cateBtn = $('.cate_btn');
+    const toggleMenuBtn = $('.toggle-menu-btn');
+    let isCateBtnVisible = true;
 
-	  toggleMenuBtn.addEventListener('click', function() {
-	    menu.style.display = (menu.style.display === 'none' || menu.style.display === '') ? 'flex' : 'none';
-	  });
-	});
+    // 초기 위치를 저장
+    const initialCateBtnDisplay = cateBtn.css('display');
 
+    toggleMenuBtn.click(function() {
+        if (isCateBtnVisible) {
+            cateBtn.hide();
+        } else {
+            // 다시 열릴 때 초기 위치로 설정
+            cateBtn.css('display', initialCateBtnDisplay);
+        }
+        isCateBtnVisible = !isCateBtnVisible;
+    });
+
+    const myLocationBtn = $('.mylocationblue_btn');
+    myLocationBtn.click(function() {
+        cateBtn.hide();
+        // 추가적인 동작이 필요하다면 이 부분에 코드를 추가하세요.
+    });
+});
 </script>
+
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d13607a4c248029181b2f5c31929d16d&libraries=services"></script>
 
@@ -440,18 +467,46 @@ navigator.geolocation.getCurrentPosition(function(position) {
             	
             	  // 카테고리에 따라 다른 마커 이미지 선택
                 switch (item.category) {
-                    case 'commercial':
-                        markerImage = new kakao.maps.MarkerImage('img/category/commercial.png', new kakao.maps.Size(30, 30));
+                    case '카페':
+                        markerImage = new kakao.maps.MarkerImage('img/category/cafe.png', new kakao.maps.Size(30, 30));
                         break;
-                    case 'business':
-                        markerImage = new kakao.maps.MarkerImage('./img/category/business.png', new kakao.maps.Size(30, 30));
+                    case '식당':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/food.png', new kakao.maps.Size(30, 30));
                         break;
-                    case 'culture':
-                        markerImage = new kakao.maps.MarkerImage('./img/category/culture.png', new kakao.maps.Size(30, 30));
+                    case '술집':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/drink.png', new kakao.maps.Size(30, 30));
                         break;
-                    case 'studio':
-                        markerImage = new kakao.maps.MarkerImage('./img/category/studio.png', new kakao.maps.Size(30, 30));
+                    case '공방/작업실':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/else.png', new kakao.maps.Size(30, 30));
                         break;
+                    case '연습실':
+                        markerImage = new kakao.maps.MarkerImage('img/category/practice.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '녹음실':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/rec.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '파티장':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/party.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '세트장':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/set.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '강당':
+                        markerImage = new kakao.maps.MarkerImage('img/category/auditorium.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '사무실':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/office.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '오피스텔':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/officetels.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '갤러리':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/gallery.png', new kakao.maps.Size(30, 30));
+                        break;
+                    case '공연장':
+                        markerImage = new kakao.maps.MarkerImage('./img/category/concert.png', new kakao.maps.Size(30, 30));
+                        break;
+                    
                     default:
                         markerImage = new kakao.maps.MarkerImage('', new kakao.maps.Size(40, 40));
                         break;

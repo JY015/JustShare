@@ -1,6 +1,8 @@
 package com.js.web.admin;
 
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +96,10 @@ public class AdminController {
       model.addAttribute("dateList", dateList); //날짜랑 날짜에 맞는 카운트 뽑기
       model.addAttribute("monthDay", monthDay);//달과 일자만 출력
       System.out.println(tradeList);
+      for (int i= 0; i < tradeList.size(); i++) {
+    	  tradeList.get(i).put("timestamp", String.valueOf(tradeList.get(i).get("timestamp")).substring(0,16));
+	}
+      
       return "admin/tradeList";
    }
    

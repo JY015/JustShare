@@ -36,7 +36,7 @@
    text-align: center;
    font-size: 22px;
    position: relative;
-   top: 6px;
+   top: 2px;
    color: rgba(0, 0, 0, 0.4);
 }
  .home_btn {
