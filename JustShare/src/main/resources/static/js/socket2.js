@@ -2,7 +2,7 @@
 
 
 
-
+//const socket = new SockJS("http://localhost:8080/chat");
    const socket = new SockJS("http://justshare.store/chat");
    //const socket = new WebSocket("ws://localhost:8080/chat");
     let msgcount=0;
@@ -12,7 +12,11 @@
    function logoutAndCloseSocket() {
        // 여기서 WebSocket 연결을 닫는 코드를 추가
        var mid = sessionStorage.getItem("mid"); 
-       
+          		
+		 var result = confirm("로그아웃 하시겠습니까?");
+				 		
+	if(result) { 
+	    
        
             
        if(mid!=null) { 
@@ -28,15 +32,16 @@
         socket.send(JSON.stringify(jsonmsg), function() {
             // WebSocket 연결이 성공적으로 닫혔을 때 실행되는 코드
             socket.close();
-            window.location.href = './logout';
+         
         });
+           window.location.href = './logout';
     } else {
         // mid가 없는 경우에는 그냥 로그아웃만 수행
         window.location.href = './logout';
     }
 }
     //socket.send(JSON.stringify(jsonmsg));
-      
+      }
        //}
      //window.location.href = './logout';
    
@@ -111,7 +116,7 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
                    
                 var jsonData = JSON.parse(data); 
                 var json = jsonData.result;
-                
+               
 
        
                 if(json==0 || json==1) {
@@ -183,9 +188,9 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
        var mid = socketdata.mid;
        var bno = socketdata.bno;
        var fromchk = socketdata.fromchk;
-    
-       
+
            if(fromchk=1) {
+
            jstradefromupdate(mid,toId,bno);
            
       }
@@ -199,11 +204,14 @@ if ("message" in socketdata && "sender" in socketdata && "time" in socketdata ) 
        var mid = socketdata.mid;
        var bno = socketdata.bno;
        var tochk = socketdata.tochk;
-    
+
    
         //여기부터
            if(tochk==1) { 
+			         
+ 
                 jstradetoupdate(mid,toId,bno);
+             
 
     }
     
@@ -220,7 +228,8 @@ function jstradefromupdate(mid,toId,bno) {
     
        //alert(toId);
          
-         
+               
+
          toastr.options = {
                 closeButton: true,
                  progressBar: true,
@@ -228,7 +237,7 @@ function jstradefromupdate(mid,toId,bno) {
                 preventDuplicates:true,
                 
                 positionClass: 'toast-top-center',
-                timeOut: 3000,
+                timeOut: 80000,
                 onShown: function() {
                       
                 },
@@ -263,7 +272,7 @@ function jstradefromupdate(mid,toId,bno) {
 //##to가from일떄 to업하기 
 function jstradetoupdate(mid,toId,bno){
       
-   
+ 
       
          toastr.options = {
                 closeButton: true,
@@ -272,7 +281,7 @@ function jstradetoupdate(mid,toId,bno){
                 preventDuplicates:true,
                 
                 positionClass: 'toast-top-center',
-                timeOut: 3000,
+                timeOut: 80000,
                 onShown: function() {
             
                     

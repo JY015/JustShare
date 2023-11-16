@@ -5,19 +5,19 @@
  * make sure you copy the url from the website since the url may change between versions.
  * */
 .toast-title {
-    font-weight: 400;
-    height: 32px;
-    font-size: 18px;
+    font-weight: 600;
+    height: 29px;
+    font-size: 16px;
     padding-left:270;
       text-align: center;
-      padding-top: 2px;
+      padding-right: 42px;
 }
 
 .toast-message {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
-    height: 40px;
-  font-size: 16px;
+    height: 37px;
+  font-size: 15px;
 
  padding-left: 10px;
 }

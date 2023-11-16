@@ -296,10 +296,10 @@ function createMarker2(item, markerImage) {
 	            // 이미지의 경로를 가져옴
 	            var imagePath = imageElement.src;
 	            //가비아용
-	            //imagesrc = imagePath.substring(25, imagePath.length);
+	            imagesrc = imagePath.substring(25, imagePath.length);
 	            
 	            //로컬호스트용
-	            imagesrc = imagePath.substring(21, imagePath.length);
+	            //imagesrc = imagePath.substring(21, imagePath.length);
 	            
 	            console.log(imagePath)
 	            console.log(imagesrc)
@@ -770,10 +770,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
             // 이미지의 경로를 가져옴
             var imagePath = imageElement.src;
             //가비아용
-            //imagesrc = imagePath.substring(25, imagePath.length);
+            imagesrc = imagePath.substring(25, imagePath.length);
             
             //로컬호스트용
-            imagesrc = imagePath.substring(21, imagePath.length);
+            //imagesrc = imagePath.substring(21, imagePath.length);
             
             console.log(imagePath)
             console.log(imagesrc)

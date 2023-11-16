@@ -235,7 +235,7 @@
 		 <div class="list--headermb">
 		 <!--   검색창  -->
 		 <form class="searchbar search" action="./board" method="get" id="searchForm" >
-		 	<input type="text" name="searchV" required="required" id="stxm" placeholder="키워드를 입력해주세요." style="padding-right: 50px; ">
+		 	<input type="text" name="searchV" required="required" id="stxm" placeholder="키워드를 입력해주세요." style="padding-right: 50px;" value="${param.searchV}">
 			<input type="hidden" name="areas" value="${param.areas }"> 
 			<input type="hidden" name="categories" value="${param.categories }">
 			<input type="hidden" name="equipments" value="${param.equipments }">

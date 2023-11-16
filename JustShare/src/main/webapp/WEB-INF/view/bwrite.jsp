@@ -494,6 +494,7 @@ $(function () {
                              $uploadImg.attr('src', bodyJson.fullpath)
                              $uploadBox.append($uploadImg)
                          } else {
+                        	 alert("글 작성이 완료되었습니다.")
                              window.location.href = 'http://172.30.1.30:8080/board'
                          }
                      })

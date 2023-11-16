@@ -92,9 +92,9 @@
 
 
 	
-
-	//const socket = new WebSocket("ws://localhost:8080/chat");
 	const socket = new SockJS("http://justshare.store/chat");
+	//const socket = new WebSocket("ws://localhost:8080/chat");
+	//const socket = new SockJS("http://justshare.store/chat");
 	 // ##소켓 연결##
      socket.onopen = function(event) {
        	console.log("커넥션이 만들어졌습니다.1");
@@ -887,7 +887,7 @@ function updateMessage(sender, time, message,sort,bno) {
               //preventDuplicates:true,
               positionClass: 'toast-top-center',
             
-              timeOut: 2000
+              timeOut: 60000
           };
           toastr.success(sender+"님과 첫 대화가 시작 되었습니다.","알림" );
 	   

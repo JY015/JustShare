@@ -365,6 +365,7 @@ $('#send').click(function() {
 		success: function(data) {
 			const checkNum = data;
 			alert('checkNum:'+ checkNum);
+			alert('문자가 전송되었습니다.');
 			
 
 			$('#complete').click(function() {	
