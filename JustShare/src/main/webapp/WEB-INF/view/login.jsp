@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
 
-
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>

@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=no"/> 
 	<meta name="description" content="공간 공유 플랫폼"/>
     <title>Just Share</title>
 	<!-- 기존에 사용하던 jquery , bootstrap , 기타등등 -->
@@ -103,10 +103,12 @@
     margin-bottom: 10px; /* 각 버튼 사이에 10px의 여백 추가 */
 }
 
-.Citycontainer .col-md-4 {
-    flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+.Citycontainer .col-md-6 {
+    width:50%;
+    text-align: left;
     box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
     padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+    margin-bottom: 5px;
 }
 .cateContainer{
  	display: flex;
@@ -117,15 +119,19 @@
 	display: flex;
     flex-wrap: wrap;
 }
-.cateContainer .col-md-4{
-	 flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+.cateContainer .col-md-6{
+	width:50%;
+	text-align: left;
     box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
     padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+    margin-bottom: 5px;
 }
-.equipContainer .col-md-4{
-	 flex: 0 0 40%; /* 각 요소의 너비를 33.333%로 설정하여 3열로 배치 */
+.equipContainer .col-md-6{
+	width:50%;
+	text-align: left;
     box-sizing: border-box; /* 요소의 패딩과 테두리를 포함한 크기를 설정 */
     padding: 0 10 10px; /* 각 요소의 좌우 패딩을 설정 */
+    margin-bottom: 5px;
 }
 .imageContainer {
         position: relative;
@@ -201,7 +207,11 @@
     font-size: 11px;
     
 }
+.modalspan {font-size: 14px; color:#004AAD; margin-right: 10px;}
 
+#resetButton{border: 0.5px solid black !important; margin-left: 1px !important; radius : 5px !important;}
+#footer{}
+#modalButton{}
 </style>
  
 </head>
@@ -389,7 +399,7 @@
 								</div>
 								<div class="Citycontainer">
 								<c:forEach items="${areaList}" var="n" begin="0" end="24">
-		                       	<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>
+		                       	<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>
 				            	</c:forEach>
 								</div>
 								</div>
@@ -399,7 +409,7 @@
 								<!--Content-->
 								<div class="cateContainer">
 								<c:forEach items="${catelist }" var="n" >
-									<div class="col-md-4"><input type="checkbox" id="cate_${n.cate }" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }</div>
+									<div class="col-md-6"><input type="checkbox" id="cate_${n.cate }" name="category" value="${n.cate}" data-cname="${n.cname }">${n.cname }</div>
 								</c:forEach>
 								</div>
 								</div>
@@ -416,7 +426,7 @@
 							<div id="tab4" class="tab_content">
 								<div class="equipContainer">
 								<c:forEach items="${equiplist }" var="n">
-									<div class="col-md-4"><input type="checkbox" name="equipment" id="equip_${n.eid }" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }</div>
+									<div class="col-md-6"><input type="checkbox" name="equipment" id="equip_${n.eid }" value="${n.eid }" data-ename="${n.ename }"> ${n.ename }</div>
 								</c:forEach>
 								</div>
 							</div>
@@ -426,8 +436,10 @@
 				</div>
 				<div class="modal-footer">
 					<div id="footer"></div>
+					<div id="moalButton">
 					<button type="button" class="btn btn-default modalbtn" id="resetButton">초기화</button>
 					<button type="button" class="btn btn-primary modalbtn" id="applyButton">적용</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -615,9 +627,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -628,9 +640,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -641,9 +653,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -654,9 +666,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -667,9 +679,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -680,9 +692,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -693,9 +705,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -706,9 +718,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break; 
@@ -719,9 +731,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break; 
@@ -732,9 +744,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break; 
@@ -745,9 +757,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 		                    </c:forEach>
 				            break; 
@@ -758,9 +770,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 		                    </c:forEach>
 				            break; 
@@ -771,9 +783,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				            </c:forEach>
 				            break;
@@ -784,9 +796,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				        </c:forEach>
 				        break;
@@ -797,9 +809,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				        </c:forEach>
 				        break;
@@ -810,9 +822,9 @@
 				            var rno = parseInt("${n.rno}");
 				            var selectedRno = parseInt(selectedClass);
 		                    if (selectedRno === rno && paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}" checked>${n.aname}</div>';
 		                    } else if (selectedRno === rno && !paramMatch) {
-		                        checkboxesHTML += '<div class="col-md-4"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
+		                        checkboxesHTML += '<div class="col-md-6"><input type="checkbox" id="area_${n.ano}" name="area" value="${n.ano}" data-aname="${n.aname}">${n.aname}</div>';
 		                    }
 				        </c:forEach>
 				        break;
@@ -959,7 +971,7 @@
     			}
 			});
 			    
-			    
+				
 			    
 			    // 각 탭에서 선택된 값들을 가져와서 selectedOptions 배열에 저장하는 함수
 			    function updateSelectedOptions() {
@@ -971,7 +983,7 @@
 			        	var ano = $(this).val(); 
 			        	var aname = $(this).data("aname");
 			            var optionValue = "area:" + aname;
-			            selectedOptions.push("<span data-option-value='area_" + ano + "'>" + aname + iconHtml + "</span>");
+			            selectedOptions.push("<span class='modalspan' data-option-value='area_" + ano + "'>" + aname + iconHtml + "</span>");
 			            
 			        });
 
@@ -979,20 +991,28 @@
 			        	var cno = $(this).val(); 
 			        	var cname = $(this).data("cname");
 			            var optionValue = "category:" + cname;
-			            selectedOptions.push("<span data-option-value='cate_" + cno + "'>" + cname + iconHtml + "</span>");
+			            selectedOptions.push("<span class='modalspan' data-option-value='cate_" + cno + "'>" + cname + iconHtml + "</span>");
 			            
 			        });
 
 			        var minPrice = $("#min-price").val();
 			        var maxPrice = $("#max-price").val();
-			        selectedOptions.push("<span data-option-value='price'>" + minPrice + " 만원 ~ " + maxPrice + "만원 </span>");
+
+			        if (minPrice !== '' && maxPrice !== '') {
+			            var priceText = minPrice + " 만원 ~ " + maxPrice + "만원";
+
+			            if (priceText !== '0 만원 ~ 100만원') {
+			                selectedOptions.push("<span class='modalspan' data-option-value='price'>" + priceText + iconHtml + " </span>");
+			            }
+			        }
+			       
 			       
 
 			        $("input[name='equipment']:checked").each(function() {
 			        	var eno = $(this).val(); 
 			        	var ename = $(this).data("ename");
 			            var optionValue = "equipment:" + ename;
-			            selectedOptions.push("<span data-option-value='equip_" + eno + "'>" + ename + iconHtml + "</span>");
+			            selectedOptions.push("<span class='modalspan' data-option-value='equip_" + eno + "'>" + ename + iconHtml + "</span>");
 			           
 			        });
 
@@ -1059,7 +1079,7 @@
 			        }
 
 			        // data("option-value") 값과 일치하는 <span> 요소 제거
-			        $("#footer").find("span[data-option-value='" + optionValue + "']").remove();
+			        $("#footer").find("span class='modalspan' [data-option-value='" + optionValue + "']").remove();
 			    });
 			  
 				
@@ -1117,7 +1137,7 @@
 							            var areaElement = $("#area_" + area);
 							            if (areaElement.length > 0) {
 							                var areaName = areaElement.data("aname"); // 해당 지역의 이름을 가져옴
-							                $("#footer").append("<span data-option-value='area_" + area + "'>" + areaName + iconHtml + "</span>");
+							                $("#footer").append("<span class='modalspan' data-option-value='area_" + area + "'>" + areaName + iconHtml + "</span>");
 							            }
 							        });
 							    }
@@ -1129,7 +1149,7 @@
 							            var categoryElement = $("#cate_" + category);
 							            if (categoryElement.length > 0) {
 							                var categoryName = categoryElement.data("cname"); // 해당 카테고리의 이름을 가져옴
-							                $("#footer").append("<span data-option-value='cate_" + category + "'>" + categoryName + iconHtml + "</span>");
+							                $("#footer").append("<span class='modalspan' data-option-value='cate_" + category + "'>" + categoryName + iconHtml + "</span>");
 							            }
 							        });
 							    }
@@ -1141,13 +1161,13 @@
 							            var equipmentElement = $("#equip_" + equipment);
 							            if (equipmentElement.length > 0) {
 							                var equipmentName = equipmentElement.data("ename"); // 해당 시설물의 이름을 가져옴
-							                $("#footer").append("<span data-option-value='equip_" + equipment + "'>" + equipmentName + iconHtml + "</span>");
+							                $("#footer").append("<span class='modalspan' data-option-value='equip_" + equipment + "'>" + equipmentName + iconHtml + "</span>");
 							            }
 							        });
 							    }
 							    if (!isNaN(minPriceParam) && !isNaN(maxPriceParam) && (minPriceParam !== 0 && maxPriceParam !== 1000000)) {
-							        var priceOption = "price:" + minPriceParam + "-" + maxPriceParam;
-							        $("#footer").append("<span data-option-value='" + priceOption + "'>" + minPriceParam + "만원 ~ " + maxPriceParam + "만원" + iconHtml + "</span>");
+							        
+							        $("#footer").append("<span class='modalspan' data-option-value='price'>" + minPriceParam + "만원 ~ " + maxPriceParam + "만원" + iconHtml + "</span>");
 							    }else{
 							    	   $("#min-price").val(0);
 								       $("#max-price").val(100);

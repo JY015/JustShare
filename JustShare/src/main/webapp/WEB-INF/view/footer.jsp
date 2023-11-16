@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>푸터</title>
+<title>footer</title>
 <link rel="canonical" href="https://www.valuevenue.co.kr/login" />
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />

@@ -114,11 +114,7 @@ $(document).ready(function() {
         isCateBtnVisible = !isCateBtnVisible;
     });
 
-    const myLocationBtn = $('.mylocationblue_btn');
-    myLocationBtn.click(function() {
-        cateBtn.hide();
-        // 추가적인 동작이 필요하다면 이 부분에 코드를 추가하세요.
-    });
+
 });
 </script>
 
@@ -173,6 +169,7 @@ function panTo() {
                 createMarker(latitude, longitude); // 새로운 위치로 마커 생성
                 updateMapCenter(latitude, longitude); // 지도 중심 위치 업데이트
             }
+            
         });
     }
 }

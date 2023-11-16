@@ -84,7 +84,7 @@
 
 <select id="listp">
 	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin 
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -231,7 +231,7 @@
 
 <update id="bedit">
 	UPDATE board
-	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum}
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum},size=#{size},startTime=#{startTime},rentTime=#{rentTime},addDetail=#{addD},endTime=#{endTime}
 	WHERE bno=#{bno}
 	
 </update>
@@ -310,4 +310,7 @@ FROM board
 ORDER BY bno DESC 
 LIMIT 1 	
 </select>
+<delete id="deleteImage">
+	delete from image where bno=#{a}
+</delete>
 </mapper>

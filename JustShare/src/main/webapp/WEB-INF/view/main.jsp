@@ -8,7 +8,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="JustShare는 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 소비자에게는 새로운 경험을 선사합니다"/>
     <title>Just Share</title>
 
     <link rel="stylesheet" href="/css/style.css?ver=20000120" />
@@ -25,8 +24,13 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
 
   </head> 
+  
+  <style>
+.logout{
+margin-right:-32px !important;
+}
+</style>
 <body>
-
   <div class="body__container section">
   <input type="hidden" class="is_phpself" value="/index.php">
   <input type="hidden" class="is_app_banner" value="">
@@ -42,9 +46,9 @@
       <div class="header__inner">
         <div class="header__first_row">
            <div class="sign-area">
-           <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login">로그인</a></li></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
+      <c:choose>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><img class="logout" src="../img/login.png"></a></c:when>
+                         <c:otherwise><a class="nav-link2" onclick="confirmLogout();"><img class="logout" src="../img/logout.png"></a></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -83,8 +87,8 @@
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-log-in xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out xi-2x"></i></a></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><img class="logout" src="../img/login.png"></a></c:when>
+                         <c:otherwise><a class="nav-link2" onclick="logoutAndCloseSocket()"><img class="logout" src="../img/logout.png"></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>
@@ -130,8 +134,8 @@
          <li class="swiper-slide tranEff">
 <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc1.jpg" onerror="this.src='/img/no_image.png'" alt="배너">
-                                 <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/img/no_image.png'" alt="배너 모바일" />
+                  				<img class="pc_banner" src="/img/pc3.jpg" onerror="this.src='/img/no_image.png'" alt="배너">
+                                 <img class="mo_banner" src="/img/m3.jpg" onerror="this.src='/img/no_image.png'" alt="배너 모바일" />
                </div>                
                
                <div class="main_banner_text">
@@ -148,8 +152,8 @@
       <li class="swiper-slide tranEff swiper-slide-prev" style="width: 893px; opacity: 1; transform: translate3d(-893px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 3" data-swiper-slide-index="0">
             <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
-                  <img class="mo_banner" src="/img/m2.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
+                  <img class="pc_banner" src="/img/pc1.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
+                  <img class="mo_banner" src="/img/m1.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
                </div>                
                
                <div class="main_banner_text">
@@ -165,8 +169,8 @@
          </li><li class="swiper-slide tranEff swiper-slide-visible swiper-slide-active" style="width: 893px; opacity: 1; transform: translate3d(-1786px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 3" data-swiper-slide-index="1">
             <div class="main_banner_w">
                <div class="banner_back_img">
-                  <img class="pc_banner" src="/img/pc3.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
-                  <img class="mo_banner" src="/img/m3.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
+                  <img class="pc_banner" src="/img/pc2.jpg"  onerror="this.src='/img/no_image.png'" alt="배너">
+                  <img class="mo_banner" src="/img/m2.jpg" onerror="this.src='/img/no_image.png'" alt="배너모바일">
                </div>                
                
                <div class="main_banner_text">
@@ -504,6 +508,15 @@ navigation: {   // 버튼 사용자 지정
 },
 });
 
+</script>
+<script>
+    function confirmLogout() {
+        var confirmResult = confirm('로그아웃 하시겠습니까?');
+        if (confirmResult) {
+            window.location.href = "./logout";
+        } else {
+        }
+    }
 </script>
 
 <div class="partition-line"></div>

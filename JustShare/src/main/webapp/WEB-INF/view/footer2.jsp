@@ -6,8 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
-    <title>팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼</title>
+    <title>footer2</title>
     <script src="./js/socket.js"></script>
    <link rel="canonical"  href="https://www.valuevenue.co.kr/login"/>
     <link rel="stylesheet" href="/css/fullcalendar.css" />
