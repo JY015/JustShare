@@ -40,7 +40,6 @@ public class LoginController {
          session.setAttribute("mid", map.get("mid"));
          session.setAttribute("mname", res.get("mname"));
          session.setAttribute("mgrade", res.get("mgrade"));
-         
            if ((int)res.get("mgrade") == 4) {               
                        
               return "redirect:/admin/";              

@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
    <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
-   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> 
    <link rel="stylesheet" href="/css/main_page.css" />
    <link rel="stylesheet" href="/css/findId.css" />
 
@@ -90,7 +89,7 @@ var _ss_user_id   = "";
             <label for="findPwFinalCode">임시비밀번호를 입력하세요</label>
                         <div class="timer">
                 <span style="color: red;" id="remaining__min">1</span> :
-                <span style="color: red;" id="remaining__sec">00</span>
+                <span style="color: red;" id="remaining__sec">00</span><i class="xi-spinner-4"></i>
             </div>
             <input type="text" id="findPwFinalCode" name="findPwFinalCode" placeholder="임시비밀번호 6자리" required="required" maxlength="6">
             <input type="hidden" name="memail" value="${memail}">

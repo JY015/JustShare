@@ -39,51 +39,28 @@ var _ss_user_id	= "";
 </script>
   </head>
 <body>
+<%@ include file="header.jsp"%>
   <div class="body__container section">
-<div class="full-line box-bottom" style="display:block"></div>
 	<section class="ani1 leasing-management">
 	  <div class="whole-title_black">
-	    <h1>JustShare SERVICE</h1>
+	    <h1>Leasing</h1>
 	  </div>
 	  <a href="/contact/forms?no=6" ><div class="sticker_new">
 	    <img class="building" src="https://www.value-venue.com/images/rentask.png" alt="">
 		<div class="sticker-content">
 		  <img src="https://www.value-venue.com/images/ic_asking.svg" alt="">
-		  <p>임차대행 문의하기</p>
+		  <p>채팅 문의</p>
 		</div>
 		</div>
       </a> 
-	  <h1 class="title">JustShare 관리자 페이지</h1>
+	  <h1 class="title">관리자 페이지</h1>
       <div class="leasing-management-subtitle">
-	    <p class="sub-copy">JustShare 전문성과 세분화된 조직 체계로 
-		차별화된 수익 구조와 안정적인 프로젝트 서비스를 제공합니다.</p>
-	  </div>
-	  <div class="leasing-content">
-	    <div class="textcontent">
-	      <div class="text-box">
-			<div class="deco-line"></div>
-			<p class="text-title">JustShare SERVICE <br>
-			[MD 컨설팅]</p>
-			<p class="text-description">공간 활성화를 위한 프로젝트 개발계획, Vertical MD 및 Concept  수립, 
-			수익성에 기반한 적정 MD 선정으로 공간의 최적화된 service를 제공합니다.</p>
-		  </div>
-		  <div class="text-box">
-		    <div class="deco-line"></div>
-			<p class="text-title">대형 상업시설<br>
-			[쇼핑몰 컨설팅]</p>
-			<p class="text-description">공간 내 MD 리뉴얼 및 마케팅을 통한 최상의 수익성 도모, 
-			브랜드 사업 확장 지원 및 pop-up 공간 제공을 통한 확장성을 제공합니다.</p>
-		  </div>
-		</div>  
-	  </div>
-	  <div class="leasing-container_new" style="z-index:0;">
-	    <div class="contentbox">
-	     <!--  <img src="https://www.value-venue.com/images/managementbuilding.jpg" alt=""> 이미지 삭제한거-->
-	    </div>
+	    <p class="sub-copy">JustShare의 전문성과 세분화된 조직 체계로 
+		차별화된 수익 구조와 안정적인 프로젝트</p>
 	  </div>
 	</section>
+
 	<section class="wework ani1">
-	<h1 class="title">카테고리</h1>
 	<div class="workcard-container">
 		<div class="work-card">
 		<div class="work-content">
@@ -99,7 +76,7 @@ var _ss_user_id	= "";
 		<div class="work-content">
 			<img src="https://www.value-venue.com/images/ic_work2.svg" alt="">
 			<div>
-			<p class="work-title">상품 등록 수</p>
+			<p class="work-title">상품 등록</p>
 			<p class="work-description">
 			 <br>
 			<a style="font-size: 22px;" href="../board">• ${boardCount}개</a>
@@ -108,9 +85,9 @@ var _ss_user_id	= "";
 		</div>
 		<div class="work-card">
 		<div class="work-content">
-			<img src="https://www.value-venue.com/images/ic_work3.svg" alt="">
+			<img src="../img/report.png" alt="">
 			<div>
-			<p class="work-title">신고 갯수</p>
+			<p class="work-title">신고</p>
 			<p class="work-description">
 			 <br>
 			<a style="font-size: 22px;" href="./reportList">• ${reportCount}개</a></p>
@@ -121,9 +98,9 @@ var _ss_user_id	= "";
 		<div class="work-content">
 			<img src="https://www.value-venue.com/images/ic_work3.svg" alt="">
 			<div>
-			<p class="work-title">거래 횟수</p>
+			<p class="work-title">거래</p>
 			<p class="work-description"><br>
-			<a style="font-size: 22px;" href="./tradeList">•  ${tradeCount}개</a></p>
+			<a style="font-size: 22px;" href="./tradeList">• ${tradeCount}개</a></p>
 		</div>
 		</div>
 		</div>
@@ -131,7 +108,7 @@ var _ss_user_id	= "";
 	</section>
 <div id="donutchart" style="width: 100%; height: 100%; text-align: center;"></div>
 <br><br><br>
-    <c:if test="${sessionScope.mgrade < 4}">
+    <c:if test="${sessionScope.mgrade < 4 || sessionScope.mgrade == null}">
         <div class="warning-message">
             <script>
                 alert("관리자모드는 접근할 수 없습니다.");
@@ -189,15 +166,67 @@ var _ss_user_id	= "";
 	<%@ include file="adminfooter.jsp"%>
 	
 	<style>
+.contentbox img{
+	width: 100%;
+}
+
+
+.leasing-content{
+	height: 59%;
+}
+
+.workcard-container{
+		grid-template-columns: repeat(2, 1fr)!important;
+		gap: 30px!important;
+	}
+	
+	
 .leasing-container_new {
+	height: 760px;
+	margin-bottom: 0px;
+}
+
+/* /* .leasing-content{
+	top: 0%;
+	height: 40%;
+}	
+
+
+
+
+.leasing-container_new {
+	height: 20%;
+	margin-bottom: 0px;
+}
+
+.textcontent{
+	padding-top: 0%;
+}
+
+.text-box {
+    margin-top: 40px;
+    padding-left: 0%;
+    padding-right: 0%;
+} */ */
+	
+	
+/* .leasing-container_new {
     height: 550px;
     margin-bottom: 125px;
 }	
 	.workcard-container{
 		grid-template-columns: repeat(2, 1fr)!important;
-		margin-right: 22px;
+		gap: 30px!important;
 	}
 	
+.leasing-content{
+ top: 0%;
+ height: 400px;
+}	
+	
+	.textcontent{
+		padding-top: 27%;
+	}
 	
 	.work-card .work-title{
 	font-weight: 600;
@@ -208,7 +237,7 @@ var _ss_user_id	= "";
 	
 	.work-card {
 		width: 107%;
-	}
+	} */
 	
 	.mb-banner {
 		height:200px;

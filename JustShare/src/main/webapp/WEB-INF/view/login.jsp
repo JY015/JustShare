@@ -73,9 +73,7 @@ var _ss_user_id   = "";
   <input type="hidden" class="is_phpself" value="/login.php">
   <input type="hidden" class="is_app_banner" value="">
   
-
-
-    
+  
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
 

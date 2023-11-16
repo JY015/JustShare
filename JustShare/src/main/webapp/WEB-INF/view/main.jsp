@@ -70,7 +70,7 @@ var _ss_user_id   = "";
            <div class="sign-area">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><li class="nav-item"><a class="nav-link" href="./login"><i class="xi-user"></i></a></c:when>
-                         <c:otherwise><li class="nav-item"><a class="nav-link" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
+                         <c:otherwise><li class="nav-item"><a class="nav-link" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></li></c:otherwise>
                         </c:choose>     
          <div class="half-line"></div>
             <a href="/mypage"> 마이페이지</a> 
@@ -109,8 +109,8 @@ var _ss_user_id   = "";
            <h1 class="logo"><a href="/"></a></h1>
            <div class="blue_btn">
            <c:choose>
-                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-key xi-2x"></i></a></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
+                         <c:when test="${sessionScope.mid eq null}"><a class="nav-link2" href="./login"><i class="xi-log-out xi-2x"></i></a></c:when>
+                         <c:otherwise><a class="nav-link2" onclick="logoutAndCloseSocket()"><i class="xi-log-out"></i></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>
