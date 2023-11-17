@@ -234,7 +234,9 @@ $(function () {
       <div class="mypage-lay1-gridC2" id="host_guide_div" style='display:none'>
         <p class="mypage_title_guide">거래 내역<br /></p>
         <div class="btn-group">
-  
+  		<c:forEach items="${tradehistory }" var="n">
+  			${n.hno } / ${n.from_user_id }/${n.to_user_id }/${n.bno}  <button onclick="location.href='./review?bno=${n.bno}&fid=${n.from_user_id}&tid=${n.to_user_id}'">Go to Review</button>
+  		</c:forEach>
         </div>
       </div>
           <div class="mypage-lay1-gridR3">

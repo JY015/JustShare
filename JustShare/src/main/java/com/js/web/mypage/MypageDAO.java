@@ -24,6 +24,8 @@ public interface MypageDAO {
 
 	void infoChange(Map<String, Object> map);
 
+	List<Map<String, Object>> tradehistory(String mid);
+
 	/* List<Map<String, Object>> trade(String mid); */
 
 	

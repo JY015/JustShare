@@ -26,7 +26,7 @@ public class MypageController {
 
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
-		String mid = (String) session.getAttribute("mid");
+		String mid = String.valueOf(session.getAttribute("mid"));
 		
 		if (mid != null) {
 			System.out.println(mid);
@@ -48,6 +48,8 @@ public class MypageController {
 			 List<Map<String,Object>> likelist = mypageService.likelist(mid);
 			 model.addAttribute("likelist", likelist);
 			 
+			 List<Map<String,Object>> tradehistory = mypageService.tradehistory(mid);
+			 model.addAttribute("tradehistory",tradehistory);
 				/*
 				 * List<Map<String,Object>> trade = mypageService.trade(mid);
 				 * model.addAttribute("list", trade);

@@ -51,6 +51,11 @@ public class MypageService {
 		mypageDAO.infoChange(map);
 	}
 
+	public List<Map<String, Object>> tradehistory(String mid) {
+		
+		return mypageDAO.tradehistory(mid);
+	}
+
 	/*
 	 * public List<Map<String, Object>> trade(String mid) {
 	 * 

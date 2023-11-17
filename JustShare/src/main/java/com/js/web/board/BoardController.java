@@ -419,7 +419,7 @@ public class BoardController {
 		  //작성 글 insert 
 		  // 띄어쓰기 적용하기 
 		    String b =String.valueOf( map.get("content"));
-		    String replaced = b.replaceAll("\\s", "<br>");
+		    String replaced = b.replaceAll("\n", "<br>");
 		    map.put("content", replaced);
 		  	map.put("mid", session.getAttribute("mid"));
 			Integer adr = boardService.adr(map); 
@@ -503,7 +503,7 @@ public class BoardController {
 			map.put("mid", sid);
 			// 수정하는 글 띄어쓰기 넣어주기 
 			String b =String.valueOf( map.get("content"));
-		    String replaced = b.replaceAll("\\s", "<br>");
+		    String replaced = b.replaceAll("\n", "<br>");
 		    map.put("content", replaced);
 		    // 보드 업데이트하기 
 			int result = boardService.bedit(map);

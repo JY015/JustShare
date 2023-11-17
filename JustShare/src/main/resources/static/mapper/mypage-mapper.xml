@@ -67,6 +67,10 @@ WHERE i.main = 1 AND b.mid = #{mid} AND l.mid = #{mid};
 	
 	
 	</select> -->
-
+<select id="tradehistory">
+select *
+from tradehistory
+where from_user_id = #{mid} OR to_user_id = #{mid} 
+</select>
   
 </mapper>
