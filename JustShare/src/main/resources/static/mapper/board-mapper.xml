@@ -278,13 +278,15 @@
 <select id="freviewCheck" parameterType="Map"> 
  SELECT COUNT(reviewNo)
  FROM reviewList 
- WHERE bno=#{bno} and rfid=#{fid} 
+ WHERE bno=#{bno} and rfid=#{fid}
+ AND timestamp BETWEEN DATE_SUB((select timestamp from tradehistory where bno=#{bno}), INTERVAL 1 WEEK) AND (select timestamp from tradehistory where bno=#{bno})
 </select>
 
 <select id="treviewCheck" parameterType="Map" > 
  SELECT COUNT(reviewNo)
  FROM reviewList 
- WHERE bno=#{bno} and rfid=#{tid} 
+ WHERE bno=#{bno} and rfid=#{tid}
+ AND timestamp BETWEEN DATE_SUB((select timestamp from tradehistory where bno=#{bno}), INTERVAL 1 WEEK) AND (select timestamp from tradehistory where bno=#{bno})
 </select>
 
 <insert id="postreview" parameterType="Map">

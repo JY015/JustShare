@@ -497,19 +497,17 @@ public class BoardController {
 	  @ResponseBody
 	  @PostMapping("/bmedit")
 	  public int bmedit(@RequestParam Map<String, Object>map,HttpSession session) {
-		// 수정하는 사람의 mid 넣어주기 
-		  	System.out.println(map);
+		  	// 수정 회원 아이디 확인 
 			String sid = String.valueOf( session.getAttribute("mid")) ;
 			map.put("mid", sid);
-			// 수정하는 글 띄어쓰기 넣어주기 
+			// 수정하는 글 <br> 변형
 			String b =String.valueOf( map.get("content"));
 		    String replaced = b.replaceAll("\n", "<br>");
 		    map.put("content", replaced);
-		    // 보드 업데이트하기 
+		    // 게시글 내용 수정 
 			int result = boardService.bedit(map);
-			// 체크 박스로 받은 시설 테이블 수정 >기존에 있던 bno가 일치하는 컬럼 전부 지우기>> 지우고 다시 쓰기
+			// 변경 전 시설 정보 삭제 
 			boardService.deleteEquip(map);
-			// 새로 받은 시설 테이블 추가 
 			String bnoString = (String) map.get("bno");
 			int a = Integer.parseInt(bnoString);
 	        // JSON 문자열을 List<String>으로 변환
@@ -519,10 +517,9 @@ public class BoardController {
 	            equipmentList = objectMapper.readValue((String) map.get("equipment"), List.class);
 	        } catch (IOException e) {
 	            e.printStackTrace();
-	            // 필요에 따라 예외 처리
 	            return -2;
 	        }
-	        // 체크 박스로 여러개 받은 시설 테이블에 저장
+	        // 시설 정보 저장
 			 Map<String, Object> equip = new HashMap<String, Object>(); 
 			 int i = 0;
 			  equip.put("bno", a); 
@@ -531,7 +528,7 @@ public class BoardController {
 				  	equip.put("i", equipment);
 		            boardService.equip(equip);
 		      }
-			  // 이미지 변경 체크 후 이미지가 변경되었을 경우 기본 이미지 삭제  
+			  // 이미지 변경 되었을 경우 기존 이미지 교체  
 			  String notChange = String.valueOf(map.get("notChange"));
 			  if(notChange.equals("off")) {
 				  boardService.deleteImage(a);
