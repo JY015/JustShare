@@ -33,10 +33,14 @@
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+
+
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" href="/css/footertoastr.min.css" />
-<script src="./js/socket2.js"></script>
+<script src="./js/socket.js"></script>
  
  <style type="text/css">
 .row detail{
@@ -235,7 +239,7 @@
 		 <div class="list--headermb">
 		 <!--   검색창  -->
 		 <form class="searchbar search" action="./board" method="get" id="searchForm" >
-		 	<input type="text" name="searchV" required="required" id="stxm" placeholder="키워드를 입력해주세요." style="padding-right: 50px;" value="${param.searchV}">
+		 	<input type="text" name="searchV" required="required" id="stxm" placeholder="키워드를 입력해주세요." style="padding-right: 50px; ">
 			<input type="hidden" name="areas" value="${param.areas }"> 
 			<input type="hidden" name="categories" value="${param.categories }">
 			<input type="hidden" name="equipments" value="${param.equipments }">
@@ -289,8 +293,9 @@
              <div class="card_item2 pop-up" >
              <div class="cccc">
              <div class="imageContainer" >
-             <img class="main" src="/img/places/${row.realFile}" <c:if test="${row.tradeFin eq 1 }">style="filter: blur(5px);"</c:if>>
-             <c:if test="${row.tradeFin eq 1 }"><h1 class="main_image_text" style="font-size:45px">거래 완료</h1></c:if>
+             <img class="main" src="/img/places/${row.realFile}" <c:if test="${row.tradeFin eq 1 || row.reportCount eq 5}">style="filter: blur(5px);"</c:if>>
+             <c:if test="${row.tradeFin eq 1 }"><h1 class="main_image_text" style="font-size:30px">거래 완료</h1></c:if>
+             <c:if test="${row.reportCount eq 5 }"><h1 class="main_image_text" style="font-size:30px">신고 누적</h1></c:if>
              <div class="like" data-bno="${row.bno}">
              <c:choose>
              <c:when test="${row.isLiked eq 1  }">
@@ -305,11 +310,11 @@
              </div>
              </div>
              </div>
-             <a class="card-surface" href="./bdetail?bno=${row.bno}">
+             <a class="card-surface" <c:choose><c:when test="${row.reportCount eq 5 }">onclick="reportfull();"</c:when><c:otherwise> href="./bdetail?bno=${row.bno}"</c:otherwise></c:choose>>
              <div class="card_inner2">
              <div class="txt__wrap2">
              <p class="txt__card__tit">
-             ${row.btitle } <span class="read_count"><i class="fa-solid fa-book-open"></i> ${row.bread }</span>
+             ${row.btitle } <span class="read_count"><i class="fa-solid fa-book-open"></i> ${row.bread } </span>
              </p>
              <p class="txt__subtit__event addrp">
              ${row.addr }<span class="likes_count" data-count=${row.likesCount } ><i class="far fa-heart" ></i> ${row.likesCount }</span> 
@@ -491,7 +496,7 @@
 						            // 새로운 카드 아이템 생성
 						            var newCardItem = "<div class='card_item2 pop-up'>";
 						            newCardItem += "<div class='cccc'><div class='imageContainer'><img class='main' src='/img/places/" + item.realFile + "' " + (item.tradeFin === 1 ? "style='filter: blur(5px);'" : "") + ">" + (item.tradeFin === 1 ? "<h1 class='main_image_text' style='font-size:45px'>거래 완료</h1>" : "") + "<div class='like' data-bno='" + item.bno + "'>" + (item.isLiked === 1 ? "<img class='likeon' src='../img/icon/zzheart.png'/><img class='likeoff' src='../img/icon/zheart.png' style='display: none'/>" : "<img class='likeon' src='../img/icon/zzheart.png' style='display: none'/><img class='likeoff' src='../img/icon/zheart.png'/>") + "</div></div></div>";
-						            newCardItem += "<a class='card-surface' href='./bdetail?bno=" + item.bno + "'>";
+						            newCardItem += "<a class='card-surface' " + (item.reportCount === 5 ? "onclick='reportfull();' href='#'" : "href='./bdetail?bno=" + item.bno + "'") + ">";
 						            newCardItem += "<div class='card_inner2'>";
 						            newCardItem += "<div class='txt__wrap2'>";
 						            newCardItem += "<p class='txt__card__tit'>" + item.btitle + " <span class='read_count'><i class='fa-solid fa-book-open'></i> " + item.bread + "</span></p>";
@@ -1349,6 +1354,10 @@ $(document).on("click", ".like", function() {
            }
        });
    });
+   
+   function reportfull(){
+		alert("신고 누적으로 볼 수 없는 게시물 입니다.")
+	}
  </script>
 
 </body>

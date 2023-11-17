@@ -55,8 +55,6 @@ $(function(){
                $('#midMsg').css("color","red");
                $('#mphone').prop('readonly', false);
                $('.get__number').prop('disabled', false);
-               $('.maddr').prop('disabled', false);
-               $('.maddr2').prop('disabled', false);
  
             }
          },
@@ -165,7 +163,7 @@ $(function(){
 <div class="join-form">
      <form action="./join" method="post" class="container">
     <div class="text_find_id">
-	<h4>회원가입</h4>
+	<h4 class="join_t" >회원가입</h4>
     </div>  
     	 <label for="mname">아이디</label><br>
          <input type="text" name="mid" id="mid" placeholder="아이디" maxlength="15">
@@ -389,6 +387,8 @@ $('#send').click(function() {
 		               $('#maddr').attr('disabled', false);
 		               $('#maddr2').attr('disabled', false);
 		               $('#mbirth').attr('disabled', false);
+		               $('.maddr').prop('disabled', false);
+		               $('.maddr2').prop('disabled', false);
 		               $('#send').text("인증완료");
 					clearInterval(timerInterval)
 				}

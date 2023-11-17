@@ -69,6 +69,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
         return null; // 예외 처리 필요
     }
     
+    public Set<String> getAllConnectedClientIds() {
+        return clients.keySet();
+    }
+    
 	 @Override
 	    public void afterConnectionEstablished(WebSocketSession session) throws Exception {  //연결된 후 
 		
@@ -318,6 +322,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	        
 	        sendMessageToAllClients(mid,message,session);//접속알림
 	        
+	    
 	  
 	        
 	        //## 온라인,오프라인 초기 생성

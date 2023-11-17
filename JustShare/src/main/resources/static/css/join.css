@@ -1,6 +1,6 @@
 body {
    font-family: Arial, sans-serif;
-   text-align: center;
+   text-align: left	;
 }
 
 .container {
@@ -58,7 +58,7 @@ button {
    word-break: keep-all;
    line-height: 1.4;
    text-align: center;
-   padding: 26px 0 42px;
+   padding: 26px 0 10px;
 }
 
 .image-container {
@@ -73,4 +73,12 @@ button {
     height: 2.5rem;
     border: 1px solid #eeefef;
     cursor: default;
+}
+
+
+.join_t{
+	color: #161616;
+    font-size: 2.5rem;
+    font-weight: 200;
+    padding-bottom: 52px;
 }

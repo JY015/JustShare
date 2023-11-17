@@ -237,7 +237,7 @@ function jstradefromupdate(mid,toId,bno) {
                 preventDuplicates:true,
                 
                 positionClass: 'toast-top-center',
-                timeOut: 80000,
+                timeOut: 3000,
                 onShown: function() {
                       
                 },
@@ -281,7 +281,7 @@ function jstradetoupdate(mid,toId,bno){
                 preventDuplicates:true,
                 
                 positionClass: 'toast-top-center',
-                timeOut: 80000,
+                timeOut: 3000,
                 onShown: function() {
             
                     
