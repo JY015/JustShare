@@ -46,6 +46,11 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/common.js?ver=20000120" defer></script>
     <script src="/js/cookie.js?ver=20000120" defer></script>
+<style type="text/css">
+
+.reportBtn{background-color : #004AAD; width: 100% !important;}
+.radioDiv {margin-bottom: 10px;}
+
 </style>
 </head>
 
@@ -57,7 +62,8 @@
 	 <div class="signup_list_wrap">
 	 <div class="signup_title">
 	 <div class="sign_text">신고하기 </div>
-	 <div class="sign_text_list">신고자 : ${map.rmid} / 신고 게시물 : ${map.bno } </div>
+	 <div class="sign_text_list">신고자 : ${map.rmid}</div>
+	 <div class="sign_text_list">해당 게시글 번호 : ${map.bno } </div>
 	 </div>
 	 </div>
 	 <!-- 내용 -->
@@ -76,8 +82,8 @@
 			<td>
 			<c:forEach items="${reportCateList }" var="n">
 			<div class="radioDiv">
-			<input type="radio"  id="radioBtn"  class="input_border"  name="rcate" value="${n.rcate}"> ${n.rcateName }
-			<label for="radioBtn">라디오 버튼</label>
+			<input type="radio"  id="radioBtn"  class="input_border"  name="rcate" value="${n.rcate}">
+			<label for="radioBtn"> ${n.rcateName }</label>
 			</div>
 			</c:forEach>
 			</td>
@@ -92,37 +98,13 @@
 	 </table>
 	 </div>
 	 <div class="sign_btn_w">
-	 <button type="button" onclick="reportSubmit()">신고하기</button>
+	<button type="button" class="reportBtn" onclick="reportSubmit()">신고하기</button>
 	 </div>
 	 </form>
 	 </div>
 	 </section>
 	</div>
 
-<body>
-<%@ include file="header.jsp"%>
-	<h1>신고하기</h1>
-	신고자 : ${map.rmid}
-	신고 게시물 : ${map.bno }
-	
-	<form id="reportForm" action="./report" method="post" >
-	<input type="hidden" name="bno" value="${map.bno }">
-	<input type="hidden" name="rmid" value="${map.rmid }">
-	<input type="hidden" name="mid" value=${map.mid }>
-	신고 사유
-	<div>
-	<c:forEach items="${reportCateList }" var="n">
-	<div>
-	<input type="radio" name="rcate" value="${n.rcate}">${n.rcateName }
-	</div>
-	</c:forEach>
-	</div>
-	상세내용
-	<div>
-	<textarea name="rcontent" id="rcontent"></textarea>
-	</div>
-	<button type="button" onclick="reportSubmit()">신고하기</button>
-	</form>
 
 
 	<script>

@@ -27,11 +27,8 @@
 <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
-<!-- 회원가입 3가지회원 유형 css new -->
 <link rel="stylesheet" href="/css/register.css?ver=20000120"/> 
-	<!-- 고객센터 css -->
 <link rel="stylesheet" href="/css/customer_service_center.css?ver=20000120" />
-	<!-- 폰트어썸 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <link rel="shortcut icon" href="/images/v_favicon32.ico" sizes="32x32" />
@@ -45,7 +42,10 @@
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
- 
+ <style type="text/css">
+ .writeB{background-color: #004AAD ; border-radius: 5px; color:white;}
+ .choose{width: 100%; margin-top: 10px; border: 0.3px solid black; margin-bottom: 10px;}
+ </style>
 
 </head>
 <body>
@@ -69,21 +69,27 @@
 				<col style="width:180px">
 				</colgroup>
 				<tbody>
-					<tr class="border_bottom">
-						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
+						<tr class="border_bottom">
+						<th><label for="image">기존 이미지 </label><span aria-hidden="true">*</span></th>
 						<td>
 						 <div class="id_mo f_ex">
-						 <button id="picker" type="button" class="choose">파일 교체하기</button>
-						 </div>
-						 <div id="box"></div>
 						 <div id="imageChange">
 						 <c:forEach items="${imageD}" var="n">
 						 <img src="/img/places/${n}">
 						 </c:forEach>
 						 </div>
+  						</div>
+						</td>
+					</tr>
+					<tr class="border_bottom">
+						<th><label for="image">이미지 변경하기 </label><span aria-hidden="true">*</span></th>
+						<td>
+						 <div class="id_mo f_ex">
+						 <button id="picker" type="button" class="choose">이미지 변경</button>
+						 </div>
+						 <div id="box"></div>
   						<div id="progress"></div>
   						<div id="upload-box"></div>	
-						 <br><span class="warningTxt2" id="resultF"></span>
 						</td>
 					</tr>
 					
@@ -175,8 +181,8 @@
 		</div>
 		<!-- 버튼 -->
 		<div class="sign_btn_w">
-			<button type="button" class="btn_black writeB" >글 수정하기</button>
-			<button type="button"  id="upload" class="btn_clear_black">이미지 변경하기</button>
+			<button type="button" class="btn_black backB" onclick="history.back();">취소</button>
+			<button type="button" class="writeB" >글 수정하기</button>
 		</div>
 	</form>
 
@@ -275,14 +281,6 @@
 
 <script type="text/javascript">
 
-document.addEventListener('DOMContentLoaded', function() {
-    var uploadButton = document.getElementById('upload');
-        uploadButton.disabled = true; 
-});
-
-
-
-
 $(function () {
     let selectImagePath = '';
     let $previewImg = null;
@@ -294,13 +292,16 @@ $(function () {
     const $upload = $('#upload');
     const $imageChange =$('#imageChange');
     const bno =${detail.bno};
+    let notChange="on";
     
     $picker.on('click', () => {
           if ($previewImg !== null) {
           $previewImg.remove();
           $previewImg = null;
         }
-          $imageChange.remove();
+         
+        $imageChange.hide();
+        notChange = "off";
         selectImagePath = '';
         $.imagePicker()
           .then(({ status, result }) => {
@@ -308,7 +309,9 @@ $(function () {
               selectImagePath = result.path;
               return $.convertBase64ByPath(selectImagePath)
             } else {
-              return Promise.reject('이미지 가져오기 실패')
+            	 $imageChange.show();
+                 notChange = "on";
+            	return Promise.reject('이미지 가져오기 실패')
             }
           })
           .then(({ status, result }) => {
@@ -327,40 +330,9 @@ $(function () {
           })
     });
     
-    $upload.on('click', () => {
+  
            	
-    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
-    if ($uploadImg) {
-      $uploadImg.remove();
-      $uploadImg = null;
-    }
     
-    $progress.text('')
-    $.uploadImageByPath(selectImagePath,bno,(total, current) => {
-      console.log(`total: ${total} , current: ${current}`)
-      $progress.text(`${current}/${total}`)
-    })
-      .then(({
-        status, header, body
-      }) => {
-        // status code
-        if (status === '200') {
-          $progress.text('업로드 완료')
-          const bodyJson = JSON.parse(body)
-          $uploadImg = $(document.createElement('img'))
-          $uploadImg.attr('height', '200px')
-          $uploadImg.attr('src', bodyJson.fullpath)
-          $uploadBox.append($uploadImg)
-        } else {
-        	window.location.href = 'http://172.30.1.30:8080/board'
-        	
-        }
-      })
-      .catch((err) => {
-        if (typeof err === 'string') alert(err)
-        console.error(err)
-      })
-    });
 
     $.imagePicker = function () {
           return new Promise((resolve) => {
@@ -392,7 +364,7 @@ $(function () {
     $.uploadImageByPath = function (targetImgPath, bno, progress) {
              return new Promise((resolve) => {
 	        const _options = {
-	          url: "http://172.30.1.30:8080/editFile",
+	          url: "http://172.30.1.30:8080/uploadFile",
 	          header: {},
 	          params: {bno:bno},
 	          body: [
@@ -515,13 +487,46 @@ $(function () {
  				"bcate" : cate,
  				"rentTime" : rentTime,
  				"equipment" : JSON.stringify(equipment),
- 				"addD":detailAddress
+ 				"addD":detailAddress,
+ 				"notChange":notChange
  			},
  			dataType : "json",
             success: function (data) {
                 if (data > 0) {
-                	$upload.prop('disabled', false); 
+                	if (selectImagePath === '') return alert('이미지를 선택해주세요.')
+                    if ($uploadImg) {
+                      $uploadImg.remove();
+                      $uploadImg = null;
+                    }
+                    
+                    $progress.text('')
+                    $.uploadImageByPath(selectImagePath,bno,(total, current) => {
+                      console.log(`total: ${total} , current: ${current}`)
+                      $progress.text(`${current}/${total}`)
+                    })
+                      .then(({
+                        status, header, body
+                      }) => {
+                        // status code
+                        if (status === '200') {
+                          $progress.text('업로드 완료')
+                          const bodyJson = JSON.parse(body)
+                          $uploadImg = $(document.createElement('img'))
+                          $uploadImg.attr('height', '200px')
+                          $uploadImg.attr('src', bodyJson.fullpath)
+                          $uploadBox.append($uploadImg)
+                        } else {
+                        	alert("글 수정이 완료되었습니다")
+                        	window.location.href = 'http://172.30.1.30:8080/bdetail?bno=' + bno;
+                        	
+                        }
+                      })
+                    
                 	 
+                }else if(data == -1){
+                	alert("글 수정이 완료되었습니다")
+                	window.location.href = 'http://172.30.1.30:8080/bdetail?bno=' + bno;
+                
                 } else {
                     console.log("글 작성 중 오류가 발생했습니다.");
                 }

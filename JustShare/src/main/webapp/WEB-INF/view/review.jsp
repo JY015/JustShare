@@ -52,6 +52,8 @@
     display: inline-block;
     direction: rtl;
     border:0;
+    margin-bottom: 15px;
+    margin-top:13px;
 }
 #myform fieldset legend{
     text-align: right;
@@ -93,8 +95,8 @@
    color: #dabd18b2;
 }
 .border_bottom th label {font-size: 25px !important;}
-
-
+.writeB{background-color: #004AAD ; border-radius: 5px; color:white;}
+.textarea.form-control textarea{margin-bottom: 10px !important;}
 </style>
 </head>
 <body>
@@ -104,8 +106,9 @@
 <div class="sign_inner">
 <div class="signup_list_wrap">
 <div class="signup_title">
-<div class="sign_text">리뷰 </div>
-<div class="sign_text_list">거래 게시글 번호 : ${map.bno } / 판매자 : ${map.tid } / 구매자 : ${map.fid }</div>
+<div class="sign_text">리뷰 작성하기 </div>
+<div class="sign_text_list">거래 게시글 번호 : ${map.bno } </div>
+<div class="sign_text_list"> 판매자 : ${map.tid }   |  구매자 : ${map.fid }</div>
 </div>
 </div>
  <!-- 내용 -->
@@ -120,7 +123,7 @@
 </colgroup>
  <tbody>
  <tr class="border_bottom">
- <th><label for="reviewStar">별점 주기</label></th>
+ <th><label for="reviewStar">별점</label></th>
  <td>
  <fieldset>
 <input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1"><i class="rating__star fas fa-star"></i></label>
@@ -141,7 +144,9 @@
 </table>
 </div>
 <div class="sign_btn_w">
-<button>취소하기</button><button type="button" onclick="submitReview()">리뷰 남기기 </button>		
+
+<button type="button" class="btn_black backB" onclick="window.location.href = '/board';">넘어가기</button>
+<button type="button" class="writeB" onclick="submitReview()">리뷰 남기기 </button>		
 </div>
 </form>
 </div>

@@ -235,6 +235,16 @@ public class BoardController {
 		if(session.getAttribute("mid") != null) {
 		// 게시글 내용 그대로 받아오기 +  아이디 일치확인
 		Map<String, Object> detail = boardService.detail(map);
+		// 내용에 대해서 /n 을 <br>로 변경한거 원래대로 복구 
+		String b =String.valueOf( detail.get("bcontent"));
+	    String replaced = b.replaceAll("<br>", "\n");
+	    detail.put("bcontent", replaced);
+		// 금액에 대해서 format 처리한거 원래대로 복구 
+		String priceEdit =  String.valueOf(detail.get("price"));
+		priceEdit = priceEdit.replaceAll(",", "");
+		int priceEditF= Integer.parseInt(priceEdit);
+		detail.put("price", priceEditF);
+		
 		String rid = String.valueOf(detail.get("mid"));
 		String sid = String.valueOf( session.getAttribute("mid")) ;
 		if(rid.equals(sid)) {
@@ -245,7 +255,7 @@ public class BoardController {
 		List<Map<String, Object>> cl = boardService.cl();
 		List<Map<String, Object>> el = boardService.el();
 		// 올렸던 파일 가져오기
-
+		
 		model.addAttribute("catelist", cl);
 		model.addAttribute("equiplist", el);
 		model.addAttribute("imageD", imageD);
@@ -443,11 +453,7 @@ public class BoardController {
 	  }
 	  
 	  @PostMapping("/uploadFile")
-	  public String uploadFile(@RequestParam("file") MultipartFile file) {
-		  System.out.println(file);
-		  int a = boardService.bnoI();
-		  System.out.println(a);
-		  
+	  public String uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("bno")int bno) {
 		  if (!file.isEmpty()) {
 		        //파일 이름 받아옴 
 		        String fileName = file.getOriginalFilename();
@@ -476,7 +482,7 @@ public class BoardController {
 				// 업로드 된 해당 이미지를 DB에 기록하기
 				// 첫번째로 올린 이미지를 메인이미지로
 				Map<String, Object> image = new HashMap<String, Object>();
-					image.put("bno", a);
+					image.put("bno", bno);
 					image.put("main",1);
 		        	image.put("originalFilename", originFile);
 					image.put("realFileName", realFileName);
@@ -492,6 +498,7 @@ public class BoardController {
 	  @PostMapping("/bmedit")
 	  public int bmedit(@RequestParam Map<String, Object>map,HttpSession session) {
 		// 수정하는 사람의 mid 넣어주기 
+		  	System.out.println(map);
 			String sid = String.valueOf( session.getAttribute("mid")) ;
 			map.put("mid", sid);
 			// 수정하는 글 띄어쓰기 넣어주기 
@@ -513,7 +520,7 @@ public class BoardController {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	            // 필요에 따라 예외 처리
-	            return -1;
+	            return -2;
 	        }
 	        // 체크 박스로 여러개 받은 시설 테이블에 저장
 			 Map<String, Object> equip = new HashMap<String, Object>(); 
@@ -524,11 +531,15 @@ public class BoardController {
 				  	equip.put("i", equipment);
 		            boardService.equip(equip);
 		      }
-			  // 기존 이미지 삭제 
-			  boardService.deleteImage(a);
+			  // 이미지 변경 체크 후 이미지가 변경되었을 경우 기본 이미지 삭제  
+			  String notChange = String.valueOf(map.get("notChange"));
+			  if(notChange.equals("off")) {
+				  boardService.deleteImage(a);
+			  }else {
+				  a=-1;
+			  }
 			 
-		  
-	  return a;
+			  return a;
 	  }
 	  
 	  @PostMapping("/editFile")

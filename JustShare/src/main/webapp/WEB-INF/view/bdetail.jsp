@@ -40,6 +40,8 @@
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" href="/css/footertoastr.min.css" />
@@ -138,16 +140,16 @@
     height: 100%;
 }
 .bottom_nav_menu .trade {
-	 line-height: 3;
+	 line-height: 2.8;
 	background-color: #004AAD;
 	border-radius :8px;
 	color : white;
 	font-size: 20px;
-    
+    	
 }
 .bottom_nav_menu .placep{
 	font-size: 20px;
-	 line-height: 3;
+	 line-height: 2.8;
 }
  .likeon, .likeoff { width: 55px; height: 50px;}
  .fa-star{rigth:5px;}
@@ -401,6 +403,11 @@ function del() {
 function edit(){
 	let chk2 = confirm("수정하시겠습니까?");
 	if(chk2){
+		if(tradeFin == 1){
+			alert("거래 완료된 글은 수정할 수 없습니다")
+			return false;
+		}
+		
 		if(sid == mid || mgrade == 4 ){
 			location.href="/bedit?bno=${detail.bno }";
 			
@@ -475,7 +482,7 @@ var marker = new kakao.maps.Marker({
 marker.setMap(map);
 
 
-var iwContent = '<div style="padding:5px; width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">'+"${detail.btitle}"+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px; width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align:center;	">'+"${detail.btitle}"+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 iwPosition = new kakao.maps.LatLng(x, y); //인포윈도우 표시 위치입니다
 
 //인포윈도우를 생성합니다

@@ -45,7 +45,10 @@
  <script src="/js/owl.carousel.min.js"></script>
  <script src="/js/common.js?ver=20000120" defer></script>
  <script src="/js/cookie.js?ver=20000120" defer></script>
- 
+ <style type="text/css">
+ .choose{width: 100%; margin-top: 10px; border: 0.3px solid black;}
+ .writeB{background-color: #004AAD ; border-radius: 5px; color:white;}
+ </style>
 
 </head>
 <body>
@@ -71,9 +74,9 @@
 					<tr class="border_bottom">
 						<th><label for="image">모피어스 이미지 </label><span aria-hidden="true">*</span></th>
 						<td>
-						 <div class="id_mo f_ex">
-						 <button id="picker" type="button" class="choose">파일 선택</button>
-						 </div>
+						 
+						 <button id="picker" type="button" class="choose">이미지 선택</button>
+						
 						 <div id="box"></div>
   						<div id="progress"></div>
   						<div id="upload-box"></div>	
@@ -169,8 +172,8 @@
 		</div>
 		<!-- 버튼 -->
 		<div class="sign_btn_w">
-			<button type="button" class="btn_black writeB" >작성완료</button>
-			<button type="button"  id="upload" class="btn_clear_black">이미지 업로드하기</button>
+			<button type="button" class="btn_black backB" onclick="history.back();">취소</button>
+			<button type="button" class="writeB" >작성완료</button>
 		</div>
 	</form>
 
@@ -269,13 +272,6 @@
 
 <script type="text/javascript">
 
-document.addEventListener('DOMContentLoaded', function() {
-    var uploadButton = document.getElementById('upload');
-        uploadButton.disabled = true;
-});
-
-
-
 
 $(function () {
     let selectImagePath = '';
@@ -318,39 +314,7 @@ $(function () {
           })
     });
     
-	    $upload.on('click', () => {
-	           	
-	    if (selectImagePath === '') return alert('이미지를 선택해주세요.')
-	    if ($uploadImg) {
-	      $uploadImg.remove();
-	      $uploadImg = null;
-	    }
-	    $progress.text('')
-	    $.uploadImageByPath(selectImagePath,bno, (total, current) => {
-	      console.log(`total: ${total} , current: ${current}`)
-	      $progress.text(`${current}/${total}`)
-	    })
-	      .then(({
-	        status, header, body
-	      }) => {
-	        // status code
-	        if (status === '200') {
-	          $progress.text('업로드 완료')
-	          const bodyJson = JSON.parse(body)
-	          $uploadImg = $(document.createElement('img'))
-	          $uploadImg.attr('height', '200px')
-	          $uploadImg.attr('src', bodyJson.fullpath)
-	          $uploadBox.append($uploadImg)
-	        } else {
-	        	window.location.href = 'http://172.30.1.30:8080/board'
-	        	
-	        }
-	      })
-	      .catch((err) => {
-	        if (typeof err === 'string') alert(err)
-	        console.error(err)
-	      })
-	    });
+	    
 
     $.imagePicker = function () {
           return new Promise((resolve) => {
@@ -509,7 +473,7 @@ $(function () {
             success: function (data) {
                 if (data > 0) {
                 	 var bno = data;
-                	 $upload.prop('disabled', false);
+                	 
                 	// 이 부분에 $upload 클릭 시 실행되어야 하는 코드를 넣어주세요.
                      if (selectImagePath === '') return alert('이미지를 선택해주세요.')
                      if ($uploadImg) {

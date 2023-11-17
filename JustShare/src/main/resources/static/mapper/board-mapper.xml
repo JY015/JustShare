@@ -29,7 +29,7 @@
 
 <select id="list" parameterType="Map" resultType="map">
 	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin,(select count(r.bno) from report r where r.bno=b.bno)as reportCount
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -84,7 +84,7 @@
 
 <select id="listp">
 	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin,(select count(r.bno) from report r where r.bno=b.bno)as reportCount
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate

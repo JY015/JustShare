@@ -28,8 +28,8 @@
         socket.send(JSON.stringify(jsonmsg), function() {
             // WebSocket 연결이 성공적으로 닫혔을 때 실행되는 코드
             socket.close();
-            window.location.href = './logout';
         });
+            window.location.href = './logout';
     } else {
         // mid가 없는 경우에는 그냥 로그아웃만 수행
         window.location.href = './logout';

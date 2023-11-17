@@ -1,14 +1,4 @@
 
-function logoutAndCloseSocket() {
-       // 여기서 WebSocket 연결을 닫는 코드를 추가
-       var mid = sessionStorage.getItem("mid"); 
-       
-             
-       var result = confirm("로그아웃 하시겠습니까?");
-                   
-   if(result) { 
-       
-
 
 
 
@@ -56,8 +46,7 @@ function logoutAndCloseSocket() {
 }
 
     
-    }
-}
+    
 	 //socket.send(JSON.stringify(jsonmsg));
 		
 	    //}
