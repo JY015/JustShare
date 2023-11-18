@@ -55,7 +55,7 @@
       <div class="work-content">
          <img src="https://www.value-venue.com/images/ic_work1.svg" alt="">
          <div>
-         <p class="work-title">총 멤버</p>
+         <p class="work-title">회원</p>
          <p class="work-description"> <br>
          <a style="font-size: 22px;" href="./member">• ${memberCount}명</a>
       </div>
@@ -127,7 +127,7 @@
           ['오피스텔',    ${boardCate[0].bcategory13 }], 
         ]);
         var options = {
-          title: '<상품 등록 카테고리>',
+          title: '<게시물 등록 카테고리>',
           pieHole: 0.1,
         };
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
