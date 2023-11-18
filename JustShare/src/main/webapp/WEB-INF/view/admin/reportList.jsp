@@ -113,7 +113,7 @@ button {
 	<div class="report-table-header">
     <div class="report-row-header">
         <div class="div-cell">신고한<br>사람</div>
-        <div class="div-cell">신고 당한<br>사람</div>
+        <div class="div-cell">신고<br>당한<br>사람</div>
         <div class="div-cell">신고<br>내용</div>
         <div class="div-cell">신고<br>카테고리</div>
         <div class="div-cell">신고<br>승인</div>
