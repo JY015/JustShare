@@ -127,13 +127,13 @@ button {
             <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcontent}</div>
             <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcateName}</div>
             	<div class="div-cell">
-					<select class="reportgrade" name="reportgrade"	onchange="reportgrade(${row.rno }, this.value)">
-						<optgroup label="신고 관리">
-							<option value="0" ${row.reportgrade eq 0 ? 'selected="selected"' : ''}>반려</option>
-							<option value="1" ${row.reportgrade eq 1 ? 'selected="selected"' : ''}>승인</option>
-						</optgroup>
-					</select>
-				</div>
+					<select class="reportgrade" name="reportgrade"   onchange="reportgrade(${row.rno }, this.value)">
+			                  <optgroup label="신고 관리">
+			                     <option value="0" ${row.reportgrade eq 0 ? 'selected="selected"' : ''}>N</option>
+			                     <option value="1" ${row.reportgrade eq 1 ? 'selected="selected"' : ''}>Y</option>
+			                  </optgroup>
+			               </select>
+		</div>
         </div>
     </c:forEach>
 </div>
