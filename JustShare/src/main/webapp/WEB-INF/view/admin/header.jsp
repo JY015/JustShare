@@ -16,7 +16,7 @@ margin-right:-32px !important;
            <div class="blue_btn">
            <c:choose>
                          <c:when test="${sessionScope.mid eq null}"><img src="../img/empty.png"></c:when>
-                         <c:otherwise><a class="nav-link2" href="./logout" onclick="return confirm('로그아웃 하시겠습니까?')"><img class="logout" src="../img/logout.png"></a></c:otherwise>
+                         <c:otherwise><a class="nav-link2" href="../logout" onclick="return confirm('로그아웃 하시겠습니까?')"><img class="logout" src="../img/logout.png"></a></c:otherwise>
                         </c:choose>    
               </div>
          </div>

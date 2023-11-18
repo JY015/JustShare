@@ -334,8 +334,8 @@ navigation: {   // 버튼 사용자 지정
 
    <div class="partition-line"></div>
     <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-        <h4 class="txt__tit">조회수 높은순</h4>
-        <span class="txt__subtit">조회수가 높은 게시물을 살펴보세요.</span>
+        <h4 class="txt__tit">조회수순</h4>
+        <span class="txt__subtit">조회수 높은 게시물을 살펴보세요.</span>
         <span class="see-more"><a href="/board?searchV=&areas=&categories=&equipments=&minPrice=&maxPrice=&sort=3">더보기
         <div class="arrow_right"></div></span></a>
         <div class="swiper swiper_space2">
@@ -387,7 +387,7 @@ navigation: {   // 버튼 사용자 지정
 </script>
   <div class="partition-line"></div>
 <section class="section--cardtype inner1400 m-pd24 pdt80 m-pdr0">
-     <h4 class="txt__tit">좋아요 높은순</h4>
+     <h4 class="txt__tit">좋아요순</h4>
      <span class="txt__subtit">좋아요 높은 게시물을 살펴보세요.</span>
      <span class="see-more"><a href="/board?searchV=&areas=&categories=&equipments=&minPrice=&maxPrice=&sort=2">더보기</a><div class="arrow_right"></div></span>
      <div>

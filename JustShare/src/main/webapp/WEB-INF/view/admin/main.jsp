@@ -34,14 +34,14 @@
      <div class="whole-title_black">
        <h1>Leasing</h1>
      </div>
-     <a href="/contact/forms?no=6" ><div class="sticker_new">
+    <!--  <a href="/contact/forms?no=6" ><div class="sticker_new">
        <img class="building" src="https://www.value-venue.com/images/rentask.png" alt="">
       <div class="sticker-content">
         <img src="https://www.value-venue.com/images/ic_asking.svg" alt="">
         <p>임차대행 문의하기</p>
       </div>
       </div>
-      </a> 
+      </a>  -->
      <h1 class="title">관리자 페이지</h1>
       <div class="leasing-management-subtitle">
        <p class="sub-copy">JustShare의 전문성과 세분화된 조직 체계로 
@@ -65,7 +65,7 @@
       <div class="work-content">
          <img src="https://www.value-venue.com/images/ic_work2.svg" alt="">
          <div>
-         <p class="work-title">상품 등록</p>
+         <p class="work-title">게시물</p>
          <p class="work-description">
           <br>
          <a style="font-size: 22px;" href="../board">• ${boardCount}개</a>
