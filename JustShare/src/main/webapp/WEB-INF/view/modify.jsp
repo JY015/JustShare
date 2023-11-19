@@ -74,27 +74,6 @@
                   </div>
                </div>
                   	
-                  	
-                  	
-                  	<!-- <div>
-	                  	<input name="postcode" class="menu-title" type="text" id="postcode" placeholder="우편번호">
-						<input class="menu-title" type="button" onclick="addrChange()" value="우편번호 찾기"><br>
-						<input name="address" class="menu-title" type="text" id="address" placeholder="주소"><br>
-						<input name="detailAddress" class="menu-title" type="text" id="detailAddress" placeholder="상세주소">
-						<input name="extraAddress" class="menu-title" type="text" id="extraAddress" placeholder="참고항목">
-                    </div> -->
-                  </div>
-                 <%--  <div class="form-group"> 전화번호 (숫자만 입력하세요.)
-                      <div class="detail">
-                      <input class="menu-title" type="text" id="phone" name="phone" placeholder="${info.mphone }">
-						<input class="btn" type="button" id="phoneChk" value = "인증번호 받기">	
-						<br><br>
-						<input class="menu-title" id="phone2" type="text" disabled required/>
-						<input class="btn" type="button" id="phoneChk2" value = "본인인증" disabled="disabled">
-						<div><span style="color: red;" class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주십시오.</span></div>
-						<input type="hidden" id="phoneDoubleChk"/>
-					</div>
-                  </div> --%>
                   <div class="form-group">
                     생년월일 : <p style="display: inline" class="menu-title">${info.mbirth}&nbsp;</p>
 				      <div><input name="birth" id="birth" type="date" min="1900-01-01"></div>

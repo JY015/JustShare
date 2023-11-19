@@ -33,6 +33,7 @@ location.href="./gradeChange?mno="+mno+"&grade="+value;
 	
 }
   }
+  
 </script>
 </head>
 <style>
@@ -50,13 +51,15 @@ location.href="./gradeChange?mno="+mno+"&grade="+value;
 	display: table-cell;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
-	background-color: #f5f5f5;
+	background-color: #004AAD;
+    color: white;
 }
 
 .div-cell{
 	display: table-cell;
 	padding: 10px;
 	border: 1px solid #f0f0f0;
+	color: currentColor;
 
 }
 
@@ -65,9 +68,10 @@ select {
 }
 </style>
 </head>
-<img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
-<body>	
-	<div class="div-table">
+<body style="font-size: 13px;">	
+<%@ include file="header.jsp"%>
+
+	<div style="text-align: center;" class="div-table">
 		<div class="div-row">
 			<div class="div-cell-head">아이디</div>
 			<div class="div-cell-head">이름</div>
@@ -77,14 +81,13 @@ select {
 
 		</div>
 		<c:forEach items="${memberList}" var="row">
-				<div class="div-row"> <%-- style="${row.mgrade <= 2 ? 'background-color: #007bff;!important;' : (row.mgrade == 4 ? 'background-color: #0056b3!important;' : '')}" --%>
+				<div class="div-row" style="${row.mgrade <= 2 ? 'color: red;!important;' : (row.mgrade == 4 ? 'color: #0056b3!important;' : '')}" >
 				<div class="div-cell">${row.mid}</div>
 				<div class="div-cell">${row.mname}</div>
 				<div class="div-cell">${row.memail}</div>
 
 				<div class="div-cell">
-					<select id="grade" name="grade"
-						onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
+					<select id="grade" name="grade"	onchange="gradeCh(${row.mno }, '${row.mname }', this.value)">
 						<optgroup label="회원등급 관리">
 							<option value="1" ${row.mgrade eq 1 ? 'selected="selected"' : ''}>탈퇴</option>
 							<option value="2" ${row.mgrade eq 2 ? 'selected="selected"' : ''}>징계</option>
@@ -96,6 +99,25 @@ select {
 			</div>
 		</c:forEach>
 	</div>
+	
+
+	
+	
+	
 	<%@ include file="adminfooter.jsp"%>
+	<footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+          </div>
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
 </body>
 </html>

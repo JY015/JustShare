@@ -5,15 +5,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>푸터</title>
+<title>footer</title>
 <link rel="canonical" href="https://www.valuevenue.co.kr/login" />
 <link rel="stylesheet" href="/css/import.css?ver=20000120" />
 <link rel="stylesheet" href="/css/style.css?ver=20000120" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
 <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
+<link rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
 <link rel="stylesheet" href="/css/main_page.css" />
+
+<!-- 폰트어썸 -->
+<link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" type="text/css"
+   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 
 <meta name="robots" content="index,follow">
@@ -77,8 +87,6 @@
     font-size: 11px;
     
 }
-
-
 </style>
 
 
@@ -86,7 +94,7 @@
    <ul><!-- 여기 수정함 b로-->
       <li class="b_nav_listb "><a href='/board'> <i class="xi-document"></i> </svg><p class="">게시판</p></a></li>
 
-      <li class="b_nav_listb "><a href='/mapMark6'> <i   class="xi-gps"></i> </svg><p class="">내위치</p></a></li>
+      <li class="b_nav_listb "><a href='/map'> <i class="xi-gps"></i> </svg><p class="">내위치</p></a></li>
 
       <li class=""><a href="/">
             <div class="home_btn">

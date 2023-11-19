@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -7,53 +7,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no, maximum-scale=1" />
-   <meta name="description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다"/>
-   <link rel="canonical"  href="https://www.valuevenue.co.kr/login"/>
-    <link rel="stylesheet" href="/css/fullcalendar.css" />
-    <link rel="stylesheet" href="/css/import.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/style.css?ver=20000120" />
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/valuevenue.css?ver=20000120" />
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-   <link rel="stylesheet" href="/css/listpage.css?ver=20000120">
     <link rel="stylesheet" href="/css/main_page.css" />
     <link rel="stylesheet" href="./css/login.css">
 
-   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-   <meta property="og:locale"       content="ko_KR" />
-   <meta property="og:type"       content="website" />
-   <meta property="og:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta property="og:description"  content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta property="og:url"          content="https://www.valuevenue.co.kr/login" />
-   <meta property="og:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg"/>
-   <meta property="og:site_name"    content="가치공간" />
-   <meta name="naver-site-verification" content="daa1d446d775041d4d3610f1a1cc60c1562046b1" />
-   <meta name="twitter:card"       content="summary" />
-   <meta name="twitter:title"       content="팝업스토어 NO.1 가치공간 - 온라이프(On-Life) 리테일 플랫폼" />
-   <meta name="twitter:description" content="가치공간은 가능성 속 잠재된 가치를 발굴하며, 공간 소유자에게는 유휴공간의 재발견을, 브랜드에게는 홍보의 장을, 소비자에게는 새로운 경험을 선사합니다" />
-   <meta name="twitter:image"       content="https://www.valuevenue.co.kr/images/main_default_v.jpg" />
-   <meta name="twitter:domain"       content="가치공간" /> 
-   <meta name="robots" content="index,follow">
-   <meta name="naver-site-verification" content="a2a89e942b8a6cb220490a635dc04627db8547ed" />
-   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="/js/valuevenue.js?ver=20000120" defer></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/common.js?ver=20000120" defer></script>
-    <script src="/js/cookie.js?ver=20000120" defer></script>
 <head>
 <meta charset="UTF-8">
-<title>로그인 창</title>
+<title>로그인</title>
 
 <script src="./js/jquery-3.7.0.min.js"></script>
 </head>
 
-<script>
-var _ss_user_id   = "";
-
-</script>
-  </head>
 <body>
+
+<!--헤더 시작-->
 <%@ include file="header.jsp"%>
+<!--헤더 끝-->
+  <div class="body__container section">
+  <input type="hidden" class="is_phpself" value="/login.php">
+  <input type="hidden" class="is_app_banner" value="">
+
     
 <script type="text/javascript" src="//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script src="/js/member.js?ver=200" defer></script>
@@ -73,7 +46,7 @@ var _ss_user_id   = "";
    <p style="color: red;"> 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.</p>
    </c:if>
    </div>   
-         <button class="login_click" type="submit">로그인</button><br><br>
+         <button style="background-color: #004AAD!important" class="login_click" type="submit">로그인</button><br><br>
          </form>
    </div>
 
@@ -110,7 +83,11 @@ var _ss_user_id   = "";
           <hr style="margin-top:12px; margin-bottom: 20px; width: 100%;">
           <div class="contact-social">
           <div>
+
+            <img style="width: 96px;margin-left: 4px;" src="/images/mo/logo_m_active2.svg" alt="">
+
             <img style="width: 96px;margin-left: 4px;" src="./img/JustSharelogo.png" alt="">
+
             <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
             TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
             <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
@@ -119,6 +96,7 @@ var _ss_user_id   = "";
         </div>
       </footer>
     </div>
+
 
   </body>
 </html>

@@ -12,9 +12,14 @@ public interface MainDAO {
 
 	List<Map<String,Object>> imageD();
 
-	List<Map<String, Object>> imageC();
 
 	List<Map<String, Object>> cateList();
+
+	List<Map<String, Object>> boardlatest();
+
+	List<Map<String, Object>> boardreadcount();
+
+	List<Map<String, Object>> blikescount();
 
 
 

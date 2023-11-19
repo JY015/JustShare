@@ -1,63 +1,76 @@
-@charset "UTF-8";
-
-.join-div{
-	box-sizing : border-box;
-	margin: 100px auto;
-	padding: 20px;
-	font-size:15px;
-	background-color:#F2F2F2;
-	width: 500px;
+body {
+   font-family: Arial, sans-serif;
+   text-align: center;
 }
 
-input{
-    background-color:white;
-    border-radius: 5px;
-    height: 50px;
-    width: 400px;
- 	border:none;
-  	outline:none;
+.container {
+   max-width: 500px;
+   margin: 0 auto;
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   
 }
 
-.emailBox{
-	display: flex;
-	text-align: center;
-	width: 400px;
+.button-container{
+   display: flex;
+    padding-bottom: 10px;
 }
 
-#memail{
-	width: 180px;
+
+label {
+   font-weight: bold;
+   display: block;
+   margin-top: 10px;
+   font-size: 16px;
 }
 
-.selectMail{
-	background-color:white;
-    border-radius: 5px;
-	width: 200px;
-    height: 50px;
- 	border:none;
-  	outline:none;
-  	margin-left: 20px;
-  	float: right;
+input[type="text"] {
+   padding: 8px !important;
+   margin: 5px 0 !important;
+   border: 1px solid #ccc !important;
+   border-radius: 4px !important;
+}
+input[type="date"] {
+   padding: 8px !important;
+   margin: 5px 0 !important;
+   border: 1px solid #ccc !important;
+   border-radius: 4px !important;
+   width: 100%;
 }
 
-.Jbutton{
-	background-color: black;
-	color: white;
-	border: none;
-    border-radius: 5px;
-    padding: 10px 25px; 
-    font-size: 16px;
-    cursor: pointer;
-}
-.idbutton{
-	background-color: black;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	padding: 5px 20px;
+button {
+   background-color: #004AAD !important;
+   color: white !important;
+   padding: 10px 20px !important;
+   border: none !important;
+   cursor: pointer !important;
+   border-radius: 4px !important;
+   font-size: 16px !important;
+   width: 100%;
+   max-width: 360px;
 }
 
-.join-div h1 {
-    font-weight: bold; 
-    font-size: 40px; 
-    color: black;
+.text_find_id {
+   color: #8A8A8A;
+   font-size: 1rem;
+   font-weight: 400;
+   word-break: keep-all;
+   line-height: 1.4;
+   text-align: center;
+   padding: 26px 0 42px;
+}
+
+.image-container {
+   margin: 20px 0;
+}
+
+.btn--disabled, button[disabled="disabled"] {
+    background: #eeefef;
+    color: #a0a0a0;
+    border: 1px solid #a0a0a0;
+    line-height: 0!important; 
+    height: 2.5rem;
+    border: 1px solid #eeefef;
+    cursor: default;
 }

@@ -3,14 +3,14 @@
 
 <mapper namespace="com.js.web.admin.AdminDAO">
 <select id="login" parameterType="Map" resultType="Integer">
-	SELECT
-	count(*) from members where mid = #{mid} and mpw = #{mpw}
-	and mgrade = 4
+   SELECT
+   count(*) from members where mid = #{mid} and mpw = #{mpw}
+   and mgrade = 4
 </select>
 
-<select id="memberList" resultType="map">	
-	SELECT mno, mid, mname, maddr, mbirth, mjoindate, memail, mphone, mgrade
-	FROM members
+<select id="memberList" resultType="map">   
+   SELECT mno, mid, mname, maddr, mbirth, mjoindate, memail, mphone, mgrade
+   FROM members
 </select>
 
 
@@ -21,27 +21,34 @@ WHERE mno=#{mno}
 
 </update>
 
-<select id="reportList" resultType="map">	
+<select id="reportList" resultType="map">   
 SELECT r.*, rc.rcateName
 FROM report r
-JOIN reportCate rc ON r.rcate = rc.rcate;
-
+JOIN reportCate rc ON r.rcate = rc.rcate WHERE reportgrade = 0;
 </select>
 
 <select id="reportListMember" parameterType="Map" resultType="Map">
-	SELECT mid, COUNT(*) as count
-	FROM report
-	GROUP BY mid;
+    SELECT mid, COUNT(*) as count
+   FROM report WHERE reportgrade = 1
+   GROUP BY mid;
 </select>
 
 <update id="gradeDown">
-	UPDATE members
-	SET mgrade = 1 WHERE MID IN (
-  	SELECT MID FROM report
-  	GROUP BY MID
-  	HAVING COUNT(*) >= 5
+   UPDATE members
+   SET mgrade = 1 WHERE MID IN (
+     SELECT MID FROM report
+     GROUP BY MID
+     HAVING COUNT(*) >= 5
 );
 </update>
+
+<update id="reportgrade" parameterType="Map">
+UPDATE report 
+SET reportgrade=#{reportgrade}
+WHERE rno =#{rno}
+</update>
+
+
 
 <select id="tradeList" resultType="Map">
 SELECT from_user_id, to_user_id, bno, timestamp,
@@ -64,6 +71,40 @@ SELECT
 FROM 
   tradehistory;
 </select>
+
+
+<select id="category" resultType="Map">
+  SELECT
+    COUNT(CASE WHEN rcate = 1 THEN 1 ELSE NULL END) AS category1,
+    COUNT(CASE WHEN rcate = 2 THEN 1 ELSE NULL END) AS category2,
+    COUNT(CASE WHEN rcate = 3 THEN 1 ELSE NULL END) AS category3,
+    COUNT(CASE WHEN rcate = 4 THEN 1 ELSE NULL END) AS category4,
+    COUNT(CASE WHEN rcate = 5 THEN 1 ELSE NULL END) AS category5
+FROM
+    report WHERE reportgrade = 1;
+</select>
+
+<select id="boardCate" resultType="Map">
+SELECT
+    COUNT(CASE WHEN cate = 1 THEN 1 ELSE NULL END) AS bcategory1,
+    COUNT(CASE WHEN cate = 2 THEN 1 ELSE NULL END) AS bcategory2,
+    COUNT(CASE WHEN cate = 3 THEN 1 ELSE NULL END) AS bcategory3,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory4,
+    COUNT(CASE WHEN cate = 5 THEN 1 ELSE NULL END) AS bcategory5,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory6,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory7,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory8,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory9,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory10,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory11,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory12,
+    COUNT(CASE WHEN cate = 4 THEN 1 ELSE NULL END) AS bcategory13
+    
+FROM
+    board;
+</select>
+
+
 
 <select id="monthDay" resultType="Map">
 SELECT

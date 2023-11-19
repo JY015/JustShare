@@ -1,8 +1,9 @@
-/* �뚯썝媛��� 遺�遺� new*/
+@charset "UTF-8";
+/* íšŒì›ê°€ìž… ë¶€ë¶„ new*/
 
-/* 怨듯넻css */
+/* ê³µí†µcss */
 
-/* 蹂대뜑 */
+/* ë³´ë” */
 .input_border {
   border-radius: 4px !important;
   border: 1px solid #DADADA !important;
@@ -12,7 +13,7 @@
   border-bottom: solid 1px #E2E2E2;
 }
 
-/* �뚮옓�� */
+/* í”Œëž™ìŠ¤ */
 .f_ex {
   display: flex;
 }
@@ -25,7 +26,7 @@
   align-items: center;
 }
 
-/* �⑤뵫 */
+/* íŒ¨ë”© */
 .pa_13_im{
   padding: 13px !important;
 }
@@ -47,12 +48,12 @@
 }
 
 
-/* 留덉쭊 */
+/* ë§ˆì§„ */
 .ma_top35{
   margin-top: 35px;
 }
 
-/* 諛깃렇�쇱슫�� */
+/* ë°±ê·¸ë¼ìš´ë“œ */
 .ba_F5586A{
   background: #F5586A;
 }
@@ -60,7 +61,7 @@
   background: white;
 }
 
-/* �고듃而щ윭 */
+/* í°íŠ¸ì»¬ëŸ¬ */
 .font_color_w{
 color: white;
 }
@@ -71,7 +72,7 @@ color: #565656;
 color: #ff001c;
 }
 
-/* �띿뒪�명겕湲� */
+/* í…ìŠ¤íŠ¸í¬ê¸° */
 .text_14{
   font-size:0.875rem;
 }
@@ -82,7 +83,7 @@ color: #ff001c;
   font-size: 1rem;
 }
 
-/* �띿뒪�� 援듦린 */
+/* í…ìŠ¤íŠ¸ êµµê¸° */
 .font_w_600{
   font-weight: 600;
 }
@@ -100,7 +101,7 @@ color: #ff001c;
   word-break: keep-all;
 }
 
-/* 踰꾪듉 */
+/* ë²„íŠ¼ */
 .btn_black {
   border-radius: 5px;
   background: #020202;
@@ -143,10 +144,10 @@ color: #ff001c;
   width: fit-content;
 }
 
-/* 怨듯넻css--end */
+/* ê³µí†µcss--end */
 
 
-/* 蹂몃Ц */
+/* ë³¸ë¬¸ */
 .signup_wrap {
   /* height: 100vh; */
   border-top: solid 1px #ddd;
@@ -167,7 +168,7 @@ color: #ff001c;
 }
 
 .signup_wrap .sign_inner .signup_list_wrap .signup_title::after {
-  
+  content: "SIGN UP";
   position: absolute;
   color: #F9F9F9;
   font-size: 6.5rem;
@@ -240,7 +241,6 @@ color: #ff001c;
 .input_sign_w table tbody tr td input {
   padding: 14px 11px;
   height: auto;
-  width: 58%;
   /* margin-right: 15px; */
   border-radius: 4px;
 }
@@ -268,7 +268,7 @@ color: #ff001c;
 .input_sign_w table tbody tr td select {
   padding: 14px 11px;
   height: auto;
-  width: 58%;
+  width: 100%;
   color: #616161;
   font-size: 0.875rem;
   font-weight: 300;
@@ -326,7 +326,7 @@ color: #ff001c;
 }
 
 
-/* �됱깮�뚯썝 泥댄겕 */
+/* í‰ìƒíšŒì› ì²´í¬ */
 
 .agree .checkbox input[type="checkbox"] {
   opacity: 0;
@@ -373,7 +373,7 @@ color: #ff001c;
   transition: transform 0.2s ease;
 }
 
-/* �됱깮�뚯썝 泥댄겕 -end*/
+/* í‰ìƒíšŒì› ì²´í¬ -end*/
 
 .agree {
   color: #3C3C3C;
@@ -398,7 +398,7 @@ color: #ff001c;
 
 
 
-/* �숈쓽 */
+/* ë™ì˜ */
 .accordion_container {
   position: relative;
   height: auto;
@@ -456,7 +456,7 @@ color: #ff001c;
 }
 
 
-/* �숈쓽 泥댄겕諛뺤뒪 */
+/* ë™ì˜ ì²´í¬ë°•ìŠ¤ */
 .container input {
   position: absolute;
   cursor: pointer;
@@ -517,7 +517,7 @@ strong{
 
 
 
- /* �섎떒踰꾪듉(痍⑥냼/�뚯썝媛���) */
+ /* í•˜ë‹¨ë²„íŠ¼(ì·¨ì†Œ/íšŒì›ê°€ìž…) */
  .sign_btn_w{
   display: flex;
   justify-content: center;
@@ -535,7 +535,7 @@ strong{
   padding-top: 60px;
  }
 
- /* SNS �뚯썝媛���  */
+ /* SNS íšŒì›ê°€ìž…  */
  
 .social_group .txt_title{
   text-align: center;
@@ -590,7 +590,7 @@ strong{
 
 
 
-/* 3媛�吏� �좏삎 �좏깮 */
+/* 3ê°€ì§€ ìœ í˜• ì„ íƒ */
 .signup_wrap .membership_inner{
   width: 1100px;
   margin: 0px auto;
@@ -697,10 +697,10 @@ strong{
   font-size: 1rem;
   padding: 10px 72px;
 }
-/* 3媛�吏� �좏삎 �좏깮 end */
+/* 3ê°€ì§€ ìœ í˜• ì„ íƒ end */
 
 
-/* 釉뚮옖�쒖젙蹂� �섏젙 */
+/* ë¸Œëžœë“œì •ë³´ ìˆ˜ì • */
 .signup_wrap .sign_inner .brand_tilte_wrap .brand_t{
   color: #242424;
   font-size: 1.52rem;
@@ -806,7 +806,7 @@ strong{
   width: 150px;
 }
 
-/* 釉뚮옖�� view page */
+/* ë¸Œëžœë“œ view page */
 .signup_wrap .sign_inner .signup_list_wrap .brand_view_t::after {
   content: "Brand";
   position: absolute;
@@ -882,7 +882,7 @@ strong{
 
 
 
-/* 濡쒓렇�� */
+/* ë¡œê·¸ì¸ */
 .signup_wrap .login_inner{
   width: 560px;
   margin: 0px auto;
@@ -979,7 +979,7 @@ strong{
   font-weight: 500;
 }
 
-/* 濡쒓렇�� 泥댄겕 */
+/* ë¡œê·¸ì¸ ì²´í¬ */
 .container2 input {
   position: absolute;
   opacity: 0;
@@ -1051,7 +1051,7 @@ strong{
   font-weight: 400;
 }
 
-/* 鍮꾨�踰덊샇李얘린 �앹뾽 */
+/* ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° íŒì—… */
 .find_pw_w{
   width: 573px !important;
   margin-top: -45px;
@@ -1106,7 +1106,7 @@ strong{
 }
 
 
-/* �뚯썝�뺣낫 �섏젙 */
+/* íšŒì›ì •ë³´ ìˆ˜ì • */
 .secession_wrap{
   text-align: center;
   padding-top: 26px;
@@ -1197,7 +1197,7 @@ strong{
 }
 
 
-/* 怨듦컙�뺣낫�깅줉  */
+/* ê³µê°„ì •ë³´ë“±ë¡  */
 .signup_wrap .sign_inner .signup_list_wrap .brand_view_t.space::after{
   content: "Space";
   position: absolute;
@@ -1212,7 +1212,7 @@ strong{
   margin-bottom: 0px;
 }
 
-/* �대�吏��낅줈�쒕�遺� */
+/* ì´ë¯¸ì§€ì—…ë¡œë“œë¶€ë¶„ */
  
 
 .img-upload .image-preview .prev_img .coverImage{
@@ -1279,7 +1279,7 @@ strong{
 
 
 
- /* �앹뾽 */
+ /* íŒì—… */
  .layer-wrap.popup_css .pop_text_css{
   text-align: center;
   padding: 17px;
@@ -1311,10 +1311,10 @@ strong{
 
 
 
-/* �쒕툝由�/紐⑤컮�� */
+/* íƒœë¸”ë¦¿/ëª¨ë°”ì¼ */
 
 @media screen and (max-width:1058px){
-     /* 3媛�吏� �좏삎�좏깮 */
+     /* 3ê°€ì§€ ìœ í˜•ì„ íƒ */
      .signup_wrap .membership_inner{
       width: 100%;
       padding-left: 16px;
@@ -1364,7 +1364,7 @@ strong{
     }
  
     
-    /* 釉뚮옖�쒖젙蹂댁닔�� */
+    /* ë¸Œëžœë“œì •ë³´ìˆ˜ì • */
     .signup_wrap .sign_inner .brand_tilte_wrap .brand_t{
       font-size: 1.42rem;
     }
@@ -1422,7 +1422,7 @@ strong{
   .input_sign_w table tbody tr th{
     padding-left: 19px;
   }
-  .input_sign_w table tbody tr td input{
+  .input_sign_w table tbody tr td{
     width: 100%;
   }
   .signup_wrap .sign_inner .signup_list_wrap .signup_title::after{
@@ -1434,7 +1434,7 @@ strong{
     width: 120px;
   }
   .input_sign_w table tbody tr td select{
-    width: 100%;
+    /* width: 100%; */
   }
 
   .btn_black{
@@ -1483,7 +1483,7 @@ strong{
     padding: 15px;
   }
 
-  /* 鍮꾨�踰덊샇李얘린 �앹뾽 */
+  /* ë¹„ë°€ë²ˆí˜¸ì°¾ê¸° íŒì—… */
   .find_pw_w{
     width: 90% !important;
   }
@@ -1560,7 +1560,7 @@ strong{
    }
 
 
-   /* 濡쒓렇�� 遺�遺�  */
+   /* ë¡œê·¸ì¸ ë¶€ë¶„  */
    .signup_wrap .login_inner{
     width: 100%;
    }
@@ -1657,7 +1657,7 @@ strong{
     font-size: 3.6vw;
   }
 
-  /* 濡쒓렇�� 遺�遺�  */
+  /* ë¡œê·¸ì¸ ë¶€ë¶„  */
   .signup_wrap .login_inner .sign_movement p{
     font-size: 16px;
     transition: 0.3s ease;

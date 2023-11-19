@@ -3631,13 +3631,13 @@ display: block;
     margin-top: 80px;
 }
 .swiper-button-next {
-    background: url(/images/btn_next_round.svg) no-repeat!important;
+    /* background: url(/images/btn_next_round.svg) no-repeat!important; */
     background-position: center!important;
     width: 60px!important;
     height: 60px!important;
   }
   .swiper-button-prev {
-    background: url(/images/btn_prev_round.svg) no-repeat!important;
+    /* background: url(/images/btn_prev_round.svg) no-repeat!important; */
     width: 60px!important;
     height: 60px!important;
     left: var(--swiper-navigation-sides-offset,-28px)!important;

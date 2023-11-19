@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<img alt="logo" src="../img/JustShare.png" width="25%;">&nbsp<br><br>
 <body> 
+<%@ include file="header.jsp"%>
+
 <style>
 .div-table {
 	display: table;
@@ -32,16 +33,29 @@
 }
 
 .div-row {
-	display: table-row;
+	display: table-row;	
+}
+
+.div-cell1{
+	display: table-cell;
+	padding: 10px;
+	border: 1px solid black;
+	width: 20%;
+	background-color: #ccdaee;	
 }
 
 .div-cell {
 	display: table-cell;
 	padding: 10px;
-	border: 1px solid #f0f0f0;
+	border: 1px solid black;
+	width: 20%;
 }
 
-
+.div-cell-a{
+	border: 1px solid black;
+	display: table-cell;
+	width: 20%;
+}
 
 .report-table {
 	display: table;
@@ -52,54 +66,152 @@
 	display: table-row;
 }
 
+.report-table-header{
+	display: table;
+	width: 100%;
+}
+
+.report-row-header{
+	display: table-row;
+	background-color: #ccdaee;	
+}
+
+button {
+    background-color: #004AAD!important;
+ }   
+
+
+.reportgrade{
+	width: 100%;
+}
 
 </style>
-<button id="toggleButton">숨기기</button>
+
 <div style="text-align: center">
 <div class="div-table">
 		<div class="div-row">
-			<div class="div-cell">신고 아이디</div>
-			<div class="div-cell">신고 누적</div>
+			<div class="div-cell1">신고 아이디</div>
+			<div class="div-cell1">신고 누적</div>
 		</div>
 		
 		<c:forEach items="${reportListMember}" var="m">
 			<div class="div-row">
-				<div class="div-cell">${m.mid}</div>
+				 <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
 				<div class="div-cell">${m.count}회
 				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
 			</div>
 		</div>
 </c:forEach>
-</div>	
-<br>
+</div>
 
-	<div class="report-table">
-		<div class="report-row">
-			<div class="div-cell">신고한 사람</div>
-			<div class="div-cell">신고 당한 사람</div>
-			<div class="div-cell">신고 내용</div>
-			<div class="div-cell">신고 카테고리</div>
-		</div>
-		<c:forEach items="${reportList}" var="row">
-			<div class="report-row" onclick="location.href='/bdetail?bno=${row.bno}'">
-				<div class="div-cell">${row.rmid}</div>
-				<div class="div-cell">${row.mid}</div>
-				<div class="div-cell">${row.rcontent}</div>
-				<div class="div-cell">${row.rcateName}</div>
+<br><br><br>
+ <div id="donutchart" style="width: 100%; height: 100%;"></div>
+ <br><br><br>
+ 
+<button id="toggleButton" style="background-color: #004AAD!important">펼치기/숨기기</button>	
+<br> <br><br><br>
+	<div class="report-table-header">
+    <div class="report-row-header">
+        <div class="div-cell">신고한<br>사람</div>
+        <div class="div-cell">신고 당한<br>사람</div>
+        <div class="div-cell">신고<br>내용</div>
+        <div class="div-cell">신고<br>카테고리</div>
+        <div class="div-cell">신고<br>승인</div>
+    </div>
+    </div>
+    <div class="report-table">
+    <c:forEach items="${reportList}" var="row">
+        <div class="report-row">
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rmid}</div>
+            <div class="div-cell-a" onclick="location.href='/bdetail?bno=${row.bno}'">${row.mid}</div>
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcontent}</div>
+            <div class="div-cell" onclick="location.href='/bdetail?bno=${row.bno}'">${row.rcateName}</div>
+            	<div class="div-cell">
+					<select class="reportgrade" name="reportgrade"	onchange="reportgrade(${row.rno }, this.value)">
+						<optgroup label="신고 관리">
+							<option value="0" ${row.reportgrade eq 0 ? 'selected="selected"' : ''}>반려</option>
+							<option value="1" ${row.reportgrade eq 1 ? 'selected="selected"' : ''}>승인</option>
+						</optgroup>
+					</select>
+				</div>
+        </div>
+    </c:forEach>
 </div>
-</c:forEach>
 </div>
-</div>
+
+<br><br><br><br>
 
 <script>
-    $(document).ready(function () {
+     $(document).ready(function () {
         $('#toggleButton').click(function () {
-            $('.report-table .report-row').toggle();
+            $('.report-table').toggle();
         });
-    });
-</script>
+    }); 
+    function showReports(userId) {
+    	  $('.report-table .report-row').hide();
+        if (userId) {
+            $('.div-cell-a').each(function () {
+                if ($(this).text() === userId) {
+                    console.log(userId);
+                    $(this).closest('.report-table .report-row').show();
+                }
+            });
+        }
+    }
+        
+    function reportgrade(rno, value){
+    	if(confirm("신고 승인 하시겠습니까?")){
+    	location.href="./reportgrade?rno="+rno+"&reportgrade="+value;  		
+    	} else {
+            alert("신고 승인이 취소되었습니다.");
+        }
+    }  
 
+    
+    
+</script>
 <%@ include file="adminfooter.jsp"%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['정보 다름',     ${category[0].category1 }],
+          ['중복게시물',      ${category[0].category2 }],
+          ['의심스러움',  ${category[0].category3 }],
+          ['거래관련 분쟁', ${category[0].category4 }],
+          ['기타',    ${category[0].category5 }]
+        ]);
+
+        var options = {
+          title: '<카테고리별 신고>',
+          pieHole: 0.1,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+<footer class="footer1400">
+        <div id="footer__box" class="footer__inner txt__subtit">
+          <div class="flex">
+          </div>
+          <div class="contact-social">
+          <div>
+            <img style="width: 96px;margin-left: 4px;" src="../img/JustSharelogo.png" alt="">
+            <p>서울특별시 강남구 테헤란로7길 7 에스코빌딩 6~7층<br>
+            TEL : <a href="tel:010-1111-2222">010-1111-2222</a> &nbsp;&nbsp;사업자등록번호 : 000-00-00000 <br>
+            <a href="mailto:valuevenue@valuevenue.co.kr">JustShare@valuevenue.co.kr</a> </p>
+          </div>
+        </div>
+        </div>
+      </footer>
+
+
+
 		
 				
 </body>

@@ -22,13 +22,14 @@
 		<if test = "minPrice !=null and minPrice !=''">
 		AND b.bprice  between #{minPrice} AND #{maxPrice} 
 		</if>
+		AND b.bdel=1  
 		</where>
 	
 </select>
 
 <select id="list" parameterType="Map" resultType="map">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
+	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -72,14 +73,18 @@
 </select>
 
 <select id="areaList" parameterType="Map" resultType="Map">
-	SELECT ano,aname
+	SELECT ano,aname,rno
 	FROM area
 	
 </select>
+<select id="regionList">
+	SELECT rno,rname
+	FROM region
+</select>
 
 <select id="listp">
-	SELECT b.bno ,b.btitle,b.bprice,b.bcontent,b.bdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
-	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked
+	SELECT b.bno ,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,DATE_FORMAT(b.bdate, '%Y.%m.%d %H:%i')as fdate,b.cate,b.bread,b.addr,b.mid,(Select i.realFile where b.bno=i.bno and main = 1 )as realFile,(SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno) AS likesCount
+	,c.cname , (SELECT COUNT(l.lno) FROM likeList l WHERE b.bno=l.bno and mid=#{sid})AS isLiked,b.rentTime,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
 	FROM board b
 	LEFT JOIN image i ON b.bno = i.bno
 	LEFT JOIN cate c ON b.cate = c.cate
@@ -123,8 +128,8 @@
 </select>
 
 <insert id="adr" parameterType="Map" >
-	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano)
-	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano})
+	INSERT INTO board (btitle,cate,bprice,bcontent,longitude,latitude,addr,mid,addNum,addDetail,rno,ano,size,startTime,endTime,rentTime)
+	VALUES (#{title},#{bcate},#{price},#{content},#{x},#{y},#{add},#{mid},#{addNum},#{addD},#{rno},#{ano},#{size},#{startTime},#{endTime},#{rentTime})
 </insert>
 
 <select id="bno">
@@ -154,9 +159,10 @@
 </select>
 
 <select id="detail" parameterType="Map" resultType="Map">
-	SELECT *
-	FROM board
-	WHERE bno=#{bno}
+	SELECT b.bno,b.btitle,FORMAT(b.bprice,0)as price,b.bcontent,b.bdate,b.cate,b.bread,b.latitude,b.longitude,b.mid,b.addr,b.addDetail,b.addNum,b.ano,(SELECT c.cname from cate c where b.cate=c.cate)as cateName,(SELECT c.cicon from cate c where b.cate=c.cate)as cateIcon,
+	b.size,b.startTime,b.endTime,round((SELECT AVG(rl.star)AS averageStar FROM reviewList rl WHERE rl.rtid=b.mid),1 )as averageS,(select Count(th.hno) from tradehistory th where th.bno=b.bno)as tradeFin
+	FROM board b 
+	WHERE b.bno=#{bno}
 </select>
 
 <select id="imageD">
@@ -174,6 +180,16 @@
 	WHERE be.bno=#{bno}
 	ORDER BY be.eid
 	
+</select>
+
+<select id="equipDetail">
+	SELECT e.ename,e.eicon
+	FROM boardEquipment be
+	JOIN board b ON b.bno=be.bno
+	JOIN equipment e ON e.eid=be.eid
+	WHERE be.bno=#{bno}
+	ORDER BY be.eid
+
 </select>
 
 <update id="del">
@@ -200,12 +216,6 @@
 	VALUES (#{rmid},#{mid},#{bno},#{rcontent},#{rcate} )
 </insert>
 
-<update id="breport">
-	UPDATE board
-	SET brno=brno+1
-	WHERE bno=#{bno}
-</update>
-
 <select id="dp" parameterType="Map" resultType="Integer">
 	SELECT Count(*)
 	FROM report
@@ -221,7 +231,7 @@
 
 <update id="bedit">
 	UPDATE board
-	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum}
+	SET btitle=#{title},cate=#{bcate},bprice=#{price},bcontent=#{content},addr=#{add},longitude=#{x},latitude=#{y},addDetail=#{addD},rno=#{rno},ano=#{ano},mid=#{mid},addNum=#{addNum},size=#{size},startTime=#{startTime},rentTime=#{rentTime},addDetail=#{addD},endTime=#{endTime}
 	WHERE bno=#{bno}
 	
 </update>
@@ -257,4 +267,50 @@
 	FROM likeList
 	WHERE mid=#{sid}
 </select>
+
+<select id="place">
+ SELECT b.btitle,b.startTime,b.endTime,b.addr,(SELECT i.realFile from image i where b.bno = i.bno and i.main = 1 )as image ,b.bno
+ FROM board b
+ WHERE b.cate=#{cate} and b.ano=#{ano} and b.bno != #{bno} 
+ ORDER by RAND() LIMIT 5;
+
+</select>
+<select id="freviewCheck" parameterType="Map"> 
+ SELECT COUNT(reviewNo)
+ FROM reviewList 
+ WHERE bno=#{bno} and rfid=#{fid} 
+</select>
+
+<select id="treviewCheck" parameterType="Map" > 
+ SELECT COUNT(reviewNo)
+ FROM reviewList 
+ WHERE bno=#{bno} and rfid=#{tid} 
+</select>
+
+<insert id="postreview" parameterType="Map">
+INSERT INTO reviewList (bno, rfid, rtid, star, reviewcontent)
+SELECT #{bno}, #{rfid},#{rtid},#{reviewStar},#{reviewContent}
+WHERE NOT EXISTS (
+    SELECT 1 FROM reviewList 
+    WHERE bno = #{bno} AND rfid =#{rfid} AND rtid = #{rtid}
+);
+</insert>
+<select id="tradeFin">
+	SELECT Count(hno)
+	FROM tradehistory
+	<where>
+		<if test="bno != null and bno !='' and fid != null and fid !='' and tid != null and tid !=''">
+			bno=#{bno} and from_user_id=#{fid} and to_user_id=#{tid}
+		</if>
+	</where>
+</select>
+<select id="bnoI">
+SELECT bno
+FROM board
+ORDER BY bno DESC 
+LIMIT 1 	
+</select>
+<delete id="deleteImage">
+	delete from image where bno=#{a}
+</delete>
 </mapper>
