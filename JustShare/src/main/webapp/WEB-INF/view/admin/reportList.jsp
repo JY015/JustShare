@@ -98,7 +98,7 @@ button {
 			<div class="div-row">
 				 <div class="div-cell" onclick="showReports('${m.mid}')">${m.mid}</div>
 				<div class="div-cell">${m.count}회
-				<c:if test="${m.count >= 5}">&nbsp&nbsp<span style="color: red">신고 횟수 5회 이상 계정 정지</span></c:if>
+				<c:if test="${m.count >= 10}">&nbsp&nbsp<span style="color: red">신고 횟수 10회 이상 계정 정지</span></c:if>
 			</div>
 		</div>
 </c:forEach>

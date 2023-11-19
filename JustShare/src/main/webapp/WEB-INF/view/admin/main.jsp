@@ -65,7 +65,7 @@
       <div class="work-content">
          <img src="https://www.value-venue.com/images/ic_work2.svg" alt="">
          <div>
-         <p class="work-title">상품 등록</p>
+         <p class="work-title">총 게시물</p>
          <p class="work-description">
           <br>
          <a style="font-size: 22px;" href="../board">• ${boardCount}개</a>
