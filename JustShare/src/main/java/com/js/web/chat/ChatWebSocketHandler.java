@@ -69,6 +69,10 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
         return null; // 예외 처리 필요
     }
     
+    public Set<String> getAllConnectedClientIds() {
+        return clients.keySet();
+    }
+    
 	 @Override
 	    public void afterConnectionEstablished(WebSocketSession session) throws Exception {  //연결된 후 
 		
@@ -108,7 +112,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	    	
 	    	if (session.isOpen()) {
 	    		
-	    		System.out.println("종료확인2"+payload);
+	    		//System.out.println("종료확인2"+payload);
 	    			payload = message.getPayload();
 	    	 	jsonObject = new JSONObject(payload);
 	    	
@@ -123,7 +127,68 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	      
 	            
 	             
-	         } else if (jsonObject.has("toId") && jsonObject.has("mid") && jsonObject.has("text")
+	         }else if (jsonObject.has("mm")) {
+	        	 
+	        
+	        		//##1 온라인,오프라인 업데이트표시
+	 	        String toId = jsonObject.optString("mm", "");
+	 	       String message1 = "연결";
+	 	        String clientStatus ="연결불러오기";
+	 	    
+	 	        
+	 	       
+	 	        
+	 	     //System.out.println("toId"+toId);
+	 	        JSONObject statusObject = new JSONObject();
+	             for (String clientName : clients.keySet()) {
+	                 // 상태 정보를 가져오는 로직을 추가해야 합니다.
+	            	 //System.out.println("1111"+clientName.toString());
+	            	 
+	            	 if(toId.equals(clientName)) {
+	            		
+	             	   clientStatus = "연결불러오기"; // 접속중인 사용자 key,value로 "연결불러오기" 값 저장
+	             	    statusObject.put(clientName, clientStatus);
+	             	   //sendMessageToAllClients(toId,message1,session);//접속알림
+	             	
+	             	    	break;
+	            	 }
+	             	
+	             	}
+	           
+	             	TextMessage statusMessage = new TextMessage(statusObject.toString());
+	             		session.sendMessage(statusMessage);
+	     	
+	             	
+	             	
+	             		WebSocketSession senderSession = clients.get(toId);
+	             		
+	             		 for (WebSocketSession clientSession : clients.values()) {
+	      		        	
+	      		        	if (clientSession != null && clientSession.isOpen() && !clientSession.equals(senderSession)) {
+	      		        	   try {
+	      		        		   
+	      		        		
+	      			                clientSession.sendMessage(statusMessage);
+	      			               
+	      	    	    
+	      	    	   
+	      	    	            
+	      	    	        } catch (IOException e) {
+	      	    	            e.printStackTrace();
+	      	    	        }
+	      	    	    } else {
+	      	    	        // 클라이언트가 로그인되지 않았거나 연결이 끊어진 경우에 대한 처리
+	      	    	    }
+	      	    		
+	      	       
+	      	    	}
+	        	 
+	        	 
+	        	 
+	        	 
+	         }
+	        	
+	    	 else if (jsonObject.has("toId") && jsonObject.has("mid") && jsonObject.has("text")
 	        		 && !jsonObject.has("firstmsg")) {
 	   
 	        	  if(jsonObject.get("mid").equals(jsonObject.get("toId"))) {
@@ -318,6 +383,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 	        
 	        sendMessageToAllClients(mid,message,session);//접속알림
 	        
+	    
 	  
 	        
 	        //## 온라인,오프라인 초기 생성

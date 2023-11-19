@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="/css/toastr.min.css" />
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
+
 <style>
 .b_nav_list {
    top: 7px;
@@ -93,8 +94,9 @@
 
 	
 
-	//const socket = new WebSocket("ws://localhost:8080/chat");
+	///const socket = new WebSocket("ws://localhost:8080/chat");
 	const socket = new SockJS("//localhost:8080/chat");
+	   //const socket = new SockJS("http://justshare.store/chat");
 	 // ##소켓 연결##
      socket.onopen = function(event) {
        	console.log("커넥션이 만들어졌습니다.1");
@@ -174,6 +176,8 @@
  			return false;
  		}
  		
+ 		 
+ 		 
  		serchidutil1(toId,mid,bno);
  
 
@@ -182,6 +186,7 @@
  
  	function serchidutil1(toId,mid,bno) {
  			
+ 		
  	
 		$.ajax({
             type: "GET",
@@ -208,6 +213,30 @@
             	//## 8-2 대화창 재생성##
             	msgload(jsonData);
             	
+            	 //비동기 임시방편인듯
+            	setTimeout(function() {
+            	
+            	    socket.send(JSON.stringify({"mm": toId}));
+            	}, 30); //
+            	
+            	
+            	
+            	
+            	//socket.send(JSON.stringify({"mm": toId}));
+            	
+            	
+            	 //msgload(jsonData, function () {
+            
+                //socket.send(JSON.stringify({ "toId": toId }));
+           // });
+            //	
+            	 //msgload(jsonData).then(function () {
+                     // msgload의 작업이 완료된 후에 실행될 코드
+                     //alert(1);
+                 
+                     //socket.send(JSON.stringify({ "toId": toId }));
+                // });
+            	
             	
             },
             error: function() {
@@ -219,7 +248,7 @@
 	}
  	
  
- 	
+
  	//##현재화면을 확인후 메시지 전달 할지 체크 ( 숨겨짐여부까지 확인가능)
  	function getCurrentScreen() {
  	    var contactsCard = document.querySelector('.contacts_card');
@@ -350,13 +379,20 @@ for (var key in data) {
     	var bno = data.bno;
     	var fromchk = data.fromchk;
     
+    
+    	var toId1Element = document.querySelector(".toId1");
+
+    	if (toId1Element) {
+    	  // .toId1 요소가 존재할 경우 해당 내용을 가져옴
+    	    	var toId1 = document.querySelector(".toId1").textContent;
+    	}
 		if (currentScreen === 'contacts_card') {
         	
 			if(fromchk==1) { 
 			jstradefromupdate(mid,toId,bno);
 			}
 
-        } else if (currentScreen === 'msgload') {
+        } else if (currentScreen === 'msgload'&&(toId1==toId||toId1==mid)) {
         	
         	tradefromupdate(mid,toId);
         	
@@ -375,14 +411,19 @@ for (var key in data) {
     	var mid = data.mid;
     	var bno = data.bno;
     	var tochk = data.tochk;
-	 
+    	var toId1Element = document.querySelector(".toId1");
+
+    	if (toId1Element) {
+    	  // .toId1 요소가 존재할 경우 해당 내용을 가져옴
+    	    	var toId1 = document.querySelector(".toId1").textContent;
+    	}
 	 if (currentScreen === 'contacts_card') {
      	//여기부터
      if(tochk==1) { 
 		 jstradetoupdate(mid,toId,bno);
      	}
 
-     } else if (currentScreen === 'msgload') {
+     } else if (currentScreen === 'msgload'&&(toId1==toId||toId1==mid)) {
     	 
     	 	tradetoupdate(mid,toId,bno);
     	 
@@ -395,6 +436,8 @@ for (var key in data) {
  }
 	 //alert(currentScreen);
     if(value ==="연결불러오기") {  // 로그인시 기존접속자 온라인,오프라인 표시하기
+
+    	
     	
  	      if (currentScreen === 'contacts_card') {
  	    	  
@@ -405,15 +448,20 @@ for (var key in data) {
  	   
  	    		
 
- 	          } else if (currentScreen === 'msgload') {
- 	    
+ 	          } else if (currentScreen === 'msgload' ) {
+ 	        		
  	        	 for (var userName in data) {
  	  	  	       var sender = userName;
  	  	  	 		 msgonlineupdate(sender);
+ 	  	  	 
  	  	     	   }
  	       
- 	          } else {
- 	     
+ 	          } else if(currentScreen === '1') {
+ 	        	  
+ 	        	 for (var userName in data) {
+ 	 	  	  	       var sender = userName;
+ 	        	 detailtomsgupdate(sender);
+ 	        	 }
  	          	// 다른페이지에는 추가하지않음 여기에 알림 모달 넣는방법도?
  	          	
  	          }
@@ -646,7 +694,7 @@ function tradetoupdate(mid,toId){
 				    
 				};
 
-				toastr.success("" + toId + '님과 거래가 완료 되셨습니다.', "알림");
+				toastr.success("" + mid + '님과 거래가 완료 되셨습니다.', "알림");
 			  
 		} else if (fromchk==0 && tochk==1){
 			userchk.setAttribute('data-touserchk',0);
@@ -753,6 +801,7 @@ function onlineupdate(sender) {
 	//## 메세지방 접속상태 online 업데이트
 	function msgonlineupdate(sender) { 
 		
+	
 		  var userList = document.querySelectorAll('.user_info1');
 	   		 var imgList = document.querySelectorAll('.img_cont1');
 	       var imgElement;
@@ -771,10 +820,37 @@ function onlineupdate(sender) {
 	     }	 
 	 }
 	 
-	
-	
-  
+	//## 대화방에서 넘어갈경우 상태업데이트 
+	function detailtomsgupdate(sender) { 
+		
 
+		var queryString = window.location.search;
+
+		// URLSearchParams를 사용하여 쿼리 문자열을 파싱합니다.
+		var urlParams = new URLSearchParams(queryString);
+		
+	var toId=urlParams.get("toId");
+	var bno=urlParams.get("bno");
+  
+  if(toId != null && bno != null )  {
+	 
+
+     if (toId === sender) {
+     
+    	
+		    
+		    	    
+		    	                //statusElement.classList.replace('offline', 'online');
+		    	   
+    			 
+    		 }
+		     
+		            
+		            
+		     	   //imgElement.querySelector('.status1').classList.replace('offline', 'online_icon');
+		        }
+  }
+		 
 
 
  //## 대화목록리스트 메세지업데이트 (sender받을떄 ,toId로받을떄 2가지버전)
@@ -808,7 +884,7 @@ function updateMessage(sender, time, message,sort,bno) {
             // sender가 일치하는 경우에만 time 및 message 업데이트
             timeElement = userList[i].querySelector('.time');
             messageElement = userList[i].querySelector('.roommessage');
-        	noteNumElement = messageElement.querySelector('.note-num');
+        	noteNumElement = timeElement.querySelector('.note-num');
         
         	 var currentMsgCount = parseInt(noteNumElement.textContent);
         	
@@ -821,7 +897,8 @@ function updateMessage(sender, time, message,sort,bno) {
         	
             timeElement.textContent = time;
             //messageElement.textContent = message+'<span class="note-num" style="display: block;">'+currentMsgCount+'</span>';
-            messageElement.innerHTML = message + '<span class="note-num" style="display: block;">' + currentMsgCount + '</span>';
+             timeElement.innerHTML=time+'<span class="note-num" style="display: block;">' + currentMsgCount + '</span>';
+            messageElement.innerHTML = message;
             msgcount=noteNumElement.textContent;
             //noteNumElement.textContent = currentMsgCount; // 읽지 않은 메시지 수 업데이트
             noteNumElement.style.display = 'block';
@@ -832,14 +909,16 @@ function updateMessage(sender, time, message,sort,bno) {
         } else if (toIdElement.textContent === sender && sort ===0 ) {
         	
         	 timeElement = userList[i].querySelector('.time');
+        	
+        	 timeElement.innerHTML = time + '<span class="note-num" style="display: none;">0</span>';
              messageElement = userList[i].querySelector('.roommessage');
-             messageElement.innerHTML = message + '<span class="note-num" style="display: none;">0</span>';
+             messageElement.innerHTML = message;
              
          	//noteNumElement = messageElement.querySelector('.note-num');
          	
          
          	
-             timeElement.textContent = time;
+           
              //messageElement.textContent = message;
            
              
@@ -863,17 +942,16 @@ function updateMessage(sender, time, message,sort,bno) {
     	  	  chatcreate+='<img src="'+img+'" class="rounded-circle user_img">';
     	      chatcreate+='<span class="status online_icon"></span></div>';
     	      chatcreate+='<div class="user_info"><span class="toId" data-bno="'+bno+'">'+sender+'';
-    	      chatcreate+='</span><span class="time">'+time+'</span>';
-    	      chatcreate+='<p class="roommessage">'+message+'';
+    	      chatcreate+='</span><span class="time">'+time+'<span class="note-num" style="display: block;">'+1+'</span></span>';
+    	      chatcreate+='<p class="roommessage">'+message+'</p></div></div></li>';
     	      //if (msgcount === 0) {
     	    	 //chatcreate+='<span class="note-num" style="display: none;">'+msgcount+'</span>';
   	      		
   	      	  //}else{
-  	      		 chatcreate+='<span class="note-num" style="display: block;">'+1+'</span>';
+  	      
   	      		  
   	      	  //}	
-    	     
-    	      chatcreate+='</p></div></div></li>';
+  
         	
   	    
   	    roomlist.insertAdjacentHTML('afterbegin', chatcreate);
@@ -1346,8 +1424,9 @@ function sendMessage() {
         	    '<div class="d-flex bd-highlight" type="button" onclick="serchid(this)">' +
         	    '<div class="img_cont"><img src="' + toimg + '" class="rounded-circle user_img"><span class="status offline"></span></div>' +
         	    '<div class="user_info"><span class="toId" data-bno="' + bno + '">' + toId + '</span>' +
-        	    '<span class="time">' + formattedTime + '</span><p class="roommessage">'+ lastmessage +
-        	    '<span class="note-num" style="display: ' + (msgcount === 0 ? 'none' : 'block') + ';">' + msgcount + '</span></p></div></div></li>'
+        	    '<span class="time">' + formattedTime +'<span class="note-num" style="display: ' + (msgcount === 0 ? 'none' : 'block') + ';">'+
+        	     msgcount + '</span></span><p class="roommessage">'+ lastmessage +
+        	    '</p></div></div></li>'
         );
         
 
@@ -1479,16 +1558,16 @@ function sendMessage() {
       		roombody +='<div class="img_cont"><img src="'+toimg+'"class="rounded-circle user_img">';
       		roombody +='<span class="status offline"></span></div><div class="user_info">';
       		roombody +='<span class="toId" data-bno="'+bno+'">'+toId+'</span><span class="time">'+formattedTime+'';
-      		roombody +='</span><p class="roommessage">'+lastmessage+'';
+      		
       		
       	  if (msgcount === 0) {
-      		roombody +='<span class="note-num" style="display: none;">'+msgcount+'</span></p></div></div></li>';
+      		roombody +='<span class="note-num" style="display: none;">'+msgcount+'</span>';
       		
       	  }else{
-      		roombody +='</span><span class="note-num" style="display: block;">'+msgcount+'</span></p></div></div></li>';
+      		roombody +='<span class="note-num" style="display: block;">'+msgcount+'</span>';
       		  
       	  }	
-      		
+      		roombody +='</span><p class="roommessage">'+lastmessage+'</p></div></div></li>';
       		
       		//roombody +='<p class="roommessage">'+lastmessage+'</p><span id="action_menu_btn"></span>';
       		//roombody +='<div class="action_menu"><ul><li><i class="fas fa-user-circle"></i> 사용자정보</li>';
@@ -1701,9 +1780,11 @@ function sendMessage() {
 						userchk.querySelector('.trading').classList.replace('trading', 'traded');
 						
 						fromup(mid,toId,bno, function() {
-						tradecopy(bno,mid,toId);
+						tradecopy(bno,toId,mid);
+					
 					
 						});  
+						//socket.send(JSON.stringify(jsonmsg));
 						}
 						    
 					} else if (fromchk==0 && tochk==0) {
@@ -1713,9 +1794,10 @@ function sendMessage() {
 						 userchk.querySelector('.trade').textContent = '확인요청';
 						 userchk.querySelector('.trade').classList.replace('trade', 'trading');
 						 
+						 
 					}
-				
-					  socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+					socket.send(JSON.stringify(jsonmsg));
+					  //socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					
 					  //socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					  
@@ -1738,8 +1820,11 @@ function sendMessage() {
 						toup(mid,toId,bno, function() {
 						tradecopy(bno,toId,mid); // mid,toId 순서 바꿔서 보내야됨  >다시수정해봄 11.13
 						
+						
 						 
-						}); }
+						}); 
+						//socket.send(JSON.stringify(jsonmsg));
+						}
 					} else if (fromchk==0 && tochk==1){
 						userchk.setAttribute('data-touserchk',0);
 						toup(mid,toId,bno);
@@ -1755,10 +1840,11 @@ function sendMessage() {
 						  userchk.querySelector('.trade').textContent = '확인요청';
 						  userchk.querySelector('.trade').classList.replace('trade', 'trading');
 						
+						
 					}
-					
+						  socket.send(JSON.stringify(jsonmsg));
 			
-						 socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
+						 //socket.send(JSON.stringify(jsonmsg));  //서버에 메시지 전달 
 					//from이다
 				}
 		
@@ -1809,7 +1895,7 @@ function sendMessage() {
 	        						 
 	   				}
 	        	   };
-	   				toastr.success("" + toId + '님과 거래가 완료 되셨습니다.', "알림");
+	   				toastr.success("" + mid + '님과 거래가 완료 되셨습니다.', "알림");
 	        	   
 	              
 	        	   //const newURL = '/review?bno='+bno+'&fid='+mid+'&tid='+toId+''; 
@@ -2027,10 +2113,10 @@ function sendMessage() {
             	var fromuserid="";
             	var mid = sessionStorage.getItem("mid"); 
 
-        		var classchange = '';
+        		var classchange = 'offline';
         		var userList = document.querySelectorAll('.user_info');
     	   		 var imgList = document.querySelectorAll('.img_cont');
-    	   		 var statuslist = document.querySelectorAll('.status')
+    	   		 var statuslist = document.querySelectorAll('.status');
     	   		 //이부분 게시판에서 바로 생성하면 status가 없음   채팅창누르고 접근하면있는데 
     	   		 
     	   		 
@@ -2041,6 +2127,8 @@ function sendMessage() {
     	     var btitle;
     	     var bno;
             
+    	     
+    	     
     	  
     	    
     	     
@@ -2075,7 +2163,7 @@ function sendMessage() {
          	        		  
          	        	  
          	        	   //여기서  서버에 사용자가 접속중인지 체크하는거실행 
-         	        		socket.send(JSON.stringify({"toId": toId}));
+         	        		//socket.send(JSON.stringify({"toId": toId}));
          	        	   
          	           }
          	    		 
@@ -2201,7 +2289,10 @@ function sendMessage() {
         	           
         		 });
     	      	}); 
-        	           
+            	  //socket.send(JSON.stringify({"toId": toId}));
+            	  //callback();
+            	  
+                
         	}
         			
         	 //## 대화창생성시 차단상대이면 차단해제 아니면 차단하기 2가지버전 (mid ,toid 반대로)
