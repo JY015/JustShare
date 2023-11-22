@@ -39,6 +39,7 @@ public class MapController {
 		List<Map<String, Object>> cateAll = mapService.cateAll(cateDto);
 		//System.out.println(cateAll);
 		model.addAttribute("cateAll",cateAll);
+		System.out.println(cateAll);
 
 		if (!ListAll.isEmpty()) {
 		    Map<String, Object> map = ListAll.get(0);

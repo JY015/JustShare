@@ -258,7 +258,8 @@ function createMarker2(item, markerImage) {
 
 	            // 각 요소에서 텍스트 내용을 가져와 배열에 추가
 	            btitleElements.forEach(function(btitleElement) {
-	              btitleValues.push(btitleElement.textContent);
+		              btitleValues.push(btitleElement.textContent);
+
 	            });
 	            
 	            // 가져온 데이터로 HTML 업데이트
@@ -430,7 +431,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
         category: '${all.cname}',
             content: '<div class="custom-overlay-info">'
             +'<div class="btitle"><c:out value="${all.btitle}" /></div>'
-            +'<p class="addr" style="white-space: nowrap;"><c:out value="${all.addr}" /> 상세주소</p>'
+            +'<p class="addr" style="white-space: nowrap;"><c:out value="${all.addr}" /> ${all.addDetail}</p>'
             +'<c:choose><c:when test="${not empty all.realFile}">'
             +'<img class="place-image" src="/img/places/${all.realFile}" >'
           	+'</c:when><c:otherwise><p class="no-image">이미지가 없습니다.</p></c:otherwise></c:choose>'

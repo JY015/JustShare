@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="cateAll" resultType="map">
-	SELECT cate.cate, cate.cname, board.bno, board.latitude, board.longitude, board.btitle, board.addr, (Select i.realFile from image i where board.bno=i.bno and i.main = 1 )as realFile
+	SELECT cate.cate, cate.cname, board.bno, board.latitude, board.longitude, board.btitle, board.addr, board.addDetail, (Select i.realFile from image i where board.bno=i.bno and i.main = 1 )as realFile
 	FROM cate
 	JOIN board ON cate.cate = board.cate
 	</select>
