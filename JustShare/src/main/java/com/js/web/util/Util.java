@@ -34,8 +34,8 @@ public class Util {
 	   
 	   public boolean htmlMailSender(Map<String, Object> map) throws EmailException {
 		   
-			String emailAddr = "eorb1527@outlook.com";// 보내는사람
-		    String passwd = "dkdntfnr1234";
+			String emailAddr = "";// 보내는사람
+		    String passwd = "";
 			String name = "Just Share 비밀번호 찾기"; // 보내는 사람 이름
 			String hostname = "smtp.office365.com";// smtp주소
 			int port = 587;
